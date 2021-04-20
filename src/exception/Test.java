@@ -1,5 +1,5 @@
 package exception;
 
 public class Test {
-    private String balbal;
+    private int testInt;
 }
