@@ -8,169 +8,169 @@ import java.awt.event.ActionListener;
 
 public class CreateOrder extends JFrame {
 
-    private final JButton jButtonAddProduct;
-    private final JButton jButtonCancel;
-    private final JButton jButtonCancel1;
-    private final JButton jButtonDeleteProduct;
-    private final JComboBox<String> jComboBoxDeadline;
-    private final JComboBox<String> jComboBoxPaymentmethod;
-    private final JLabel jLabelAddProduct;
-    private final JLabel jLabelAddProduct1;
-    private final JLabel jLabelCreationDate;
-    private final JLabel jLabelCustomer;
-    private final JLabel jLabelDate;
-    private final JLabel jLabelDateOfTheDay;
-    private final JLabel jLabelNickname;
-    private final JLabel jLabelPaymentDealine;
-    private final JLabel jLabelPaymentDealine1;
-    private final JLabel jLabelPaymentMethod;
-    private final JPanel jPanelOrder;
-    private final JPanel jPanelOrderInformation;
-    private final JScrollPane jScrollPane1;
-    private final JScrollPane jScrollPane2;
-    private final JTable jTable1;
-    private final JTable jTable2;
-    private final JTextField jTextFieldAddProductChoose;
-    private final JTextField jTextFieldCustomerName;
-    private final JTextField jTextFieldNickname;
-    private final JTextField jTextFieldQuantityChoose;
+    private javax.swing.JButton jButtonAddProduct;
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonCancel1;
+    private javax.swing.JButton jButtonDeleteProduct;
+    private javax.swing.JComboBox<String> jComboBoxDeadline;
+    private javax.swing.JComboBox<String> jComboBoxPaymentmethod;
+    private javax.swing.JLabel jLabelAddProduct;
+    private javax.swing.JLabel jLabelAddProduct1;
+    private javax.swing.JLabel jLabelCreationDate;
+    private javax.swing.JLabel jLabelCustomer;
+    private javax.swing.JLabel jLabelDate;
+    private javax.swing.JLabel jLabelDateOfTheDay;
+    private javax.swing.JLabel jLabelNickname;
+    private javax.swing.JLabel jLabelPaymentDealine;
+    private javax.swing.JLabel jLabelPaymentDealine1;
+    private javax.swing.JLabel jLabelPaymentMethod;
+    private javax.swing.JScrollPane jScrollPaneOrderInformation;
+    private javax.swing.JScrollPane jScrollPaneTotal;
+    private javax.swing.JTable jTableOrderInformation;
+    private javax.swing.JTable jTableTotal;
+    private javax.swing.JTextField jTextFieldAddProductChoose;
+    private javax.swing.JTextField jTextFieldCustomerName;
+    private javax.swing.JTextField jTextFieldNickname;
+    private javax.swing.JTextField jTextFieldQuantityChoose;
+    private javax.swing.JPanel panelOrder;
+    private javax.swing.JPanel panelOrderInformation;
 
     public CreateOrder()
     {
-        jPanelOrderInformation = new JPanel();
-        jLabelCustomer = new JLabel();
-        jTextFieldCustomerName = new JTextField();
-        jTextFieldNickname = new JTextField();
-        jLabelPaymentMethod = new JLabel();
-        jComboBoxPaymentmethod = new JComboBox<>();
-        jLabelPaymentDealine = new JLabel();
-        jComboBoxDeadline = new JComboBox<>();
-        jLabelPaymentDealine1 = new JLabel();
-        jLabelCreationDate = new JLabel();
-        jLabelDate = new JLabel();
-        jLabelDateOfTheDay = new JLabel();
-        jLabelNickname = new JLabel();
-        jPanelOrder = new JPanel();
-        jScrollPane1 = new JScrollPane();
-        jTable1 = new JTable();
-        jLabelAddProduct = new JLabel();
-        jTextFieldAddProductChoose = new JTextField();
-        jLabelAddProduct1 = new JLabel();
-        jTextFieldQuantityChoose = new JTextField();
-        jButtonAddProduct = new JButton();
-        jScrollPane2 = new JScrollPane();
-        jTable2 = new JTable();
-        jButtonDeleteProduct = new JButton();
-        jButtonCancel = new JButton();
-        jButtonCancel1 = new JButton();
+        panelOrderInformation = new javax.swing.JPanel();
+        jLabelCustomer = new javax.swing.JLabel();
+        jTextFieldCustomerName = new javax.swing.JTextField();
+        jTextFieldNickname = new javax.swing.JTextField();
+        jLabelPaymentMethod = new javax.swing.JLabel();
+        jComboBoxPaymentmethod = new javax.swing.JComboBox<>();
+        jLabelPaymentDealine = new javax.swing.JLabel();
+        jComboBoxDeadline = new javax.swing.JComboBox<>();
+        jLabelPaymentDealine1 = new javax.swing.JLabel();
+        jLabelCreationDate = new javax.swing.JLabel();
+        jLabelDate = new javax.swing.JLabel();
+        jLabelDateOfTheDay = new javax.swing.JLabel();
+        jLabelNickname = new javax.swing.JLabel();
+        panelOrder = new javax.swing.JPanel();
+        jScrollPaneOrderInformation = new javax.swing.JScrollPane();
+        jTableOrderInformation = new javax.swing.JTable();
+        jLabelAddProduct = new javax.swing.JLabel();
+        jTextFieldAddProductChoose = new javax.swing.JTextField();
+        jLabelAddProduct1 = new javax.swing.JLabel();
+        jTextFieldQuantityChoose = new javax.swing.JTextField();
+        jButtonAddProduct = new javax.swing.JButton();
+        jScrollPaneTotal = new javax.swing.JScrollPane();
+        jTableTotal = new javax.swing.JTable();
+        jButtonDeleteProduct = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
+        jButtonCancel1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabelCustomer.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelCustomer.setText("Customer");
 
-        jTextFieldCustomerName.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-        jTextFieldCustomerName.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jTextFieldCustomerName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldCustomerName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //jTextFieldCustomerNameActionPerformed(evt);
             }
         });
 
-        jTextFieldNickname.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-        jTextFieldNickname.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jTextFieldNickname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldNickname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //jTextFieldNicknameActionPerformed(evt);
             }
         });
 
-        jLabelPaymentMethod.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelPaymentMethod.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelPaymentMethod.setText("Payment method");
 
-        jComboBoxPaymentmethod.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-        jComboBoxPaymentmethod.setModel(new DefaultComboBoxModel<>(new String[] { "Paypal", "transfer" }));
+        jComboBoxPaymentmethod.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBoxPaymentmethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paypal", "transfer" }));
 
-        jLabelPaymentDealine.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelPaymentDealine.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelPaymentDealine.setText("Payment deadline");
 
-        jComboBoxDeadline.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-        jComboBoxDeadline.setModel(new DefaultComboBoxModel<>(new String[] { "8", "15", "30" }));
+        jComboBoxDeadline.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBoxDeadline.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8", "15", "30" }));
 
-        jLabelPaymentDealine1.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelPaymentDealine1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelPaymentDealine1.setText("days");
 
-        jLabelCreationDate.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelCreationDate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelCreationDate.setText("Creation date");
 
-        jLabelDate.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelDate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabelDateOfTheDay.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelDateOfTheDay.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelDateOfTheDay.setText("Date of the day");
 
-        jLabelNickname.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelNickname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelNickname.setText("Nickname");
 
-        GroupLayout jPanelOrderInformationLayout = new GroupLayout(jPanelOrderInformation);
-        jPanelOrderInformation.setLayout(jPanelOrderInformationLayout);
-        jPanelOrderInformationLayout.setHorizontalGroup(
-                jPanelOrderInformationLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelOrderInformationLayout.createSequentialGroup()
-                                .addGroup(jPanelOrderInformationLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanelOrderInformationLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelOrderInformationLayout = new javax.swing.GroupLayout(panelOrderInformation);
+        panelOrderInformation.setLayout(panelOrderInformationLayout);
+        panelOrderInformationLayout.setHorizontalGroup(
+                panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
+                                .addGroup(panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
                                                 .addGap(57, 57, 57)
                                                 .addComponent(jLabelCreationDate)
                                                 .addGap(18, 18, 18)
-                                                .addGroup(jPanelOrderInformationLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jLabelDate, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(jPanelOrderInformationLayout.createSequentialGroup()
+                                                .addGroup(panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(jLabelDate, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
                                                                 .addGap(10, 10, 10)
-                                                                .addComponent(jLabelDateOfTheDay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                                .addComponent(jLabelDateOfTheDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jLabelPaymentMethod)
                                                 .addGap(38, 38, 38)
-                                                .addComponent(jComboBoxPaymentmethod, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jComboBoxPaymentmethod, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(53, 53, 53)
                                                 .addComponent(jLabelPaymentDealine)
                                                 .addGap(37, 37, 37)
-                                                .addComponent(jComboBoxDeadline, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jComboBoxDeadline, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(36, 36, 36)
                                                 .addComponent(jLabelPaymentDealine1))
-                                        .addGroup(jPanelOrderInformationLayout.createSequentialGroup()
+                                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
                                                 .addGap(149, 149, 149)
                                                 .addComponent(jLabelCustomer)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jTextFieldCustomerName, GroupLayout.PREFERRED_SIZE, 392, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jTextFieldCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jLabelNickname)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jTextFieldNickname, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addComponent(jTextFieldNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanelOrderInformationLayout.setVerticalGroup(
-                jPanelOrderInformationLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelOrderInformationLayout.createSequentialGroup()
+        panelOrderInformationLayout.setVerticalGroup(
+                panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
                                 .addGap(22, 22, 22)
-                                .addGroup(jPanelOrderInformationLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addGroup(panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelCustomer)
-                                        .addComponent(jTextFieldCustomerName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextFieldNickname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldNickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabelNickname))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanelOrderInformationLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addGroup(panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelCreationDate)
                                         .addComponent(jLabelPaymentMethod)
-                                        .addComponent(jComboBoxPaymentmethod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jComboBoxPaymentmethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabelPaymentDealine)
-                                        .addComponent(jComboBoxDeadline, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jComboBoxDeadline, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabelPaymentDealine1)
                                         .addComponent(jLabelDate)
                                         .addComponent(jLabelDateOfTheDay))
                                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jPanelOrder.setBackground(new Color(0, 153, 153));
+        panelOrder.setBackground(new java.awt.Color(0, 153, 153));
 
-        jTable1.setFont(new Font("Tahoma", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableOrderInformation.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTableOrderInformation.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
                         {null, null, null, null, null, null},
                         {null, null, null, null, null, null},
@@ -201,7 +201,7 @@ public class CreateOrder extends JFrame {
                         "Product", "Quantity", "Unit Price", "Discount", "VAT", "Subtotal"
                 }
         ) {
-            final Class[] types = new Class [] {
+            Class[] types = new Class [] {
                     java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class
             };
 
@@ -209,37 +209,37 @@ public class CreateOrder extends JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPaneOrderInformation.setViewportView(jTableOrderInformation);
 
-        jLabelAddProduct.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-        jLabelAddProduct.setForeground(new Color(255, 255, 255));
+        jLabelAddProduct.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelAddProduct.setForeground(new java.awt.Color(255, 255, 255));
         jLabelAddProduct.setText("Quantity");
 
-        jTextFieldAddProductChoose.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-        jTextFieldAddProductChoose.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jTextFieldAddProductChoose.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldAddProductChoose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //jTextFieldAddProductChooseActionPerformed(evt);
             }
         });
 
-        jLabelAddProduct1.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-        jLabelAddProduct1.setForeground(new Color(255, 255, 255));
+        jLabelAddProduct1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelAddProduct1.setForeground(new java.awt.Color(255, 255, 255));
         jLabelAddProduct1.setText("Add product");
 
-        jTextFieldQuantityChoose.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldQuantityChoose.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextFieldQuantityChoose.setText("0");
-        jTextFieldQuantityChoose.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jTextFieldQuantityChoose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //jTextFieldQuantityChooseActionPerformed(evt);
             }
         });
 
-        jButtonAddProduct.setBackground(new Color(0, 204, 51));
-        jButtonAddProduct.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonAddProduct.setBackground(new java.awt.Color(0, 204, 51));
+        jButtonAddProduct.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonAddProduct.setText("Add");
 
-        jTable2.setFont(new Font("Tahoma", 0, 12)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTotal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTableTotal.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
                         {"Total excluding VAT", null},
                         {"VAT", null},
@@ -249,7 +249,7 @@ public class CreateOrder extends JFrame {
                         "", ""
                 }
         ) {
-            final Class[] types = new Class [] {
+            Class[] types = new Class [] {
                     java.lang.String.class, java.lang.Double.class
             };
 
@@ -257,91 +257,92 @@ public class CreateOrder extends JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPaneTotal.setViewportView(jTableTotal);
 
-        jButtonDeleteProduct.setBackground(new Color(255, 255, 0));
-        jButtonDeleteProduct.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonDeleteProduct.setBackground(new java.awt.Color(255, 255, 0));
+        jButtonDeleteProduct.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonDeleteProduct.setText("Delete product");
 
-        jButtonCancel.setBackground(new Color(0, 204, 0));
-        jButtonCancel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonCancel.setBackground(new java.awt.Color(0, 204, 0));
+        jButtonCancel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonCancel.setText("Create order");
 
-        jButtonCancel1.setBackground(new Color(255, 0, 0));
-        jButtonCancel1.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonCancel1.setBackground(new java.awt.Color(255, 0, 0));
+        jButtonCancel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonCancel1.setText("Cancel");
 
-        GroupLayout jPanelOrderLayout = new GroupLayout(jPanelOrder);
-        jPanelOrder.setLayout(jPanelOrderLayout);
-        jPanelOrderLayout.setHorizontalGroup(
-                jPanelOrderLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelOrderLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelOrderLayout = new javax.swing.GroupLayout(panelOrder);
+        panelOrder.setLayout(panelOrderLayout);
+        panelOrderLayout.setHorizontalGroup(
+                panelOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelOrderLayout.createSequentialGroup()
                                 .addGap(35, 35, 35)
-                                .addGroup(jPanelOrderLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 1042, GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanelOrderLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                                .addGroup(jPanelOrderLayout.createSequentialGroup()
+                                .addGroup(panelOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPaneOrderInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 1042, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(panelOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addGroup(panelOrderLayout.createSequentialGroup()
                                                         .addComponent(jLabelAddProduct1)
                                                         .addGap(18, 18, 18)
-                                                        .addComponent(jTextFieldAddProductChoose, GroupLayout.PREFERRED_SIZE, 334, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jTextFieldAddProductChoose, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
                                                         .addComponent(jLabelAddProduct)
                                                         .addGap(18, 18, 18)
-                                                        .addComponent(jTextFieldQuantityChoose, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jTextFieldQuantityChoose, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
                                                         .addComponent(jButtonAddProduct)
                                                         .addGap(365, 365, 365))
-                                                .addGroup(jPanelOrderLayout.createSequentialGroup()
-                                                        .addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 340, GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(panelOrderLayout.createSequentialGroup()
+                                                        .addComponent(jScrollPaneTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(jButtonDeleteProduct))
-                                                .addGroup(jPanelOrderLayout.createSequentialGroup()
+                                                .addGroup(panelOrderLayout.createSequentialGroup()
                                                         .addComponent(jButtonCancel)
                                                         .addGap(31, 31, 31)
                                                         .addComponent(jButtonCancel1))))
                                 .addContainerGap(26, Short.MAX_VALUE))
         );
-        jPanelOrderLayout.setVerticalGroup(
-                jPanelOrderLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelOrderLayout.createSequentialGroup()
+        panelOrderLayout.setVerticalGroup(
+                panelOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelOrderLayout.createSequentialGroup()
                                 .addGap(19, 19, 19)
-                                .addGroup(jPanelOrderLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTextFieldAddProductChoose, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextFieldQuantityChoose, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(panelOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jTextFieldAddProductChoose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldQuantityChoose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabelAddProduct1)
                                         .addComponent(jButtonAddProduct)
                                         .addComponent(jLabelAddProduct))
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPaneOrderInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanelOrderLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanelOrderLayout.createSequentialGroup()
-                                                .addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(jPanelOrderLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addGroup(panelOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(panelOrderLayout.createSequentialGroup()
+                                                .addComponent(jScrollPaneTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(panelOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(jButtonCancel)
                                                         .addComponent(jButtonCancel1))
                                                 .addGap(51, 51, 51))
-                                        .addGroup(jPanelOrderLayout.createSequentialGroup()
+                                        .addGroup(panelOrderLayout.createSequentialGroup()
                                                 .addComponent(jButtonDeleteProduct)
-                                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanelOrderInformation, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanelOrder, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panelOrderInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanelOrderInformation, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanelOrder, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(panelOrderInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
+
         pack();
     }
 }

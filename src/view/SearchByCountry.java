@@ -6,52 +6,52 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SearchByCountry extends JFrame {
-    private final JPanel PanelSelector;
-    private final JPanel PanelTable;
-    private final JComboBox<String> jComboBoxCountryChoose;
-    private final JLabel jLabelCountry;
-    private final JScrollPane jScrollPane1;
-    private final JTable jTable1;
+    private javax.swing.JComboBox<String> jComboBoxCountryChoose;
+    private javax.swing.JLabel jLabelCountry;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JPanel panelCountrySelector;
+    private javax.swing.JPanel panelTableCustomer;
 
     public SearchByCountry(){
-        PanelSelector = new JPanel();
-        jLabelCountry = new JLabel();
-        jComboBoxCountryChoose = new JComboBox<>();
-        PanelTable = new JPanel();
-        jScrollPane1 = new JScrollPane();
-        jTable1 = new JTable();
+        panelCountrySelector = new javax.swing.JPanel();
+        jLabelCountry = new javax.swing.JLabel();
+        jComboBoxCountryChoose = new javax.swing.JComboBox<>();
+        panelTableCustomer = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabelCountry.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelCountry.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelCountry.setText("Country");
 
-        jComboBoxCountryChoose.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-        jComboBoxCountryChoose.setModel(new DefaultComboBoxModel<>(new String[] { "Belgium", "France", "Netherlands", "Spain", "Germany" }));
-        jComboBoxCountryChoose.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jComboBoxCountryChoose.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBoxCountryChoose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Belgium", "France", "Netherlands", "Spain", "Germany" }));
+        jComboBoxCountryChoose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //jComboBoxCountryChooseActionPerformed(evt);
             }
         });
 
-        GroupLayout PanelSelectorLayout = new GroupLayout(PanelSelector);
-        PanelSelector.setLayout(PanelSelectorLayout);
-        PanelSelectorLayout.setHorizontalGroup(
-                PanelSelectorLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(PanelSelectorLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelCountrySelectorLayout = new javax.swing.GroupLayout(panelCountrySelector);
+        panelCountrySelector.setLayout(panelCountrySelectorLayout);
+        panelCountrySelectorLayout.setHorizontalGroup(
+                panelCountrySelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelCountrySelectorLayout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addComponent(jLabelCountry)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBoxCountryChoose, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jComboBoxCountryChoose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(433, Short.MAX_VALUE))
         );
-        PanelSelectorLayout.setVerticalGroup(
-                PanelSelectorLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(GroupLayout.Alignment.TRAILING, PanelSelectorLayout.createSequentialGroup()
+        panelCountrySelectorLayout.setVerticalGroup(
+                panelCountrySelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCountrySelectorLayout.createSequentialGroup()
                                 .addContainerGap(31, Short.MAX_VALUE)
-                                .addGroup(PanelSelectorLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addGroup(panelCountrySelectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelCountry)
-                                        .addComponent(jComboBoxCountryChoose, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jComboBoxCountryChoose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(17, 17, 17))
         );
 
@@ -125,35 +125,36 @@ public class SearchByCountry extends JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        GroupLayout PanelTableLayout = new GroupLayout(PanelTable);
-        PanelTable.setLayout(PanelTableLayout);
-        PanelTableLayout.setHorizontalGroup(
-                PanelTableLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(PanelTableLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 621, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(19, Short.MAX_VALUE))
+        javax.swing.GroupLayout panelTableCustomerLayout = new javax.swing.GroupLayout(panelTableCustomer);
+        panelTableCustomer.setLayout(panelTableCustomerLayout);
+        panelTableCustomerLayout.setHorizontalGroup(
+                panelTableCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTableCustomerLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        PanelTableLayout.setVerticalGroup(
-                PanelTableLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(PanelTableLayout.createSequentialGroup()
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 586, GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 8, Short.MAX_VALUE))
+        panelTableCustomerLayout.setVerticalGroup(
+                panelTableCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelTableCustomerLayout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 23, Short.MAX_VALUE))
         );
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(PanelSelector, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(PanelTable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panelCountrySelector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(panelTableCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addComponent(PanelSelector, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(PanelTable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(panelCountrySelector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(panelTableCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

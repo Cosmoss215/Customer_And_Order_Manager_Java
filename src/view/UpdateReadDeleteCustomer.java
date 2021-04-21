@@ -5,9 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CreateCustomer extends JFrame {
-    private javax.swing.JButton jButtonCreateCustomer;
-    private javax.swing.JButton jButtonCreateCustomer1;
+
+public class UpdateReadDeleteCustomer extends JFrame {
+
+    private javax.swing.JButton jButtonDeleteCustomer;
+    private javax.swing.JButton jButtonUpdateCustomer;
     private javax.swing.JCheckBox jCheckBoxIsVIP;
     private javax.swing.JLabel jLabelAddressNumber;
     private javax.swing.JLabel jLabelBIC;
@@ -35,9 +37,7 @@ public class CreateCustomer extends JFrame {
     private javax.swing.JTextField jTextFieldVATNumber;
     private javax.swing.JPanel panelButton;
     private javax.swing.JPanel panelForm;
-
-    public CreateCustomer()
-    {
+    public UpdateReadDeleteCustomer(){
         panelForm = new javax.swing.JPanel();
         jLabelCustomerInformation = new javax.swing.JLabel();
         jLabelFirstName = new javax.swing.JLabel();
@@ -65,8 +65,8 @@ public class CreateCustomer extends JFrame {
         jTextFieldBIC = new javax.swing.JTextField();
         jCheckBoxIsVIP = new javax.swing.JCheckBox();
         panelButton = new javax.swing.JPanel();
-        jButtonCreateCustomer = new javax.swing.JButton();
-        jButtonCreateCustomer1 = new javax.swing.JButton();
+        jButtonUpdateCustomer = new javax.swing.JButton();
+        jButtonDeleteCustomer = new javax.swing.JButton();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,7 +76,7 @@ public class CreateCustomer extends JFrame {
         jLabelCustomerInformation.setText("Customer information");
 
         jLabelFirstName.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabelFirstName.setText("First Name");
+        jLabelFirstName.setText("Frist Name");
 
         jTextFieldFirstName.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jTextFieldFirstName.addActionListener(new java.awt.event.ActionListener() {
@@ -289,11 +289,11 @@ public class CreateCustomer extends JFrame {
                                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jButtonCreateCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButtonCreateCustomer.setText("Reset");
+        jButtonUpdateCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButtonUpdateCustomer.setText("Update");
 
-        jButtonCreateCustomer1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButtonCreateCustomer1.setText("Create");
+        jButtonDeleteCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButtonDeleteCustomer.setText("Delete");
 
         javax.swing.GroupLayout panelButtonLayout = new javax.swing.GroupLayout(panelButton);
         panelButton.setLayout(panelButtonLayout);
@@ -301,9 +301,9 @@ public class CreateCustomer extends JFrame {
                 panelButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelButtonLayout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonCreateCustomer)
+                                .addComponent(jButtonUpdateCustomer)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonCreateCustomer1)
+                                .addComponent(jButtonDeleteCustomer)
                                 .addGap(23, 23, 23))
         );
         panelButtonLayout.setVerticalGroup(
@@ -311,8 +311,8 @@ public class CreateCustomer extends JFrame {
                         .addGroup(panelButtonLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(panelButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButtonCreateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButtonCreateCustomer1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jButtonUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButtonDeleteCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -332,6 +332,5 @@ public class CreateCustomer extends JFrame {
         );
 
         pack();
-
     }
 }

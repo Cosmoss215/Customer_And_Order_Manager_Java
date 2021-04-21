@@ -4,39 +4,39 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ProductList extends JFrame {
-    private final JButton jButtonSearch;
-    private final JLabel jLabelProductList;
-    private final JPanel jPanel1;
-    private final JPanel jPanelSearchBar;
-    private final JScrollPane jScrollPane1;
-    private final JTable jTable1;
-    private final JTextField jTextFieldSearch;
+    private javax.swing.JButton jButtonSearch;
+    private javax.swing.JLabel jLabelProductList;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextFieldSearch;
+    private javax.swing.JPanel panelAllProducts;
+    private javax.swing.JPanel panelSearchBar;
 
     public ProductList()
     {
-        jPanelSearchBar = new JPanel();
-        jTextFieldSearch = new JTextField();
-        jLabelProductList = new JLabel();
-        jButtonSearch = new JButton();
-        jPanel1 = new JPanel();
-        jScrollPane1 = new JScrollPane();
-        jTable1 = new JTable();
+        panelSearchBar = new javax.swing.JPanel();
+        jTextFieldSearch = new javax.swing.JTextField();
+        jLabelProductList = new javax.swing.JLabel();
+        jButtonSearch = new javax.swing.JButton();
+        panelAllProducts = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextFieldSearch.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldSearch.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabelProductList.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelProductList.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelProductList.setText("Product list");
 
-        jButtonSearch.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonSearch.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonSearch.setText("Search");
 
-        GroupLayout jPanelSearchBarLayout = new GroupLayout(jPanelSearchBar);
-        jPanelSearchBar.setLayout(jPanelSearchBarLayout);
-        jPanelSearchBarLayout.setHorizontalGroup(
-                jPanelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(GroupLayout.Alignment.TRAILING, jPanelSearchBarLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelSearchBarLayout = new javax.swing.GroupLayout(panelSearchBar);
+        panelSearchBar.setLayout(panelSearchBarLayout);
+        panelSearchBarLayout.setHorizontalGroup(
+                panelSearchBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSearchBarLayout.createSequentialGroup()
                                 .addGap(44, 44, 44)
                                 .addComponent(jLabelProductList)
                                 .addGap(18, 18, 18)
@@ -45,12 +45,12 @@ public class ProductList extends JFrame {
                                 .addComponent(jButtonSearch)
                                 .addGap(32, 32, 32))
         );
-        jPanelSearchBarLayout.setVerticalGroup(
-                jPanelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelSearchBarLayout.createSequentialGroup()
+        panelSearchBarLayout.setVerticalGroup(
+                panelSearchBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelSearchBarLayout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addGroup(jPanelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTextFieldSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(panelSearchBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jButtonSearch)
                                         .addComponent(jLabelProductList))
                                 .addContainerGap(34, Short.MAX_VALUE))
@@ -124,10 +124,10 @@ public class ProductList extends JFrame {
                         "Reference", "Wording", "Unit price", "Stock quantity", "Description"
                 }
         ) {
-            final Class[] types = new Class [] {
+            Class[] types = new Class [] {
                     java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
             };
-            final boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean [] {
                     false, false, false, true, false
             };
 
@@ -141,35 +141,35 @@ public class ProductList extends JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelAllProductsLayout = new javax.swing.GroupLayout(panelAllProducts);
+        panelAllProducts.setLayout(panelAllProductsLayout);
+        panelAllProductsLayout.setHorizontalGroup(
+                panelAllProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelAllProductsLayout.createSequentialGroup()
                                 .addGap(35, 35, 35)
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 1037, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(28, Short.MAX_VALUE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(30, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 523, GroupLayout.PREFERRED_SIZE)
+        panelAllProductsLayout.setVerticalGroup(
+                panelAllProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelAllProductsLayout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 32, Short.MAX_VALUE))
         );
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanelSearchBar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panelSearchBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelAllProducts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanelSearchBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(panelSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panelAllProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();

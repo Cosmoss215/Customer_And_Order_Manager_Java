@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MainMenu extends JFrame {
+public class Menu extends JFrame {
     private final JButton jButtonCreateOrder;
     private final JButton jButtonCustomer;
     private final JButton jButtonProduct;
@@ -21,7 +21,7 @@ public class MainMenu extends JFrame {
     private final JMenuItem jMenuItemSearch3;
     private final JPanel jPanel1;
 
-    public MainMenu (){
+    public Menu(){
         jPanel1 = new JPanel();
         jButtonCustomer = new JButton();
         jButtonCreateOrder = new JButton();
