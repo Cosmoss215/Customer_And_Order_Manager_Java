@@ -16,7 +16,7 @@ public class CountryDBAccess implements CountryDataAccess {
     }
 
     @Override
-    public ArrayList<Country> getAllCountry() throws QueryException {
+    public ArrayList<Country> getAllCountries() throws QueryException {
         return null;
     }
 }

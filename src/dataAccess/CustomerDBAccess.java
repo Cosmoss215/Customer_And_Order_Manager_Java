@@ -16,7 +16,7 @@ public class CustomerDBAccess implements CustomerDataAccess{
     }
 
     @Override
-    public ArrayList<Customer> getAllCustomer() throws QueryException {
+    public ArrayList<Customer> getAllCustomers() throws QueryException {
         return null;
     }
 }

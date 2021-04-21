@@ -6,5 +6,5 @@ import model.Product;
 import java.util.ArrayList;
 
 public interface ProductDataAccess {
-    ArrayList<Product> getAllProduct() throws QueryException;
+    ArrayList<Product> getAllProducts() throws QueryException;
 }

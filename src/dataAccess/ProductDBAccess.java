@@ -15,7 +15,7 @@ public class ProductDBAccess implements ProductDataAccess{
     }
 
     @Override
-    public ArrayList<Product> getAllProduct() throws QueryException {
+    public ArrayList<Product> getAllProducts() throws QueryException {
         return null;
     }
 }

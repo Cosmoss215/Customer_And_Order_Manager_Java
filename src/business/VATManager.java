@@ -2,9 +2,12 @@ package business;
 
 import dataAccess.VATDataAccess;
 import dataAccess.VATDBAccess;
+import exception.QueryException;
+import model.Product;
 import model.VAT;
 
 import java.net.ConnectException;
+import java.util.ArrayList;
 
 
 public class VATManager {
@@ -16,5 +19,9 @@ public class VATManager {
 
     public void setDao(VATDataAccess dao) {
         this.dao = dao;
+    }
+
+    public ArrayList<VAT> getAllVAT()throws QueryException {
+        return dao.getAllVAT();
     }
 }

@@ -16,7 +16,7 @@ public class OrderDBAccess implements OrderDataAccess{
     }
 
     @Override
-    public ArrayList<Order> getAllOrder() throws QueryException {
+    public ArrayList<Order> getAllOrders() throws QueryException {
         return null;
     }
 }

@@ -6,5 +6,5 @@ import java.util.ArrayList;
 
 public interface CountryDataAccess {
 
-    ArrayList<Country> getAllCountry() throws QueryException;
+    ArrayList<Country> getAllCountries() throws QueryException;
 }

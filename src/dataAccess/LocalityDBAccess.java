@@ -15,7 +15,7 @@ public class LocalityDBAccess implements LocalityDataAccess{
     }
 
     @Override
-    public ArrayList<Locality> getAllLocality() throws QueryException {
+    public ArrayList<Locality> getAllLocalities() throws QueryException {
         return null;
     }
 }

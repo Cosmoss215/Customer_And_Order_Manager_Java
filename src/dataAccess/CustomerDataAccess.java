@@ -7,5 +7,5 @@ import model.Customer;
 import java.util.ArrayList;
 
 public interface CustomerDataAccess {
-    ArrayList<Customer> getAllCustomer() throws QueryException;
+    ArrayList<Customer> getAllCustomers() throws QueryException;
 }

@@ -15,7 +15,7 @@ public class PaymentMethodDBAccess implements PaymentMethodDataAccess{
     }
 
     @Override
-    public ArrayList<PaymentMethod> getAllPaymentMethod() throws QueryException {
+    public ArrayList<PaymentMethod> getAllPaymentMethods() throws QueryException {
         return null;
     }
 }

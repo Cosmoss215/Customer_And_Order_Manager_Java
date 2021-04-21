@@ -6,5 +6,5 @@ import model.Order;
 import java.util.ArrayList;
 
 public interface OrderDataAccess{
-    ArrayList<Order> getAllOrder() throws QueryException;
+    ArrayList<Order> getAllOrders() throws QueryException;
 }
