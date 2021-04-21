@@ -1,9 +1,9 @@
 package model;
 
 public class Product {
-    private final int reference;
+    private final Integer reference;
     private final String wording;
-    private final double unitPrice;
+    private final Double unitPrice;
     private final Integer stockQuantity;
     private final String description;
     private final VAT vat;

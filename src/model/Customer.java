@@ -7,7 +7,7 @@ public class Customer {
     private final String firstName;
     private final String lastName;
     private final LocalDate registrationDate;
-    private final boolean isVip;
+    private final Boolean isVip;
     private final String nickname;
     private final Integer phoneNumber;
     private final String email;

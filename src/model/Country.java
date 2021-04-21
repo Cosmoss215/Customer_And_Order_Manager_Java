@@ -1,7 +1,7 @@
 package model;
 
 public class Country {
-    private final char code;
+    private final Character code;
     private final String name;
 
     public Country(char code, String name) {
