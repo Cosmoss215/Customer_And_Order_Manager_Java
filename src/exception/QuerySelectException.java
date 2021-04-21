@@ -1,6 +1,6 @@
 package exception;
 
-public class QueryException extends MainException{
+public class QuerySelectException extends MainException{
     private final String typeError = "DB Query Exception";
     private final String message = "Can't acces to the DB";
 

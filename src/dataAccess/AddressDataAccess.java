@@ -1,9 +1,9 @@
 package dataAccess;
 
-import exception.QueryException;
+import exception.QuerySelectException;
 import java.util.ArrayList;
 import model.Address;
 
 public interface AddressDataAccess {
-    ArrayList<Address> getAllAddress() throws QueryException;
+    ArrayList<Address> getAllAddresses() throws QuerySelectException;
 }

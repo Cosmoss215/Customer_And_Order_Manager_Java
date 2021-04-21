@@ -1,6 +1,7 @@
 package dataAccess;
 
-import exception.QueryException;
+import exception.QuerySelectException;
+import model.PaymentMethod;
 import model.Product;
 
 import java.net.ConnectException;
@@ -15,7 +16,14 @@ public class ProductDBAccess implements ProductDataAccess{
     }
 
     @Override
-    public ArrayList<Product> getAllProducts() throws QueryException {
+    public ArrayList<Product> getAllProducts() throws QuerySelectException {
+        ArrayList<Product> allProducts = new ArrayList<>();
+        //Accès à la base de données
+        return allProducts;
+    }
+
+    @Override
+    public ArrayList<Product> getProductsByReference() throws QuerySelectException {
         return null;
     }
 }

@@ -1,6 +1,7 @@
 package dataAccess;
 
-import exception.QueryException;
+import exception.QuerySelectException;
+import model.Order;
 import model.OrderLine;
 
 import java.net.ConnectException;
@@ -16,7 +17,9 @@ public class OrderLineDBAccess implements OrderLineDataAccess{
     }
 
     @Override
-    public ArrayList<OrderLine> getAllOrderLine() throws QueryException {
-        return null;
+    public ArrayList<OrderLine> getAllOrderLine() throws QuerySelectException {
+        ArrayList<OrderLine> allOrderLine = new ArrayList<>();
+        //Accès à la base de données
+        return allOrderLine;
     }
 }

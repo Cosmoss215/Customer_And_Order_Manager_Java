@@ -2,7 +2,8 @@ package business;
 
 import dataAccess.OrderDataAccess;
 import dataAccess.OrderDBAccess;
-import exception.QueryException;
+import exception.QuerySelectException;
+import model.Customer;
 import model.Order;
 
 import java.net.ConnectException;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public class OrderManager {
     private OrderDataAccess dao;
 
-    public OrderManager(OrderDataAccess dao) throws ConnectException {
+    public OrderManager() throws ConnectException {
         setDao(new OrderDBAccess());
     }
 
@@ -19,7 +20,9 @@ public class OrderManager {
         this.dao = dao;
     }
 
-    public ArrayList<Order> getAllOrders()throws QueryException {
-        return dao.getAllOrders();
+    public ArrayList<Order> getAllOrders()throws QuerySelectException {
+        ArrayList<Order> orderArrayList = dao.getAllOrders();
+        //Traitements éventuels sur la liste de livres
+        return orderArrayList;
     }
 }

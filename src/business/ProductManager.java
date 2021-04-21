@@ -2,8 +2,8 @@ package business;
 
 import dataAccess.ProductDataAccess;
 import dataAccess.ProductDBAccess;
-import exception.QueryException;
-import model.PaymentMethod;
+import exception.QuerySelectException;
+import model.Customer;
 import model.Product;
 
 import java.net.ConnectException;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ProductManager {
     private ProductDataAccess dao;
 
-    public ProductManager(ProductDataAccess dao) throws ConnectException {
+    public ProductManager() throws ConnectException {
         setDao(new ProductDBAccess());
     }
 
@@ -20,7 +20,9 @@ public class ProductManager {
         this.dao = dao;
     }
 
-    public ArrayList<Product> getAllProducts()throws QueryException {
-        return dao.getAllProducts();
+    public ArrayList<Product> getAllProducts()throws QuerySelectException {
+        ArrayList<Product> productArrayList = dao.getAllProducts();
+        //Traitements éventuels sur la liste de livres
+        return productArrayList;
     }
 }

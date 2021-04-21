@@ -1,10 +1,10 @@
 package dataAccess;
 
-import exception.QueryException;
+import exception.QuerySelectException;
 import model.OrderLine;
 
 import java.util.ArrayList;
 
 public interface OrderLineDataAccess {
-    ArrayList<OrderLine> getAllOrderLine() throws QueryException;
+    ArrayList<OrderLine> getAllOrderLine() throws QuerySelectException;
 }

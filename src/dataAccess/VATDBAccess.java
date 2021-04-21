@@ -1,6 +1,7 @@
 package dataAccess;
 
-import exception.QueryException;
+import exception.QuerySelectException;
+import model.Product;
 import model.VAT;
 
 import java.net.ConnectException;
@@ -16,7 +17,9 @@ public class VATDBAccess implements VATDataAccess{
     }
 
     @Override
-    public ArrayList<VAT> getAllVAT() throws QueryException {
-        return null;
+    public ArrayList<VAT> getAllVAT() throws QuerySelectException {
+        ArrayList<VAT> allAllVAT = new ArrayList<>();
+        //Accès à la base de données
+        return allAllVAT;
     }
 }

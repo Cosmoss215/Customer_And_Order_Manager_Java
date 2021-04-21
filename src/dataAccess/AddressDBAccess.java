@@ -1,6 +1,6 @@
 package dataAccess;
 
-import exception.QueryException;
+import exception.QuerySelectException;
 import model.Address;
 import java.net.ConnectException;
 import java.sql.Connection;
@@ -14,8 +14,10 @@ public class AddressDBAccess implements AddressDataAccess{
     }
 
     @Override
-    public ArrayList<Address> getAllAddress() throws QueryException {
-        return null;
+    public ArrayList<Address> getAllAddresses() throws QuerySelectException {
+        ArrayList<Address> allAddresses = new ArrayList<>();
+        //Accès à la base de données
+        return allAddresses;
     }
 
 }

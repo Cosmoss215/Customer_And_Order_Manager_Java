@@ -1,10 +1,10 @@
 package dataAccess;
 
-import exception.QueryException;
+import exception.QuerySelectException;
 import model.PaymentMethod;
 
 import java.util.ArrayList;
 
 public interface PaymentMethodDataAccess {
-    ArrayList<PaymentMethod> getAllPaymentMethods() throws QueryException;
+    ArrayList<PaymentMethod> getAllPaymentMethods() throws QuerySelectException;
 }

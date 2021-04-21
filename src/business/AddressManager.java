@@ -2,7 +2,7 @@ package business;
 
 import dataAccess.AddressDataAccess;
 import dataAccess.AddressDBAccess;
-import exception.QueryException;
+import exception.QuerySelectException;
 import model.Address;
 
 import java.net.ConnectException;
@@ -19,7 +19,9 @@ public class AddressManager {
         this.dao = dao;
     }
 
-    public ArrayList<Address> getAllAddress()throws QueryException{
-        return dao.getAllAddress();
+    public ArrayList<Address> getAllAddresses()throws QuerySelectException {
+        ArrayList<Address> addressArrayList = dao.getAllAddresses();
+//Traitements éventuels sur la liste de livres
+        return addressArrayList;
     }
 }
