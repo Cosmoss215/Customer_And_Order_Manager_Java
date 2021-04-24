@@ -2,9 +2,12 @@ package dataAccess;
 
 import exception.ConnectionException;
 import exception.QuerySelectException;
+import model.Address;
 import model.Customer;
-import java.sql.Connection;
+
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class CustomerDBAccess implements CustomerDataAccess{
 
@@ -17,7 +20,51 @@ public class CustomerDBAccess implements CustomerDataAccess{
     @Override
     public ArrayList<Customer> getAllCustomers() throws QuerySelectException {
         ArrayList<Customer> allCustomers = new ArrayList<>();
-        //Accès à la base de données
+        String sqlInstruction = "SELECT * FROM Customer";
+
+        /* WORK IN PROGRESS
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library?useSSL=false", "root", "Manil93Manderlier97");
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            ResultSet data = preparedStatement.executeQuery();
+
+            Customer customer;
+            Address address;
+
+            while (data.next()) {
+                GregorianCalendar calendar = new GregorianCalendar();
+                java.sql.Date registration_date = data.getDate("registration_date");
+
+                address = new Address(data.getString("street_name"),
+                        data.getInt("street_number"),
+                        data.getString("box")
+                );
+
+
+                customer = new Customer(
+                        data.getInt("id"),
+                        data.getString("first_name"),
+                        data.getString("last_name"),
+                        calendar.setTime(registration_date),
+                        data.getBoolean("is_vip"),
+                        data.getString("nickname"),
+                        data.getInt("phone_number"),
+                        data.getString("email"),
+                        data.getInt("vat_number"),
+                        data.getString("iban"),
+                        data.getString("bic"),
+                        address
+                );
+
+                allCustomers.add(customer);
+
+            }
+
+        } catch (SQLException throwables) {
+            throw new QuerySelectException();
+        }
+         */
+
         return allCustomers;
     }
 

@@ -35,7 +35,8 @@ public class AllProductsModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Product product = contents.get(rowIndex);
         switch(columnIndex)
-        { case 0 : return product.getReference();
+        {
+            case 0 : return product.getReference();
             case 1 : return product.getWording();
             case 2: return product.getUnitPrice();
             case 3: return product.getStockQuantity();
@@ -51,7 +52,8 @@ public class AllProductsModel extends AbstractTableModel {
     public Class getColumnClass (int column)
     { Class c;
         switch (column)
-        { case 0: c = Integer.class;
+        {
+            case 0: c = Integer.class;
             break;
             case 1: c = String.class;
                 break;
