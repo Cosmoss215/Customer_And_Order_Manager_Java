@@ -44,7 +44,9 @@ public class AllProductsModel extends AbstractTableModel {
             default : return null;
         }
     }
-    public String getColumnName(int column) { return columnNames.get(column); }
+    public String getColumnName(int column) {
+        return columnNames.get(column);
+    }
 
     public Class getColumnClass (int column)
     { Class c;
