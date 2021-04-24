@@ -2,18 +2,17 @@ package business;
 
 import dataAccess.VATDataAccess;
 import dataAccess.VATDBAccess;
+import exception.ConnectionException;
 import exception.QuerySelectException;
-import model.Customer;
 import model.VAT;
 
-import java.net.ConnectException;
 import java.util.ArrayList;
 
 
 public class VATManager {
     private VATDataAccess dao;
 
-    public VATManager() throws ConnectException {
+    public VATManager() throws ConnectionException {
         setDao(new VATDBAccess());
     }
 

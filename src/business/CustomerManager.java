@@ -2,17 +2,16 @@ package business;
 
 import dataAccess.CustomerDataAccess;
 import dataAccess.CustomerDBAccess;
+import exception.ConnectionException;
 import exception.QuerySelectException;
 import model.Country;
 import model.Customer;
-
-import java.net.ConnectException;
 import java.util.ArrayList;
 
 public class CustomerManager {
     private CustomerDataAccess dao;
 
-    public CustomerManager() throws ConnectException {
+    public CustomerManager() throws ConnectionException {
         setDao(new CustomerDBAccess());
     }
 

@@ -2,17 +2,15 @@ package business;
 
 import dataAccess.PaymentMethodDataAccess;
 import dataAccess.PaymentMethodDBAccess;
+import exception.ConnectionException;
 import exception.QuerySelectException;
-import model.Customer;
 import model.PaymentMethod;
-
-import java.net.ConnectException;
 import java.util.ArrayList;
 
 public class PaymentMethodManager {
     private PaymentMethodDataAccess dao;
 
-    public PaymentMethodManager() throws ConnectException {
+    public PaymentMethodManager() throws ConnectionException {
         setDao(new PaymentMethodDBAccess());
     }
 

@@ -1,10 +1,9 @@
 package dataAccess;
 
+import exception.ConnectionException;
 import exception.QuerySelectException;
-import model.Address;
 import model.Country;
 
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -12,7 +11,7 @@ public class CountryDBAccess implements CountryDataAccess {
 
     private Connection connection;
 
-    public CountryDBAccess()throws ConnectException {
+    public CountryDBAccess()throws ConnectionException {
         this.connection = SingletonConnection.getInstance();
     }
 

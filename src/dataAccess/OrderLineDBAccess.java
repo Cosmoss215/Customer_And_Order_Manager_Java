@@ -1,10 +1,8 @@
 package dataAccess;
 
+import exception.ConnectionException;
 import exception.QuerySelectException;
-import model.Order;
 import model.OrderLine;
-
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -12,7 +10,7 @@ public class OrderLineDBAccess implements OrderLineDataAccess{
 
     private Connection connection;
 
-    public OrderLineDBAccess()throws ConnectException {
+    public OrderLineDBAccess()throws ConnectionException {
         this.connection = SingletonConnection.getInstance();
     }
 

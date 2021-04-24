@@ -1,10 +1,8 @@
 package dataAccess;
 
+import exception.ConnectionException;
 import exception.QuerySelectException;
-import model.Country;
 import model.Customer;
-
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -12,7 +10,7 @@ public class CustomerDBAccess implements CustomerDataAccess{
 
     private Connection connection;
 
-    public CustomerDBAccess()throws ConnectException {
+    public CustomerDBAccess()throws ConnectionException {
         this.connection = SingletonConnection.getInstance();
     }
 

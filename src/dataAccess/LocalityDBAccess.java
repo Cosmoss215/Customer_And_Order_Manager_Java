@@ -1,17 +1,15 @@
 package dataAccess;
 
+import exception.ConnectionException;
 import exception.QuerySelectException;
-import model.Customer;
 import model.Locality;
-
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
 public class LocalityDBAccess implements LocalityDataAccess{
     private Connection connection;
 
-    public LocalityDBAccess()throws ConnectException {
+    public LocalityDBAccess()throws ConnectionException {
         this.connection = SingletonConnection.getInstance();
     }
 

@@ -2,16 +2,15 @@ package business;
 
 import dataAccess.AddressDataAccess;
 import dataAccess.AddressDBAccess;
+import exception.ConnectionException;
 import exception.QuerySelectException;
 import model.Address;
-
-import java.net.ConnectException;
 import java.util.ArrayList;
 
 public class AddressManager {
     private AddressDataAccess dao;
 
-    public AddressManager() throws ConnectException {
+    public AddressManager() throws ConnectionException {
         setDao(new AddressDBAccess());
     }
 

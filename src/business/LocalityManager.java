@@ -2,17 +2,16 @@ package business;
 
 import dataAccess.LocalityDataAccess;
 import dataAccess.LocalityDBAccess;
+import exception.ConnectionException;
 import exception.QuerySelectException;
 import model.Customer;
 import model.Locality;
-
-import java.net.ConnectException;
 import java.util.ArrayList;
 
 public class LocalityManager {
     private LocalityDataAccess dao;
 
-    public LocalityManager() throws ConnectException {
+    public LocalityManager() throws ConnectionException {
         setDao(new LocalityDBAccess());
     }
 

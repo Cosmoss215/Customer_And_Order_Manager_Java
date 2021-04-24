@@ -2,17 +2,15 @@ package business;
 
 import dataAccess.OrderDataAccess;
 import dataAccess.OrderDBAccess;
+import exception.ConnectionException;
 import exception.QuerySelectException;
-import model.Customer;
 import model.Order;
-
-import java.net.ConnectException;
 import java.util.ArrayList;
 
 public class OrderManager {
     private OrderDataAccess dao;
 
-    public OrderManager() throws ConnectException {
+    public OrderManager() throws ConnectionException {
         setDao(new OrderDBAccess());
     }
 

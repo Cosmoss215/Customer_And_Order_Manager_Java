@@ -2,17 +2,15 @@ package business;
 
 import dataAccess.ProductDataAccess;
 import dataAccess.ProductDBAccess;
+import exception.ConnectionException;
 import exception.QuerySelectException;
-import model.Customer;
 import model.Product;
-
-import java.net.ConnectException;
 import java.util.ArrayList;
 
 public class ProductManager {
     private ProductDataAccess dao;
 
-    public ProductManager() throws ConnectException {
+    public ProductManager() throws ConnectionException {
         setDao(new ProductDBAccess());
     }
 

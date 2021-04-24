@@ -1,10 +1,9 @@
 package dataAccess;
 
+import exception.ConnectionException;
 import exception.QuerySelectException;
 import model.Locality;
 import model.Order;
-
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -12,7 +11,7 @@ public class OrderDBAccess implements OrderDataAccess{
 
     private Connection connection;
 
-    public OrderDBAccess()throws ConnectException {
+    public OrderDBAccess()throws ConnectionException {
         this.connection = SingletonConnection.getInstance();
     }
 

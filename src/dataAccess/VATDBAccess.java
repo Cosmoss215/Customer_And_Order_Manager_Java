@@ -1,10 +1,8 @@
 package dataAccess;
 
+import exception.ConnectionException;
 import exception.QuerySelectException;
-import model.Product;
 import model.VAT;
-
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -12,7 +10,7 @@ public class VATDBAccess implements VATDataAccess{
 
     private Connection connection;
 
-    public VATDBAccess()throws ConnectException {
+    public VATDBAccess()throws ConnectionException {
         this.connection = SingletonConnection.getInstance();
     }
 

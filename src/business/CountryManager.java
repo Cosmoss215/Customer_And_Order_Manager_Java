@@ -2,17 +2,16 @@ package business;
 
 import dataAccess.CountryDBAccess;
 import dataAccess.CountryDataAccess;
+import exception.ConnectionException;
 import exception.QuerySelectException;
 import model.Address;
 import model.Country;
-
-import java.net.ConnectException;
 import java.util.ArrayList;
 
 public class CountryManager {
     private CountryDataAccess dao;
 
-    public CountryManager() throws ConnectException {
+    public CountryManager() throws ConnectionException {
        setDoa(new CountryDBAccess());
     }
 

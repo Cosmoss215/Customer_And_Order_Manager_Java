@@ -1,15 +1,15 @@
 package dataAccess;
 
+import exception.ConnectionException;
 import exception.QuerySelectException;
 import model.Address;
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
 public class AddressDBAccess implements AddressDataAccess{
     private Connection connection;
 
-    public AddressDBAccess()throws ConnectException{
+    public AddressDBAccess()throws ConnectionException {
         this.connection = SingletonConnection.getInstance();
     }
 
