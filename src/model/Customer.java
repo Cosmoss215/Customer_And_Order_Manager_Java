@@ -4,18 +4,18 @@ import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
 public class Customer {
-    private final Integer id;
-    private final String firstName;
-    private final String lastName;
-    private final GregorianCalendar registrationDate;
-    private final Boolean isVip;
-    private final String nickname;
-    private final Integer phoneNumber;
-    private final String email;
-    private final Integer vatNumber;
-    private final String iban;
-    private final String bic;
-    private final Address address;
+    private  Integer id;
+    private  String firstName;
+    private  String lastName;
+    private  GregorianCalendar registrationDate;
+    private  Boolean isVip;
+    private  String nickname;
+    private  Integer phoneNumber;
+    private  String email;
+    private  Integer vatNumber;
+    private  String iban;
+    private  String bic;
+    private  Address address;
 
     public Customer(Integer id, String firstName, String lastName, GregorianCalendar registrationDate, Boolean isVip, String nickname, Integer phoneNumber, String email, Integer vatNumber, String iban, String bic, Address address) {
         this.id = id;
@@ -23,7 +23,7 @@ public class Customer {
         this.lastName = lastName;
         this.registrationDate = registrationDate;
         this.isVip = isVip;
-        this.nickname = nickname;
+        setNickname(nickname);
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.vatNumber = vatNumber;
@@ -77,6 +77,10 @@ public class Customer {
 
     public Address getAddress() {
         return address;
+    }
+
+    public String setNickname(String nickname){
+        return this.nickname = nickname;
     }
 }
 

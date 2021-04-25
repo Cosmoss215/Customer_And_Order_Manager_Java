@@ -28,4 +28,14 @@ public class Address {
     public String getBox() {
         return box;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "streetName='" + streetName + '\'' +
+                ", streetNumber=" + streetNumber +
+                ", box='" + box + '\'' +
+                ", locality=" + locality +
+                '}';
+    }
 }
