@@ -61,6 +61,7 @@ public class ProductList extends JFrame {
                                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
+        //C'est ici que l'on créer la table. Toutes les données au dessus et en dessous ne sont pas utile.
         ApplicationController allProducts = new ApplicationController();
 
         ArrayList<Product> all = allProducts.getAllProducts();
@@ -80,6 +81,9 @@ public class ProductList extends JFrame {
 
 
         jScrollPane1.setViewportView(jTable1);
+        //-------------------------------------------------------------------------------------
+
+
 
         GroupLayout panelAllProductsLayout = new GroupLayout(panelAllProducts);
         panelAllProducts.setLayout(panelAllProductsLayout);

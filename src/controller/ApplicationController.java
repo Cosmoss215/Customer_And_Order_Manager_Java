@@ -30,7 +30,6 @@ public class ApplicationController  {
         vatManager = new VATManager();
     }
 
-
     public ArrayList<Address> getAllAddresses()throws QuerySelectException {
         return addressManager.getAllAddresses();
     }
@@ -39,7 +38,6 @@ public class ApplicationController  {
     public ArrayList<Country> getAllCountries()throws QuerySelectException {
         return countryManager.getAllCountries();
     }
-
 
     public ArrayList<Customer> getAllCustomers()throws QuerySelectException {
         return customerManager.getAllCustomers();
@@ -65,11 +63,9 @@ public class ApplicationController  {
         return paymentMethodManager.getAllPaymentMethods();
     }
 
-
     public ArrayList<Product> getAllProducts()throws QuerySelectException {
         return productManager.getAllProducts();
     }
-
 
     public ArrayList<VAT> getAllVAT()throws QuerySelectException {
         return vatManager.getAllVAT();
