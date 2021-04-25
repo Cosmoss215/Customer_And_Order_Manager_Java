@@ -59,6 +59,7 @@ public class Customer {
     public String getEmail() {
         return email;
     }
+
     public Integer getPhoneNumber() {
         return phoneNumber;
     }
@@ -81,6 +82,14 @@ public class Customer {
 
     public String setNickname(String nickname){
         return this.nickname = nickname;
+    }
+
+    public Integer setPhoneNumber(Integer phoneNumber){
+        return this.phoneNumber = phoneNumber;
+    }
+    public String setEmail(String email){
+        String s;
+        return s = " ";
     }
 }
 

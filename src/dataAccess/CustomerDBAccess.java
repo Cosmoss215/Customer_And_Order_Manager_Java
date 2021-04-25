@@ -75,6 +75,11 @@ public class CustomerDBAccess implements CustomerDataAccess{
                 {
                     customer.setNickname(nickname);
                 }
+                Integer phoneNumber =  data.getInt("phone_number");
+                if (phoneNumber != null)
+                {
+                    customer.setNickname(nickname);
+                }
                 //Faire les autres setter pour les autres valeur pouvant être null (phonenumber, email,vatnumber,iban,bic
 
                 allCustomers.add(customer);
