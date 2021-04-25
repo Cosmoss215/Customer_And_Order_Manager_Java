@@ -1,25 +1,25 @@
 package dataAccess;
 
-import java.net.ConnectException;
+import exception.ConnectionException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SingletonConnection {
     private static Connection connection = null;
-    private static String url = "https://databases.000webhost.com/db_sql.php?db=id15012105_orderandinvoicedb";
-    private static String id = " id15012105_orderandinvoice";
-    private static String passeword = "Manil93Manderlier97%";
+    private static String url = "jdbc:mysql://localhost:3306/library";
+    private static String id = " root";
+    private static String password = "Manil93Manderlier97";
 
-    private SingletonConnection() throws ConnectException{
+    private SingletonConnection() throws ConnectionException {
         try{
-            connection = DriverManager.getConnection(url,id,passeword);
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library?useSSL=false", "root", "Manil93Manderlier97");
         } catch (SQLException troubles) {
-            throw new ConnectException();
+            throw new ConnectionException();
         }
     }
 
-    public static Connection getInstance() throws ConnectException{
+    public static Connection getInstance() throws ConnectionException{
         if (connection == null){
             new SingletonConnection();
         }

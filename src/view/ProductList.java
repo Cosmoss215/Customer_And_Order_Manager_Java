@@ -1,42 +1,47 @@
 package view;
 
+import controller.ApplicationController;
+import exception.ConnectionException;
+import exception.QuerySelectException;
+import model.Product;
+import view.tableModel.AllProductsModel;
+
 import javax.swing.*;
-import java.awt.*;
+import javax.swing.table.DefaultTableCellRenderer;
+
+import java.util.ArrayList;
 
 public class ProductList extends JFrame {
-    private final JButton jButtonSearch;
-    private final JLabel jLabelProductList;
-    private final JPanel jPanel1;
-    private final JPanel jPanelSearchBar;
-    private final JScrollPane jScrollPane1;
-    private final JTable jTable1;
-    private final JTextField jTextFieldSearch;
+    private JButton jButtonSearch;
+    private JLabel jLabelProductList;
+    private JScrollPane jScrollPane1;
+    private JTable jTable1;
+    private JTextField jTextFieldSearch;
+    private JPanel panelAllProducts;
+    private JPanel panelSearchBar;
 
-    public ProductList()
-    {
-        jPanelSearchBar = new JPanel();
+    public ProductList() throws ConnectionException, QuerySelectException {
+        panelSearchBar = new JPanel();
         jTextFieldSearch = new JTextField();
         jLabelProductList = new JLabel();
         jButtonSearch = new JButton();
-        jPanel1 = new JPanel();
-        jScrollPane1 = new JScrollPane();
-        jTable1 = new JTable();
+        panelAllProducts = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextFieldSearch.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldSearch.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabelProductList.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelProductList.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelProductList.setText("Product list");
 
-        jButtonSearch.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonSearch.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonSearch.setText("Search");
 
-        GroupLayout jPanelSearchBarLayout = new GroupLayout(jPanelSearchBar);
-        jPanelSearchBar.setLayout(jPanelSearchBarLayout);
-        jPanelSearchBarLayout.setHorizontalGroup(
-                jPanelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(GroupLayout.Alignment.TRAILING, jPanelSearchBarLayout.createSequentialGroup()
+        GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
+        panelSearchBar.setLayout(panelSearchBarLayout);
+        panelSearchBarLayout.setHorizontalGroup(
+                panelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, panelSearchBarLayout.createSequentialGroup()
                                 .addGap(44, 44, 44)
                                 .addComponent(jLabelProductList)
                                 .addGap(18, 18, 18)
@@ -45,114 +50,49 @@ public class ProductList extends JFrame {
                                 .addComponent(jButtonSearch)
                                 .addGap(32, 32, 32))
         );
-        jPanelSearchBarLayout.setVerticalGroup(
-                jPanelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelSearchBarLayout.createSequentialGroup()
+        panelSearchBarLayout.setVerticalGroup(
+                panelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(panelSearchBarLayout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addGroup(jPanelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addGroup(panelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(jTextFieldSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jButtonSearch)
                                         .addComponent(jLabelProductList))
                                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null}
-                },
-                new String [] {
-                        "Reference", "Wording", "Unit price", "Stock quantity", "Description"
-                }
-        ) {
-            final Class[] types = new Class [] {
-                    java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
-            };
-            final boolean[] canEdit = new boolean [] {
-                    false, false, false, true, false
-            };
+        ApplicationController allProducts = new ApplicationController();
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+        ArrayList<Product> all = allProducts.getAllProducts();
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        AllProductsModel productsModel = new AllProductsModel(all);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        jTable1 = new JTable(productsModel);
+        jTable1.setAutoCreateRowSorter(true);
+        jTable1.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        jTable1.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        jTable1.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        jTable1.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        jScrollPane1 = new JScrollPane(jTable1);
+
+
         jScrollPane1.setViewportView(jTable1);
 
-        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+        GroupLayout panelAllProductsLayout = new GroupLayout(panelAllProducts);
+        panelAllProducts.setLayout(panelAllProductsLayout);
+        panelAllProductsLayout.setHorizontalGroup(
+                panelAllProductsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(panelAllProductsLayout.createSequentialGroup()
                                 .addGap(35, 35, 35)
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 1037, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(28, Short.MAX_VALUE))
+                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 1185, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(30, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+        panelAllProductsLayout.setVerticalGroup(
+                panelAllProductsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(panelAllProductsLayout.createSequentialGroup()
                                 .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 523, GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 32, Short.MAX_VALUE))
         );
@@ -161,15 +101,15 @@ public class ProductList extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanelSearchBar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelSearchBar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelAllProducts, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanelSearchBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(panelSearchBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(panelAllProducts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
         pack();

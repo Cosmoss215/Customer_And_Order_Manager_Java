@@ -7,73 +7,93 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CustomerList extends JFrame {
-    private final JButton jButtonCreateCustomer;
-    private final JButton jButtonDeleteCustomer;
-    private final JButton jButtonReadCustomer;
-    private final JButton jButtonSearch;
-    private final JButton jButtonUpdateCustomer;
-    private final JLabel jLabelCustomerList;
-    private final JPanel jPanelButton;
-    private final JPanel jPanelCustomerTable;
-    private final JPanel jPanelSearch;
-    private final JScrollPane jScrollPane1;
-    private final JTable jTable1;
-    private final JTextField jTextFieldSearchBar;
+    private javax.swing.JButton jButtonCreateCustomer;
+    private javax.swing.JButton jButtonDeleteCustomer;
+    private javax.swing.JButton jButtonReadCustomer;
+    private javax.swing.JButton jButtonSearch;
+    private javax.swing.JButton jButtonUpdateCustomer;
+    private javax.swing.JLabel jLabelCustomerName;
+    private javax.swing.JLabel jLabelNickname;
+    private javax.swing.JScrollPane jScrollCustomerTable;
+    private javax.swing.JTable jTableCustomerList;
+    private javax.swing.JTextField jTextFieldSearchBar;
+    private javax.swing.JTextField jTextFieldSearchBar1;
+    private javax.swing.JPanel panelButtonCRUD;
+    private javax.swing.JPanel panelCustomerTable;
+    private javax.swing.JPanel panelSearchBar;
 
     public CustomerList(){
-        jPanelSearch = new JPanel();
-        jButtonSearch = new JButton();
-        jLabelCustomerList = new JLabel();
-        jTextFieldSearchBar = new JTextField();
-        jPanelCustomerTable = new JPanel();
-        jScrollPane1 = new JScrollPane();
-        jTable1 = new JTable();
-        jPanelButton = new JPanel();
-        jButtonCreateCustomer = new JButton();
-        jButtonReadCustomer = new JButton();
-        jButtonUpdateCustomer = new JButton();
-        jButtonDeleteCustomer = new JButton();
+        panelSearchBar = new javax.swing.JPanel();
+        jButtonSearch = new javax.swing.JButton();
+        jTextFieldSearchBar = new javax.swing.JTextField();
+        jLabelCustomerName = new javax.swing.JLabel();
+        jLabelNickname = new javax.swing.JLabel();
+        jTextFieldSearchBar1 = new javax.swing.JTextField();
+        panelCustomerTable = new javax.swing.JPanel();
+        jScrollCustomerTable = new javax.swing.JScrollPane();
+        jTableCustomerList = new javax.swing.JTable();
+        panelButtonCRUD = new javax.swing.JPanel();
+        jButtonCreateCustomer = new javax.swing.JButton();
+        jButtonReadCustomer = new javax.swing.JButton();
+        jButtonUpdateCustomer = new javax.swing.JButton();
+        jButtonDeleteCustomer = new javax.swing.JButton();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButtonSearch.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonSearch.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonSearch.setText("Search");
 
-        jLabelCustomerList.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-        jLabelCustomerList.setText("Customer list");
-
-        jTextFieldSearchBar.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-        jTextFieldSearchBar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jTextFieldSearchBar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldSearchBar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //jTextFieldSearchBarActionPerformed(evt);
             }
         });
 
-        GroupLayout jPanelSearchLayout = new GroupLayout(jPanelSearch);
-        jPanelSearch.setLayout(jPanelSearchLayout);
-        jPanelSearchLayout.setHorizontalGroup(
-                jPanelSearchLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(GroupLayout.Alignment.TRAILING, jPanelSearchLayout.createSequentialGroup()
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelCustomerList)
-                                .addGap(421, 421, 421)
-                                .addComponent(jTextFieldSearchBar, GroupLayout.PREFERRED_SIZE, 421, GroupLayout.PREFERRED_SIZE)
+        jLabelCustomerName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelCustomerName.setText("Customer name");
+
+        jLabelNickname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelNickname.setText("Nickname");
+
+        jTextFieldSearchBar1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldSearchBar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //jTextFieldSearchBar1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelSearchBarLayout = new javax.swing.GroupLayout(panelSearchBar);
+        panelSearchBar.setLayout(panelSearchBarLayout);
+        panelSearchBarLayout.setHorizontalGroup(
+                panelSearchBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSearchBarLayout.createSequentialGroup()
+                                .addGap(142, 142, 142)
+                                .addComponent(jLabelCustomerName)
                                 .addGap(18, 18, 18)
+                                .addComponent(jTextFieldSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelNickname)
+                                .addGap(32, 32, 32)
+                                .addComponent(jTextFieldSearchBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonSearch)
-                                .addGap(31, 31, 31))
+                                .addGap(26, 26, 26))
         );
-        jPanelSearchLayout.setVerticalGroup(
-                jPanelSearchLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelSearchLayout.createSequentialGroup()
+        panelSearchBarLayout.setVerticalGroup(
+                panelSearchBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelSearchBarLayout.createSequentialGroup()
                                 .addGap(24, 24, 24)
-                                .addGroup(jPanelSearchLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabelCustomerList)
-                                        .addComponent(jTextFieldSearchBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButtonSearch))
+                                .addGroup(panelSearchBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jTextFieldSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButtonSearch)
+                                        .addComponent(jLabelCustomerName)
+                                        .addComponent(jLabelNickname)
+                                        .addComponent(jTextFieldSearchBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableCustomerList.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
                         {null, null, null, null, null, null, null, null, null, null},
                         {null, null, null, null, null, null, null, null, null, null},
@@ -141,10 +161,10 @@ public class CustomerList extends JFrame {
                         "Id", "Customer", "Registration date", "Address", "Phone number", "Email", "VAT number", "IBAN", "BIC", "Is VIP"
                 }
         ) {
-            final Class[] types = new Class [] {
+            Class[] types = new Class [] {
                     java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class
             };
-            final boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean [] {
                     false, false, false, false, false, false, false, false, false, false
             };
 
@@ -156,48 +176,48 @@ public class CustomerList extends JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
+        jTableCustomerList.getTableHeader().setReorderingAllowed(false);
+        jScrollCustomerTable.setViewportView(jTableCustomerList);
 
-        GroupLayout jPanelCustomerTableLayout = new GroupLayout(jPanelCustomerTable);
-        jPanelCustomerTable.setLayout(jPanelCustomerTableLayout);
-        jPanelCustomerTableLayout.setHorizontalGroup(
-                jPanelCustomerTableLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelCustomerTableLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelCustomerTableLayout = new javax.swing.GroupLayout(panelCustomerTable);
+        panelCustomerTable.setLayout(panelCustomerTableLayout);
+        panelCustomerTableLayout.setHorizontalGroup(
+                panelCustomerTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelCustomerTableLayout.createSequentialGroup()
                                 .addGap(15, 15, 15)
-                                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 1069, Short.MAX_VALUE)
+                                .addComponent(jScrollCustomerTable, javax.swing.GroupLayout.DEFAULT_SIZE, 1219, Short.MAX_VALUE)
                                 .addGap(16, 16, 16))
         );
-        jPanelCustomerTableLayout.setVerticalGroup(
-                jPanelCustomerTableLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(GroupLayout.Alignment.TRAILING, jPanelCustomerTableLayout.createSequentialGroup()
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)
+        panelCustomerTableLayout.setVerticalGroup(
+                panelCustomerTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCustomerTableLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollCustomerTable, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(60, 60, 60))
         );
 
-        jButtonCreateCustomer.setBackground(new Color(0, 204, 0));
-        jButtonCreateCustomer.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonCreateCustomer.setBackground(new java.awt.Color(0, 204, 0));
+        jButtonCreateCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonCreateCustomer.setText("Create customer");
 
-        jButtonReadCustomer.setBackground(new Color(204, 255, 102));
-        jButtonReadCustomer.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonReadCustomer.setBackground(new java.awt.Color(204, 255, 102));
+        jButtonReadCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonReadCustomer.setText("Read customer");
 
-        jButtonUpdateCustomer.setBackground(new Color(0, 153, 153));
-        jButtonUpdateCustomer.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonUpdateCustomer.setBackground(new java.awt.Color(0, 153, 153));
+        jButtonUpdateCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonUpdateCustomer.setText("Update customer");
 
-        jButtonDeleteCustomer.setBackground(new Color(255, 102, 102));
-        jButtonDeleteCustomer.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonDeleteCustomer.setBackground(new java.awt.Color(255, 102, 102));
+        jButtonDeleteCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonDeleteCustomer.setText("Delete customer");
 
-        GroupLayout jPanelButtonLayout = new GroupLayout(jPanelButton);
-        jPanelButton.setLayout(jPanelButtonLayout);
-        jPanelButtonLayout.setHorizontalGroup(
-                jPanelButtonLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(GroupLayout.Alignment.TRAILING, jPanelButtonLayout.createSequentialGroup()
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelButtonCRUDLayout = new javax.swing.GroupLayout(panelButtonCRUD);
+        panelButtonCRUD.setLayout(panelButtonCRUDLayout);
+        panelButtonCRUDLayout.setHorizontalGroup(
+                panelButtonCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelButtonCRUDLayout.createSequentialGroup()
+                                .addGap(271, 271, 271)
                                 .addComponent(jButtonCreateCustomer)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonReadCustomer)
@@ -205,37 +225,37 @@ public class CustomerList extends JFrame {
                                 .addComponent(jButtonUpdateCustomer)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonDeleteCustomer)
-                                .addGap(201, 201, 201))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanelButtonLayout.setVerticalGroup(
-                jPanelButtonLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelButtonLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanelButtonLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+        panelButtonCRUDLayout.setVerticalGroup(
+                panelButtonCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelButtonCRUDLayout.createSequentialGroup()
+                                .addGroup(panelButtonCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jButtonCreateCustomer)
                                         .addComponent(jButtonReadCustomer)
                                         .addComponent(jButtonUpdateCustomer)
                                         .addComponent(jButtonDeleteCustomer))
-                                .addContainerGap(25, Short.MAX_VALUE))
+                                .addGap(0, 26, Short.MAX_VALUE))
         );
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanelSearch, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanelCustomerTable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanelButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panelSearchBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelCustomerTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelButtonCRUD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanelSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanelCustomerTable, GroupLayout.PREFERRED_SIZE, 495, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanelButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(panelSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelCustomerTable, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelButtonCRUD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
         pack();
     }
 }

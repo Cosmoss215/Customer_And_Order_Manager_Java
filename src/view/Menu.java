@@ -1,10 +1,14 @@
 package view;
 
+import exception.ConnectionException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import exception.ConnectionException;
+import exception.QuerySelectException;
 
-public class MainMenu extends JFrame {
+public class Menu extends JFrame {
     private final JButton jButtonCreateOrder;
     private final JButton jButtonCustomer;
     private final JButton jButtonProduct;
@@ -21,7 +25,7 @@ public class MainMenu extends JFrame {
     private final JMenuItem jMenuItemSearch3;
     private final JPanel jPanel1;
 
-    public MainMenu (){
+    public Menu(){
         jPanel1 = new JPanel();
         jButtonCustomer = new JButton();
         jButtonCreateOrder = new JButton();
@@ -182,8 +186,18 @@ public class MainMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            ProductList productList = new ProductList();
-            productList.setVisible(true);
+            ProductList productList = null;
+            try {
+                productList = new ProductList();
+                productList.setVisible(true);
+            } catch (ConnectionException ConnectionException) {
+                JOptionPane.showMessageDialog(null,ConnectionException.getMessage(), "ConnectionException",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }catch (QuerySelectException querySelectException) {
+                JOptionPane.showMessageDialog(null,querySelectException.getMessage(), "QuerySelectException",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+
         }
     }
 

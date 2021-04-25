@@ -12,4 +12,30 @@ public class Locality {
         this.region = region;
         this.country = country;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public Integer getPostalCode() {
+        return postalCode;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    @Override
+    public String toString() {
+        return "Locality{" +
+                "name='" + name + '\'' +
+                ", postalCode=" + postalCode +
+                ", region='" + region + '\'' +
+                ", country=" + country +
+                '}';
+    }
 }

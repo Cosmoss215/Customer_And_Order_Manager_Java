@@ -2,7 +2,7 @@ package view;
 
 public class Main {
     public static void main(String[] args) {
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.setVisible(true);
+        Menu menu = new Menu();
+        menu.setVisible(true);
     }
 }
