@@ -93,6 +93,33 @@ public class CustomerList extends JFrame {
                                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
+        //Expemple de comment productList à été fait
+        //ApplicationController allProducts = new ApplicationController();
+        //
+        //        ArrayList<Product> all = allProducts.getAllProducts();
+        //
+        //        AllProductsModel productsModel = new AllProductsModel(all);
+        //
+        //
+        //        jTable1 = new JTable(productsModel);
+        //
+        //        jScrollPane1 = new JScrollPane(jTable1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
         jTableCustomerList.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
                         {null, null, null, null, null, null, null, null, null, null},
@@ -176,6 +203,7 @@ public class CustomerList extends JFrame {
                 return canEdit [columnIndex];
             }
         });
+        */
         jTableCustomerList.getTableHeader().setReorderingAllowed(false);
         jScrollCustomerTable.setViewportView(jTableCustomerList);
 
