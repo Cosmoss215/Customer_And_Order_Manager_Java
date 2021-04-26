@@ -1,10 +1,17 @@
 package view;
 
 
+import controller.ApplicationController;
+import exception.ConnectionException;
+import exception.SelectQueryException;
+
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableCellRenderer;
+
+import model.*;
+import view.tableModel.AllCustomersModel;
+
+import java.util.ArrayList;
 
 public class CustomerList extends JFrame {
     private javax.swing.JButton jButtonCreateCustomer;
@@ -22,7 +29,7 @@ public class CustomerList extends JFrame {
     private javax.swing.JPanel panelCustomerTable;
     private javax.swing.JPanel panelSearchBar;
 
-    public CustomerList(){
+    public CustomerList() throws ConnectionException, SelectQueryException {
         panelSearchBar = new javax.swing.JPanel();
         jButtonSearch = new javax.swing.JButton();
         jTextFieldSearchBar = new javax.swing.JTextField();
@@ -105,11 +112,27 @@ public class CustomerList extends JFrame {
         //
         //        jScrollPane1 = new JScrollPane(jTable1);
 
+        ApplicationController allCustomers = new ApplicationController();
+        ArrayList<Customer> customers = allCustomers.getAllCustomers();
+        AllCustomersModel customersModel = new AllCustomersModel(customers);
 
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
-
-
-
+        jTableCustomerList = new JTable(customersModel);
+        jTableCustomerList.setAutoCreateRowSorter(true);/*
+        jTableCustomerList.getColumn(0).setCellRenderer(centerRenderer);
+        jTableCustomerList.getColumn(1).setCellRenderer(centerRenderer);
+        jTableCustomerList.getColumn(2).setCellRenderer(centerRenderer);
+        jTableCustomerList.getColumn(3).setCellRenderer(centerRenderer);
+        jTableCustomerList.getColumn(4).setCellRenderer(centerRenderer);
+        jTableCustomerList.getColumn(5).setCellRenderer(centerRenderer);
+        jTableCustomerList.getColumn(6).setCellRenderer(centerRenderer);
+        jTableCustomerList.getColumn(7).setCellRenderer(centerRenderer);
+        jTableCustomerList.getColumn(8).setCellRenderer(centerRenderer);
+        jTableCustomerList.getColumn(9).setCellRenderer(centerRenderer);
+        jTableCustomerList.getColumn(10).setCellRenderer(centerRenderer);*/
+        jScrollCustomerTable = new JScrollPane(jTableCustomerList);
 
 
 

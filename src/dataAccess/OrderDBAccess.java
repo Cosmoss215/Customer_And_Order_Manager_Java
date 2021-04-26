@@ -1,8 +1,7 @@
 package dataAccess;
 
 import exception.ConnectionException;
-import exception.QuerySelectException;
-import model.Locality;
+import exception.SelectQueryException;
 import model.Order;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class OrderDBAccess implements OrderDataAccess{
     }
 
     @Override
-    public ArrayList<Order> getAllOrders() throws QuerySelectException {
+    public ArrayList<Order> getAllOrders() throws SelectQueryException {
         ArrayList<Order> allOrders = new ArrayList<>();
         //Accès à la base de données
         return allOrders;

@@ -1,7 +1,7 @@
 package dataAccess;
 
 import exception.ConnectionException;
-import exception.QuerySelectException;
+import exception.SelectQueryException;
 import model.Locality;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class LocalityDBAccess implements LocalityDataAccess{
     }
 
     @Override
-    public ArrayList<Locality> getAllLocalities() throws QuerySelectException {
+    public ArrayList<Locality> getAllLocalities() throws SelectQueryException {
         ArrayList<Locality> allLocalities = new ArrayList<>();
         //Accès à la base de données
         return allLocalities;

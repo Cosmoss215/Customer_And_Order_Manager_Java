@@ -18,7 +18,8 @@ public class AllProductsModel extends AbstractTableModel {
         columnNames.add("Unit price");
         columnNames.add("Stock quantity");
         columnNames.add("Description");
-        columnNames.add("VAT");
+        columnNames.add("VAT category");
+        columnNames.add("VAT rate");
     }
 
     @Override
@@ -38,10 +39,11 @@ public class AllProductsModel extends AbstractTableModel {
         {
             case 0 : return product.getReference();
             case 1 : return product.getWording();
-            case 2: return product.getUnitPrice();
-            case 3: return product.getStockQuantity();
-            case 4: return product.getDescription();
-            case 5:return product.getVat();
+            case 2 : return product.getUnitPrice();
+            case 3 : return product.getStockQuantity();
+            case 4 : return product.getDescription();
+            case 5 : return product.getVat().getCategory();
+            case 6 : return product.getVat().getRate();
             default : return null;
         }
     }
@@ -64,6 +66,8 @@ public class AllProductsModel extends AbstractTableModel {
             case 4: c = String.class;
                 break;
             case 5: c = String.class;
+                break;
+            case 6 : c = Double.class;
                 break;
             default: c = String.class;
         }

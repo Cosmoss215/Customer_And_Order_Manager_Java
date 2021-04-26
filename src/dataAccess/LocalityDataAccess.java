@@ -1,10 +1,10 @@
 package dataAccess;
 
-import exception.QuerySelectException;
+import exception.SelectQueryException;
 import model.Locality;
 
 import java.util.ArrayList;
 
 public interface LocalityDataAccess {
-    ArrayList<Locality> getAllLocalities() throws QuerySelectException;
+    ArrayList<Locality> getAllLocalities() throws SelectQueryException;
 }

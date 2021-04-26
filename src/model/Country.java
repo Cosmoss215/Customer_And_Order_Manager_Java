@@ -1,12 +1,12 @@
 package model;
 
 public class Country {
-    private final String code;
-    private final String name;
+    private String code;
+    private String name;
 
     public Country(String code, String name) {
-        this.code = code;
-        this.name = name;
+        setCode(code);
+        setName(name);
     }
 
     public String getName() {
@@ -17,11 +17,16 @@ public class Country {
         return code;
     }
 
+    public void setCode(String code){
+        this.code = code;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        return "Country{" +
-                "code=" + code +
-                ", name='" + name + '\'' +
-                '}';
+        return code + " " + name;
     }
 }

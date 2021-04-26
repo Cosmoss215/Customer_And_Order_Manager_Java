@@ -3,7 +3,7 @@ package business;
 import dataAccess.ProductDataAccess;
 import dataAccess.ProductDBAccess;
 import exception.ConnectionException;
-import exception.QuerySelectException;
+import exception.SelectQueryException;
 import model.Product;
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class ProductManager {
         this.dao = dao;
     }
 
-    public ArrayList<Product> getAllProducts()throws QuerySelectException {
+    public ArrayList<Product> getAllProducts()throws SelectQueryException {
         ArrayList<Product> productArrayList = dao.getAllProducts();
         //Traitements éventuels sur la liste de livres
         return productArrayList;

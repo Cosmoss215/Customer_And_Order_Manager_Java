@@ -3,7 +3,7 @@ package business;
 import dataAccess.OrderDataAccess;
 import dataAccess.OrderDBAccess;
 import exception.ConnectionException;
-import exception.QuerySelectException;
+import exception.SelectQueryException;
 import model.Order;
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class OrderManager {
         this.dao = dao;
     }
 
-    public ArrayList<Order> getAllOrders()throws QuerySelectException {
+    public ArrayList<Order> getAllOrders()throws SelectQueryException {
         ArrayList<Order> orderArrayList = dao.getAllOrders();
         //Traitements éventuels sur la liste de livres
         return orderArrayList;

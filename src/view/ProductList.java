@@ -2,7 +2,7 @@ package view;
 
 import controller.ApplicationController;
 import exception.ConnectionException;
-import exception.QuerySelectException;
+import exception.SelectQueryException;
 import model.Product;
 import view.tableModel.AllProductsModel;
 
@@ -20,7 +20,7 @@ public class ProductList extends JFrame {
     private JPanel panelAllProducts;
     private JPanel panelSearchBar;
 
-    public ProductList() throws ConnectionException, QuerySelectException {
+    public ProductList() throws ConnectionException, SelectQueryException {
         panelSearchBar = new JPanel();
         jTextFieldSearch = new JTextField();
         jLabelProductList = new JLabel();
@@ -61,7 +61,7 @@ public class ProductList extends JFrame {
                                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        //C'est ici que l'on créer la table. Toutes les données au dessus et en dessous ne sont pas utile.
+        // Création des colonnes d'affichage
         ApplicationController allProducts = new ApplicationController();
 
         ArrayList<Product> all = allProducts.getAllProducts();
@@ -77,6 +77,7 @@ public class ProductList extends JFrame {
         jTable1.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
         jTable1.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
         jTable1.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        jTable1.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
         jScrollPane1 = new JScrollPane(jTable1);
 
 

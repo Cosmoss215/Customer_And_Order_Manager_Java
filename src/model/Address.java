@@ -1,16 +1,21 @@
 package model;
 
 public class Address {
-    private final String streetName;
-    private final Integer streetNumber;
-    private final String box;
-    private final Locality locality;
+    private Integer id;
+    private String streetName;
+    private Integer streetNumber;
+    private String box;
+    private Locality locality;
 
-    public Address(String streetName, Integer streetNumber, String box, Locality locality) {
-        this.streetName = streetName;
-        this.streetNumber = streetNumber;
-        this.box = box;
-        this.locality = locality;
+    public Address(Integer id, String streetName, Integer streetNumber, String box, Locality locality) {
+        setStreetName(streetName);
+        setStreetNumber(streetNumber);
+        setBox(box);
+        setLocality(locality);
+    }
+
+    public Integer getId(){
+        return id;
     }
 
     public Integer getStreetNumber() {
@@ -29,13 +34,29 @@ public class Address {
         return box;
     }
 
+    public void setStreetName(String streetName){
+        this.streetName = streetName;
+    }
+
+    public void setStreetNumber(Integer streetNumber) {
+        this.streetNumber = streetNumber;
+    }
+
+    public void setBox(String box) {
+        if(box != null)
+            this.box = box;
+        else
+            this.box = null;
+    }
+
+    public void setLocality(Locality locality){
+        this.locality = locality;
+    }
+
     @Override
     public String toString() {
-        return "Address{" +
-                "streetName='" + streetName + '\'' +
-                ", streetNumber=" + streetNumber +
-                ", box='" + box + '\'' +
-                ", locality=" + locality +
-                '}';
+        return  getStreetName() + " n°" + getStreetNumber() +
+                ((getBox()!=null)?getBox():"") + ", " +
+                getLocality().getPostalCode() + " " + getLocality().getName();
     }
 }

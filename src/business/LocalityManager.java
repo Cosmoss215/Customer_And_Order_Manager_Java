@@ -3,8 +3,7 @@ package business;
 import dataAccess.LocalityDataAccess;
 import dataAccess.LocalityDBAccess;
 import exception.ConnectionException;
-import exception.QuerySelectException;
-import model.Customer;
+import exception.SelectQueryException;
 import model.Locality;
 import java.util.ArrayList;
 
@@ -19,7 +18,7 @@ public class LocalityManager {
         this.dao = dao;
     }
 
-    public ArrayList<Locality> getAllLocalities()throws QuerySelectException {
+    public ArrayList<Locality> getAllLocalities()throws SelectQueryException {
         ArrayList<Locality> localityArrayList = dao.getAllLocalities();
         //Traitements éventuels sur la liste de livres
         return localityArrayList;

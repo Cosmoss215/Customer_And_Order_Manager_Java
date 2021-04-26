@@ -3,8 +3,7 @@ package business;
 import dataAccess.CustomerDataAccess;
 import dataAccess.CustomerDBAccess;
 import exception.ConnectionException;
-import exception.QuerySelectException;
-import model.Country;
+import exception.SelectQueryException;
 import model.Customer;
 import java.util.ArrayList;
 
@@ -19,7 +18,7 @@ public class CustomerManager {
         this.dao = dao;
     }
 
-    public ArrayList<Customer> getAllCustomers()throws QuerySelectException {
+    public ArrayList<Customer> getAllCustomers()throws SelectQueryException {
         ArrayList<Customer> customerArrayList = dao.getAllCustomers();
         //Traitements éventuels sur la liste de livres
         return customerArrayList;

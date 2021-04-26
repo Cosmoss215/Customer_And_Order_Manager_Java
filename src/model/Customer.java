@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Customer {
@@ -18,18 +19,22 @@ public class Customer {
     private  Address address;
 
     public Customer(Integer id, String firstName, String lastName, GregorianCalendar registrationDate, Boolean isVip, String nickname, Integer phoneNumber, String email, Integer vatNumber, String iban, String bic, Address address) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.registrationDate = registrationDate;
-        this.isVip = isVip;
+        setId(id);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setRegistrationDate(registrationDate);
+        setIsVip(isVip);
         setNickname(nickname);
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.vatNumber = vatNumber;
-        this.iban = iban;
-        this.bic = bic;
-        this.address = address;
+        setPhoneNumber(phoneNumber);
+        setEmail(email);
+        setVatNumber(vatNumber);
+        setIban(iban);
+        setBic(bic);
+        setAddress(address);
+    }
+
+    public Customer(Integer id, String firstName, String lastName, GregorianCalendar registrationDate, Boolean isVip, String iban, String bic, Address address) {
+        this(id, firstName, lastName, registrationDate, isVip, null, null, null, null, iban, bic, address);
     }
 
     public Integer getId() {
@@ -46,6 +51,10 @@ public class Customer {
 
     public GregorianCalendar getRegistrationDate() {
         return registrationDate;
+    }
+
+    public String displayRegistrationDate(){
+        return registrationDate.get(Calendar.DAY_OF_MONTH) + "/" + ((registrationDate.get(Calendar.MONTH) + 1)<10?"0":"") + (registrationDate.get(Calendar.MONTH) + 1) + "/" + registrationDate.get(Calendar.YEAR);
     }
 
     public Boolean getVip() {
@@ -80,16 +89,64 @@ public class Customer {
         return address;
     }
 
-    public String setNickname(String nickname){
-        return this.nickname = nickname;
+    public void setId(Integer id){
+        this.id = id;
     }
 
-    public Integer setPhoneNumber(Integer phoneNumber){
-        return this.phoneNumber = phoneNumber;
+    public void setFirstName(String firstName){
+        this.firstName = firstName;
     }
-    public String setEmail(String email){
-        String s;
-        return s = " ";
+
+    public void setLastName(String lastName){
+        this.lastName = lastName;
+    }
+
+    public void setRegistrationDate(GregorianCalendar date){
+        registrationDate = date;
+    }
+
+    public void setIsVip(Boolean isVip){
+        this.isVip = isVip;
+    }
+
+    public void setNickname(String nickname){
+        if(nickname != null)
+            this.nickname = nickname;
+        else
+            this.nickname = null;
+    }
+
+    public void setPhoneNumber(Integer phoneNumber){
+        if(phoneNumber != null)
+            this.phoneNumber = phoneNumber;
+        else
+            this.phoneNumber = null;
+    }
+
+    public void setEmail(String email){
+        if(email != null)
+            this.email = email;
+        else
+            this.email = null;
+    }
+
+    public void setVatNumber(Integer vatNumber) {
+        if(vatNumber != null)
+            this.vatNumber = vatNumber;
+        else
+            this.vatNumber = null;
+    }
+
+    public void setBic(String bic) {
+        this.bic = bic;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }
 

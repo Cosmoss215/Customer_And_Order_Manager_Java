@@ -1,7 +1,7 @@
 package dataAccess;
 
 import exception.ConnectionException;
-import exception.QuerySelectException;
+import exception.SelectQueryException;
 import model.PaymentMethod;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class PaymentMethodDBAccess implements PaymentMethodDataAccess{
     }
 
     @Override
-    public ArrayList<PaymentMethod> getAllPaymentMethods() throws QuerySelectException {
+    public ArrayList<PaymentMethod> getAllPaymentMethods() throws SelectQueryException {
         ArrayList<PaymentMethod> allPaymentMethods= new ArrayList<>();
         //Accès à la base de données
         return allPaymentMethods;

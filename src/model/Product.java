@@ -6,9 +6,9 @@ public class Product {
     private final Double unitPrice;
     private final Integer stockQuantity;
     private final String description;
-    private final String vat;
+    private final VAT vat;
 
-    public Product(int reference, String wording, double unitPrice, int stockQuantity, String description, String vat) {
+    public Product(int reference, String wording, double unitPrice, int stockQuantity, String description, VAT vat) {
         this.reference = reference;
         this.wording = wording;
         this.unitPrice = unitPrice;
@@ -37,7 +37,7 @@ public class Product {
         return description;
     }
 
-    public String getVat() {
+    public VAT getVat() {
         return vat;
     }
 }

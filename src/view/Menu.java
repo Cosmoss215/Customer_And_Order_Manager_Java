@@ -5,8 +5,8 @@ import exception.ConnectionException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import exception.ConnectionException;
-import exception.QuerySelectException;
+
+import exception.SelectQueryException;
 
 public class Menu extends JFrame {
     private final JButton jButtonCreateOrder;
@@ -168,11 +168,19 @@ public class Menu extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    private class CustomerListner implements ActionListener{
+    private class CustomerListner implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            CustomerList customerList = new CustomerList();
-            customerList.setVisible(true);
+            try {
+                CustomerList customerList = new CustomerList();
+                customerList.setVisible(true);
+            } catch (ConnectionException connectionException) {
+                JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException",
+                        JOptionPane.WARNING_MESSAGE);
+            } catch (SelectQueryException selectQueryException) {
+                JOptionPane.showMessageDialog(null, selectQueryException.getMessage(), "SelectQueryException",
+                        JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
     private class CreateOrderListner implements ActionListener{
@@ -182,20 +190,19 @@ public class Menu extends JFrame {
             createOrder.setVisible(true);
         }
     }
-    private class ProductListListner implements ActionListener{
-
+    private class ProductListListner implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             ProductList productList = null;
             try {
                 productList = new ProductList();
                 productList.setVisible(true);
-            } catch (ConnectionException ConnectionException) {
-                JOptionPane.showMessageDialog(null,ConnectionException.getMessage(), "ConnectionException",
-                        JOptionPane.INFORMATION_MESSAGE);
-            }catch (QuerySelectException querySelectException) {
-                JOptionPane.showMessageDialog(null,querySelectException.getMessage(), "QuerySelectException",
-                        JOptionPane.INFORMATION_MESSAGE);
+            } catch (ConnectionException connectionException) {
+                JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException",
+                        JOptionPane.WARNING_MESSAGE);
+            } catch (SelectQueryException selectQueryException) {
+                JOptionPane.showMessageDialog(null, selectQueryException.getMessage(), "SelectQueryException",
+                        JOptionPane.WARNING_MESSAGE);
             }
 
         }

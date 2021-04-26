@@ -8,13 +8,16 @@ public class VAT {
         this.category = category;
         this.rate = rate;
     }
-    public VAT(String category)
-    {
+    public VAT(String category) {
         this.category = category;
         this.rate = 0.00;
     }
 
     public String getCategory() {
         return category;
+    }
+
+    public Double getRate() {
+        return rate;
     }
 }

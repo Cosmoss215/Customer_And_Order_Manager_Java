@@ -7,16 +7,15 @@ import java.util.ArrayList;
 
 public class AllCustomersModel extends AbstractTableModel {
     private ArrayList<String> columnNames;
-    private ArrayList<Customer> contents;
+    private ArrayList<Customer> content;
 
-    public AllCustomersModel(ArrayList<Customer> customers)
-    {
-        contents = customers;
+    public AllCustomersModel(ArrayList<Customer> customers) {
+        content = customers;
         columnNames = new ArrayList<>();
         columnNames.add("Id");
-        columnNames.add("Name");
+        columnNames.add("Full Name");
         columnNames.add("Nickname");
-        columnNames.add("Registration data");
+        columnNames.add("Registration date");
         columnNames.add("Address");
         columnNames.add("Phone number");
         columnNames.add("Email");
@@ -28,7 +27,7 @@ public class AllCustomersModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return contents.size();
+        return content.size();
     }
 
     @Override
@@ -38,19 +37,20 @@ public class AllCustomersModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Customer customers = contents.get(rowIndex);
-        switch(columnIndex)
-        {   case 0 : return customers.getId();
-            case 1 : return customers.getFirstName()+customers.getLastName();
-            case 2: return customers.getNickname();
-            case 3: return customers.getRegistrationDate();
-            case 4: return customers.getAddress();
-            case 5: return customers.getPhoneNumber();
-            case 6:return customers.getEmail();
-            case 7:return customers.getVatNumber();
-            case 8:return customers.getIban();
-            case 9:return customers.getBic();
-            case 10:return customers.getVip();
+        Customer customers = content.get(rowIndex);
+        switch(columnIndex) {
+            case 0 : return customers.getId();
+            case 1 : return customers.getFirstName()+" "+customers.getLastName();
+            case 2 : return customers.getNickname();
+            case 3 : return customers.displayRegistrationDate();
+            case 4 : return customers.getAddress();
+            case 5 : return customers.getPhoneNumber();
+            case 6 : return customers.getEmail();
+            case 7 : return customers.getVatNumber();
+            case 8 : return customers.getIban();
+            case 9 : return customers.getBic();
+            case 10: return customers.getVip();
+            // insérer getCountry();
             default : return null;
         }
     }
@@ -58,8 +58,8 @@ public class AllCustomersModel extends AbstractTableModel {
         return columnNames.get(column);
     }
 
-    public Class getColumnClass (int column)
-    { Class c;
+    public Class getColumnClass (int column) {
+        Class c;
         switch (column)
         {
             case 0: c = Integer.class;

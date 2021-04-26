@@ -1,35 +1,40 @@
 package dataAccess;
 
 import exception.ConnectionException;
-import exception.QuerySelectException;
+import exception.SelectQueryException;
 import model.Product;
 import model.VAT;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ProductDBAccess implements ProductDataAccess{
+public class ProductDBAccess implements ProductDataAccess {
     private Connection connection;
 
-    public ProductDBAccess()throws ConnectionException {
+    public ProductDBAccess() throws ConnectionException {
         this.connection = SingletonConnection.getInstance();
     }
 
     @Override
-    public ArrayList<Product> getAllProducts() throws QuerySelectException {
+    public ArrayList<Product> getAllProducts() throws SelectQueryException {
         ArrayList<Product> allProducts = new ArrayList<>();
-        String sqlInstruction = "SELECT * FROM Product";
+
+        String sqlInstruction = "SELECT p.reference, p.wording, p.unit_price, p.stock_quantity, p.description, p.vat_code, v.rate " +
+                                "FROM product p " +
+                                "JOIN vat v ON p.vat_code = v.category;";
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library?useSSL=false", "root", "Manil93Manderlier97");
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             ResultSet data = preparedStatement.executeQuery();
 
             Product product;
-            VAT vatCode;
+            VAT vat;
 
             while (data.next()) {
-                vatCode = new VAT(data.getString("vat_code"));
+                vat = new VAT(
+                        data.getString("vat_code"),
+                        data.getDouble("rate")
+                );
 
                 product = new Product(
                         data.getInt("reference"),
@@ -37,22 +42,23 @@ public class ProductDBAccess implements ProductDataAccess{
                         data.getDouble("unit_price"),
                         data.getInt("stock_quantity"),
                         data.getString("description"),
-                        vatCode.getCategory()
+                        vat
                 );
 
                 allProducts.add(product);
 
             }
 
-        } catch (SQLException throwables) {
-            throw new QuerySelectException();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new SelectQueryException();
         }
 
         return allProducts;
     }
 
     @Override
-    public ArrayList<Product> getProductsByReference() throws QuerySelectException {
+    public ArrayList<Product> getProductsByReference() throws SelectQueryException {
         return null;
     }
 }

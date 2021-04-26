@@ -2,7 +2,7 @@ package controller;
 
 import business.*;
 import exception.ConnectionException;
-import exception.QuerySelectException;
+import exception.SelectQueryException;
 import model.*;
 
 import java.util.ArrayList;
@@ -30,44 +30,44 @@ public class ApplicationController  {
         vatManager = new VATManager();
     }
 
-    public ArrayList<Address> getAllAddresses()throws QuerySelectException {
+    public ArrayList<Address> getAllAddresses() throws SelectQueryException {
         return addressManager.getAllAddresses();
     }
 
 
-    public ArrayList<Country> getAllCountries()throws QuerySelectException {
+    public ArrayList<Country> getAllCountries() throws SelectQueryException {
         return countryManager.getAllCountries();
     }
 
-    public ArrayList<Customer> getAllCustomers()throws QuerySelectException {
+    public ArrayList<Customer> getAllCustomers() throws SelectQueryException {
         return customerManager.getAllCustomers();
     }
 
 
-    public ArrayList<Locality> getAllLocalities()throws QuerySelectException {
+    public ArrayList<Locality> getAllLocalities() throws SelectQueryException {
         return localityManager.getAllLocalities();
     }
 
 
-    public ArrayList<Order> getAllOrders()throws QuerySelectException {
+    public ArrayList<Order> getAllOrders() throws SelectQueryException {
         return orderManager.getAllOrders();
     }
 
 
-    public ArrayList<OrderLine> getAllOrderLine()throws QuerySelectException {
+    public ArrayList<OrderLine> getAllOrderLine() throws SelectQueryException {
         return orderLineManager.getAllOrderLine();
     }
 
 
-    public ArrayList<PaymentMethod> getAllPaymentMethods()throws QuerySelectException {
+    public ArrayList<PaymentMethod> getAllPaymentMethods() throws SelectQueryException {
         return paymentMethodManager.getAllPaymentMethods();
     }
 
-    public ArrayList<Product> getAllProducts()throws QuerySelectException {
+    public ArrayList<Product> getAllProducts() throws SelectQueryException {
         return productManager.getAllProducts();
     }
 
-    public ArrayList<VAT> getAllVAT()throws QuerySelectException {
+    public ArrayList<VAT> getAllVAT() throws SelectQueryException {
         return vatManager.getAllVAT();
     }
 }

@@ -1,7 +1,7 @@
 package dataAccess;
 
 import exception.ConnectionException;
-import exception.QuerySelectException;
+import exception.SelectQueryException;
 import model.Country;
 
 import java.sql.Connection;
@@ -16,7 +16,7 @@ public class CountryDBAccess implements CountryDataAccess {
     }
 
     @Override
-    public ArrayList<Country> getAllCountries() throws QuerySelectException {
+    public ArrayList<Country> getAllCountries() throws SelectQueryException {
         ArrayList<Country> allCountries = new ArrayList<>();
         //Accès à la base de données
         return allCountries;
