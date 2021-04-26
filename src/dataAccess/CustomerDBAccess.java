@@ -136,15 +136,16 @@ public class CustomerDBAccess implements CustomerDataAccess {
         String sqlInstruction =
                 "UPDATE customer " +
                 "SET first_name = ?, " +
-                "last_name = ?, " +
-                "is_vip = ?, " +
-                "nickname = ?, " +
-                "phone_number = ?, " +
-                "email = ?, " +
-                "vat_number = ?, " +
-                "iban = ?, " +
-                "bic = ?, " +
-                "address = ?;";
+                    "last_name = ?, " +
+                    "is_vip = ?, " +
+                    "nickname = ?, " +
+                    "phone_number = ?, " +
+                    "email = ?, " +
+                    "vat_number = ?, " +
+                    "iban = ?, " +
+                    "bic = ?, " +
+                    "address = ? " +
+                "WHERE customer.id = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             preparedStatement.setString(1,customer.getFirstName());
