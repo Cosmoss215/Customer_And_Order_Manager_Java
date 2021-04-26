@@ -158,6 +158,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
             preparedStatement.setString(8, customer.getIban());
             preparedStatement.setString(9, customer.getBic());
             preparedStatement.setInt(10, customer.getAddress().getId());
+            preparedStatement.setInt(11, customer.getId());
 
             affectedRowsNb = preparedStatement.executeUpdate();
         } catch (SQLException sqlException) {
