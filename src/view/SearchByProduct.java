@@ -30,7 +30,7 @@ public class SearchByProduct extends JFrame {
         jLabelProduct.setText("Product");
 
         jTextFieldFindProduct.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextFieldFindProduct.setText("Find product");
+        jTextFieldFindProduct.setText("");
         jTextFieldFindProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //jTextFieldFindProductActionPerformed(evt);

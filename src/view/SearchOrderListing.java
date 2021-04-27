@@ -41,7 +41,7 @@ public class SearchOrderListing extends JFrame {
         jLabelCustomerAddress.setText("Address");
 
         jTextFieldSearchBar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTextFieldSearchBar.setText("Find order with customer's name");
+        jTextFieldSearchBar.setText("");
         jTextFieldSearchBar.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextFieldSearchBar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
