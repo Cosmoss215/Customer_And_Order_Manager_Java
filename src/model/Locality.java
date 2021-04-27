@@ -1,16 +1,16 @@
 package model;
 
 public class Locality {
-    private final String name;
-    private final Integer postalCode;
-    private final String region;
-    private final Country country;
+    private String name;
+    private Integer postalCode;
+    private String region;
+    private Country country;
 
     public Locality(String name, int postalCode, String region, Country country) {
-        this.name = name;
-        this.postalCode = postalCode;
-        this.region = region;
-        this.country = country;
+        setName(name);
+        setPostalCode(postalCode);
+        setRegion(region);
+        setCountry(country);
     }
 
     public String getName() {
@@ -29,13 +29,33 @@ public class Locality {
         return region;
     }
 
-    @Override
-    public String toString() {
+    private void setName(String name) {
+        this.name = name;
+    }
+
+    private void setPostalCode(Integer postalCode){
+        this.postalCode = postalCode;
+    }
+
+    private void setRegion(String region) {
+        this.region = region;
+    }
+
+    private void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public String display() {
         return "Locality{" +
                 "name='" + name + '\'' +
                 ", postalCode=" + postalCode +
                 ", region='" + region + '\'' +
                 ", country=" + country +
                 '}';
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + postalCode + " " + region;
     }
 }

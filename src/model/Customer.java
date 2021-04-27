@@ -5,18 +5,18 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Customer {
-    private  Integer id;
-    private  String firstName;
-    private  String lastName;
-    private  GregorianCalendar registrationDate;
-    private  Boolean isVip;
-    private  String nickname;
-    private  Integer phoneNumber;
-    private  String email;
-    private  Integer vatNumber;
-    private  String iban;
-    private  String bic;
-    private  Address address;
+    private Integer id;
+    private String firstName;
+    private String lastName;
+    private GregorianCalendar registrationDate;
+    private Boolean isVip;
+    private String nickname;
+    private Integer phoneNumber;
+    private String email;
+    private Integer vatNumber;
+    private String iban;
+    private String bic;
+    private Address address;
 
     public Customer(Integer id, String firstName, String lastName, GregorianCalendar registrationDate, Boolean isVip, String nickname, Integer phoneNumber, String email, Integer vatNumber, String iban, String bic, Address address) {
         setId(id);
@@ -147,6 +147,26 @@ public class Customer {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public String display(){
+        return "id : " + id + "\n" +
+                "firstName : " + firstName + "\n" +
+                "lastName : " + lastName + "\n" +
+                "registrationDate : " + registrationDate + "\n" +
+                "isVip : " + isVip + "\n" +
+                "nickname : " + nickname + "\n" +
+                "phoneNumber : " + phoneNumber + "\n" +
+                "email : " + email + "\n" +
+                "vatNumber : " + vatNumber + "\n" +
+                "iban : " + iban + "\n" +
+                "bic : " + bic + "\n" +
+                "address : " + address;
+    }
+
+    @Override
+    public String toString(){
+        return getFirstName() + " " + getLastName();
     }
 }
 

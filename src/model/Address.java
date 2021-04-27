@@ -8,10 +8,15 @@ public class Address {
     private Locality locality;
 
     public Address(Integer id, String streetName, Integer streetNumber, String box, Locality locality) {
+        setId(id);
         setStreetName(streetName);
         setStreetNumber(streetNumber);
         setBox(box);
         setLocality(locality);
+    }
+    public Address(String streetName, Integer streetNumber, String box, Locality locality) {
+        this(null, streetName, streetNumber, box, locality);
+        setBox(box);
     }
 
     public Integer getId(){
@@ -40,6 +45,10 @@ public class Address {
 
     public void setStreetNumber(Integer streetNumber) {
         this.streetNumber = streetNumber;
+    }
+
+    public void setId(Integer id){
+        this.id = id;
     }
 
     public void setBox(String box) {

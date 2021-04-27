@@ -1,20 +1,20 @@
 package model;
 
 public class Product {
-    private final Integer reference;
-    private final String wording;
-    private final Double unitPrice;
-    private final Integer stockQuantity;
-    private final String description;
-    private final VAT vat;
+    private Integer reference;
+    private String wording;
+    private Double unitPrice;
+    private Integer stockQuantity;
+    private String description;
+    private VAT vat;
 
-    public Product(int reference, String wording, double unitPrice, int stockQuantity, String description, VAT vat) {
-        this.reference = reference;
-        this.wording = wording;
-        this.unitPrice = unitPrice;
-        this.stockQuantity = stockQuantity;
-        this.description = description;
-        this.vat = vat;
+    public Product(Integer reference, String wording, Double unitPrice, Integer stockQuantity, String description, VAT vat) {
+        setReference(reference);
+        setWording(wording);
+        setUnitPrice(unitPrice);
+        setStockQuantity(stockQuantity);
+        setDescription(description);
+        setVat(vat);
     }
 
     public Integer getReference() {
@@ -39,5 +39,29 @@ public class Product {
 
     public VAT getVat() {
         return vat;
+    }
+
+    private void setReference(Integer reference) {
+        this.reference = reference;
+    }
+
+    private void setWording(String wording) {
+        this.wording = wording;
+    }
+
+    private void setUnitPrice(Double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    private void setStockQuantity(Integer stockQuantity) {
+        this.stockQuantity = stockQuantity;
+    }
+
+    private void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setVat(VAT vat) {
+        this.vat = vat;
     }
 }
