@@ -9,8 +9,12 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import model.*;
+import view.CustomerForm.CreateCustomerForm;
+import view.CustomerForm.CustomerForm;
+import view.CustomerForm.EditCustomerForm;
 import view.tableModel.AllCustomersModel;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class CustomerList extends JFrame {
@@ -44,6 +48,8 @@ public class CustomerList extends JFrame {
         jButtonReadCustomer = new javax.swing.JButton();
         jButtonUpdateCustomer = new javax.swing.JButton();
         jButtonDeleteCustomer = new javax.swing.JButton();
+
+
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -100,18 +106,6 @@ public class CustomerList extends JFrame {
                                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        //Expemple de comment productList à été fait
-        //ApplicationController allProducts = new ApplicationController();
-        //
-        //        ArrayList<Product> all = allProducts.getAllProducts();
-        //
-        //        AllProductsModel productsModel = new AllProductsModel(all);
-        //
-        //
-        //        jTable1 = new JTable(productsModel);
-        //
-        //        jScrollPane1 = new JScrollPane(jTable1);
-
         ApplicationController allCustomers = new ApplicationController();
         ArrayList<Customer> customers = allCustomers.getAllCustomers();
         AllCustomersModel customersModel = new AllCustomersModel(customers);
@@ -135,98 +129,6 @@ public class CustomerList extends JFrame {
         jScrollCustomerTable = new JScrollPane(jTableCustomerList);
 
 
-
-
-
-
-
-
-
-        /*
-        jTableCustomerList.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null, null}
-                },
-                new String [] {
-                        "Id", "Customer", "Registration date", "Address", "Phone number", "Email", "VAT number", "IBAN", "BIC", "Is VIP"
-                }
-        ) {
-            Class[] types = new Class [] {
-                    java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class
-            };
-            boolean[] canEdit = new boolean [] {
-                    false, false, false, false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        */
         jTableCustomerList.getTableHeader().setReorderingAllowed(false);
         jScrollCustomerTable.setViewportView(jTableCustomerList);
 
@@ -247,17 +149,27 @@ public class CustomerList extends JFrame {
                                 .addGap(60, 60, 60))
         );
 
+        Color color = new Color(166, 207, 147);
         jButtonCreateCustomer.setBackground(new java.awt.Color(0, 204, 0));
         jButtonCreateCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonCreateCustomer.setText("Create customer");
-
-        jButtonReadCustomer.setBackground(new java.awt.Color(204, 255, 102));
-        jButtonReadCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButtonReadCustomer.setText("Read customer");
+        jButtonCreateCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateCustomerForm CreateCustomerForm = new CreateCustomerForm(color,"CreateCustomer");
+                CreateCustomerForm.setVisible(true);
+            }
+        });
 
         jButtonUpdateCustomer.setBackground(new java.awt.Color(0, 153, 153));
         jButtonUpdateCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButtonUpdateCustomer.setText("Update customer");
+        jButtonUpdateCustomer.setText("Edit customer");
+        jButtonUpdateCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+                EditCustomerForm editCustomerForm = new EditCustomerForm(color,"Edit customer");
+                editCustomerForm.setVisible(true);
+            }
+        });
 
         jButtonDeleteCustomer.setBackground(new java.awt.Color(255, 102, 102));
         jButtonDeleteCustomer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -268,10 +180,8 @@ public class CustomerList extends JFrame {
         panelButtonCRUDLayout.setHorizontalGroup(
                 panelButtonCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelButtonCRUDLayout.createSequentialGroup()
-                                .addGap(271, 271, 271)
+                                .addGap(376, 376, 376)
                                 .addComponent(jButtonCreateCustomer)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonReadCustomer)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonUpdateCustomer)
                                 .addGap(18, 18, 18)
@@ -282,10 +192,9 @@ public class CustomerList extends JFrame {
                 panelButtonCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelButtonCRUDLayout.createSequentialGroup()
                                 .addGroup(panelButtonCRUDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButtonCreateCustomer)
-                                        .addComponent(jButtonReadCustomer)
                                         .addComponent(jButtonUpdateCustomer)
-                                        .addComponent(jButtonDeleteCustomer))
+                                        .addComponent(jButtonDeleteCustomer)
+                                        .addComponent(jButtonCreateCustomer))
                                 .addGap(0, 26, Short.MAX_VALUE))
         );
 

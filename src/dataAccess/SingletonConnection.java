@@ -8,12 +8,12 @@ import java.sql.SQLException;
 public class SingletonConnection {
     private static Connection connection = null;
     private static String url = "jdbc:mysql://localhost:3306/library";
-    private static String id = "DBAdmin";
-    private static String password = "sinderilIG2B";
+    private static String id = " root";
+    private static String password = "Manil93Manderlier97";
 
     private SingletonConnection() throws ConnectionException {
         try{
-            connection = DriverManager.getConnection(url, id, password);
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library?useSSL=false", "root", "Manil93Manderlier97");
         } catch (SQLException troubles) {
             System.out.println(troubles.getMessage());
             throw new ConnectionException();
