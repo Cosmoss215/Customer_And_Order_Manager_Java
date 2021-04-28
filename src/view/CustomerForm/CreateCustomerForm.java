@@ -17,7 +17,17 @@ public class CreateCustomerForm extends CustomerForm {
         jButtonResetCustomer.setText("Reset");
         jButtonResetCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //Reset des données
+                jTextFieldAddressNumber.setText("");
+                jTextFieldBIC.setText("");
+                jTextFieldFirstName.setText("");
+                jTextFieldIBAN.setText("");
+                jTextFieldLastName.setText("");
+                jTextFieldLocality.setText("");
+                jTextFieldPhoneNumber.setText("");
+                jTextFieldPostalCode.setText("");;
+                jTextFieldStreetWording.setText("");
+                jTextFieldVATNumber.setText("");
+                jCheckBoxIsVIP.setSelected(false);
             }
         });
         jButtonResetCustomer.setFont(new Font("Tahoma", 0, 20));

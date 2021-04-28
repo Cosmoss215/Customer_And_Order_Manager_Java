@@ -9,7 +9,7 @@ import java.util.Date;
 public class CustomerForm extends JFrame {
     private Container mainContainer;
     public JCheckBox jCheckBoxIsVIP;
-    public JLabel jLabelAddressNumber,jLabelBIC, jLabelCustomerInformation, jLabelFirstName, jLabelIBAN,jLabelIsVIP, jLabelLastName, jLabelLocality, jLabelPhoneNumber, jLabelPostalCode, jLabelRegistrationDate, jLabelStreetWording,jLabelVATNumber;
+    public JLabel jLabelAddressNumber,jLabelBIC, jLabelCustomerInformation, jLabelFirstName, jLabelIBAN,jLabelIsVIP, jLabelLastName, jLabelLocality, jLabelPhoneNumber, jLabelPostalCode, jLabelRegistrationDate, jLabelStreetWording,jLabelVATNumber,yearLabel;
     public JTextField jTextFieldAddressNumber,jTextFieldBIC,jTextFieldFirstName,jTextFieldIBAN,jTextFieldLastName,jTextFieldLocality,jTextFieldPhoneNumber,jTextFieldPostalCode,jTextFieldStreetWording,jTextFieldVATNumber;
 
     public JPanel mainPanel,panelForm,panelButton;
@@ -75,7 +75,7 @@ public class CustomerForm extends JFrame {
         Date date = new Date();
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int years  = localDate.getYear();
-        JLabel yearLabel = new JLabel(String.valueOf(years));
+        yearLabel = new JLabel(String.valueOf(years));
         yearLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 
         datePicker.add(day);
