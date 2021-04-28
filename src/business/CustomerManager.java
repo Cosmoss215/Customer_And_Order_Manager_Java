@@ -20,7 +20,13 @@ public class CustomerManager {
 
     public ArrayList<Customer> getAllCustomers()throws SelectQueryException {
         ArrayList<Customer> customerArrayList = dao.getAllCustomers();
-        //Traitements éventuels sur la liste de livres
+        //Traitements éventuels
+        return customerArrayList;
+    }
+
+    public ArrayList<Customer> getCustomersByCountry(String countrySearched)throws SelectQueryException {
+        ArrayList<Customer> customerArrayList = dao.getCustomersByCountry(countrySearched);
+        //Traitements éventuels
         return customerArrayList;
     }
 }

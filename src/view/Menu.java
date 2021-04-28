@@ -113,7 +113,16 @@ public class Menu extends JFrame {
         jMenuItemSearch2.setText("Search 2 Customer by country");
         jMenuItemSearch2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                SearchByCountry searchByCountry = new SearchByCountry();
+                SearchByCountry searchByCountry = null;
+                try {
+                    searchByCountry = new SearchByCountry();
+                } catch (ConnectionException e) {
+                    JOptionPane.showMessageDialog(null,e.getMessage(), "ConnectionException",
+                            JOptionPane.WARNING_MESSAGE);
+                } catch (SelectQueryException e) {
+                    JOptionPane.showMessageDialog(null,e.getMessage(), "ConnectionException",
+                            JOptionPane.WARNING_MESSAGE);
+                }
                 searchByCountry.setVisible(true);
             }
         });

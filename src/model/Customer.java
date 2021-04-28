@@ -149,24 +149,22 @@ public class Customer {
         this.address = address;
     }
 
-    public String display(){
-        return "id : " + id + "\n" +
-                "firstName : " + firstName + "\n" +
-                "lastName : " + lastName + "\n" +
-                "registrationDate : " + registrationDate + "\n" +
-                "isVip : " + isVip + "\n" +
-                "nickname : " + nickname + "\n" +
-                "phoneNumber : " + phoneNumber + "\n" +
-                "email : " + email + "\n" +
-                "vatNumber : " + vatNumber + "\n" +
-                "iban : " + iban + "\n" +
-                "bic : " + bic + "\n" +
-                "address : " + address;
-    }
-
     @Override
-    public String toString(){
-        return getFirstName() + " " + getLastName();
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", registrationDate=" + registrationDate +
+                ", isVip=" + isVip +
+                ", nickname='" + nickname + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                ", vatNumber=" + vatNumber +
+                ", iban='" + iban + '\'' +
+                ", bic='" + bic + '\'' +
+                ", address=" + address +
+                '}';
     }
 }
 

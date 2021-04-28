@@ -59,30 +59,35 @@ public class CustomerDBAccess implements CustomerDataAccess {
                         data.getString("last_name"),
                         registrationDate,
                         data.getByte("is_vip") == 1,
-                        data.getString("nickname"),
-                        data.getInt("phone_number"),
-                        data.getString("email"),
-                        data.getInt("vat_number"),
                         data.getString("iban"),
                         data.getString("bic"),
                         address
                 );
 
-                // Utilité ?
                 String nickname =  data.getString("nickname");
-                if (nickname != null) {
+                if (!data.wasNull()) {
                     customer.setNickname(nickname);
                 }
                 Integer phoneNumber =  data.getInt("phone_number");
-                if (phoneNumber != null) {
-                    customer.setNickname(nickname);
+                if (!data.wasNull()) {
+                    customer.setPhoneNumber(phoneNumber);
                 }
                 String email = data.getString("email");
-                if(email != null)
+                if(!data.wasNull()) {
                     customer.setEmail(email);
+                }
                 Integer vatNumber = data.getInt("vat_number");
-                if(vatNumber != null)
+                if(!data.wasNull()) {
                     customer.setVatNumber(vatNumber);
+                }
+                String iban = data.getString("iban");
+                if(!data.wasNull()) {
+                    customer.setVatNumber(vatNumber);
+                }
+                String bic = data.getString("bic");
+                if(!data.wasNull()) {
+                    customer.setBic(bic);
+                }
 
                 customers.add(customer);
             }
@@ -105,7 +110,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
     public ArrayList<Customer> getCustomersByCountry(String countrySearched) throws SelectQueryException {
         ArrayList<Customer> customersByCountry = new ArrayList<>();
         String sqlWhereClause = "WHERE co.code IN (" + countrySearched + ") OR co.name LIKE (%" + countrySearched + "%)";
-
         return getCustomers(customersByCountry, sqlWhereClause);
     }
 

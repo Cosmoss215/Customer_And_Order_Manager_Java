@@ -26,6 +26,7 @@ public class CustomerForm extends JFrame {
         mainPanel = new JPanel();
         mainContainer.add(mainPanel);
         mainPanel.setBackground(color);
+
         mainPanel.setBounds(10, 80, 660, 650);
         mainPanel.setLayout(new BorderLayout(25,25));
 

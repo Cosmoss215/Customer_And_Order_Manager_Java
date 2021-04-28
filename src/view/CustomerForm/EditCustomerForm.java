@@ -1,5 +1,7 @@
 package view.CustomerForm;
 
+import model.Customer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +13,7 @@ import java.util.Date;
 public class EditCustomerForm extends CustomerForm {
 
     private JButton jButtonCancelCustomer,jButtonEditCustomer;
-    public EditCustomerForm(Color color,String title){
+    public EditCustomerForm(Color color, String title){
         super(title,color);
 
         jButtonCancelCustomer = new JButton();
