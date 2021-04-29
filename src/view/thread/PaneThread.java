@@ -10,14 +10,18 @@ import java.io.IOException;
 public class PaneThread extends JPanel {
     private BufferedImage box;
     private BufferedImage box2;
+    private BufferedImage bonhomme;
+    private BufferedImage bonhomme2;
     private BufferedImage currentBox;
-    private int xPos = 0;
-    private int direction = 2;
+    private BufferedImage currentBonhomme;
+    private int boboxPos = 0;
+    private int boxPos;
+    private int direction = 1;
 
     public PaneThread() {
         try {
-            box = ImageIO.read(new File("src/resource/box.png"));
-            box2 = ImageIO.read(new File("src/resource/box2.png"));
+            box = ImageIO.read(new File("src/resource/boxB.png"));
+            box2 = ImageIO.read(new File("src/resource/boxB2.png"));
             currentBox = box;
             MovementThread thread = new MovementThread(this);
             thread.start();
@@ -28,18 +32,20 @@ public class PaneThread extends JPanel {
 
     public void move(){
         try {
-            box = ImageIO.read(new File("src/resource/box.png"));
-            box2 = ImageIO.read(new File("src/resource/box2.png"));
+            box = ImageIO.read(new File("src/resource/boxB.png"));
+            box2 = ImageIO.read(new File("src/resource/boxB2.png"));
 
-            xPos += direction;
-            if (xPos + currentBox.getWidth() > getWidth()) {
-                xPos = getWidth() - currentBox.getWidth();
+            boxPos += direction;
+            if (boxPos + currentBox.getWidth() > getWidth()) {
+                boxPos = getWidth() - currentBox.getWidth();
                 direction *= -1;
                 currentBox = box2;
-            } else if (xPos < 0) {
-                xPos = 0;
+                currentBonhomme = bonhomme2;
+            } else if (boxPos < 0) {
+                boxPos = 0;
                 direction *= -1;
                 currentBox = box;
+                currentBonhomme = bonhomme;
             }
             repaint();
         } catch (IOException ioException) {
@@ -56,7 +62,7 @@ public class PaneThread extends JPanel {
         super.paintComponent(g);
 
         int y = getHeight() - box.getHeight();
-        g.drawImage(currentBox, xPos, y,this);
+        g.drawImage(currentBox, boxPos, y,this);
 
     }
 }

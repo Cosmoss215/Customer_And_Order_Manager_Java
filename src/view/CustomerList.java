@@ -175,7 +175,7 @@ public class CustomerList extends JFrame {
                 customer = customersModel.getRow(jTableCustomerList.getSelectedRow());
                 System.out.println(customer);
 
-                EditCustomerForm editCustomerForm = new EditCustomerForm(color,"Edit customer");
+                EditCustomerForm editCustomerForm = new EditCustomerForm(color,"Edit customer",customer);
                 editCustomerForm.setVisible(true);
 
             }

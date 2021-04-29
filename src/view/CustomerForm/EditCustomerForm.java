@@ -13,11 +13,10 @@ import java.util.Date;
 public class EditCustomerForm extends CustomerForm {
 
     private JButton jButtonCancelCustomer,jButtonEditCustomer;
-    public EditCustomerForm(Color color, String title){
+    public EditCustomerForm(Color color, String title,Customer customer){
         super(title,color);
 
-        jButtonCancelCustomer = new JButton();
-        jButtonCancelCustomer.setText("Cancel");
+        jButtonCancelCustomer = new JButton("Cancel");
         jButtonCancelCustomer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 EditCustomerForm.super.dispose();
@@ -26,10 +25,12 @@ public class EditCustomerForm extends CustomerForm {
         jButtonCancelCustomer.setFont(new Font("Tahoma", 0, 20));
         panelButton.add(jButtonCancelCustomer);
 
-        jButtonEditCustomer = new JButton();
-        jButtonEditCustomer.setText("Edit");
+        jButtonEditCustomer = new JButton("Edit");
         jButtonEditCustomer.setFont(new Font("Tahoma", 0, 20));
         panelButton.add(jButtonEditCustomer);
+
+
+
 
 
 

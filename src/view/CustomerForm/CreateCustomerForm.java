@@ -13,8 +13,7 @@ public class CreateCustomerForm extends CustomerForm {
         super(title,color);
 
 
-        jButtonResetCustomer = new JButton();
-        jButtonResetCustomer.setText("Reset");
+        jButtonResetCustomer = new JButton("Reset");
         jButtonResetCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldAddressNumber.setText("");
@@ -33,8 +32,7 @@ public class CreateCustomerForm extends CustomerForm {
         jButtonResetCustomer.setFont(new Font("Tahoma", 0, 20));
         panelButton.add(jButtonResetCustomer);
 
-        jButtonCreateCustomer = new JButton();
-        jButtonCreateCustomer.setText("Create");
+        jButtonCreateCustomer = new JButton("Create");
         jButtonCreateCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //Ajout du client dans la base de donnée
