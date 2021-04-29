@@ -30,9 +30,17 @@ public class EditCustomerForm extends CustomerForm {
         panelButton.add(jButtonEditCustomer);
 
 
-
-
-
-
+        jTextFieldFirstName.setText(customer.getFirstName());
+        jTextFieldLastName.setText(customer.getLastName());
+        //RegistrationDate
+        jTextFieldPhoneNumber.setText(String.valueOf(customer.getPhoneNumber()));
+        jTextFieldAddressNumber.setText(String.valueOf(customer.getAddress().getStreetNumber()));
+        jTextFieldStreetWording.setText(customer.getAddress().getStreetName());
+        jTextFieldLocality.setText(String.valueOf(customer.getAddress().getLocality()));
+        jTextFieldPostalCode.setText(String.valueOf(customer.getAddress().getLocality().getPostalCode()));
+        jTextFieldIBAN.setText(customer.getIban());
+        jTextFieldBIC.setText(customer.getBic());
+        jTextFieldVATNumber.setText(String.valueOf(customer.getVatNumber()));
+        jCheckBoxIsVIP.setSelected(customer.getVip());
     }
 }
