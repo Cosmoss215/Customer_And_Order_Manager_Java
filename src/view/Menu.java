@@ -1,92 +1,44 @@
 package view;
 
 import exception.ConnectionException;
+import exception.SelectQueryException;
+import view.thread.PaneThread;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
-import exception.SelectQueryException;
+import java.net.URI;
 
 public class Menu extends JFrame {
-    private final JButton jButtonCreateOrder;
-    private final JButton jButtonCustomer;
-    private final JButton jButtonProduct;
-    private final JMenu jMenu1;
-    private final JMenu jMenu3;
-    private final JMenuBar jMenuBar1;
-    private final JMenu jMenuFile;
-    private final JMenuItem jMenuItem1;
-    private final JMenuItem jMenuItem2;
-    private final JMenuItem jMenuItem3;
-    private final JMenuItem jMenuItemExit;
-    private final JMenuItem jMenuItemSearch1;
-    private final JMenuItem jMenuItemSearch2;
-    private final JMenuItem jMenuItemSearch3;
-    private final JPanel jPanel1;
+    private JMenuBar jMenuBar;
+    private JMenu jMenuNavigate,jMenuSearch,jMenuFile;
+    private JMenuItem jMenuItemCustomer, jMenuItemCreateOrder,jMenuItemProductList,jMenuItemExit,jMenuItemSearch1,jMenuItemSearch2,jMenuItemSearch3;
+    private JLabel welcomeMessage,info;
+    private Container mainContainer;
 
     public Menu(){
-        jPanel1 = new JPanel();
-        jButtonCustomer = new JButton();
-        jButtonCreateOrder = new JButton();
-        jButtonProduct = new JButton();
-        jMenuBar1 = new JMenuBar();
-        jMenuFile = new JMenu();
-        jMenuItemExit = new JMenuItem();
-        jMenu3 = new JMenu();
-        jMenuItemSearch1 = new JMenuItem();
-        jMenuItemSearch2 = new JMenuItem();
-        jMenuItemSearch3 = new JMenuItem();
-        jMenu1 = new JMenu();
-        jMenuItem1 = new JMenuItem();
-        jMenuItem2 = new JMenuItem();
-        jMenuItem3 = new JMenuItem();
-
+        super("Menu With a Thread");
+        //Opération spécifique à la fenêtre
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(800,600));
 
-        jButtonCustomer.setFont(new Font("Dialog", 0, 24)); // NOI18N
-        jButtonCustomer.setText("Customer");
-        CustomerListner customerListner = new CustomerListner();
-        jButtonCustomer.addActionListener(customerListner);
+        //Container
+        mainContainer = getContentPane();
+        mainContainer.add(new PaneThread(),BorderLayout.CENTER);
 
+        //MenuBar
+        jMenuBar = new JMenuBar();
 
-        jButtonCreateOrder.setFont(new Font("Dialog", 0, 24)); // NOI18N
-        jButtonCreateOrder.setText("Create Order");
-        CreateOrderListner createOrderListner = new CreateOrderListner();
-        jButtonCreateOrder.addActionListener(createOrderListner);
+        jMenuFile = new JMenu("File");
+        jMenuSearch = new JMenu("Search");
+        jMenuNavigate = new JMenu("Navigate");
 
-        jButtonProduct.setFont(new Font("Dialog", 0, 24)); // NOI18N
-        jButtonProduct.setText("Product list");
-        ProductListListner productListListner = new ProductListListner();
-        jButtonProduct.addActionListener(productListListner);
+        jMenuBar.add(jMenuFile);
+        jMenuBar.add(jMenuSearch);
+        jMenuBar.add(jMenuNavigate);
 
-        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap(237, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jButtonCustomer, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jButtonCreateOrder, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jButtonProduct, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)))
-                                .addGap(231, 231, 231))
-        );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap(214, Short.MAX_VALUE)
-                                .addComponent(jButtonCustomer)
-                                .addGap(31, 31, 31)
-                                .addComponent(jButtonCreateOrder)
-                                .addGap(32, 32, 32)
-                                .addComponent(jButtonProduct)
-                                .addGap(80, 80, 80))
-        );
-
-        jMenuFile.setText("File");
-        jMenuItemExit.setText("Exit");
+        jMenuItemExit = new JMenuItem("Exit");
         jMenuItemExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 System.exit(0);
@@ -94,127 +46,115 @@ public class Menu extends JFrame {
         });
         jMenuFile.add(jMenuItemExit);
 
-        jMenuBar1.add(jMenuFile);
 
-        jMenu3.setText("Search");
+        jMenuItemCustomer = new JMenuItem("Customer list");
+        jMenuItemCustomer.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                CustomerList customerList = null;
+                try {
+                    customerList = new CustomerList();
+                } catch (ConnectionException connectionException) {
+                    connectionException.printStackTrace();
+                } catch (SelectQueryException selectQueryException) {
+                    selectQueryException.printStackTrace();
+                }
+                customerList.setVisible(true);
+            }
+        });
+        jMenuItemCreateOrder = new JMenuItem("Create Order");
+        jMenuItemCreateOrder.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                CreateOrder createOrder = new CreateOrder();
+                createOrder.setVisible(true);
+            }
+        });
+        jMenuItemProductList = new JMenuItem("Product List");
+        jMenuItemProductList.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                ProductList productList = null;
+                try {
+                    productList = new ProductList();
+                } catch (ConnectionException connectionException) {
+                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException",
+                            JOptionPane.WARNING_MESSAGE);
+                } catch (SelectQueryException selectQueryException) {
+                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "ConnectionException",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+                productList.setVisible(true);
+            }
+        });
+        jMenuNavigate.add(jMenuItemCustomer);
+        jMenuNavigate.add(jMenuItemCreateOrder);
+        jMenuNavigate.add(jMenuItemProductList);
 
+        jMenuItemSearch1 = new JMenuItem("Search 1 Order listing");
         jMenuItemSearch1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.ALT_DOWN_MASK));
-        jMenuItemSearch1.setText("Search 1 Order listing");
-
         jMenuItemSearch1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 SearchOrderListing orderListing = new SearchOrderListing();
                 orderListing.setVisible(true);
             }
         });
-        jMenu3.add(jMenuItemSearch1);
-
+        jMenuItemSearch2 = new JMenuItem("Search 2 Customer by country");
         jMenuItemSearch2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,InputEvent.ALT_DOWN_MASK));
-        jMenuItemSearch2.setText("Search 2 Customer by country");
         jMenuItemSearch2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
+
                 SearchByCountry searchByCountry = null;
                 try {
                     searchByCountry = new SearchByCountry();
-                } catch (ConnectionException e) {
-                    JOptionPane.showMessageDialog(null,e.getMessage(), "ConnectionException",
+                } catch (ConnectionException connectionException) {
+                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException",
                             JOptionPane.WARNING_MESSAGE);
-                } catch (SelectQueryException e) {
-                    JOptionPane.showMessageDialog(null,e.getMessage(), "ConnectionException",
+                } catch (SelectQueryException selectQueryException) {
+                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "QueryException",
                             JOptionPane.WARNING_MESSAGE);
                 }
                 searchByCountry.setVisible(true);
+
             }
         });
-        jMenu3.add(jMenuItemSearch2);
-
+        jMenuItemSearch3 = new JMenuItem("Search 3 Product");
         jMenuItemSearch3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.ALT_DOWN_MASK));
-        jMenuItemSearch3.setText("Search 3 Product");
-
-
         jMenuItemSearch3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 SearchByProduct searchByProduct = new SearchByProduct();
                 searchByProduct.setVisible(true);
             }
         });
-        jMenu3.add(jMenuItemSearch3);
+        jMenuSearch.add(jMenuItemSearch1);
+        jMenuSearch.add(jMenuItemSearch2);
+        jMenuSearch.add(jMenuItemSearch3);
 
-        jMenuBar1.add(jMenu3);
+        setJMenuBar(jMenuBar);
 
-        jMenu1.setText("Navigate");
 
-        jMenuItem1.setText("Customer");
-        jMenuItem1.addActionListener(customerListner);
+        //Welcome Message
+        welcomeMessage = new JLabel("Welcome to the Order and Invoice Manager",JLabel.CENTER);
+        welcomeMessage.setFont(new Font("Tahoma", Font.BOLD, 30));
+        welcomeMessage.setForeground(new Color(102,102,255));
+        mainContainer.add(welcomeMessage,BorderLayout.NORTH);
+        info = new JLabel("You can visit this link to learn more about the program",JLabel.CENTER);
+        info.setForeground(Color.BLUE);
+        info.setFont(new Font("Tahoma", Font.ITALIC, 20));
+        info.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try{
+                    Desktop.getDesktop().browse(new URI("https://github.com/Cosmoss215/OrderAndInvoiceManager"));
 
-        jMenu1.add(jMenuItem1);
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null,exception.getMessage(), "ConnectionException",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+        mainContainer.add(info,BorderLayout.SOUTH);
 
-        jMenuItem2.setText("Create Order");
-        jMenuItem2.addActionListener(createOrderListner);
-
-        jMenu1.add(jMenuItem2);
-
-        jMenuItem3.setText("Product list");
-        jMenuItem3.addActionListener(productListListner);
-
-        jMenu1.add(jMenuItem3);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
-
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
         pack();
-        setLocationRelativeTo(null);
-    }
-
-    private class CustomerListner implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                CustomerList customerList = new CustomerList();
-                customerList.setVisible(true);
-            } catch (ConnectionException connectionException) {
-                JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException",
-                        JOptionPane.WARNING_MESSAGE);
-            } catch (SelectQueryException selectQueryException) {
-                JOptionPane.showMessageDialog(null, selectQueryException.getMessage(), "SelectQueryException",
-                        JOptionPane.WARNING_MESSAGE);
-            }
-        }
-    }
-    private class CreateOrderListner implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            CreateOrder createOrder = new CreateOrder();
-            createOrder.setVisible(true);
-        }
-    }
-    private class ProductListListner implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            ProductList productList = null;
-            try {
-                productList = new ProductList();
-                productList.setVisible(true);
-            } catch (ConnectionException connectionException) {
-                JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException",
-                        JOptionPane.WARNING_MESSAGE);
-            } catch (SelectQueryException selectQueryException) {
-                JOptionPane.showMessageDialog(null, selectQueryException.getMessage(), "SelectQueryException",
-                        JOptionPane.WARNING_MESSAGE);
-            }
-
-        }
+        setLocationRelativeTo(null);//Met la fenêtre au millieux de l'écran
+        setVisible(true);
     }
 
 }

@@ -165,8 +165,6 @@ public class CustomerList extends JFrame {
         });
 
 
-
-
         jButtonUpdateCustomer.setBackground(new Color(0, 153, 153));
         jButtonUpdateCustomer.setFont(new Font("Tahoma", 0, 18));
         jButtonUpdateCustomer.setText("Edit customer");
