@@ -2,8 +2,10 @@ package view.CustomerForm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 public class CustomerForm extends JFrame {
@@ -12,7 +14,7 @@ public class CustomerForm extends JFrame {
     public JLabel jLabelAddressNumber,jLabelBIC, jLabelCustomerInformation, jLabelFirstName, jLabelIBAN,jLabelIsVIP, jLabelLastName, jLabelLocality, jLabelPhoneNumber, jLabelPostalCode, jLabelRegistrationDate, jLabelStreetWording,jLabelVATNumber,yearLabel;
     public JTextField jTextFieldAddressNumber,jTextFieldBIC,jTextFieldFirstName,jTextFieldIBAN,jTextFieldLastName,jTextFieldLocality,jTextFieldPhoneNumber,jTextFieldPostalCode,jTextFieldStreetWording,jTextFieldVATNumber;
 
-    public JPanel mainPanel,panelForm,panelButton;
+    public JPanel mainPanel,panelForm,panelButton,datePicker;
 
     public CustomerForm(String title,Color color){
         setTitle(title);
@@ -62,25 +64,14 @@ public class CustomerForm extends JFrame {
         jLabelRegistrationDate.setFont(new Font("Tahoma", 0, 20));
         panelForm.add(jLabelRegistrationDate);
 
-        JPanel datePicker = new JPanel();
-        Integer[] dayS = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
-        Integer[] monthS = {1,2,3,4,5,6,7,8,9,10,11,12};
-        JComboBox<Integer> day = new JComboBox<Integer>(dayS);
-        day.setFont(new Font("Tahoma", 0, 15));
-
-        JComboBox<Integer> month = new JComboBox<Integer>(monthS);
-        month.setFont(new Font("Tahoma", 0, 15));
+        datePicker = new JPanel();
 
 
-        Date date = new Date();
-        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        int years  = localDate.getYear();
-        yearLabel = new JLabel(String.valueOf(years));
-        yearLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+        SpinnerDateModel dateSpinner = new SpinnerDateModel();
+        JSpinner dateSelector = new JSpinner(dateSpinner);
+        dateSelector.setFont(new Font("Tahoma", 0, 15));
 
-        datePicker.add(day);
-        datePicker.add(month);
-        datePicker.add(yearLabel);
+        datePicker.add(dateSelector);
         datePicker.setBackground(color);
         panelForm.add(datePicker);
 
