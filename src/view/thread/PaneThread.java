@@ -18,8 +18,8 @@ public class PaneThread extends JPanel {
 
     public PaneThread() throws ThreadException {
         try {
-            box = ImageIO.read(new File("src/view/thread/boxB.png"));
-            box2 = ImageIO.read(new File("src/view/thread/boxB2.png"));
+            box = ImageIO.read(new File("src/resource/boxB.png"));
+            box2 = ImageIO.read(new File("src/resource/boxB2.png"));
             currentBox = box;
             MovementThread thread = new MovementThread(this);
             thread.start();
@@ -30,8 +30,8 @@ public class PaneThread extends JPanel {
 
     public void move() throws ThreadException {
         try {
-            box = ImageIO.read(new File("src/view/thread/boxB.png"));
-            box2 = ImageIO.read(new File("src/view/thread/boxB2.png"));
+            box = ImageIO.read(new File("src/resource/boxB.png"));
+            box2 = ImageIO.read(new File("src/resource/boxB2.png"));
 
             boxPos += direction;
             if (boxPos + currentBox.getWidth() > getWidth()) {
