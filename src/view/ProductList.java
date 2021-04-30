@@ -37,6 +37,33 @@ public class ProductList extends JFrame {
         jButtonSearch.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonSearch.setText("Search");
 
+
+
+
+        ApplicationController allProducts = new ApplicationController();
+
+        ArrayList<Product> all = allProducts.getAllProducts();
+
+        AllProductsModel productsModel = new AllProductsModel(all);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        jTable1 = new JTable(productsModel);
+        jTable1.setAutoCreateRowSorter(true);
+        jTable1.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        jTable1.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        jTable1.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        jTable1.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        jTable1.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
+        jScrollPane1 = new JScrollPane(jTable1);
+
+        jScrollPane1.setViewportView(jTable1);
+        //-------------------------------------------------------------------------------------
+
+
+
+        //region Code de mise en forme
         GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
         panelSearchBar.setLayout(panelSearchBarLayout);
         panelSearchBarLayout.setHorizontalGroup(
@@ -60,31 +87,6 @@ public class ProductList extends JFrame {
                                         .addComponent(jLabelProductList))
                                 .addContainerGap(34, Short.MAX_VALUE))
         );
-
-        // Création des colonnes d'affichage
-        ApplicationController allProducts = new ApplicationController();
-
-        ArrayList<Product> all = allProducts.getAllProducts();
-
-        AllProductsModel productsModel = new AllProductsModel(all);
-
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-
-        jTable1 = new JTable(productsModel);
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        jTable1.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
-        jTable1.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
-        jTable1.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
-        jTable1.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
-        jScrollPane1 = new JScrollPane(jTable1);
-
-
-        jScrollPane1.setViewportView(jTable1);
-        //-------------------------------------------------------------------------------------
-
-
 
         GroupLayout panelAllProductsLayout = new GroupLayout(panelAllProducts);
         panelAllProducts.setLayout(panelAllProductsLayout);
@@ -116,6 +118,7 @@ public class ProductList extends JFrame {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(panelAllProducts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
+        //endregion
 
         pack();
     }

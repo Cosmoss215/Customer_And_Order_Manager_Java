@@ -109,7 +109,10 @@ public class CustomerDBAccess implements CustomerDataAccess {
     @Override
     public ArrayList<Customer> getCustomersByCountry(String countrySearched) throws SelectQueryException {
         ArrayList<Customer> customersByCountry = new ArrayList<>();
+        /*
         String sqlWhereClause = "WHERE co.code IN (" + countrySearched + ") OR co.name LIKE (%" + countrySearched + "%)";
+         */
+        String sqlWhereClause = "WHERE co.name IN (\'" + countrySearched + "\')";
         return getCustomers(customersByCountry, sqlWhereClause);
     }
 

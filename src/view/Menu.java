@@ -139,7 +139,6 @@ public class Menu extends JFrame {
 
         setJMenuBar(jMenuBar);
 
-
         //Welcome Message
         welcomeMessage = new JLabel("Welcome to the Order and Invoice Manager",JLabel.CENTER);
         welcomeMessage.setFont(new Font("Tahoma", Font.BOLD, 30));

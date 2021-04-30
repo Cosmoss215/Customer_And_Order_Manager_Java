@@ -11,9 +11,9 @@ import java.util.Date;
 public class CustomerForm extends JFrame {
     private Container mainContainer;
     public JCheckBox jCheckBoxIsVIP;
-    public JLabel jLabelAddressNumber,jLabelBIC, jLabelCustomerInformation, jLabelFirstName, jLabelIBAN,jLabelIsVIP, jLabelLastName, jLabelLocality, jLabelPhoneNumber, jLabelPostalCode, jLabelRegistrationDate, jLabelStreetWording,jLabelVATNumber,yearLabel;
+    public JLabel jLabelAddressNumber,jLabelBIC, jLabelCustomerInformation, jLabelFirstName, jLabelIBAN,jLabelIsVIP, jLabelLastName, jLabelLocality, jLabelPhoneNumber, jLabelPostalCode, jLabelRegistrationDate, jLabelStreetWording,jLabelVATNumber,jLabelCountryChoose;
     public JTextField jTextFieldAddressNumber,jTextFieldBIC,jTextFieldFirstName,jTextFieldIBAN,jTextFieldLastName,jTextFieldLocality,jTextFieldPhoneNumber,jTextFieldPostalCode,jTextFieldStreetWording,jTextFieldVATNumber;
-
+    public JComboBox<String> jComboBoxCountry;
     public JPanel mainPanel,panelForm,panelButton,datePicker;
 
     public CustomerForm(String title,Color color){
@@ -36,13 +36,13 @@ public class CustomerForm extends JFrame {
         jLabelCustomerInformation.setFont(new Font("Tahoma", 0, 20));
         jLabelCustomerInformation.setHorizontalAlignment(SwingConstants.CENTER);
 
-         panelForm = new JPanel();
-         panelButton = new JPanel();
+        panelForm = new JPanel();
+        panelButton = new JPanel();
 
         panelForm.setBackground(color);
         panelButton.setBackground(color);
 
-        panelForm.setLayout(new GridLayout(13,2,50,10));
+        panelForm.setLayout(new GridLayout(14,2,50,10));
         panelButton.setLayout(new FlowLayout());
 
         jLabelFirstName = new JLabel("First name");
@@ -81,7 +81,7 @@ public class CustomerForm extends JFrame {
         jTextFieldPhoneNumber = new JTextField();
         panelForm.add(jTextFieldPhoneNumber);
 
-        jLabelAddressNumber = new JLabel("Address number");
+        jLabelAddressNumber = new JLabel("Address");
         jLabelAddressNumber.setFont(new Font("Tahoma", 0, 20));
         panelForm.add(jLabelAddressNumber);
         jTextFieldAddressNumber = new JTextField();
@@ -105,6 +105,17 @@ public class CustomerForm extends JFrame {
         panelForm.add(jLabelPostalCode);
         jTextFieldPostalCode = new JTextField();
         panelForm.add(jTextFieldPostalCode);
+
+
+        jLabelCountryChoose = new JLabel("Country");
+        jLabelCountryChoose.setFont(new Font("Tahoma", 0, 20));
+        panelForm.add(jLabelCountryChoose);
+
+        jComboBoxCountry = new JComboBox<>();
+        jComboBoxCountry.setFont(new Font("Tahoma", 0, 20));
+        jComboBoxCountry.setModel(new DefaultComboBoxModel<>(new String[] { "Belgium", "France", "Netherlands", "Spain", "Germany" }));
+        panelForm.add(jComboBoxCountry);
+
 
         jLabelVATNumber = new JLabel("Vat number");
         jLabelVATNumber.setFont(new Font("Tahoma", 0, 20));

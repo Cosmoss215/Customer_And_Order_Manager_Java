@@ -109,63 +109,7 @@ public class CreateOrder extends JFrame {
         jLabelNickname.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelNickname.setText("Nickname");
 
-        javax.swing.GroupLayout panelOrderInformationLayout = new javax.swing.GroupLayout(panelOrderInformation);
-        panelOrderInformation.setLayout(panelOrderInformationLayout);
-        panelOrderInformationLayout.setHorizontalGroup(
-                panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
-                                .addGroup(panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
-                                                .addGap(57, 57, 57)
-                                                .addComponent(jLabelCreationDate)
-                                                .addGap(18, 18, 18)
-                                                .addGroup(panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jLabelDate, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
-                                                                .addGap(10, 10, 10)
-                                                                .addComponent(jLabelDateOfTheDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabelPaymentMethod)
-                                                .addGap(38, 38, 38)
-                                                .addComponent(jComboBoxPaymentmethod, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(53, 53, 53)
-                                                .addComponent(jLabelPaymentDealine)
-                                                .addGap(37, 37, 37)
-                                                .addComponent(jComboBoxDeadline, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(36, 36, 36)
-                                                .addComponent(jLabelPaymentDealine1))
-                                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
-                                                .addGap(149, 149, 149)
-                                                .addComponent(jLabelCustomer)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTextFieldCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabelNickname)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTextFieldNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelOrderInformationLayout.setVerticalGroup(
-                panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabelCustomer)
-                                        .addComponent(jTextFieldCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextFieldNickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabelNickname))
-                                .addGap(18, 18, 18)
-                                .addGroup(panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabelCreationDate)
-                                        .addComponent(jLabelPaymentMethod)
-                                        .addComponent(jComboBoxPaymentmethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabelPaymentDealine)
-                                        .addComponent(jComboBoxDeadline, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabelPaymentDealine1)
-                                        .addComponent(jLabelDate)
-                                        .addComponent(jLabelDateOfTheDay))
-                                .addContainerGap(19, Short.MAX_VALUE))
-        );
+
 
         panelOrder.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -271,6 +215,67 @@ public class CreateOrder extends JFrame {
         jButtonCancel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButtonCancel1.setText("Cancel");
 
+        //region Code de mise en forme
+        javax.swing.GroupLayout panelOrderInformationLayout = new javax.swing.GroupLayout(panelOrderInformation);
+        panelOrderInformation.setLayout(panelOrderInformationLayout);
+        panelOrderInformationLayout.setHorizontalGroup(
+                panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
+                                .addGroup(panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
+                                                .addGap(57, 57, 57)
+                                                .addComponent(jLabelCreationDate)
+                                                .addGap(18, 18, 18)
+                                                .addGroup(panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(jLabelDate, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
+                                                                .addGap(10, 10, 10)
+                                                                .addComponent(jLabelDateOfTheDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabelPaymentMethod)
+                                                .addGap(38, 38, 38)
+                                                .addComponent(jComboBoxPaymentmethod, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(53, 53, 53)
+                                                .addComponent(jLabelPaymentDealine)
+                                                .addGap(37, 37, 37)
+                                                .addComponent(jComboBoxDeadline, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(36, 36, 36)
+                                                .addComponent(jLabelPaymentDealine1))
+                                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
+                                                .addGap(149, 149, 149)
+                                                .addComponent(jLabelCustomer)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jTextFieldCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabelNickname)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jTextFieldNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelOrderInformationLayout.setVerticalGroup(
+                panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelOrderInformationLayout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabelCustomer)
+                                        .addComponent(jTextFieldCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldNickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabelNickname))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelOrderInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabelCreationDate)
+                                        .addComponent(jLabelPaymentMethod)
+                                        .addComponent(jComboBoxPaymentmethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabelPaymentDealine)
+                                        .addComponent(jComboBoxDeadline, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabelPaymentDealine1)
+                                        .addComponent(jLabelDate)
+                                        .addComponent(jLabelDateOfTheDay))
+                                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+
+
         javax.swing.GroupLayout panelOrderLayout = new javax.swing.GroupLayout(panelOrder);
         panelOrder.setLayout(panelOrderLayout);
         panelOrderLayout.setHorizontalGroup(
@@ -342,6 +347,7 @@ public class CreateOrder extends JFrame {
                                 .addComponent(panelOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
+        //endregion
 
         pack();
     }

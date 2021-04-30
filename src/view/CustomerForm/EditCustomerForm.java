@@ -38,6 +38,11 @@ public class EditCustomerForm extends CustomerForm {
         jTextFieldStreetWording.setText(customer.getAddress().getStreetName());
         jTextFieldLocality.setText(String.valueOf(customer.getAddress().getLocality()));
         jTextFieldPostalCode.setText(String.valueOf(customer.getAddress().getLocality().getPostalCode()));
+
+
+        //jComboBoxCountry.setSelectedIndex(1);
+
+
         jTextFieldIBAN.setText(customer.getIban());
         jTextFieldBIC.setText(customer.getBic());
         jTextFieldVATNumber.setText(String.valueOf(customer.getVatNumber()));
