@@ -30,6 +30,20 @@ public class ApplicationController  {
         vatManager = new VATManager();
     }
 
+    public ArrayList<Customer> getAllCustomers() throws SelectQueryException {
+        return customerManager.getAllCustomers();
+    }
+
+    public ArrayList<Product> getAllProducts() throws SelectQueryException {
+        return productManager.getAllProducts();
+    }
+    public ArrayList<Customer> getCustomersByCountry(String countrySearched)throws SelectQueryException {
+        return customerManager.getCustomersByCountry(countrySearched);
+    }
+
+
+
+
     public ArrayList<Address> getAllAddresses() throws SelectQueryException {
         return addressManager.getAllAddresses();
     }
@@ -37,10 +51,6 @@ public class ApplicationController  {
 
     public ArrayList<Country> getAllCountries() throws SelectQueryException {
         return countryManager.getAllCountries();
-    }
-
-    public ArrayList<Customer> getAllCustomers() throws SelectQueryException {
-        return customerManager.getAllCustomers();
     }
 
 
@@ -63,9 +73,7 @@ public class ApplicationController  {
         return paymentMethodManager.getAllPaymentMethods();
     }
 
-    public ArrayList<Product> getAllProducts() throws SelectQueryException {
-        return productManager.getAllProducts();
-    }
+
 
     public ArrayList<VAT> getAllVAT() throws SelectQueryException {
         return vatManager.getAllVAT();

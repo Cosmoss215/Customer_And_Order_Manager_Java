@@ -13,18 +13,26 @@ public class CreateCustomerForm extends CustomerForm {
         super(title,color);
 
 
-        jButtonResetCustomer = new JButton();
-        jButtonResetCustomer.setText("Reset");
+        jButtonResetCustomer = new JButton("Reset");
         jButtonResetCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //Reset des données
+                jTextFieldAddressNumber.setText("");
+                jTextFieldBIC.setText("");
+                jTextFieldFirstName.setText("");
+                jTextFieldIBAN.setText("");
+                jTextFieldLastName.setText("");
+                jTextFieldLocality.setText("");
+                jTextFieldPhoneNumber.setText("");
+                jTextFieldPostalCode.setText("");;
+                jTextFieldStreetWording.setText("");
+                jTextFieldVATNumber.setText("");
+                jCheckBoxIsVIP.setSelected(false);
             }
         });
         jButtonResetCustomer.setFont(new Font("Tahoma", 0, 20));
         panelButton.add(jButtonResetCustomer);
 
-        jButtonCreateCustomer = new JButton();
-        jButtonCreateCustomer.setText("Create");
+        jButtonCreateCustomer = new JButton("Create");
         jButtonCreateCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 //Ajout du client dans la base de donnée

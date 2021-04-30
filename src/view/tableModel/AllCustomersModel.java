@@ -88,5 +88,8 @@ public class AllCustomersModel extends AbstractTableModel {
         }
         return c;
     }
+    public Customer getRow(int indexRow){
+        return content.get(indexRow);
+    }
 
 }

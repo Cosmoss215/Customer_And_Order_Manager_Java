@@ -1,9 +1,19 @@
 package view;
 
+import controller.ApplicationController;
+import exception.ConnectionException;
+import exception.SelectQueryException;
+import model.Customer;
+import model.Product;
+import view.tableModel.AllCustomersByCountryModel;
+import view.tableModel.AllProductsModel;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class SearchByCountry extends JFrame {
     private javax.swing.JComboBox<String> jComboBoxCountryChoose;
@@ -13,7 +23,7 @@ public class SearchByCountry extends JFrame {
     private javax.swing.JPanel panelCountrySelector;
     private javax.swing.JPanel panelTableCustomer;
 
-    public SearchByCountry(){
+    public SearchByCountry() throws ConnectionException, SelectQueryException {
         panelCountrySelector = new javax.swing.JPanel();
         jLabelCountry = new javax.swing.JLabel();
         jComboBoxCountryChoose = new javax.swing.JComboBox<>();
@@ -30,7 +40,33 @@ public class SearchByCountry extends JFrame {
         jComboBoxCountryChoose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Belgium", "France", "Netherlands", "Spain", "Germany" }));
         jComboBoxCountryChoose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //jComboBoxCountryChooseActionPerformed(evt);
+                ApplicationController customersByCountry = null;
+                try {
+                    customersByCountry = new ApplicationController();
+                } catch (ConnectionException e) {
+                    JOptionPane.showMessageDialog(null,e.getMessage(), "ConnectionException",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+
+                String country = (String) jComboBoxCountryChoose.getSelectedItem();
+
+                System.out.println(country);
+
+                ArrayList<Customer> allCustomerByCountry = null;
+                try {
+                    allCustomerByCountry = customersByCountry.getCustomersByCountry(country);
+                } catch (SelectQueryException e) {
+                    JOptionPane.showMessageDialog(null,e.getMessage(), "ConnectionException",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+
+                AllCustomersByCountryModel customersByCountryModel = new AllCustomersByCountryModel(allCustomerByCountry);
+
+
+                DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+                centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+                jTable1 = new JTable(customersByCountryModel);
             }
         });
 
@@ -55,74 +91,7 @@ public class SearchByCountry extends JFrame {
                                 .addGap(17, 17, 17))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null}
-                },
-                new String [] {
-                        "Customer name", "Address"
-                }
-        ));
+
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout panelTableCustomerLayout = new javax.swing.GroupLayout(panelTableCustomer);
