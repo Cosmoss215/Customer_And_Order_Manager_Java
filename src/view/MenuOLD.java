@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import exception.SelectQueryException;
+import exception.ThreadException;
 import view.thread.PaneThread;
 
 public class MenuOLD extends JFrame {
@@ -27,7 +28,7 @@ public class MenuOLD extends JFrame {
     private final JPanel jPanelMenu;
     private Container mainContainer;
 
-    public MenuOLD(){
+    public MenuOLD() throws ThreadException {
         jPanelMenu = new JPanel();
         jButtonCustomer = new JButton();
         jButtonCreateOrder = new JButton();
