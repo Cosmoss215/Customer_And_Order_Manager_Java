@@ -67,7 +67,7 @@ public class AllProductsModel extends AbstractTableModel {
                 break;
             case 5: c = String.class;
                 break;
-            case 6 : c = Double.class;
+            case 6: c = Double.class;
                 break;
             default: c = String.class;
         }
