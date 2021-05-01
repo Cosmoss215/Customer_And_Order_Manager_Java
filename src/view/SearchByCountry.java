@@ -36,7 +36,30 @@ public class SearchByCountry extends JFrame {
         jComboBoxCountryChoose.setModel(new DefaultComboBoxModel<>(new String[] { "Belgium", "France", "Netherlands", "Spain", "Germany" }));
         jComboBoxCountryChoose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                //Ajouter le code permettant de refresh la ou est le tableau en fonction du pays selectionner
+                panelTableCustomer.remove(jTable1);
+                ApplicationController customersByCountry = null;
+                try {
+                    customersByCountry = new ApplicationController();
+                } catch (ConnectionException e) {
+                    JOptionPane.showMessageDialog(null,e.getMessage(), "ConnectionException",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+                String country = (String) jComboBoxCountryChoose.getSelectedItem();
+
+                ArrayList<Customer> allCustomerByCountry = null;
+                try {
+                    allCustomerByCountry = customersByCountry.getCustomersByCountry("France");
+                } catch (SelectQueryException e) {
+                    JOptionPane.showMessageDialog(null,e.getMessage(), "QueryException",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+
+                AllCustomersByCountryModel customersByCountryModel = new AllCustomersByCountryModel(allCustomerByCountry);
+
+                customersByCountryModel.fireTableDataChanged();
+                jTable1 = new JTable(customersByCountryModel);
+                panelTableCustomer.add(jTable1);
+                panelTableCustomer.revalidate();
             }
         });
         ApplicationController customersByCountry = null;
@@ -50,17 +73,13 @@ public class SearchByCountry extends JFrame {
 
         ArrayList<Customer> allCustomerByCountry = null;
         try {
-            allCustomerByCountry = customersByCountry.getCustomersByCountry("France");
+            allCustomerByCountry = customersByCountry.getCustomersByCountry(country);
         } catch (SelectQueryException e) {
             JOptionPane.showMessageDialog(null,e.getMessage(), "QueryException",
                     JOptionPane.WARNING_MESSAGE);
         }
 
         AllCustomersByCountryModel customersByCountryModel = new AllCustomersByCountryModel(allCustomerByCountry);
-
-
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
         jTable1 = new JTable(customersByCountryModel);
         panelTableCustomer.add(jTable1);
