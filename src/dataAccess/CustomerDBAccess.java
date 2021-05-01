@@ -116,10 +116,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
         return getCustomers(customersByCountry, sqlWhereClause);
     }
 
-    @Override
-    public boolean addCustomer(Customer customer) {
-        return false;
-    }
 
     @Override
     public ArrayList<Customer> getCustomersByNickname(String nickname) throws SelectQueryException {
@@ -135,6 +131,18 @@ public class CustomerDBAccess implements CustomerDataAccess {
         String sqlWhereClause = "WHERE c.first_name LIKE (%" + name + "%) OR c.last_name LIKE (%" + name + "%)";
 
         return getCustomers(customersByName, sqlWhereClause);
+    }
+
+    @Override
+    public boolean addCustomer(Customer customer) {
+        PreparedStatement preparedStatement;
+
+        String sqlInstruction = "INSERT INTO customer (id,first_name,last_name,registration_date,is_vip,nickname,phone_number,email,vat_number,iban,bic,address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        Customer customerInsert = customer;
+        Address address = customer.getAddress();
+
+
+        return false;
     }
 
     @Override
