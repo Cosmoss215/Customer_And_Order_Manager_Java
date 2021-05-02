@@ -29,10 +29,10 @@ public class SearchByCountry extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabelCountry.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelCountry.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelCountry.setText("Country");
 
-        jComboBoxCountryChoose.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jComboBoxCountryChoose.setFont(new Font("Tahoma", 0, 18)); // 
         jComboBoxCountryChoose.setModel(new DefaultComboBoxModel<>(new String[] { "Belgium", "France", "Netherlands", "Spain", "Germany" }));
         jComboBoxCountryChoose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {

@@ -66,54 +66,54 @@ public class CreateOrder extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabelCustomer.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelCustomer.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelCustomer.setText("Customer");
 
-        jTextFieldCustomerName.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldCustomerName.setFont(new Font("Tahoma", 0, 18)); // 
         jTextFieldCustomerName.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //jTextFieldCustomerNameActionPerformed(evt);
             }
         });
 
-        jTextFieldNickname.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldNickname.setFont(new Font("Tahoma", 0, 18)); // 
         jTextFieldNickname.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //jTextFieldNicknameActionPerformed(evt);
             }
         });
 
-        jLabelPaymentMethod.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelPaymentMethod.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelPaymentMethod.setText("Payment method");
 
-        jComboBoxPaymentmethod.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jComboBoxPaymentmethod.setFont(new Font("Tahoma", 0, 18)); // 
         jComboBoxPaymentmethod.setModel(new DefaultComboBoxModel<>(new String[] { "Paypal", "transfer" }));
 
-        jLabelPaymentDealine.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelPaymentDealine.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelPaymentDealine.setText("Payment deadline");
 
-        jComboBoxDeadline.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jComboBoxDeadline.setFont(new Font("Tahoma", 0, 18)); // 
         jComboBoxDeadline.setModel(new DefaultComboBoxModel<>(new String[] { "8", "15", "30" }));
 
-        jLabelPaymentDealine1.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelPaymentDealine1.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelPaymentDealine1.setText("days");
 
-        jLabelCreationDate.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelCreationDate.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelCreationDate.setText("Creation date");
 
-        jLabelDate.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelDate.setFont(new Font("Tahoma", 0, 18)); // 
 
-        jLabelDateOfTheDay.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelDateOfTheDay.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelDateOfTheDay.setText("Date of the day");
 
-        jLabelNickname.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelNickname.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelNickname.setText("Nickname");
 
 
 
         panelOrder.setBackground(new Color(0, 153, 153));
 
-        jTableOrderInformation.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        jTableOrderInformation.setFont(new Font("Tahoma", 0, 12)); // 
         jTableOrderInformation.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
                         {null, null, null, null, null, null},
@@ -155,22 +155,22 @@ public class CreateOrder extends JFrame {
         });
         jScrollPaneOrderInformation.setViewportView(jTableOrderInformation);
 
-        jLabelAddProduct.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelAddProduct.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelAddProduct.setForeground(new Color(255, 255, 255));
         jLabelAddProduct.setText("Quantity");
 
-        jTextFieldAddProductChoose.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldAddProductChoose.setFont(new Font("Tahoma", 0, 18)); // 
         jTextFieldAddProductChoose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //jTextFieldAddProductChooseActionPerformed(evt);
             }
         });
 
-        jLabelAddProduct1.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelAddProduct1.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelAddProduct1.setForeground(new Color(255, 255, 255));
         jLabelAddProduct1.setText("Add product");
 
-        jTextFieldQuantityChoose.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldQuantityChoose.setFont(new Font("Tahoma", 0, 18)); // 
         jTextFieldQuantityChoose.setText("0");
         jTextFieldQuantityChoose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -179,10 +179,10 @@ public class CreateOrder extends JFrame {
         });
 
         jButtonAddProduct.setBackground(new Color(0, 204, 51));
-        jButtonAddProduct.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonAddProduct.setFont(new Font("Tahoma", 0, 18)); // 
         jButtonAddProduct.setText("Add");
 
-        jTableTotal.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        jTableTotal.setFont(new Font("Tahoma", 0, 12)); // 
         jTableTotal.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
                         {"Total excluding VAT", null},
@@ -204,15 +204,15 @@ public class CreateOrder extends JFrame {
         jScrollPaneTotal.setViewportView(jTableTotal);
 
         jButtonDeleteProduct.setBackground(new Color(255, 255, 0));
-        jButtonDeleteProduct.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonDeleteProduct.setFont(new Font("Tahoma", 0, 18)); // 
         jButtonDeleteProduct.setText("Delete product");
 
         jButtonCancel.setBackground(new Color(0, 204, 0));
-        jButtonCancel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonCancel.setFont(new Font("Tahoma", 0, 18)); // 
         jButtonCancel.setText("Create order");
 
         jButtonCancel1.setBackground(new Color(255, 0, 0));
-        jButtonCancel1.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonCancel1.setFont(new Font("Tahoma", 0, 18)); // 
         jButtonCancel1.setText("Cancel");
 
         //region Code de mise en forme

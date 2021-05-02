@@ -55,23 +55,23 @@ public class CustomerList extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButtonSearch.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonSearch.setFont(new Font("Tahoma", 0, 18)); // 
         jButtonSearch.setText("Search");
 
-        jTextFieldSearchBar.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldSearchBar.setFont(new Font("Tahoma", 0, 18)); // 
         jTextFieldSearchBar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //jTextFieldSearchBarActionPerformed(evt);
             }
         });
 
-        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelCustomerName.setText("Customer name");
 
-        jLabelNickname.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelNickname.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelNickname.setText("Nickname");
 
-        jTextFieldSearchBar1.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldSearchBar1.setFont(new Font("Tahoma", 0, 18)); // 
         jTextFieldSearchBar1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //jTextFieldSearchBar1ActionPerformed(evt);
@@ -91,7 +91,7 @@ public class CustomerList extends JFrame {
 
         Color color = new Color(166, 207, 147);
         jButtonCreateCustomer.setBackground(new Color(0, 204, 0));
-        jButtonCreateCustomer.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonCreateCustomer.setFont(new Font("Tahoma", 0, 18)); // 
         jButtonCreateCustomer.setText("Create customer");
         jButtonCreateCustomer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -119,7 +119,7 @@ public class CustomerList extends JFrame {
         //MouseListner sur jtable
 
         jButtonDeleteCustomer.setBackground(new Color(255, 102, 102));
-        jButtonDeleteCustomer.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonDeleteCustomer.setFont(new Font("Tahoma", 0, 18)); // 
         jButtonDeleteCustomer.setText("Delete customer");
 
 

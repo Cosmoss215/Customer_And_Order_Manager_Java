@@ -34,13 +34,13 @@ public class SearchOrderListing extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelCustomerName.setText("Customer's name");
 
-        jLabelCustomerAddress.setFont(new Font("Dialog", 0, 18)); // NOI18N
+        jLabelCustomerAddress.setFont(new Font("Dialog", 0, 18)); // 
         jLabelCustomerAddress.setText("Address");
 
-        jTextFieldSearchBar.setFont(new Font("Dialog", 0, 18)); // NOI18N
+        jTextFieldSearchBar.setFont(new Font("Dialog", 0, 18)); // 
         jTextFieldSearchBar.setText("");
         jTextFieldSearchBar.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         jTextFieldSearchBar.addActionListener(new ActionListener() {
@@ -50,25 +50,25 @@ public class SearchOrderListing extends JFrame {
         });
 
         jFormattedTextFieldStartDate.setText("DD/MM/YYY");
-        jFormattedTextFieldStartDate.setFont(new Font("Dialog", 0, 18)); // NOI18N
+        jFormattedTextFieldStartDate.setFont(new Font("Dialog", 0, 18)); // 
         jFormattedTextFieldStartDate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //jFormattedTextFieldStartDateActionPerformed(evt);
             }
         });
 
-        jLabelFrom.setFont(new Font("Dialog", 0, 18)); // NOI18N
+        jLabelFrom.setFont(new Font("Dialog", 0, 18)); // 
         jLabelFrom.setText("From");
 
         jFormattedTextFieldDateEnd.setText("DD/MM/YYY");
-        jFormattedTextFieldDateEnd.setFont(new Font("Dialog", 0, 18)); // NOI18N
+        jFormattedTextFieldDateEnd.setFont(new Font("Dialog", 0, 18)); // 
         jFormattedTextFieldDateEnd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //jFormattedTextFieldDateEndActionPerformed(evt);
             }
         });
 
-        jLabelTo.setFont(new Font("Dialog", 0, 18)); // NOI18N
+        jLabelTo.setFont(new Font("Dialog", 0, 18)); // 
         jLabelTo.setText("to");
 
 
