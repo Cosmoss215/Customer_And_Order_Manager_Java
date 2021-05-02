@@ -35,8 +35,8 @@ public class SearchByProduct extends JFrame {
                 //jTextFieldFindProductActionPerformed(evt);
             }
         });
-        jButton1.setBackground(new java.awt.Color(0, 204, 204));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton1.setBackground(new Color(0, 204, 204));
+        jButton1.setFont(new Font("Tahoma", 0, 16)); // NOI18N
         jButton1.setText("Search");
 
         jScrollPane1.setViewportView(jTable1);

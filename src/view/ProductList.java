@@ -9,6 +9,7 @@ import view.tableModel.AllProductsModel;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class ProductList extends JFrame {
@@ -29,15 +30,13 @@ public class ProductList extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextFieldSearch.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldSearch.setFont(new Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabelProductList.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelProductList.setFont(new Font("Tahoma", 0, 18)); // NOI18N
         jLabelProductList.setText("Product list");
 
-        jButtonSearch.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButtonSearch.setFont(new Font("Tahoma", 0, 18)); // NOI18N
         jButtonSearch.setText("Search");
-
-
 
 
         ApplicationController allProducts = new ApplicationController();
