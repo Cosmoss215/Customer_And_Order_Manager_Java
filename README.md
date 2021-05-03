@@ -3,7 +3,7 @@
 
 Le projet compte package différent :
 
-* 5 packages concernant la découpe en couche, les voici
+* 5 packages concernant la découpe en couche
   * View
   * Model
   * Controller
