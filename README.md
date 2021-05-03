@@ -1,9 +1,14 @@
 # Projet Java 2021 - Order and Invoice Manager
 ## Ce projet java s'inscrit dans le cadre de nos études d'informatique de gestion à l'Henallux de namur. 
 
+Le projet compte package différent :
 
-
-* item 1
-* item 2
-  * Item 2A
-  * Item 2B
+* 5 packages concernant la découpe en couche, les voici
+  * View
+  * Model
+  * Controller
+  * Business
+  * DataAccess
+* et pour finir les couches
+  * Exception, comprenant tous les classes relevant les exceptions
+  * Ressource, ce package comprend toutes les ressources tel que les images pour le thread
