@@ -4,7 +4,7 @@
 Le projet compte package différent :
 
 * 5 packages concernant la découpe en couche
-  * View
+  * View, comprend toutes les classes lié à l'interface
   * Model
   * Controller
   * Business
