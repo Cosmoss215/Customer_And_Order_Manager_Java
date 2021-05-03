@@ -10,5 +10,5 @@ Le projet compte package différent :
   * Business
   * DataAccess
 * et pour finir les couches
-  * Exception, comprenant tous les classes relevant les exceptions
+  * Exception, comprenant toutes les classes relevant les exceptions
   * Ressource, ce package comprend toutes les ressources tel que les images pour le thread
