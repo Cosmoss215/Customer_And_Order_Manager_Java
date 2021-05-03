@@ -50,5 +50,4 @@ public class AllCustomersByCountryModel extends AbstractTableModel {
         }
         return c;
     }
-
 }

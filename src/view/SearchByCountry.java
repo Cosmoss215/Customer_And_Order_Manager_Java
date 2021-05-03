@@ -16,7 +16,7 @@ public class SearchByCountry extends JFrame {
     private JComboBox<String> jComboBoxCountryChoose;
     private JLabel jLabelCountry;
     private JScrollPane jScrollPane1;
-    private JTable jTable1;
+    private JTable jTableCustomerByCountry;
     private JPanel panelCountrySelector,panelTableCustomer;
 
     public SearchByCountry() throws ConnectionException, SelectQueryException {
@@ -25,18 +25,17 @@ public class SearchByCountry extends JFrame {
         jComboBoxCountryChoose = new JComboBox<>();
         panelTableCustomer = new JPanel();
         jScrollPane1 = new JScrollPane();
-        jTable1 = new JTable();
+        jTableCustomerByCountry = new JTable();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabelCountry.setFont(new Font("Tahoma", 0, 18)); // 
+        jLabelCountry.setFont(new Font("Tahoma", 0, 18));
         jLabelCountry.setText("Country");
 
-        jComboBoxCountryChoose.setFont(new Font("Tahoma", 0, 18)); // 
+        jComboBoxCountryChoose.setFont(new Font("Tahoma", 0, 18));
         jComboBoxCountryChoose.setModel(new DefaultComboBoxModel<>(new String[] { "Belgium", "France", "Netherlands", "Spain", "Germany" }));
         jComboBoxCountryChoose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                panelTableCustomer.remove(jTable1);
                 ApplicationController customersByCountry = null;
                 try {
                     customersByCountry = new ApplicationController();
@@ -48,7 +47,7 @@ public class SearchByCountry extends JFrame {
 
                 ArrayList<Customer> allCustomerByCountry = null;
                 try {
-                    allCustomerByCountry = customersByCountry.getCustomersByCountry("France");
+                    allCustomerByCountry = customersByCountry.getCustomersByCountry(country);
                 } catch (SelectQueryException e) {
                     JOptionPane.showMessageDialog(null,e.getMessage(), "QueryException",
                             JOptionPane.WARNING_MESSAGE);
@@ -57,34 +56,9 @@ public class SearchByCountry extends JFrame {
                 AllCustomersByCountryModel customersByCountryModel = new AllCustomersByCountryModel(allCustomerByCountry);
 
                 customersByCountryModel.fireTableDataChanged();
-                jTable1 = new JTable(customersByCountryModel);
-                panelTableCustomer.add(jTable1);
-                panelTableCustomer.revalidate();
+                jTableCustomerByCountry.setModel(customersByCountryModel);
             }
         });
-        ApplicationController customersByCountry = null;
-        try {
-            customersByCountry = new ApplicationController();
-        } catch (ConnectionException e) {
-            JOptionPane.showMessageDialog(null,e.getMessage(), "ConnectionException",
-                    JOptionPane.WARNING_MESSAGE);
-        }
-        String country = (String) jComboBoxCountryChoose.getSelectedItem();
-
-        ArrayList<Customer> allCustomerByCountry = null;
-        try {
-            allCustomerByCountry = customersByCountry.getCustomersByCountry(country);
-        } catch (SelectQueryException e) {
-            JOptionPane.showMessageDialog(null,e.getMessage(), "QueryException",
-                    JOptionPane.WARNING_MESSAGE);
-        }
-
-        AllCustomersByCountryModel customersByCountryModel = new AllCustomersByCountryModel(allCustomerByCountry);
-
-        jTable1 = new JTable(customersByCountryModel);
-        panelTableCustomer.add(jTable1);
-
-
         //region Code de mise en forme
         GroupLayout panelCountrySelectorLayout = new GroupLayout(panelCountrySelector);
         panelCountrySelector.setLayout(panelCountrySelectorLayout);
@@ -108,7 +82,7 @@ public class SearchByCountry extends JFrame {
         );
 
 
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableCustomerByCountry);
 
         GroupLayout panelTableCustomerLayout = new GroupLayout(panelTableCustomer);
         panelTableCustomer.setLayout(panelTableCustomerLayout);
@@ -142,7 +116,9 @@ public class SearchByCountry extends JFrame {
                                 .addComponent(panelTableCustomer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         //endregion
-
         pack();
+    }
+    public void tableCustomers(){
+
     }
 }
