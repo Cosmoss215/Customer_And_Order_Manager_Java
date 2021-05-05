@@ -9,7 +9,6 @@ public class SearchOrderListing extends JFrame {
 
     private JFormattedTextField jFormattedTextFieldDateEnd;
     private JFormattedTextField jFormattedTextFieldStartDate;
-    private JLabel jLabelCustomerAddress;
     private JLabel jLabelCustomerName;
     private JLabel jLabelFrom;
     private JLabel jLabelTo;
@@ -22,7 +21,6 @@ public class SearchOrderListing extends JFrame {
     public SearchOrderListing(){
         panelSearchBar = new JPanel();
         jLabelCustomerName = new JLabel();
-        jLabelCustomerAddress = new JLabel();
         jTextFieldSearchBar = new JTextField();
         jFormattedTextFieldStartDate = new JFormattedTextField();
         jLabelFrom = new JLabel();
@@ -36,9 +34,6 @@ public class SearchOrderListing extends JFrame {
 
         jLabelCustomerName.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelCustomerName.setText("Customer's name");
-
-        jLabelCustomerAddress.setFont(new Font("Dialog", 0, 18)); // 
-        jLabelCustomerAddress.setText("Address");
 
         jTextFieldSearchBar.setFont(new Font("Dialog", 0, 18)); // 
         jTextFieldSearchBar.setText("");
@@ -168,9 +163,8 @@ public class SearchOrderListing extends JFrame {
                                 .addGap(16, 16, 16)
                                 .addComponent(jLabelCustomerName)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabelCustomerAddress, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldSearchBar, GroupLayout.PREFERRED_SIZE, 422, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldSearchBar, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabelFrom)
                                 .addGap(18, 18, 18)
@@ -193,7 +187,6 @@ public class SearchOrderListing extends JFrame {
                                                 .addComponent(jLabelFrom)
                                                 .addComponent(jTextFieldSearchBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(GroupLayout.Alignment.TRAILING, panelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(jLabelCustomerAddress)
                                                 .addComponent(jLabelCustomerName)))
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

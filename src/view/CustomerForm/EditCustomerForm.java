@@ -41,7 +41,12 @@ public class EditCustomerForm extends CustomerForm {
 
 
         //jComboBoxCountry.setSelectedIndex(1);
+        /*
+        switch (customer.getAddress().getLocality().getCountry())
+        {
 
+        }
+         */
 
         jTextFieldIBAN.setText(customer.getIban());
         jTextFieldBIC.setText(customer.getBic());
