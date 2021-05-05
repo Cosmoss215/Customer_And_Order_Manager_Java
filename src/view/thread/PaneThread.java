@@ -1,5 +1,7 @@
 package view.thread;
 
+import exception.ThreadException;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -10,15 +12,11 @@ import java.io.IOException;
 public class PaneThread extends JPanel {
     private BufferedImage box;
     private BufferedImage box2;
-    private BufferedImage bonhomme;
-    private BufferedImage bonhomme2;
     private BufferedImage currentBox;
-    private BufferedImage currentBonhomme;
-    private int boboxPos = 0;
     private int boxPos;
     private int direction = 1;
 
-    public PaneThread() {
+    public PaneThread() throws ThreadException {
         try {
             box = ImageIO.read(new File("src/resource/boxB.png"));
             box2 = ImageIO.read(new File("src/resource/boxB2.png"));
@@ -26,11 +24,11 @@ public class PaneThread extends JPanel {
             MovementThread thread = new MovementThread(this);
             thread.start();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            throw new ThreadException();
         }
     }
 
-    public void move(){
+    public void move() throws ThreadException {
         try {
             box = ImageIO.read(new File("src/resource/boxB.png"));
             box2 = ImageIO.read(new File("src/resource/boxB2.png"));
@@ -40,16 +38,14 @@ public class PaneThread extends JPanel {
                 boxPos = getWidth() - currentBox.getWidth();
                 direction *= -1;
                 currentBox = box2;
-                currentBonhomme = bonhomme2;
             } else if (boxPos < 0) {
                 boxPos = 0;
                 direction *= -1;
                 currentBox = box;
-                currentBonhomme = bonhomme;
             }
             repaint();
         } catch (IOException ioException) {
-            ioException.printStackTrace();
+                throw new ThreadException();
         }
     }
     @Override

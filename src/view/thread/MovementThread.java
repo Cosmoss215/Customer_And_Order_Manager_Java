@@ -1,5 +1,7 @@
 package view.thread;
 
+import exception.ThreadException;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,10 +21,15 @@ public class MovementThread extends Thread{
         while(true){
             try{
                 Thread.sleep(10);
-                pane.move();
+                    pane.move();
                 pane.repaint();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (ThreadException | InterruptedException e) {
+                try {
+                    throw new ThreadException();
+                } catch (ThreadException threadException) {
+                    JOptionPane.showMessageDialog(null,threadException.getMessage(), "QueryException",
+                            JOptionPane.WARNING_MESSAGE);
+                }
             }
         }
     }

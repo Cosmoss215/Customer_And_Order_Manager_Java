@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import exception.SelectQueryException;
+import exception.ThreadException;
 import view.thread.PaneThread;
 
 public class MenuOLD extends JFrame {
@@ -27,7 +28,7 @@ public class MenuOLD extends JFrame {
     private final JPanel jPanelMenu;
     private Container mainContainer;
 
-    public MenuOLD(){
+    public MenuOLD() throws ThreadException {
         jPanelMenu = new JPanel();
         jButtonCustomer = new JButton();
         jButtonCreateOrder = new JButton();
@@ -49,18 +50,18 @@ public class MenuOLD extends JFrame {
         mainContainer = getContentPane();
         mainContainer.add(new PaneThread());
 
-        jButtonCustomer.setFont(new Font("Dialog", 0, 24)); // NOI18N
+        jButtonCustomer.setFont(new Font("Dialog", 0, 24)); // 
         jButtonCustomer.setText("Customer");
         CustomerListner customerListner = new CustomerListner();
         jButtonCustomer.addActionListener(customerListner);
 
 
-        jButtonCreateOrder.setFont(new Font("Dialog", 0, 24)); // NOI18N
+        jButtonCreateOrder.setFont(new Font("Dialog", 0, 24)); // 
         jButtonCreateOrder.setText("Create Order");
         CreateOrderListner createOrderListner = new CreateOrderListner();
         jButtonCreateOrder.addActionListener(createOrderListner);
 
-        jButtonProduct.setFont(new Font("Dialog", 0, 24)); // NOI18N
+        jButtonProduct.setFont(new Font("Dialog", 0, 24)); // 
         jButtonProduct.setText("Product list");
         ProductListListner productListListner = new ProductListListner();
         jButtonProduct.addActionListener(productListListner);

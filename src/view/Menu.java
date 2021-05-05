@@ -2,6 +2,7 @@ package view;
 
 import exception.ConnectionException;
 import exception.SelectQueryException;
+import exception.ThreadException;
 import view.thread.PaneThread;
 
 import javax.swing.*;
@@ -25,7 +26,14 @@ public class Menu extends JFrame {
 
         //Container
         mainContainer = getContentPane();
-        mainContainer.add(new PaneThread(),BorderLayout.CENTER);
+        try{
+            PaneThread paneThread = new PaneThread();
+            mainContainer.add(paneThread,BorderLayout.CENTER);
+        } catch (ThreadException threadException) {
+            JOptionPane.showMessageDialog(null,threadException.getMessage(), "ThreadException",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+
 
         //MenuBar
         jMenuBar = new JMenuBar();
@@ -54,9 +62,11 @@ public class Menu extends JFrame {
                 try {
                     customerList = new CustomerList();
                 } catch (ConnectionException connectionException) {
-                    connectionException.printStackTrace();
+                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException",
+                            JOptionPane.WARNING_MESSAGE);
                 } catch (SelectQueryException selectQueryException) {
-                    selectQueryException.printStackTrace();
+                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "QueryException",
+                            JOptionPane.WARNING_MESSAGE);
                 }
                 customerList.setVisible(true);
             }
@@ -128,7 +138,6 @@ public class Menu extends JFrame {
         jMenuSearch.add(jMenuItemSearch3);
 
         setJMenuBar(jMenuBar);
-
 
         //Welcome Message
         welcomeMessage = new JLabel("Welcome to the Order and Invoice Manager",JLabel.CENTER);

@@ -53,33 +53,79 @@ public class CustomerList extends JFrame {
         jButtonUpdateCustomer = new JButton();
         jButtonDeleteCustomer = new JButton();
 
-
-
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButtonSearch.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jButtonSearch.setFont(new Font("Tahoma", 0, 18)); // 
         jButtonSearch.setText("Search");
 
-        jTextFieldSearchBar.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldSearchBar.setFont(new Font("Tahoma", 0, 18)); // 
         jTextFieldSearchBar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //jTextFieldSearchBarActionPerformed(evt);
             }
         });
 
-        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelCustomerName.setText("Customer name");
 
-        jLabelNickname.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jLabelNickname.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelNickname.setText("Nickname");
 
-        jTextFieldSearchBar1.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        jTextFieldSearchBar1.setFont(new Font("Tahoma", 0, 18)); // 
         jTextFieldSearchBar1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //jTextFieldSearchBar1ActionPerformed(evt);
             }
         });
 
+        ApplicationController allCustomers = new ApplicationController();
+        ArrayList<Customer> customers = allCustomers.getAllCustomers();
+        AllCustomersModel customersModel = new AllCustomersModel(customers);
+
+        jTableCustomerList = new JTable(customersModel);
+        jTableCustomerList.setAutoCreateRowSorter(true);
+        jScrollCustomerTable = new JScrollPane(jTableCustomerList);
+
+        jTableCustomerList.getTableHeader().setReorderingAllowed(false);
+        jScrollCustomerTable.setViewportView(jTableCustomerList);
+
+        Color color = new Color(166, 207, 147);
+        jButtonCreateCustomer.setBackground(new Color(0, 204, 0));
+        jButtonCreateCustomer.setFont(new Font("Tahoma", 0, 18)); // 
+        jButtonCreateCustomer.setText("Create customer");
+        jButtonCreateCustomer.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                CreateCustomerForm CreateCustomerForm = new CreateCustomerForm(color,"CreateCustomer");
+                CreateCustomerForm.setVisible(true);
+            }
+        });
+
+        jButtonUpdateCustomer.setBackground(new Color(0, 153, 153));
+        jButtonUpdateCustomer.setFont(new Font("Tahoma", 0, 18));
+        jButtonUpdateCustomer.setText("Edit customer");
+        jButtonUpdateCustomer.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+
+                Customer customer;
+                customer = customersModel.getRow(jTableCustomerList.getSelectedRow());
+                System.out.println(customer);
+
+                EditCustomerForm editCustomerForm = new EditCustomerForm(color,"Edit customer",customer);
+                editCustomerForm.setVisible(true);
+
+            }
+        });
+
+        //MouseListner sur jtable
+
+        jButtonDeleteCustomer.setBackground(new Color(255, 102, 102));
+        jButtonDeleteCustomer.setFont(new Font("Tahoma", 0, 18)); // 
+        jButtonDeleteCustomer.setText("Delete customer");
+
+
+
+
+        //region Code de mise en forme
         GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
         panelSearchBar.setLayout(panelSearchBarLayout);
         panelSearchBarLayout.setHorizontalGroup(
@@ -110,32 +156,6 @@ public class CustomerList extends JFrame {
                                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        ApplicationController allCustomers = new ApplicationController();
-        ArrayList<Customer> customers = allCustomers.getAllCustomers();
-        AllCustomersModel customersModel = new AllCustomersModel(customers);
-
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-
-        jTableCustomerList = new JTable(customersModel);
-        jTableCustomerList.setAutoCreateRowSorter(true);/*
-        jTableCustomerList.getColumn(0).setCellRenderer(centerRenderer);
-        jTableCustomerList.getColumn(1).setCellRenderer(centerRenderer);
-        jTableCustomerList.getColumn(2).setCellRenderer(centerRenderer);
-        jTableCustomerList.getColumn(3).setCellRenderer(centerRenderer);
-        jTableCustomerList.getColumn(4).setCellRenderer(centerRenderer);
-        jTableCustomerList.getColumn(5).setCellRenderer(centerRenderer);
-        jTableCustomerList.getColumn(6).setCellRenderer(centerRenderer);
-        jTableCustomerList.getColumn(7).setCellRenderer(centerRenderer);
-        jTableCustomerList.getColumn(8).setCellRenderer(centerRenderer);
-        jTableCustomerList.getColumn(9).setCellRenderer(centerRenderer);
-        jTableCustomerList.getColumn(10).setCellRenderer(centerRenderer);*/
-        jScrollCustomerTable = new JScrollPane(jTableCustomerList);
-
-
-        jTableCustomerList.getTableHeader().setReorderingAllowed(false);
-        jScrollCustomerTable.setViewportView(jTableCustomerList);
-
         GroupLayout panelCustomerTableLayout = new GroupLayout(panelCustomerTable);
         panelCustomerTable.setLayout(panelCustomerTableLayout);
         panelCustomerTableLayout.setHorizontalGroup(
@@ -152,40 +172,6 @@ public class CustomerList extends JFrame {
                                 .addComponent(jScrollCustomerTable, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)
                                 .addGap(60, 60, 60))
         );
-
-        Color color = new Color(166, 207, 147);
-        jButtonCreateCustomer.setBackground(new Color(0, 204, 0));
-        jButtonCreateCustomer.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-        jButtonCreateCustomer.setText("Create customer");
-        jButtonCreateCustomer.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                CreateCustomerForm CreateCustomerForm = new CreateCustomerForm(color,"CreateCustomer");
-                CreateCustomerForm.setVisible(true);
-            }
-        });
-
-
-        jButtonUpdateCustomer.setBackground(new Color(0, 153, 153));
-        jButtonUpdateCustomer.setFont(new Font("Tahoma", 0, 18));
-        jButtonUpdateCustomer.setText("Edit customer");
-        jButtonUpdateCustomer.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-
-                Customer customer;
-                customer = customersModel.getRow(jTableCustomerList.getSelectedRow());
-                System.out.println(customer);
-
-                EditCustomerForm editCustomerForm = new EditCustomerForm(color,"Edit customer",customer);
-                editCustomerForm.setVisible(true);
-
-            }
-        });
-
-        //MouseListner sur jtable
-
-        jButtonDeleteCustomer.setBackground(new Color(255, 102, 102));
-        jButtonDeleteCustomer.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-        jButtonDeleteCustomer.setText("Delete customer");
 
         GroupLayout panelButtonCRUDLayout = new GroupLayout(panelButtonCRUD);
         panelButtonCRUD.setLayout(panelButtonCRUDLayout);
@@ -227,6 +213,7 @@ public class CustomerList extends JFrame {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(panelButtonCRUD, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        //endregion
 
         pack();
     }
