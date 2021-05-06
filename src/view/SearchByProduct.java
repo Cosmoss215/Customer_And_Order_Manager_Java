@@ -29,7 +29,7 @@ public class SearchByProduct extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabelProduct.setFont(new Font("Tahoma", 0, 18)); // 
+        jLabelProduct.setFont(new Font("Tahoma", 0, 18));
         jLabelProduct.setText("Product");
 
         ApplicationController getProductByReference = new ApplicationController();
@@ -41,7 +41,7 @@ public class SearchByProduct extends JFrame {
         jScrollPane1 = new JScrollPane(jTableCustomersByProduct);
         jScrollPane1.setViewportView(jTableCustomersByProduct);
 
-        jTextFieldFindProduct.setFont(new Font("Tahoma", 0, 16)); // 
+        jTextFieldFindProduct.setFont(new Font("Tahoma", 0, 16));
         jTextFieldFindProduct.setText("");
         jTextFieldFindProduct.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
