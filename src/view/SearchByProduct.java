@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class SearchByProduct extends JFrame {
-    private JButton jButtonSearch;
     private JLabel jLabelProduct;
     private JScrollPane jScrollPane1;
     private JTable jTableCustomersByProduct;
@@ -26,7 +25,6 @@ public class SearchByProduct extends JFrame {
         panelSearchBar = new JPanel();
         jLabelProduct = new JLabel();
         jTextFieldFindProduct = new JTextField();
-        jButtonSearch = new JButton();
         panelTableByProduct = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -63,8 +61,6 @@ public class SearchByProduct extends JFrame {
                 jTableCustomersByProduct.setModel(customersByProductModel);
             }
         });
-
-
         //region Code de mise en forme
         GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
         panelSearchBar.setLayout(panelSearchBarLayout);
@@ -123,7 +119,6 @@ public class SearchByProduct extends JFrame {
                                         .addComponent(panelTableByProduct, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
         );
         //endregion
-
         pack();
     }
 }
