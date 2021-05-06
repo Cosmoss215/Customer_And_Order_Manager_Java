@@ -9,7 +9,6 @@ public class SearchOrderListing extends JFrame {
     private SpinnerDateModel jDatePickerModelStart,jDatePickerModelEnd;
     private JSpinner startDateSelector;
     private JSpinner endDateSelector;
-
     private JLabel jLabelCustomerName;
     private JLabel jLabelFrom;
     private JLabel jLabelTo;
@@ -25,12 +24,9 @@ public class SearchOrderListing extends JFrame {
         jTextFieldSearchBar = new JTextField();
         jDatePickerModelStart = new SpinnerDateModel();
         jDatePickerModelEnd = new SpinnerDateModel();
-
         jLabelFrom = new JLabel();
-
         startDateSelector = new JSpinner();
         endDateSelector = new JSpinner();
-
         jLabelTo = new JLabel();
         panelTableOrderList = new JPanel();
         jScrollTableOrderList = new JScrollPane();
@@ -49,7 +45,6 @@ public class SearchOrderListing extends JFrame {
                 //jTextFieldSearchBarActionPerformed(evt);
             }
         });
-
         startDateSelector.setModel(jDatePickerModelStart);
         endDateSelector.setModel(jDatePickerModelEnd);
         startDateSelector.setFont(new Font("Tahoma", 0, 18));
@@ -99,11 +94,11 @@ public class SearchOrderListing extends JFrame {
         panelSearchBarLayout.setHorizontalGroup(
                 panelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(panelSearchBarLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabelCustomerName)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldSearchBar, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldSearchBar, GroupLayout.PREFERRED_SIZE, 495, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabelFrom)
                                 .addGap(18, 18, 18)
