@@ -4,6 +4,7 @@ import dataAccess.ProductDataAccess;
 import dataAccess.ProductDBAccess;
 import exception.ConnectionException;
 import exception.SelectQueryException;
+import model.CustomerByProduct;
 import model.Product;
 import java.util.ArrayList;
 
@@ -20,7 +21,10 @@ public class ProductManager {
 
     public ArrayList<Product> getAllProducts()throws SelectQueryException {
         ArrayList<Product> productArrayList = dao.getAllProducts();
-        //Traitements éventuels sur la liste de livres
+        return productArrayList;
+    }
+    public ArrayList<CustomerByProduct> getProductByReference(Integer reference)throws SelectQueryException {
+        ArrayList<CustomerByProduct> productArrayList = dao.getProductByReference(reference);
         return productArrayList;
     }
 }

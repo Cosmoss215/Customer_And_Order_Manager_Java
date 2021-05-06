@@ -1,6 +1,7 @@
 package dataAccess;
 
 import exception.*;
+import model.CustomerByProduct;
 import model.Product;
 
 import java.util.ArrayList;
@@ -8,5 +9,5 @@ import java.util.ArrayList;
 public interface ProductDataAccess {
     ArrayList<Product> getAllProducts() throws SelectQueryException;
 
-    ArrayList<Product> getProductsByReference() throws SelectQueryException;
+    ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException;
 }

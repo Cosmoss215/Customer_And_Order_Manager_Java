@@ -1,27 +1,33 @@
 package view;
 
+import controller.ApplicationController;
+import exception.ConnectionException;
+import exception.SelectQueryException;
+import model.Customer;
+import model.CustomerByProduct;
+import view.tableModel.AllCustomersByProductModel;
+import view.tableModel.AllCustomersModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class SearchByProduct extends JFrame {
-    private JButton jButton1;
+    private JButton jButtonSearch;
     private JLabel jLabelProduct;
     private JScrollPane jScrollPane1;
-    private JTable jTable1;
+    private JTable jTableCustomersByProduct;
     private JTextField jTextFieldFindProduct;
     private JPanel panelSearchBar,panelTableByProduct;
 
-    public SearchByProduct()
-    {
+    public SearchByProduct() throws SelectQueryException, ConnectionException {
         panelSearchBar = new JPanel();
         jLabelProduct = new JLabel();
         jTextFieldFindProduct = new JTextField();
-        jButton1 = new JButton();
+        jButtonSearch = new JButton();
         panelTableByProduct = new JPanel();
-        jScrollPane1 = new JScrollPane();
-        jTable1 = new JTable();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -35,11 +41,21 @@ public class SearchByProduct extends JFrame {
                 //jTextFieldFindProductActionPerformed(evt);
             }
         });
-        jButton1.setBackground(new Color(0, 204, 204));
-        jButton1.setFont(new Font("Tahoma", 0, 16)); // 
-        jButton1.setText("Search");
+        jButtonSearch.setBackground(new Color(0, 204, 204));
+        jButtonSearch.setFont(new Font("Tahoma", 0, 16)); // 
+        jButtonSearch.setText("Search");
 
-        jScrollPane1.setViewportView(jTable1);
+
+
+        ApplicationController getProductByReference = new ApplicationController();
+        ArrayList<CustomerByProduct> customersByProduct = getProductByReference.getProductByReference(14);
+        AllCustomersByProductModel customersByProductModel = new AllCustomersByProductModel(customersByProduct);
+
+        jTableCustomersByProduct = new JTable(customersByProductModel);
+        jTableCustomersByProduct.setAutoCreateRowSorter(true);
+        jScrollPane1 = new JScrollPane(jTableCustomersByProduct);
+
+        jScrollPane1.setViewportView(jTableCustomersByProduct);
 
         //region Code de mise en forme
         GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
@@ -52,7 +68,7 @@ public class SearchByProduct extends JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextFieldFindProduct, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)
+                                .addComponent(jButtonSearch)
                                 .addContainerGap(31, Short.MAX_VALUE))
         );
         panelSearchBarLayout.setVerticalGroup(
@@ -62,7 +78,7 @@ public class SearchByProduct extends JFrame {
                                 .addGroup(panelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelProduct)
                                         .addComponent(jTextFieldFindProduct, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton1))
+                                        .addComponent(jButtonSearch))
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

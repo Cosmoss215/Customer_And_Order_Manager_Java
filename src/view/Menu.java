@@ -110,7 +110,6 @@ public class Menu extends JFrame {
         jMenuItemSearch2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,InputEvent.ALT_DOWN_MASK));
         jMenuItemSearch2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-
                 SearchByCountry searchByCountry = null;
                 try {
                     searchByCountry = new SearchByCountry();
@@ -129,7 +128,16 @@ public class Menu extends JFrame {
         jMenuItemSearch3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.ALT_DOWN_MASK));
         jMenuItemSearch3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                SearchByProduct searchByProduct = new SearchByProduct();
+                SearchByProduct searchByProduct = null;
+                try {
+                    searchByProduct = new SearchByProduct();
+                } catch (SelectQueryException selectQueryException) {
+                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "QueryException",
+                            JOptionPane.WARNING_MESSAGE);
+                } catch (ConnectionException connectionException) {
+                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException",
+                            JOptionPane.WARNING_MESSAGE);
+                }
                 searchByProduct.setVisible(true);
             }
         });
