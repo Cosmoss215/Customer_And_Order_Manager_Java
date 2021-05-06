@@ -60,13 +60,13 @@ public class ProductDBAccess implements ProductDataAccess {
     public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException {
         ArrayList<CustomerByProduct> productByReference = new ArrayList<>();
 
-        String sqlInstruction = "select c.last_name, c.first_name, ol.quantity,pm.wording" +
-                "from product product" +
-                "join order_line ol on product.reference = ol.product" +
-                "join `order` o on o.number = ol.`order`" +
-                "join customer c on c.id = o.customer" +
-                "join payment_method pm on pm.wording = o.payment_method" +
-                "where product.reference = reference;";
+        String sqlInstruction = "SELECT c.last_name, c.first_name, ol.quantity,pm.wording" +
+                "from product product " +
+                "JOIN order_line ol ON product.reference = ol.product " +
+                "JOIN `order` o ON o.number = ol.`order` " +
+                "JOIN customer c ON c.id = o.customer " +
+                "JOIN payment_method pm ON pm.wording = o.payment_method " +
+                "WHERE product.reference = "+reference+";";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             ResultSet data = preparedStatement.executeQuery();
