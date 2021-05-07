@@ -61,12 +61,12 @@ public class ProductDBAccess implements ProductDataAccess {
         ArrayList<CustomerByProduct> productByReference = new ArrayList<>();
 
         String sqlInstruction = "SELECT cu.last_name, cu.first_name, ol.quantity,pm.wording " +
-                "from product product " +
-                "JOIN order_line ol ON product.reference = ol.product " +
+                "from product p " +
+                "JOIN order_line ol ON p.reference = ol.product " +
                 "JOIN `order` o ON o.number = ol.`order` " +
                 "JOIN customer cu ON cu.id = o.customer " +
                 "JOIN payment_method pm ON pm.wording = o.payment_method " +
-                "WHERE product.reference = "+reference+";";
+                "WHERE p.reference = "+reference+";";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             ResultSet data = preparedStatement.executeQuery();
