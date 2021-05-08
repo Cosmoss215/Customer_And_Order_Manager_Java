@@ -7,7 +7,7 @@ import model.*;
 
 import java.util.ArrayList;
 
-public class ApplicationController  {
+public class ApplicationController {
     private AddressManager addressManager;
     private CountryManager countryManager;
     private CustomerManager customerManager;
@@ -37,45 +37,13 @@ public class ApplicationController  {
     public ArrayList<Product> getAllProducts() throws SelectQueryException {
         return productManager.getAllProducts();
     }
-    public ArrayList<Customer> getCustomersByCountry(String countrySearched)throws SelectQueryException {
+
+    public ArrayList<Customer> getCustomersByCountry(String countrySearched) throws SelectQueryException {
         return customerManager.getCustomersByCountry(countrySearched);
     }
 
-
-
-
-    public ArrayList<Address> getAllAddresses() throws SelectQueryException {
-        return addressManager.getAllAddresses();
+    public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException {
+        return productManager.getProductByReference(reference);
     }
 
-
-    public ArrayList<Country> getAllCountries() throws SelectQueryException {
-        return countryManager.getAllCountries();
-    }
-
-
-    public ArrayList<Locality> getAllLocalities() throws SelectQueryException {
-        return localityManager.getAllLocalities();
-    }
-
-
-    public ArrayList<Order> getAllOrders() throws SelectQueryException {
-        return orderManager.getAllOrders();
-    }
-
-
-    public ArrayList<OrderLine> getAllOrderLine() throws SelectQueryException {
-        return orderLineManager.getAllOrderLine();
-    }
-
-
-    public ArrayList<PaymentMethod> getAllPaymentMethods() throws SelectQueryException {
-        return paymentMethodManager.getAllPaymentMethods();
-    }
-
-
-
-    public ArrayList<VAT> getAllVAT() throws SelectQueryException {
-        return vatManager.getAllVAT();
-    }
 }

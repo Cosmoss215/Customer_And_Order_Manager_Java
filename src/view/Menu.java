@@ -62,11 +62,9 @@ public class Menu extends JFrame {
                 try {
                     customerList = new CustomerList();
                 } catch (ConnectionException connectionException) {
-                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException",
-                            JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException", JOptionPane.WARNING_MESSAGE);
                 } catch (SelectQueryException selectQueryException) {
-                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "QueryException",
-                            JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "QueryException", JOptionPane.WARNING_MESSAGE);
                 }
                 customerList.setVisible(true);
             }
@@ -85,11 +83,9 @@ public class Menu extends JFrame {
                 try {
                     productList = new ProductList();
                 } catch (ConnectionException connectionException) {
-                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException",
-                            JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException", JOptionPane.WARNING_MESSAGE);
                 } catch (SelectQueryException selectQueryException) {
-                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "ConnectionException",
-                            JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "ConnectionException", JOptionPane.WARNING_MESSAGE);
                 }
                 productList.setVisible(true);
             }
@@ -110,18 +106,15 @@ public class Menu extends JFrame {
         jMenuItemSearch2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,InputEvent.ALT_DOWN_MASK));
         jMenuItemSearch2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-
-                SearchByCountry searchByCountry = null;
                 try {
-                    searchByCountry = new SearchByCountry();
+                    SearchByCountry searchByCountry = new SearchByCountry();
+                    searchByCountry.setVisible(true);
                 } catch (ConnectionException connectionException) {
-                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException",
-                            JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException", JOptionPane.WARNING_MESSAGE);
                 } catch (SelectQueryException selectQueryException) {
-                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "QueryException",
-                            JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "QueryException", JOptionPane.WARNING_MESSAGE);
                 }
-                searchByCountry.setVisible(true);
+
 
             }
         });
@@ -129,8 +122,15 @@ public class Menu extends JFrame {
         jMenuItemSearch3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.ALT_DOWN_MASK));
         jMenuItemSearch3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                SearchByProduct searchByProduct = new SearchByProduct();
-                searchByProduct.setVisible(true);
+
+                try {
+                    SearchByProduct searchByProduct = new SearchByProduct();
+                    searchByProduct.setVisible(true);
+                } catch (SelectQueryException selectQueryException) {
+                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "QueryException", JOptionPane.WARNING_MESSAGE);
+                } catch (ConnectionException connectionException) {
+                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
         jMenuSearch.add(jMenuItemSearch1);

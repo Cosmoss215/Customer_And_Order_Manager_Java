@@ -2,8 +2,7 @@ package dataAccess;
 
 import exception.ConnectionException;
 import exception.SelectQueryException;
-import model.Product;
-import model.VAT;
+import model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -58,7 +57,36 @@ public class ProductDBAccess implements ProductDataAccess {
     }
 
     @Override
-    public ArrayList<Product> getProductsByReference() throws SelectQueryException {
-        return null;
+    public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException {
+        ArrayList<CustomerByProduct> productByReference = new ArrayList<>();
+
+        String sqlInstruction = "SELECT cu.last_name, cu.first_name, ol.quantity,pm.wording " +
+                "from product p " +
+                "JOIN order_line ol ON p.reference = ol.product " +
+                "JOIN `order` o ON o.number = ol.`order` " +
+                "JOIN customer cu ON cu.id = o.customer " +
+                "JOIN payment_method pm ON pm.wording = o.payment_method " +
+                "WHERE p.reference = "+reference+";";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            ResultSet data = preparedStatement.executeQuery();
+
+            CustomerByProduct customerByProduct;
+
+            while (data.next()) {
+                customerByProduct = new CustomerByProduct(
+                        data.getString("last_name"),
+                        data.getString("first_name"),
+                        data.getInt("quantity"),
+                        data.getString("wording")
+                );
+                productByReference.add(customerByProduct);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new SelectQueryException();
+        }
+
+        return productByReference;
     }
 }

@@ -1,46 +1,66 @@
 package view;
 
+import controller.ApplicationController;
+import exception.ConnectionException;
+import exception.SelectQueryException;
+import model.Customer;
+import model.CustomerByProduct;
+import view.tableModel.AllCustomersByProductModel;
+import view.tableModel.AllCustomersModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class SearchByProduct extends JFrame {
-    private JButton jButton1;
     private JLabel jLabelProduct;
     private JScrollPane jScrollPane1;
-    private JTable jTable1;
+    private JTable jTableCustomersByProduct;
     private JTextField jTextFieldFindProduct;
     private JPanel panelSearchBar,panelTableByProduct;
 
-    public SearchByProduct()
-    {
+    public SearchByProduct() throws SelectQueryException, ConnectionException {
         panelSearchBar = new JPanel();
         jLabelProduct = new JLabel();
         jTextFieldFindProduct = new JTextField();
-        jButton1 = new JButton();
         panelTableByProduct = new JPanel();
-        jScrollPane1 = new JScrollPane();
-        jTable1 = new JTable();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabelProduct.setFont(new Font("Tahoma", 0, 18)); // 
+        jLabelProduct.setFont(new Font("Tahoma", 0, 18));
         jLabelProduct.setText("Product");
 
-        jTextFieldFindProduct.setFont(new Font("Tahoma", 0, 16)); // 
+        ApplicationController getProductByReference = new ApplicationController();
+        ArrayList<CustomerByProduct> customersByProduct = getProductByReference.getProductByReference(0);
+        AllCustomersByProductModel customersByProductModel = new AllCustomersByProductModel(customersByProduct);
+
+        jTableCustomersByProduct = new JTable(customersByProductModel);
+        jTableCustomersByProduct.setAutoCreateRowSorter(true);
+        jScrollPane1 = new JScrollPane(jTableCustomersByProduct);
+        jScrollPane1.setViewportView(jTableCustomersByProduct);
+
+        jTextFieldFindProduct.setFont(new Font("Tahoma", 0, 16));
         jTextFieldFindProduct.setText("");
         jTextFieldFindProduct.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                //jTextFieldFindProductActionPerformed(evt);
+                ApplicationController getProductByReference = null;
+                try {
+                    getProductByReference = new ApplicationController();
+                } catch (ConnectionException connectionException) {
+                    connectionException.printStackTrace();
+                }
+                ArrayList<CustomerByProduct> customersByProduct = null;
+                try {
+                    customersByProduct = getProductByReference.getProductByReference(Integer.valueOf(jTextFieldFindProduct.getText()));
+                } catch (SelectQueryException selectQueryException) {
+                    selectQueryException.printStackTrace();
+                }
+                AllCustomersByProductModel customersByProductModel = new AllCustomersByProductModel(customersByProduct);
+                jTableCustomersByProduct.setModel(customersByProductModel);
             }
         });
-        jButton1.setBackground(new Color(0, 204, 204));
-        jButton1.setFont(new Font("Tahoma", 0, 16)); // 
-        jButton1.setText("Search");
-
-        jScrollPane1.setViewportView(jTable1);
-
         //region Code de mise en forme
         GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
         panelSearchBar.setLayout(panelSearchBarLayout);
@@ -52,7 +72,6 @@ public class SearchByProduct extends JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextFieldFindProduct, GroupLayout.PREFERRED_SIZE, 444, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)
                                 .addContainerGap(31, Short.MAX_VALUE))
         );
         panelSearchBarLayout.setVerticalGroup(
@@ -61,8 +80,7 @@ public class SearchByProduct extends JFrame {
                                 .addGap(20, 20, 20)
                                 .addGroup(panelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelProduct)
-                                        .addComponent(jTextFieldFindProduct, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton1))
+                                        .addComponent(jTextFieldFindProduct, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -101,7 +119,6 @@ public class SearchByProduct extends JFrame {
                                         .addComponent(panelTableByProduct, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
         );
         //endregion
-
         pack();
     }
 }

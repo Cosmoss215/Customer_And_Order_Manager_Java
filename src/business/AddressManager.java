@@ -20,7 +20,7 @@ public class AddressManager {
 
     public ArrayList<Address> getAllAddresses()throws SelectQueryException {
         ArrayList<Address> addressArrayList = dao.getAllAddresses();
-//Traitements éventuels sur la liste de livres
+        //Traitements éventuels sur la liste de livres
         return addressArrayList;
     }
 }

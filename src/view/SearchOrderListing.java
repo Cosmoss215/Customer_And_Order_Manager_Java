@@ -6,10 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SearchOrderListing extends JFrame {
-
-    private JFormattedTextField jFormattedTextFieldDateEnd;
-    private JFormattedTextField jFormattedTextFieldStartDate;
-    private JLabel jLabelCustomerAddress;
+    private SpinnerDateModel jDatePickerModelStart,jDatePickerModelEnd;
+    private JSpinner startDateSelector;
+    private JSpinner endDateSelector;
     private JLabel jLabelCustomerName;
     private JLabel jLabelFrom;
     private JLabel jLabelTo;
@@ -22,11 +21,12 @@ public class SearchOrderListing extends JFrame {
     public SearchOrderListing(){
         panelSearchBar = new JPanel();
         jLabelCustomerName = new JLabel();
-        jLabelCustomerAddress = new JLabel();
         jTextFieldSearchBar = new JTextField();
-        jFormattedTextFieldStartDate = new JFormattedTextField();
+        jDatePickerModelStart = new SpinnerDateModel();
+        jDatePickerModelEnd = new SpinnerDateModel();
         jLabelFrom = new JLabel();
-        jFormattedTextFieldDateEnd = new JFormattedTextField();
+        startDateSelector = new JSpinner();
+        endDateSelector = new JSpinner();
         jLabelTo = new JLabel();
         panelTableOrderList = new JPanel();
         jScrollTableOrderList = new JScrollPane();
@@ -34,13 +34,10 @@ public class SearchOrderListing extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18)); // 
+        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18));
         jLabelCustomerName.setText("Customer's name");
 
-        jLabelCustomerAddress.setFont(new Font("Dialog", 0, 18)); // 
-        jLabelCustomerAddress.setText("Address");
-
-        jTextFieldSearchBar.setFont(new Font("Dialog", 0, 18)); // 
+        jTextFieldSearchBar.setFont(new Font("Dialog", 0, 18));
         jTextFieldSearchBar.setText("");
         jTextFieldSearchBar.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         jTextFieldSearchBar.addActionListener(new ActionListener() {
@@ -48,91 +45,23 @@ public class SearchOrderListing extends JFrame {
                 //jTextFieldSearchBarActionPerformed(evt);
             }
         });
+        startDateSelector.setModel(jDatePickerModelStart);
+        endDateSelector.setModel(jDatePickerModelEnd);
+        startDateSelector.setFont(new Font("Tahoma", 0, 18));
+        endDateSelector.setFont(new Font("Tahoma", 0, 18));
 
-        jFormattedTextFieldStartDate.setText("DD/MM/YYY");
-        jFormattedTextFieldStartDate.setFont(new Font("Dialog", 0, 18)); // 
-        jFormattedTextFieldStartDate.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //jFormattedTextFieldStartDateActionPerformed(evt);
-            }
-        });
 
-        jLabelFrom.setFont(new Font("Dialog", 0, 18)); // 
+        jLabelFrom.setFont(new Font("Dialog", 0, 18));
         jLabelFrom.setText("From");
 
-        jFormattedTextFieldDateEnd.setText("DD/MM/YYY");
-        jFormattedTextFieldDateEnd.setFont(new Font("Dialog", 0, 18)); // 
-        jFormattedTextFieldDateEnd.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //jFormattedTextFieldDateEndActionPerformed(evt);
-            }
-        });
 
-        jLabelTo.setFont(new Font("Dialog", 0, 18)); // 
+        jLabelTo.setFont(new Font("Dialog", 0, 18));
         jLabelTo.setText("to");
 
 
 
         jTableOrderList.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
                         {null, null, null, null, null},
                         {null, null, null, null, null},
                         {null, null, null, null, null}
@@ -165,20 +94,19 @@ public class SearchOrderListing extends JFrame {
         panelSearchBarLayout.setHorizontalGroup(
                 panelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(panelSearchBarLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabelCustomerName)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabelCustomerAddress, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldSearchBar, GroupLayout.PREFERRED_SIZE, 422, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldSearchBar, GroupLayout.PREFERRED_SIZE, 495, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabelFrom)
                                 .addGap(18, 18, 18)
-                                .addComponent(jFormattedTextFieldStartDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(startDateSelector, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabelTo)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jFormattedTextFieldDateEnd, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(endDateSelector, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(169, 169, 169))
         );
         panelSearchBarLayout.setVerticalGroup(
@@ -188,12 +116,11 @@ public class SearchOrderListing extends JFrame {
                                 .addGroup(panelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(panelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                 .addComponent(jLabelTo)
-                                                .addComponent(jFormattedTextFieldDateEnd, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jFormattedTextFieldStartDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(endDateSelector, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(startDateSelector, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jLabelFrom)
                                                 .addComponent(jTextFieldSearchBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(GroupLayout.Alignment.TRAILING, panelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(jLabelCustomerAddress)
                                                 .addComponent(jLabelCustomerName)))
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
