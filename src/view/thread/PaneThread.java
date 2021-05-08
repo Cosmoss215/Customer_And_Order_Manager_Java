@@ -2,6 +2,7 @@ package view.thread;
 
 import exception.ThreadException;
 
+//import ressource.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;

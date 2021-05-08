@@ -109,9 +109,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
     @Override
     public ArrayList<Customer> getCustomersByCountry(String countrySearched) throws SelectQueryException {
         ArrayList<Customer> customersByCountry = new ArrayList<>();
-        /*
-        String sqlWhereClause = "WHERE co.code IN (" + countrySearched + ") OR co.name LIKE (%" + countrySearched + "%)";
-         */
         String sqlWhereClause = "WHERE co.name IN (\'" + countrySearched + "\')";
         return getCustomers(customersByCountry, sqlWhereClause);
     }
@@ -134,15 +131,51 @@ public class CustomerDBAccess implements CustomerDataAccess {
     }
 
     @Override
-    public boolean addCustomer(Customer customer) {
-        PreparedStatement preparedStatement;
+    public boolean addCustomer(Customer customer) throws CreateQueryException {
+        int affectedRowsNb;
+        String sqlInstruction = "INSERT INTO customer (" +
+                    "first_name," +
+                    "last_name," +
+                    "registration_date," +
+                    "is_vip," +
+                    "nickname," +
+                    "phone_number," +
+                    "email," +
+                    "vat_number," +
+                    "iban," +
+                    "bic," +
+                    "address) " +
+                "VALUES(?,?,?,?,?,?,?,?,?,?,?);";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            setPreparedWritingStatement(preparedStatement, customer);
 
-        String sqlInstruction = "INSERT INTO customer (id,first_name,last_name,registration_date,is_vip,nickname,phone_number,email,vat_number,iban,bic,address) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-        Customer customerInsert = customer;
-        Address address = customer.getAddress();
+            affectedRowsNb = preparedStatement.executeUpdate();
+        } catch (SQLException sqlException){
+            System.out.println(sqlException.getMessage());
+            throw new CreateQueryException();
+        }
+        return affectedRowsNb != 0;
+    }
 
-
-        return false;
+    /** Use this method to set the params of a PreparedStatement object which will be used to access the DB in the WRITE mode.
+     * @param preparedStatement needs to be initialized before given to this method.
+     * @param customer either an existing or a new one.
+     *                 WARNING : because the customer may not exist, there is NOT a setInt() to add customer.id !!!
+     *                 You will need to add this instruction after using this method.
+     * @throws SQLException needs to be caught with a catch() instruction in another method.
+     */
+    private void setPreparedWritingStatement(PreparedStatement preparedStatement, Customer customer) throws SQLException {
+        preparedStatement.setString(1, customer.getFirstName());
+        preparedStatement.setString(2, customer.getLastName());
+        preparedStatement.setByte(3, (customer.getVip() ? (byte) 1 : (byte) 0));
+        preparedStatement.setString(4, customer.getNickname());
+        preparedStatement.setInt(5, customer.getPhoneNumber());
+        preparedStatement.setString(6, customer.getEmail());
+        preparedStatement.setInt(7, customer.getVatNumber());
+        preparedStatement.setString(8, customer.getIban());
+        preparedStatement.setString(9, customer.getBic());
+        preparedStatement.setInt(10, customer.getAddress().getId());
     }
 
     @Override
@@ -163,16 +196,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
                 "WHERE customer.id = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
-            preparedStatement.setString(1,customer.getFirstName());
-            preparedStatement.setString(2,customer.getLastName());
-            preparedStatement.setByte(3, (customer.getVip()?(byte)1:(byte)0));
-            preparedStatement.setString(4, customer.getNickname());
-            preparedStatement.setInt(5, customer.getPhoneNumber());
-            preparedStatement.setString(6, customer.getEmail());
-            preparedStatement.setInt(7, customer.getVatNumber());
-            preparedStatement.setString(8, customer.getIban());
-            preparedStatement.setString(9, customer.getBic());
-            preparedStatement.setInt(10, customer.getAddress().getId());
+            setPreparedWritingStatement(preparedStatement, customer);
             preparedStatement.setInt(11, customer.getId());
 
             affectedRowsNb = preparedStatement.executeUpdate();
@@ -185,6 +209,18 @@ public class CustomerDBAccess implements CustomerDataAccess {
 
     @Override
     public boolean delete(Customer customer) throws DeleteQueryException {
-        return false;
+        int affectedRowsNb;
+        String sqlInstruction = "DELETE FROM customer WHERE customer.id = ?;";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            preparedStatement.setInt(1,customer.getId());
+
+            affectedRowsNb = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new DeleteQueryException();
+        }
+        return affectedRowsNb != 0;
     }
 }
