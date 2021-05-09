@@ -3,54 +3,54 @@ package model;
 import exception.OrderStateException;
 
 import java.time.LocalDate;
+import java.util.GregorianCalendar;
 
 public class Order {
     private Integer number;
-    private LocalDate creationDate;
-    private LocalDate PaymentDeadline;
+    private GregorianCalendar creationDate;
+    private GregorianCalendar PaymentDeadline;
     private String state;
     private Customer customer;
     private PaymentMethod paymentMethod;
-    public final static String [] states = { "pending", "payed", "delivered" };
-    public final static Integer statesNumbers = 3; // this is the number of the different valid states values.
+    public static final String [] states = { "pending", "payed", "delivered" };
+    public static final int STATES_NUMBER = 3;
 
-    // CONSTRUCTORS
-    /* Full constructor
-    Use this constructor to get an order from de DB
+    //region Constructors
+    /** Full constructor
     */
-    public Order(Integer number, LocalDate creationDate, LocalDate paymentDeadline, Integer stateNumber, Customer customer, PaymentMethod paymentMethod) {
-        setNumber(number); // DB AUTO_INCREMENT !
+    public Order(Integer number, GregorianCalendar creationDate, GregorianCalendar paymentDeadline, String state, Customer customer, PaymentMethod paymentMethod) {
+        setNumber(number);
         setCreationDate(creationDate);
         setPaymentDeadline(paymentDeadline);
-        setState(stateNumber);
+        setState(state);
         setCustomer(customer);
         setPaymentMethod(paymentMethod);
     }
-    /*  Without number (= DB id, default = AUTO_INCREMENT)
-    Use this constructor if you want to create an order that already exists (FROM VIEW) to put in the DB (which will create a proper ID)
-     */
-    public Order(LocalDate creationDate, LocalDate paymentDeadline, Integer stateNumber, Customer customer, PaymentMethod paymentMethod) {
-        this(null, creationDate, paymentDeadline, stateNumber, customer, paymentMethod);
+    /**  SQL DB constructor (auto_incremented ID)
+     * Use this constructor if you want to create an order that already exists (FROM VIEW) to put in the DB (which will create a proper ID)
+     * */
+    public Order(GregorianCalendar creationDate, GregorianCalendar paymentDeadline, String state, Customer customer, PaymentMethod paymentMethod) {
+        this(null, creationDate, paymentDeadline, state, customer, paymentMethod);
     }
-    /* Without number (= DB id, default = AUTO_INCREMENT), creationDate (default = today) and stateNumber (default = 0, corresponds to "pending")
-    Use this constructor if you want to create a new order to put into the DB (which will create a proper ID)
+    /** Light constructor
+    * It will let DB set the ID, the default creation date will be set to today() and the default state will be set to "pending"
     */
-    public Order(LocalDate paymentDeadline, Customer customer, PaymentMethod paymentMethod) {
-        this(null, null, paymentDeadline, 0, customer, paymentMethod);
+    public Order(GregorianCalendar paymentDeadline, Customer customer, PaymentMethod paymentMethod) {
+        this(null, null, paymentDeadline, "pending", customer, paymentMethod);
         setState();
         setCreationDate();
     }
-    // END CONSTRUCTORS
+    //endregion
 
     public Integer getNumber() {
         return number;
     }
 
-    public LocalDate getCreationDate() {
+    public GregorianCalendar getCreationDate() {
         return creationDate;
     }
 
-    public LocalDate getPaymentDeadline() {
+    public GregorianCalendar getPaymentDeadline() {
         return PaymentDeadline;
     }
 
@@ -70,28 +70,37 @@ public class Order {
         this.number = number;
     }
 
-    private void setCreationDate(LocalDate creationDate) {
+    private void setCreationDate(GregorianCalendar creationDate) {
         this.creationDate = creationDate;
     }
     private void setCreationDate(){
         LocalDate today = LocalDate.now();
-        setCreationDate(today);
+        GregorianCalendar creationDate = new GregorianCalendar(today.getYear(), today.getMonthValue() - 1, today.getDayOfMonth());
+        setCreationDate(creationDate);
     }
 
-    private void setPaymentDeadline(LocalDate paymentDeadline) {
+    private void setPaymentDeadline(GregorianCalendar paymentDeadline) {
         PaymentDeadline = paymentDeadline;
     }
 
-    private void setState(Integer stateNumber) { // throws OrderStateException ?
-        switch(stateNumber){
-            case 0 :
-            case 1 :
-            case 2 : this.state = Order.states[stateNumber]; break;
-            default : this.state = Order.states[0]; break;
+    private void setState(String state) { // throws OrderStateException ?
+        /*
+        if(state.equals(states[0]) || state.equals(states[1]) || state.equals(states[2]))
+            this.state = state;
+        else
+            this.state = states[0];
+        */
+        switch (state) {
+            case "pending" :
+            case "payed" :
+            case "delivered" : this.state = state;
+                break;
+            default : this.state = states[0];
         }
     }
+
     private void setState(){
-        setState(0);
+        setState("pending");
     }
 
     private void setCustomer(Customer customer) {

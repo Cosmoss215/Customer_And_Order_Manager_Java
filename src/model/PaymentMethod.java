@@ -2,10 +2,10 @@ package model;
 
 public class PaymentMethod {
     private String wording;
-    private Integer iban;
+    private String iban;
     private String bic;
 
-    public PaymentMethod(String wording, Integer iban, String bic) {
+    public PaymentMethod(String wording, String iban, String bic) {
        setWording(wording);
        setIban(iban);
        setBic(bic);
@@ -15,7 +15,7 @@ public class PaymentMethod {
         return wording;
     }
 
-    public Integer getIban() {
+    public String getIban() {
         return iban;
     }
 
@@ -27,7 +27,7 @@ public class PaymentMethod {
         this.wording = wording;
     }
 
-    private void setIban(Integer iban) {
+    private void setIban(String iban) {
         this.iban = iban;
     }
 

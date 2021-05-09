@@ -12,7 +12,7 @@ public class OrderStateException extends MainException {
 
     private String getValues(){
         String values = "";
-        for(int i = 0; i < Order.statesNumbers; i++){
+        for(int i = 0; i < Order.STATES_NUMBER; i++){
             values += "\"" + Order.states[i] + "\" ";
         }
         return values += ".";

@@ -13,8 +13,9 @@ public class CustomerDBAccess implements CustomerDataAccess {
     public CustomerDBAccess() throws ConnectionException {
         this.connection = SingletonConnection.getInstance();
     }
-    @Override
-    public ArrayList<Customer> getCustomers(ArrayList<Customer> customers, String sqlWhereClause) throws SelectQueryException {
+
+    public ArrayList<Customer> getCustomers(String sqlWhereClause) throws SelectQueryException {
+        ArrayList<Customer> customers = new ArrayList<>();
         try {
             String sqlInstruction = "SELECT c.*, a.*, l.*, co.* " +
                     "FROM customer c " +
@@ -102,32 +103,25 @@ public class CustomerDBAccess implements CustomerDataAccess {
 
     @Override
     public ArrayList<Customer> getAllCustomers() throws SelectQueryException {
-        ArrayList<Customer> allCustomers = new ArrayList<>();
-        return getCustomers(allCustomers, "");
+        return getCustomers("");
     }
 
     @Override
     public ArrayList<Customer> getCustomersByCountry(String countrySearched) throws SelectQueryException {
-        ArrayList<Customer> customersByCountry = new ArrayList<>();
         String sqlWhereClause = "WHERE co.name IN (\'" + countrySearched + "\')";
-        return getCustomers(customersByCountry, sqlWhereClause);
+        return getCustomers(sqlWhereClause);
     }
-
 
     @Override
     public ArrayList<Customer> getCustomersByNickname(String nickname) throws SelectQueryException {
-        ArrayList<Customer> customersByNickname = new ArrayList<>();
-        String sqlWhereClause = "WHERE c.nickname LIKE (%" + nickname + "%)";
-
-        return getCustomers(customersByNickname, sqlWhereClause);
+        String sqlWhereClause = "WHERE c.nickname LIKE (\'%" + nickname + "%\')";
+        return getCustomers(sqlWhereClause);
     }
 
     @Override
     public ArrayList<Customer> getCustomersByName(String name) throws SelectQueryException {
-        ArrayList<Customer> customersByName = new ArrayList<>();
-        String sqlWhereClause = "WHERE c.first_name LIKE (%" + name + "%) OR c.last_name LIKE (%" + name + "%)";
-
-        return getCustomers(customersByName, sqlWhereClause);
+        String sqlWhereClause = "WHERE c.first_name LIKE (\'%" + name + "%\') OR c.last_name LIKE (\'%" + name + "%\')";
+        return getCustomers(sqlWhereClause);
     }
 
     @Override
@@ -146,7 +140,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
                     "bic," +
                     "address) " +
                 "VALUES(?,?,?,?,?,?,?,?,?,?,?);";
-        try{
+        try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             setPreparedWritingStatement(preparedStatement, customer);
 
@@ -156,26 +150,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
             throw new CreateQueryException();
         }
         return affectedRowsNb != 0;
-    }
-
-    /** Use this method to set the params of a PreparedStatement object which will be used to access the DB in the WRITE mode.
-     * @param preparedStatement needs to be initialized before given to this method.
-     * @param customer either an existing or a new one.
-     *                 WARNING : because the customer may not exist, there is NOT a setInt() to add customer.id !!!
-     *                 You will need to add this instruction after using this method.
-     * @throws SQLException needs to be caught with a catch() instruction in another method.
-     */
-    private void setPreparedWritingStatement(PreparedStatement preparedStatement, Customer customer) throws SQLException {
-        preparedStatement.setString(1, customer.getFirstName());
-        preparedStatement.setString(2, customer.getLastName());
-        preparedStatement.setByte(3, (customer.getVip() ? (byte) 1 : (byte) 0));
-        preparedStatement.setString(4, customer.getNickname());
-        preparedStatement.setInt(5, customer.getPhoneNumber());
-        preparedStatement.setString(6, customer.getEmail());
-        preparedStatement.setInt(7, customer.getVatNumber());
-        preparedStatement.setString(8, customer.getIban());
-        preparedStatement.setString(9, customer.getBic());
-        preparedStatement.setInt(10, customer.getAddress().getId());
     }
 
     @Override
@@ -205,6 +179,26 @@ public class CustomerDBAccess implements CustomerDataAccess {
             throw new UpdateQueryException();
         }
         return affectedRowsNb != 0;
+    }
+
+    /** Use this method to set the params of a PreparedStatement instance which will be used to access the DB in the WRITE mode.
+     * @param preparedStatement needs to be initialized before being given to this method.
+     * @param customer WARNING ! If you use this method in a CREATE or UPDATE statement, you have to use id as following :
+     *                 CREATE : no need to add something else : the DB will auto-increment the customer's id
+     *                 UPDATE : you will need to add a setInt() instruction in order to get the customer's id which already exists
+     * @throws SQLException needs to be caught with a catch() instruction in another method.
+     */
+    private void setPreparedWritingStatement(PreparedStatement preparedStatement, Customer customer) throws SQLException {
+        preparedStatement.setString(1, customer.getFirstName());
+        preparedStatement.setString(2, customer.getLastName());
+        preparedStatement.setByte(3, (customer.getVip() ? (byte) 1 : (byte) 0));
+        preparedStatement.setString(4, customer.getNickname());
+        preparedStatement.setInt(5, customer.getPhoneNumber());
+        preparedStatement.setString(6, customer.getEmail());
+        preparedStatement.setInt(7, customer.getVatNumber());
+        preparedStatement.setString(8, customer.getIban());
+        preparedStatement.setString(9, customer.getBic());
+        preparedStatement.setInt(10, customer.getAddress().getId());
     }
 
     @Override
