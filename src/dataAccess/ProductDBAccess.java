@@ -56,12 +56,13 @@ public class ProductDBAccess implements ProductDataAccess {
         return allProducts;
     }
 
+    // ATTENTION : créer une exception qui va gérer en affichage les mauvaises insertions (strings);
     @Override
     public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException {
         ArrayList<CustomerByProduct> productByReference = new ArrayList<>();
 
-        String sqlInstruction = "SELECT cu.last_name, cu.first_name, ol.quantity,pm.wording " +
-                "from product p " +
+        String sqlInstruction = "SELECT cu.last_name, cu.first_name, ol.quantity, pm.wording " +
+                "FROM product p " +
                 "JOIN order_line ol ON p.reference = ol.product " +
                 "JOIN `order` o ON o.number = ol.`order` " +
                 "JOIN customer cu ON cu.id = o.customer " +
