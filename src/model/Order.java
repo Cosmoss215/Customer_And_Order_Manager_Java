@@ -26,7 +26,7 @@ public class Order {
         setCustomer(customer);
         setPaymentMethod(paymentMethod);
     }
-    /**  SQL DB constructor (auto_incremented ID)
+     /**  SQL DB constructor (auto_incremented ID)
      * Use this constructor if you want to create an order that already exists (FROM VIEW) to put in the DB (which will create a proper ID)
      * */
     public Order(GregorianCalendar creationDate, GregorianCalendar paymentDeadline, String state, Customer customer, PaymentMethod paymentMethod) {

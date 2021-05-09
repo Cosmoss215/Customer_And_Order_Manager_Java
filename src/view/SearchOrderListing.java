@@ -1,9 +1,16 @@
 package view;
 
+import controller.ApplicationController;
+import exception.ConnectionException;
+import exception.SelectQueryException;
+import model.Customer;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
 
 public class SearchOrderListing extends JFrame {
     private SpinnerDateModel jDatePickerModelStart,jDatePickerModelEnd;
@@ -17,8 +24,9 @@ public class SearchOrderListing extends JFrame {
     private JTextField jTextFieldSearchBar;
     private JPanel panelSearchBar;
     private JPanel panelTableOrderList;
+    private ArrayList<Customer> customers;
 
-    public SearchOrderListing(){
+    public SearchOrderListing() throws ConnectionException, SelectQueryException {
         panelSearchBar = new JPanel();
         jLabelCustomerName = new JLabel();
         jTextFieldSearchBar = new JTextField();
@@ -32,6 +40,11 @@ public class SearchOrderListing extends JFrame {
         jScrollTableOrderList = new JScrollPane();
         jTableOrderList = new JTable();
 
+
+        ApplicationController allCustomers = new ApplicationController();
+        customers = allCustomers.getAllCustomers();
+
+
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabelCustomerName.setFont(new Font("Tahoma", 0, 18));
@@ -40,11 +53,11 @@ public class SearchOrderListing extends JFrame {
         jTextFieldSearchBar.setFont(new Font("Dialog", 0, 18));
         jTextFieldSearchBar.setText("");
         jTextFieldSearchBar.setCursor(new Cursor(Cursor.TEXT_CURSOR));
-        jTextFieldSearchBar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //jTextFieldSearchBarActionPerformed(evt);
-            }
-        });
+
+        KeyboardListner keyboardListner = new KeyboardListner();
+        jTextFieldSearchBar.addKeyListener(keyboardListner);
+
+
         startDateSelector.setModel(jDatePickerModelStart);
         endDateSelector.setModel(jDatePickerModelEnd);
         startDateSelector.setFont(new Font("Tahoma", 0, 18));
@@ -171,5 +184,58 @@ public class SearchOrderListing extends JFrame {
         //endregion
 
         pack();
+    }
+    public void autoComplete (String txt){
+        String complete = "";
+        int start = txt.length();
+        int last = txt.length();
+        int a;
+
+        //name as array variable
+        for(a = 0; a < customers.size();a++)
+        {
+            if (customers.get(a).getFirstName().startsWith(txt) || customers.get(a).getLastName().startsWith(txt)) {
+                complete = customers.get(a).getLastName() + " " +customers.get(a).getFirstName();
+                last = complete.length();
+                break;
+            }
+        }
+        if (last > start) {
+            jTextFieldSearchBar.setText(complete);
+            jTextFieldSearchBar.setCaretPosition(last);
+            jTextFieldSearchBar.moveCaretPosition(start);
+        }
+    }
+
+    private class KeyboardListner implements KeyListener {
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent evt) {
+            switch (evt.getKeyCode()) {
+                case KeyEvent.VK_BACK_SPACE:
+                    break;
+                case KeyEvent.VK_ENTER:
+                    jTextFieldSearchBar.setText(jTextFieldSearchBar.getText());
+                    break;
+                default:
+                    EventQueue.invokeLater(new Runnable(){
+                        @Override
+
+                        public void run(){
+                            String txt = jTextFieldSearchBar.getText();
+                            autoComplete(txt);
+                        }
+                    });
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
     }
 }

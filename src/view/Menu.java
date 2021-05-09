@@ -98,7 +98,14 @@ public class Menu extends JFrame {
         jMenuItemSearch1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.ALT_DOWN_MASK));
         jMenuItemSearch1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                SearchOrderListing orderListing = new SearchOrderListing();
+                SearchOrderListing orderListing = null;
+                try {
+                    orderListing = new SearchOrderListing();
+                } catch (ConnectionException connectionException) {
+                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException", JOptionPane.WARNING_MESSAGE);
+                } catch (SelectQueryException selectQueryException) {
+                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "QueryException", JOptionPane.WARNING_MESSAGE);
+                }
                 orderListing.setVisible(true);
             }
         });

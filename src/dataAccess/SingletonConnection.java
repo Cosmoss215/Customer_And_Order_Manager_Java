@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 public class SingletonConnection {
     private static Connection connection = null;
-    private static String url = "jdbc:mysql://localhost:3306/library"; //"jdbc:mysql://localhost:3306/library?useSSL=false"
-    private static String id = "DBAdmin"; //"root"
-    private static String password = "sinderilIG2B"; //"Manil93Manderlier97"
+    private static String url = "jdbc:mysql://localhost:3306/library?useSSL=false"; /*"jdbc:mysql://localhost:3306/library";*/
+    private static String id = "root";/*"DBAdmin";*/
+    private static String password = "Manil93Manderlier97"; /*"sinderilIG2B"; */
 
     private SingletonConnection() throws ConnectionException {
         try{
