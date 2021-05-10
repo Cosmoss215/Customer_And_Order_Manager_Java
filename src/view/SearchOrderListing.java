@@ -191,7 +191,6 @@ public class SearchOrderListing extends JFrame {
         int last = txt.length();
         int a;
 
-        //name as array variable
         for(a = 0; a < customers.size();a++)
         {
             if (customers.get(a).getFirstName().startsWith(txt) || customers.get(a).getLastName().startsWith(txt)) {

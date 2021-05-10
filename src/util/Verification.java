@@ -22,4 +22,7 @@ public class Verification {
                 , date) || pattern.matches("^\\d{2}-\\d{2}-\\d{2}$"
                 , date);
     }
+    public static boolean productReferenceVerification(String reference) {
+        return pattern.matches( "^\\d{1,10}$",reference);
+    }
 }

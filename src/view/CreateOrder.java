@@ -1,46 +1,35 @@
 package view;
 
+import controller.ApplicationController;
+import exception.ConnectionException;
+import exception.SelectQueryException;
+import model.Customer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 
 public class CreateOrder extends JFrame {
 
-    private JButton jButtonAddProduct;
-    private JButton jButtonCancel;
-    private JButton jButtonCancel1;
-    private JButton jButtonDeleteProduct;
-    private JComboBox<String> jComboBoxDeadline;
-    private JComboBox<String> jComboBoxPaymentmethod;
-    private JLabel jLabelAddProduct;
-    private JLabel jLabelAddProduct1;
-    private JLabel jLabelCreationDate;
-    private JLabel jLabelCustomer;
-    private JLabel jLabelDate;
-    private JLabel jLabelDateOfTheDay;
-    private JLabel jLabelNickname;
-    private JLabel jLabelPaymentDealine;
-    private JLabel jLabelPaymentDealine1;
-    private JLabel jLabelPaymentMethod;
-    private JScrollPane jScrollPaneOrderInformation;
-    private JScrollPane jScrollPaneTotal;
-    private JTable jTableOrderInformation;
-    private JTable jTableTotal;
-    private JTextField jTextFieldAddProductChoose;
-    private JTextField jTextFieldCustomerName;
-    private JTextField jTextFieldNickname;
-    private JTextField jTextFieldQuantityChoose;
-    private JPanel panelOrder;
-    private JPanel panelOrderInformation;
+    private JButton jButtonAddProduct, jButtonCancel, jButtonCancel1,jButtonDeleteProduct;
+    private JComboBox<String> jComboBoxDeadline, jComboBoxPaymentmethod;
+    private JLabel jLabelAddProduct, jLabelAddProduct1,jLabelCreationDate, jLabelCustomer,jLabelDate, jLabelDateOfTheDay,jLabelPaymentDealine,jLabelPaymentDealine1,jLabelPaymentMethod;
+    private JScrollPane jScrollPaneOrderInformation,jScrollPaneTotal;
+    private JTable jTableOrderInformation,jTableTotal;
+    private JTextField jTextFieldAddProductChoose,jTextFieldCustomerName;
+    private JPanel panelOrder,panelOrderInformation;
+    private JSpinner quantitySelector;
+    private ArrayList<Customer> customers;
 
-    public CreateOrder()
-    {
+    public CreateOrder() throws ConnectionException, SelectQueryException {
         panelOrderInformation = new JPanel();
         jLabelCustomer = new JLabel();
         jTextFieldCustomerName = new JTextField();
-        jTextFieldNickname = new JTextField();
         jLabelPaymentMethod = new JLabel();
         jComboBoxPaymentmethod = new JComboBox<>();
         jLabelPaymentDealine = new JLabel();
@@ -49,14 +38,12 @@ public class CreateOrder extends JFrame {
         jLabelCreationDate = new JLabel();
         jLabelDate = new JLabel();
         jLabelDateOfTheDay = new JLabel();
-        jLabelNickname = new JLabel();
         panelOrder = new JPanel();
         jScrollPaneOrderInformation = new JScrollPane();
         jTableOrderInformation = new JTable();
         jLabelAddProduct = new JLabel();
         jTextFieldAddProductChoose = new JTextField();
         jLabelAddProduct1 = new JLabel();
-        jTextFieldQuantityChoose = new JTextField();
         jButtonAddProduct = new JButton();
         jScrollPaneTotal = new JScrollPane();
         jTableTotal = new JTable();
@@ -76,12 +63,10 @@ public class CreateOrder extends JFrame {
             }
         });
 
-        jTextFieldNickname.setFont(new Font("Tahoma", 0, 18)); // 
-        jTextFieldNickname.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //jTextFieldNicknameActionPerformed(evt);
-            }
-        });
+        ApplicationController allCustomers = new ApplicationController();
+        customers = allCustomers.getAllCustomers();
+        KeyboardListner keyboardListner = new KeyboardListner();
+        jTextFieldCustomerName.addKeyListener(keyboardListner);
 
         jLabelPaymentMethod.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelPaymentMethod.setText("Payment method");
@@ -106,36 +91,11 @@ public class CreateOrder extends JFrame {
         jLabelDateOfTheDay.setFont(new Font("Tahoma", 0, 18)); // 
         jLabelDateOfTheDay.setText("Date of the day");
 
-        jLabelNickname.setFont(new Font("Tahoma", 0, 18)); // 
-        jLabelNickname.setText("Nickname");
-
-
-
         panelOrder.setBackground(new Color(0, 153, 153));
 
         jTableOrderInformation.setFont(new Font("Tahoma", 0, 12)); // 
         jTableOrderInformation.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
                         {null, null, null, null, null, null},
                         {null, null, null, null, null, null},
                         {null, null, null, null, null, null},
@@ -170,13 +130,9 @@ public class CreateOrder extends JFrame {
         jLabelAddProduct1.setForeground(new Color(255, 255, 255));
         jLabelAddProduct1.setText("Add product");
 
-        jTextFieldQuantityChoose.setFont(new Font("Tahoma", 0, 18)); // 
-        jTextFieldQuantityChoose.setText("0");
-        jTextFieldQuantityChoose.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //jTextFieldQuantityChooseActionPerformed(evt);
-            }
-        });
+
+        quantitySelector = new JSpinner(new SpinnerNumberModel(0,0,100000,1));
+        quantitySelector.setFont(new Font("Tahoma", 0, 18));
 
         jButtonAddProduct.setBackground(new Color(0, 204, 51));
         jButtonAddProduct.setFont(new Font("Tahoma", 0, 18)); // 
@@ -247,9 +203,7 @@ public class CreateOrder extends JFrame {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jTextFieldCustomerName, GroupLayout.PREFERRED_SIZE, 392, GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jLabelNickname)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTextFieldNickname, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(18, 18, 18)))
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelOrderInformationLayout.setVerticalGroup(
@@ -259,8 +213,7 @@ public class CreateOrder extends JFrame {
                                 .addGroup(panelOrderInformationLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelCustomer)
                                         .addComponent(jTextFieldCustomerName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextFieldNickname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabelNickname))
+                                            )
                                 .addGap(18, 18, 18)
                                 .addGroup(panelOrderInformationLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelCreationDate)
@@ -273,7 +226,6 @@ public class CreateOrder extends JFrame {
                                         .addComponent(jLabelDateOfTheDay))
                                 .addContainerGap(19, Short.MAX_VALUE))
         );
-
 
 
         GroupLayout panelOrderLayout = new GroupLayout(panelOrder);
@@ -292,7 +244,7 @@ public class CreateOrder extends JFrame {
                                                         .addGap(18, 18, 18)
                                                         .addComponent(jLabelAddProduct)
                                                         .addGap(18, 18, 18)
-                                                        .addComponent(jTextFieldQuantityChoose, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(quantitySelector, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
                                                         .addComponent(jButtonAddProduct)
                                                         .addGap(365, 365, 365))
@@ -312,7 +264,7 @@ public class CreateOrder extends JFrame {
                                 .addGap(19, 19, 19)
                                 .addGroup(panelOrderLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(jTextFieldAddProductChoose, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextFieldQuantityChoose, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(quantitySelector, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabelAddProduct1)
                                         .addComponent(jButtonAddProduct)
                                         .addComponent(jLabelAddProduct))
@@ -350,5 +302,58 @@ public class CreateOrder extends JFrame {
         //endregion
 
         pack();
+    }
+
+    public void autoComplete (String txt){
+        String complete = "";
+        int start = txt.length();
+        int last = txt.length();
+        int a;
+
+        for(a = 0; a < customers.size();a++)
+        {
+            if (customers.get(a).getFirstName().startsWith(txt) || customers.get(a).getLastName().startsWith(txt)) {
+                complete = customers.get(a).getLastName() + " " +customers.get(a).getFirstName();
+                last = complete.length();
+                break;
+            }
+        }
+        if (last > start) {
+            jTextFieldCustomerName.setText(complete);
+            jTextFieldCustomerName.setCaretPosition(last);
+            jTextFieldCustomerName.moveCaretPosition(start);
+        }
+    }
+
+    private class KeyboardListner implements KeyListener {
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent evt) {
+            switch (evt.getKeyCode()) {
+                case KeyEvent.VK_BACK_SPACE:
+                    break;
+                case KeyEvent.VK_ENTER:
+                    jTextFieldCustomerName.setText(jTextFieldCustomerName.getText());
+                    break;
+                default:
+                    EventQueue.invokeLater(new Runnable(){
+                        @Override
+
+                        public void run(){
+                            String txt = jTextFieldCustomerName.getText();
+                            autoComplete(txt);
+                        }
+                    });
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
     }
 }

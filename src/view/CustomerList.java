@@ -18,6 +18,8 @@ import view.tableModel.AllCustomersModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
@@ -36,7 +38,7 @@ public class CustomerList extends JFrame {
     private javax.swing.JPanel panelButtonCRUD;
     private javax.swing.JPanel panelCustomerTable;
     private javax.swing.JPanel panelSearchBar;
-
+    private ArrayList<Customer> customers;
     public CustomerList() throws ConnectionException, SelectQueryException {
         panelSearchBar = new JPanel();
         jButtonSearch = new JButton();
@@ -55,31 +57,29 @@ public class CustomerList extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButtonSearch.setFont(new Font("Tahoma", 0, 18)); // 
+        jButtonSearch.setFont(new Font("Tahoma", 0, 18));
         jButtonSearch.setText("Search");
 
-        jTextFieldSearchBar.setFont(new Font("Tahoma", 0, 18)); // 
+        jTextFieldSearchBar.setFont(new Font("Tahoma", 0, 18));
         jTextFieldSearchBar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //jTextFieldSearchBarActionPerformed(evt);
             }
         });
 
-        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18)); // 
+        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18));
         jLabelCustomerName.setText("Customer name");
 
-        jLabelNickname.setFont(new Font("Tahoma", 0, 18)); // 
+        jLabelNickname.setFont(new Font("Tahoma", 0, 18));
         jLabelNickname.setText("Nickname");
 
-        jTextFieldSearchBar1.setFont(new Font("Tahoma", 0, 18)); // 
-        jTextFieldSearchBar1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //jTextFieldSearchBar1ActionPerformed(evt);
-            }
-        });
+        jTextFieldSearchBar1.setFont(new Font("Tahoma", 0, 18));
+
+        KeyboardListner keyboardListner = new KeyboardListner();
+        jTextFieldSearchBar.addKeyListener(keyboardListner);
 
         ApplicationController allCustomers = new ApplicationController();
-        ArrayList<Customer> customers = allCustomers.getAllCustomers();
+        customers = allCustomers.getAllCustomers();
         AllCustomersModel customersModel = new AllCustomersModel(customers);
 
         jTableCustomerList = new JTable(customersModel);
@@ -105,23 +105,17 @@ public class CustomerList extends JFrame {
         jButtonUpdateCustomer.setText("Edit customer");
         jButtonUpdateCustomer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-
                 Customer customer;
                 customer = customersModel.getRow(jTableCustomerList.getSelectedRow());
-
                 EditCustomerForm editCustomerForm = new EditCustomerForm(color,"Edit customer",customer);
                 editCustomerForm.setVisible(true);
 
             }
         });
 
-        //MouseListner sur jtable
-
         jButtonDeleteCustomer.setBackground(new Color(255, 102, 102));
         jButtonDeleteCustomer.setFont(new Font("Tahoma", 0, 18)); // 
         jButtonDeleteCustomer.setText("Delete customer");
-
-
 
 
         //region Code de mise en forme
@@ -215,5 +209,58 @@ public class CustomerList extends JFrame {
         //endregion
 
         pack();
+    }
+
+    public void autoComplete (String txt){
+        String complete = "";
+        int start = txt.length();
+        int last = txt.length();
+        int a;
+
+        for(a = 0; a < customers.size();a++)
+        {
+            if (customers.get(a).getFirstName().startsWith(txt) || customers.get(a).getLastName().startsWith(txt)) {
+                complete = customers.get(a).getLastName() + " " +customers.get(a).getFirstName();
+                last = complete.length();
+                break;
+            }
+        }
+        if (last > start) {
+            jTextFieldSearchBar.setText(complete);
+            jTextFieldSearchBar.setCaretPosition(last);
+            jTextFieldSearchBar.moveCaretPosition(start);
+        }
+    }
+
+    private class KeyboardListner implements KeyListener {
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent evt) {
+            switch (evt.getKeyCode()) {
+                case KeyEvent.VK_BACK_SPACE:
+                    break;
+                case KeyEvent.VK_ENTER:
+                    jTextFieldSearchBar.setText(jTextFieldSearchBar.getText());
+                    break;
+                default:
+                    EventQueue.invokeLater(new Runnable(){
+                        @Override
+
+                        public void run(){
+                            String txt = jTextFieldSearchBar.getText();
+                            autoComplete(txt);
+                        }
+                    });
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
     }
 }

@@ -123,7 +123,7 @@ public class CustomerForm extends JFrame {
         jLabelPostalCode.setFont(new Font("Tahoma", 0, 20));
         panelForm.add(jLabelPostalCode);
 
-        postalCodeSelector = new JSpinner(new SpinnerNumberModel(0,0,100000,2));
+        postalCodeSelector = new JSpinner(new SpinnerNumberModel(0,0,100000,1));
         postalCodeSelector.setFont(new Font("Tahoma", 0, 20));
         panelForm.add(postalCodeSelector);
 

@@ -5,10 +5,12 @@ import exception.ConnectionException;
 import exception.SelectQueryException;
 import model.Customer;
 import model.CustomerByProduct;
+import util.Verification;
 import view.tableModel.AllCustomersByProductModel;
 import view.tableModel.AllCustomersModel;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,12 +55,20 @@ public class SearchByProduct extends JFrame {
                 }
                 ArrayList<CustomerByProduct> customersByProduct = null;
                 try {
-                    customersByProduct = getProductByReference.getProductByReference(Integer.valueOf(jTextFieldFindProduct.getText()));
+                        if (Verification.productReferenceVerification(jTextFieldFindProduct.getText()))
+                        {
+                            customersByProduct = getProductByReference.getProductByReference(Integer.valueOf(jTextFieldFindProduct.getText()));
+                            AllCustomersByProductModel customersByProductModel = new AllCustomersByProductModel(customersByProduct);
+                            jTableCustomersByProduct.setModel(customersByProductModel);
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null,"The given reference is not correct, open the product list to help you", "Incorrect reference ", JOptionPane.INFORMATION_MESSAGE);
+                            jTextFieldFindProduct.setBorder(new LineBorder(Color.red,3));
+                        }
                 } catch (SelectQueryException selectQueryException) {
                     selectQueryException.printStackTrace();
                 }
-                AllCustomersByProductModel customersByProductModel = new AllCustomersByProductModel(customersByProduct);
-                jTableCustomersByProduct.setModel(customersByProductModel);
+
             }
         });
         //region Code de mise en forme

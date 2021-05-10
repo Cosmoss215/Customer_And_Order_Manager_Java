@@ -34,8 +34,6 @@ public class Menu extends JFrame {
                     JOptionPane.WARNING_MESSAGE);
         }
 
-
-        //MenuBar
         jMenuBar = new JMenuBar();
 
         jMenuFile = new JMenu("File");
@@ -72,7 +70,14 @@ public class Menu extends JFrame {
         jMenuItemCreateOrder = new JMenuItem("Create Order");
         jMenuItemCreateOrder.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                CreateOrder createOrder = new CreateOrder();
+                CreateOrder createOrder = null;
+                try {
+                    createOrder = new CreateOrder();
+                } catch (ConnectionException connectionException) {
+                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException", JOptionPane.WARNING_MESSAGE);
+                } catch (SelectQueryException selectQueryException) {
+                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "ConnectionException", JOptionPane.WARNING_MESSAGE);
+                }
                 createOrder.setVisible(true);
             }
         });
