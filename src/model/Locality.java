@@ -6,11 +6,14 @@ public class Locality {
     private String region;
     private Country country;
 
-    public Locality(String name, int postalCode, String region, Country country) {
+    public Locality(String name, Integer postalCode, String region, Country country) {
         setName(name);
         setPostalCode(postalCode);
         setRegion(region);
         setCountry(country);
+    }
+    public Locality(){
+        this(null,null,null,null);
     }
 
     public String getName() {
@@ -29,19 +32,19 @@ public class Locality {
         return region;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    private void setPostalCode(Integer postalCode){
+    public void setPostalCode(Integer postalCode){
         this.postalCode = postalCode;
     }
 
-    private void setRegion(String region) {
+    public void setRegion(String region) {
         this.region = region;
     }
 
-    private void setCountry(Country country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 
@@ -53,7 +56,6 @@ public class Locality {
                 ", country=" + country +
                 '}';
     }
-
     @Override
     public String toString() {
         return name + " " + postalCode + " " + region;

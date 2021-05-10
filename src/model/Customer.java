@@ -36,6 +36,12 @@ public class Customer {
     public Customer(Integer id, String firstName, String lastName, GregorianCalendar registrationDate, Boolean isVip, String iban, String bic, Address address) {
         this(id, firstName, lastName, registrationDate, isVip, null, null, null, null, iban, bic, address);
     }
+    public Customer( String firstName, String lastName, GregorianCalendar registrationDate, Boolean isVip, String iban, String bic, Address address) {
+        this(null, firstName, lastName, registrationDate, isVip, null, null, null, null, iban, bic, address);
+    }
+    public Customer(){
+        this(null,null,null,null,null,null,null,null,null,null,null,null);
+    }
 
     public Integer getId() {
         return id;
@@ -106,7 +112,11 @@ public class Customer {
     }
 
     public void setIsVip(Boolean isVip){
-        this.isVip = isVip;
+        if (isVip != null)
+            this.isVip = isVip;
+        else
+            this.isVip = true;
+
     }
 
     public void setNickname(String nickname){

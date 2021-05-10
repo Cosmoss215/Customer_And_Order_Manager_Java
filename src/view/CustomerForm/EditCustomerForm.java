@@ -6,9 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class EditCustomerForm extends CustomerForm {
 
@@ -28,29 +31,35 @@ public class EditCustomerForm extends CustomerForm {
         jButtonEditCustomer = new JButton("Edit");
         jButtonEditCustomer.setFont(new Font("Tahoma", 0, 20));
         panelButton.add(jButtonEditCustomer);
+        jButtonEditCustomer.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                verification();
+            }
+        });
+
+
+        SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
+        fmt.setCalendar(customer.getRegistrationDate());
+        String dateFormatted = fmt.format(customer.getRegistrationDate().getTime());
+        System.out.println(dateFormatted);
 
 
         jTextFieldFirstName.setText(customer.getFirstName());
         jTextFieldLastName.setText(customer.getLastName());
-        //RegistrationDate
+        jTextFieldNickame.setText(customer.getNickname());
+        jTextFieldRegistrationDate.setText(dateFormatted);
         jTextFieldPhoneNumber.setText(String.valueOf(customer.getPhoneNumber()));
-        jTextFieldAddressNumber.setText(String.valueOf(customer.getAddress().getStreetNumber()));
+        jTextFieldEmail.setText(String.valueOf(customer.getEmail()));
         jTextFieldStreetWording.setText(customer.getAddress().getStreetName());
+        streetNumberSelector.setValue(customer.getAddress().getStreetNumber());
+        jTextFieldBox.setText(customer.getAddress().getBox());
         jTextFieldLocality.setText(String.valueOf(customer.getAddress().getLocality()));
-        jTextFieldPostalCode.setText(String.valueOf(customer.getAddress().getLocality().getPostalCode()));
-
-
-        //jComboBoxCountry.setSelectedIndex(1);
-        /*
-        switch (customer.getAddress().getLocality().getCountry())
-        {
-
-        }
-         */
-
+        postalCodeSelector.setValue(customer.getAddress().getLocality().getPostalCode());
         jTextFieldIBAN.setText(customer.getIban());
         jTextFieldBIC.setText(customer.getBic());
         jTextFieldVATNumber.setText(String.valueOf(customer.getVatNumber()));
         jCheckBoxIsVIP.setSelected(customer.getVip());
+
+
     }
 }

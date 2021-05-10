@@ -18,6 +18,9 @@ public class Address {
         this(null, streetName, streetNumber, box, locality);
         setBox(box);
     }
+    public Address() {
+        this(null, null, null, null, null);
+    }
 
     public Integer getId(){
         return id;

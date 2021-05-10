@@ -2,6 +2,8 @@ package controller;
 
 import business.*;
 import exception.ConnectionException;
+import exception.CreateQueryException;
+import exception.NullException;
 import exception.SelectQueryException;
 import model.*;
 
@@ -44,6 +46,12 @@ public class ApplicationController {
 
     public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException {
         return productManager.getProductByReference(reference);
+    }
+    public boolean addCustomer(Customer customer) throws CreateQueryException, NullException {
+        if (customer == null){
+            throw new NullException();
+        }
+        return customerManager.addCustomer(customer);
     }
 
 }
