@@ -28,4 +28,5 @@ public class Verification {
     public static boolean isAlphabeticCharacters(String character) {
         return pattern.matches( "/^[A-Za-z]+$/",character);
     }
+
 }
