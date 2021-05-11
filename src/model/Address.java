@@ -10,7 +10,7 @@ public class Address {
     private Locality locality;
 
     public Address(Integer id, String streetName, Integer streetNumber, String box, Locality locality) {
-        this.id = id;
+        setId(id);
         this.streetName = streetName;
         setStreetNumber(streetNumber);
         setBox(box);
@@ -47,17 +47,20 @@ public class Address {
     }
     //endregion
     //region setter
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public void setStreetNumber(Integer streetNumber){
         if (streetNumber > 0){
             this.streetNumber = streetNumber;
         }
+        else{
+            this.streetNumber = null;
+        }
 
     }
-
     public void setBox(String box){
-        if (Verification.isAlphabeticCharacters(box)){
-            this.box = box;
-        }
+        this.box = box;
     }
     //endregion
     //region Display

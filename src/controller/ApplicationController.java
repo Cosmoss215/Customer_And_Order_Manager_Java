@@ -10,7 +10,6 @@ import model.*;
 import java.util.ArrayList;
 
 public class ApplicationController {
-    private AddressManager addressManager;
     private CountryManager countryManager;
     private CustomerManager customerManager;
     private LocalityManager localityManager;
@@ -20,7 +19,6 @@ public class ApplicationController {
     private VATManager vatManager;
 
     public ApplicationController() throws ConnectionException {
-        addressManager = new AddressManager();
         countryManager = new CountryManager();
         customerManager = new CustomerManager();
         localityManager = new LocalityManager();
@@ -50,6 +48,10 @@ public class ApplicationController {
             throw new NullException();
         }
         return customerManager.addCustomer(customer);
+    }
+    public ArrayList<Country> getAllCountries()throws SelectQueryException {
+        ArrayList<Country> countryArrayList = countryManager.getAllCountries();
+        return countryArrayList;
     }
 
 }

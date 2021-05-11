@@ -5,6 +5,7 @@ import util.Verification;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.regex.Pattern;
 
 public class Customer {
     private Integer id;
@@ -97,32 +98,19 @@ public class Customer {
     //endregion
     //region setter
     public void setRegistrationDate(GregorianCalendar date){
-        if(Verification.dateVerification(String.valueOf(date)))
-        {
-            this.registrationDate = date;
-        }
-
+        this.registrationDate = date;
     }
     public void setNickname(String nickname){
-        if (Verification.LengthStringVerification(nickname,0,10)){
-            this.nickname = nickname;
-
-        }
+        this.nickname = nickname;
     }
-    public void setPhoneNumber(Integer phoneNumber){
-        if (Verification.phoneNumberVerification(String.valueOf(phoneNumber))){
-            this.phoneNumber = phoneNumber;
-        }
+    public void setPhoneNumber(Integer phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
     public void setEmail(String email){
-        if (Verification.emailVerification(email)){
-            this.email = email;
-        }
+        this.email = email;
     }
     public void setVatNumber(Integer vatNumber) {
-        if (vatNumber >= 0){
-            this.vatNumber = vatNumber;
-        }
+        this.vatNumber = vatNumber;
     }
     public void setBic(String bic) {
         this.bic = bic;

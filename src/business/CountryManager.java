@@ -20,7 +20,6 @@ public class CountryManager {
 
     public ArrayList<Country> getAllCountries()throws SelectQueryException {
         ArrayList<Country> countryArrayList = dao.getAllCountries();
-//Traitements éventuels sur la liste de livres
         return countryArrayList;
     }
 }
