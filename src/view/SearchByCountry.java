@@ -48,8 +48,8 @@ public class SearchByCountry extends JFrame {
                 ArrayList<Customer> allCustomerByCountry = null;
                 try {
                     allCustomerByCountry = customersByCountry.getCustomersByCountry(country);
-                } catch (SelectQueryException | NullException e) {
-                    JOptionPane.showMessageDialog(null,e.getMessage(), e.getTypeError(), JOptionPane.WARNING_MESSAGE);
+                } catch (SelectQueryException | NullException exception) {
+                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
 
                 AllCustomersByCountryModel customersByCountryModel = new AllCustomersByCountryModel(allCustomerByCountry);

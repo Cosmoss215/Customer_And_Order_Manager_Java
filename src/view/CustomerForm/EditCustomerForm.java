@@ -1,7 +1,10 @@
 package view.CustomerForm;
 
+import controller.ApplicationController;
 import exception.ConnectionException;
+import exception.NullException;
 import exception.SelectQueryException;
+import exception.UpdateQueryException;
 import model.Customer;
 
 import javax.swing.*;
@@ -36,6 +39,12 @@ public class EditCustomerForm extends CustomerForm {
         jButtonEditCustomer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 verification();
+                try {
+                    ApplicationController applicationController = new ApplicationController();
+                    applicationController.update(customer);
+                } catch (ConnectionException | UpdateQueryException | NullException exception) {
+                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
 
@@ -43,14 +52,16 @@ public class EditCustomerForm extends CustomerForm {
         SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
         fmt.setCalendar(customer.getRegistrationDate());
         String dateFormatted = fmt.format(customer.getRegistrationDate().getTime());
-        System.out.println(dateFormatted);
-
 
         jTextFieldFirstName.setText(customer.getFirstName());
         jTextFieldLastName.setText(customer.getLastName());
         jTextFieldNickame.setText(customer.getNickname());
         jTextFieldRegistrationDate.setText(dateFormatted);
-        jTextFieldPhoneNumber.setText(String.valueOf(customer.getPhoneNumber()));
+
+        if (customer.getPhoneNumber() != null){
+            jTextFieldPhoneNumber.setText(String.valueOf(customer.getPhoneNumber()));
+        }
+
         jTextFieldEmail.setText(String.valueOf(customer.getEmail()));
         jTextFieldStreetWording.setText(customer.getAddress().getStreetName());
         streetNumberSelector.setValue(customer.getAddress().getStreetNumber());

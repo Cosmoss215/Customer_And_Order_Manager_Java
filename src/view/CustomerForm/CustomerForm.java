@@ -200,21 +200,27 @@ public class CustomerForm extends JFrame {
     public boolean verification(){
 
         if (jTextFieldFirstName.getText().length() > 50 || jTextFieldFirstName.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null,"This field is obligatory and the maximum length is (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"First name field is obligatory and the maximum length is (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldFirstName.setBorder(new LineBorder(Color.red,3));
             return false;
+        }else {
+            jTextFieldFirstName.setBorder(new LineBorder(Color.BLACK,1));
         }
 
         if (jTextFieldLastName.getText().isEmpty() || jTextFieldLastName.getText().length() > 50) {
-            JOptionPane.showMessageDialog(null,"This field is obligatory and the maximum length is (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Last name field is obligatory and the maximum length is (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldLastName.setBorder(new LineBorder(Color.red,3));
             return false;
+        }else {
+            jTextFieldLastName.setBorder(new LineBorder(Color.BLACK,1));
         }
 
-        if (!jTextFieldNickame.getText().isEmpty() || jTextFieldNickame.getText().length() > 10) {
+        if (!jTextFieldNickame.getText().isEmpty() && jTextFieldNickame.getText().length() > 10) {
             JOptionPane.showMessageDialog(null,"The maximum length is reached (10)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldNickame.setBorder(new LineBorder(Color.red,3));
             return false;
+        }else {
+            jTextFieldNickame.setBorder(new LineBorder(Color.BLACK,1));
         }
 
         if (!Verification.dateVerification(jTextFieldRegistrationDate.getText()) || jTextFieldRegistrationDate.getText().isEmpty()) {
@@ -225,17 +231,23 @@ public class CustomerForm extends JFrame {
         else {
             jTextFieldRegistrationDate.setBorder(new LineBorder(Color.BLACK,1));
         }
-
+        //can be null
         if (!jTextFieldPhoneNumber.getText().isEmpty() && !Verification.phoneNumberVerification(jTextFieldPhoneNumber.getText())) {
             JOptionPane.showMessageDialog(null,"The phone number is incorrect", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldPhoneNumber.setBorder(new LineBorder(Color.red,3));
             return false;
         }
-
+        else {
+            jTextFieldPhoneNumber.setBorder(new LineBorder(Color.BLACK,1));
+        }
+        //can be null
         if (!jTextFieldEmail.getText().isEmpty() && !Verification.emailVerification(jTextFieldEmail.getText())) {
             JOptionPane.showMessageDialog(null,"The email is incorrect (must be xxxx@xxxx.ccc", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldEmail.setBorder(new LineBorder(Color.red,3));
             return false;
+        }
+        else {
+            jTextFieldEmail.setBorder(new LineBorder(Color.BLACK,1));
         }
 
         if (jTextFieldStreetWording.getText().isEmpty()){
@@ -243,34 +255,53 @@ public class CustomerForm extends JFrame {
             jTextFieldStreetWording.setBorder(new LineBorder(Color.red,3));
             return false;
         }
+        else {
+            jTextFieldStreetWording.setBorder(new LineBorder(Color.BLACK,1));
+        }
 
         if (streetNumberSelector.getValue().equals(0)){
             JOptionPane.showMessageDialog(null,"The street number cannot be 0", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldStreetWording.setBorder(new LineBorder(Color.red,3));
+            streetNumberSelector.setBorder(new LineBorder(Color.red,2));
             return false;
         }
+        else {
+            streetNumberSelector.setBorder(new LineBorder(Color.BLACK,1));
+        }
+        //can be null
         if (!jTextFieldBox.getText().isEmpty() && !Verification.isAlphabeticCharacters(jTextFieldBox.getText())){
             JOptionPane.showMessageDialog(null,"The box must be a character or short string (A,AB,..)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldBox.setBorder(new LineBorder(Color.red,3));
             return false;
         }
-
+        else {
+            jTextFieldBox.setBorder(new LineBorder(Color.BLACK,1));
+        }
+        //can be null
         if (!jTextFieldVATNumber.getText().isEmpty() && Integer.parseInt(jTextFieldVATNumber.getText()) < 0) {
             JOptionPane.showMessageDialog(null,"VAT isn't good", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldVATNumber.setBorder(new LineBorder(Color.red,3));
             return false;
         }
+        else {
+            jTextFieldVATNumber.setBorder(new LineBorder(Color.BLACK,1));
+        }
 
         if (jTextFieldIBAN.getText().length() > 35 || jTextFieldIBAN.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null,"The maximum length is reached (35)", "FormException", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Iban field is obligatory and the maximum length is (35)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldIBAN.setBorder(new LineBorder(Color.red,3));
             return false;
         }
+        else {
+            jTextFieldIBAN.setBorder(new LineBorder(Color.BLACK,1));
+        }
 
         if (jTextFieldBIC.getText().length() > 15 || jTextFieldBIC.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null,"The maximum length is reached (15)", "FormException", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"BIC field is obligatory and the maximum length is reached (15)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldBIC.setBorder(new LineBorder(Color.red,3));
             return false;
+        }
+        else {
+            jTextFieldBIC.setBorder(new LineBorder(Color.BLACK,1));
         }
         return true;
     }

@@ -28,11 +28,11 @@ public class CustomerManager {
         //Traitements éventuels
         return customerArrayList;
     }
-    public boolean addCustomer(Customer customer) throws CreateQueryException,NullPointerException {
-            if (customer == null){
-                throw new NullPointerException();
-            }
+    public boolean addCustomer(Customer customer) throws CreateQueryException {
             return dao.addCustomer(customer);
+    }
+    public boolean update(Customer customer) throws UpdateQueryException{
+        return dao.update(customer);
     }
     public boolean delete(Customer customer)throws DeleteQueryException{
         if (customer == null){

@@ -39,6 +39,12 @@ public class ApplicationController {
         }
         return customerManager.addCustomer(customer);
     }
+    public boolean update(Customer customer) throws UpdateQueryException, NullException {
+        if (customer == null){
+            throw new NullException(customer.getClass().getName());
+        }
+        return customerManager.update(customer);
+    }
     public boolean delete(Customer customer)throws DeleteQueryException {
         if (customer == null){
             throw new NullPointerException();
