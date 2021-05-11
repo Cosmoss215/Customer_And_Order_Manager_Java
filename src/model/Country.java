@@ -8,6 +8,9 @@ public class Country {
         setCode(code);
         setName(name);
     }
+    public Country(String code) {
+        this(code,null);
+    }
 
     public String getName() {
         return name;
@@ -24,7 +27,6 @@ public class Country {
     public void setName(String name){
         this.name = name;
     }
-
     @Override
     public String toString() {
         return code + " " + name;

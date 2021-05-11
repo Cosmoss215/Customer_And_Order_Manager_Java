@@ -43,9 +43,7 @@ public class ProductDBAccess implements ProductDataAccess {
                         data.getString("description"),
                         vat
                 );
-
                 allProducts.add(product);
-
             }
 
         } catch (SQLException e) {

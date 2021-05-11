@@ -55,10 +55,7 @@ public class Address {
     }
 
     public void setBox(String box) {
-        if(box != null)
-            this.box = box;
-        else
-            this.box = null;
+        this.box = box;
     }
 
     public void setLocality(Locality locality){

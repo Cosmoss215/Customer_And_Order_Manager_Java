@@ -84,25 +84,17 @@ public class Order {
     }
 
     private void setState(String state) { // throws OrderStateException ?
-        /*
-        if(state.equals(states[0]) || state.equals(states[1]) || state.equals(states[2]))
+
+        if(state.equals(states[0]) || state.equals(states[1]) || state.equals(states[2])){
             this.state = state;
-        else
+        }
+        else {
             this.state = states[0];
-        */
-        switch (state) {
-            case "pending" :
-            case "payed" :
-            case "delivered" : this.state = state;
-                break;
-            default : this.state = states[0];
         }
     }
-
     private void setState(){
         setState("pending");
     }
-
     private void setCustomer(Customer customer) {
         this.customer = customer;
     }

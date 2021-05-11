@@ -1,13 +1,16 @@
 package view.CustomerForm;
 
 import model.Address;
+import model.Country;
 import model.Customer;
+import model.Locality;
 import org.jdatepicker.JDateComponent;
 import util.Verification;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.GregorianCalendar;
 
 
 public class CustomerForm extends JFrame {
@@ -17,7 +20,7 @@ public class CustomerForm extends JFrame {
     public JLabel jLabelRegion,jLabelCountry;
     public JTextField jTextFieldEmail,jTextFieldBIC,jTextFieldFirstName,jTextFieldIBAN,jTextFieldLastName,jTextFieldLocality,jTextFieldPhoneNumber,jTextFieldStreetWording,jTextFieldVATNumber,jTextFieldNickame,jTextFieldBox,jTextFieldRegistrationDate,jTextFieldRegion;
     public JPanel mainPanel,panelForm,panelButton;
-    public JSpinner streetNumberSelector,postalCodeSelector;
+    public JSpinner streetNumberSelector,postalCodeSelector,vatSelector;
     public JComboBox<String> jComboBoxCountry;
 
     public CustomerForm(String title,Color color){
@@ -146,6 +149,8 @@ public class CustomerForm extends JFrame {
         jLabelVATNumber = new JLabel("Vat number");
         jLabelVATNumber.setFont(new Font("Tahoma", 0, 20));
         panelForm.add(jLabelVATNumber);
+
+
         jTextFieldVATNumber = new JTextField();
         jTextFieldVATNumber.setFont(new Font("Tahoma", 0, 20));
         panelForm.add(jTextFieldVATNumber);
@@ -178,88 +183,91 @@ public class CustomerForm extends JFrame {
 
     }
     public boolean verification(){
-        if (!Verification.dateVerification(jTextFieldRegistrationDate.getText()))
-        {
+        if (!Verification.dateVerification(jTextFieldRegistrationDate.getText())) {
             JOptionPane.showMessageDialog(null,"This date is incorrect, should be dd-mm-yy or dd-mm-yyyy", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldRegistrationDate.setBorder(new LineBorder(Color.red,3));
             return false;
         }
-
-        if (jTextFieldFirstName.getText().length() > 50)
-        {
+        else {
+            jTextFieldRegistrationDate.setBorder(new LineBorder(Color.BLACK,1));
+        }
+        if (jTextFieldFirstName.getText().length() > 50) {
             JOptionPane.showMessageDialog(null,"The maximum length is reached (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldFirstName.setBorder(new LineBorder(Color.red,3));
             return false;
         }
-
-        if (jTextFieldLastName.getText().length() > 50)
-        {
+        if (jTextFieldLastName.getText().length() > 50) {
             JOptionPane.showMessageDialog(null,"The maximum length is reached (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldLastName.setBorder(new LineBorder(Color.red,3));
             return false;
         }
 
-        if (jTextFieldNickame.getText().length() > 10)
-        {
+        if (jTextFieldNickame.getText().length() > 10) {
             JOptionPane.showMessageDialog(null,"The maximum length is reached (10)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldNickame.setBorder(new LineBorder(Color.red,3));
             return false;
         }
 
-        if (!Verification.phoneNumberVerification(jTextFieldPhoneNumber.getText()))
-        {
+        if (!Verification.phoneNumberVerification(jTextFieldPhoneNumber.getText())) {
             JOptionPane.showMessageDialog(null,"The phone number is incorrect", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldPhoneNumber.setBorder(new LineBorder(Color.red,3));
             return false;
         }
 
-        if (!Verification.emailVerification(jTextFieldEmail.getText()))
-        {
+        if (!Verification.emailVerification(jTextFieldEmail.getText())) {
             JOptionPane.showMessageDialog(null,"The email is incorrect (must be xxxx@xxxx.ccc", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldEmail.setBorder(new LineBorder(Color.red,3));
             return false;
         }
 
-        if (jTextFieldIBAN.getText().length() > 35)
-        {
+        if (jTextFieldIBAN.getText().length() > 35) {
             JOptionPane.showMessageDialog(null,"The maximum length is reached (35)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldIBAN.setBorder(new LineBorder(Color.red,3));
             return false;
         }
 
-        if (jTextFieldBIC.getText().length() > 15)
-        {
+        if (jTextFieldBIC.getText().length() > 15) {
             JOptionPane.showMessageDialog(null,"The maximum length is reached (15)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldBIC.setBorder(new LineBorder(Color.red,3));
             return false;
         }
         return true;
     }
-    /* Work in progress
+
+
     public Customer addCustomer() {
-        Address address = new Address();
 
-        Customer customer = new Customer(jTextFieldFirstName.getText(), jTextFieldLastName.getText(), registrationDateSelector.get, jCheckBoxIsVIP.isSelected(), jTextFieldNickame.getText(), jTextFieldPhoneNumber.getText(), jTextFieldEmail.getText(), jTextFieldVATNumber.getText(), jTextFieldIBAN.getText(), jTextFieldBIC.getText(), address)
+        Boolean isVip;
+        String firstName, lastName, nickname, email, iban, bic, streetName, box, localityName, region, code, registrationDate;
+        Integer streetNumber, postalCode, phoneNumber, vatNumber;
 
+        firstName = jTextFieldFirstName.getText();
+        lastName = jTextFieldLastName.getText();
+        nickname = jTextFieldNickame.getText();
+        phoneNumber = Integer.valueOf(jTextFieldPhoneNumber.getText());
+        email = jTextFieldEmail.getText();
+        vatNumber = Integer.valueOf(jTextFieldVATNumber.getText());
+        iban = jTextFieldIBAN.getText();
+        bic = jTextFieldBIC.getText();
+        streetName = jTextFieldStreetWording.getText();
+        box = jTextFieldBox.getText();
+        localityName = jTextFieldLocality.getText();
+        region = jTextFieldRegion.getText();
+        code = (String) jComboBoxCountry.getSelectedItem();
+        isVip = jCheckBoxIsVIP.isSelected();
+        registrationDate = jTextFieldRegistrationDate.getText();
+        postalCode = (Integer) postalCodeSelector.getValue();
+        streetNumber = (Integer) streetNumberSelector.getValue();
 
+        GregorianCalendar gregorianCalendar = new GregorianCalendar(2020,05,05);
 
-            locality.setName(jTextFieldLocality.getText());
+        Country country = new Country(code);
+        Locality locality = new Locality(localityName, postalCode, region, country);
+        Address address = new Address(streetName, streetNumber, box, locality);
+        Customer customer = new Customer(firstName, lastName, gregorianCalendar, isVip, nickname, phoneNumber, email, vatNumber, iban, bic, address);
 
-            locality.setPostalCode((Integer) postalCodeSelector.getValue());
+        return customer;
+    }
 
-            customer.getAddress().setBox(jTextFieldBox.getText());
-
-            customer.getAddress().setLocality(locality);
-
-            customer.getAddress().setStreetName(jTextFieldStreetWording.getText());
-
-            customer.getAddress().setStreetNumber((Integer) streetNumberSelector.getValue());
-
-            customer.setVatNumber(Integer.valueOf(jTextFieldVATNumber.getText()));
-
-            return customer;
-        }
-
-     */
 }
 

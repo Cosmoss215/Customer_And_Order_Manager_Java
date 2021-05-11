@@ -19,4 +19,7 @@ public class LocalityDBAccess implements LocalityDataAccess{
         //Accès à la base de données
         return allLocalities;
     }
+    public boolean localityExists(){
+        return true;
+    }
 }

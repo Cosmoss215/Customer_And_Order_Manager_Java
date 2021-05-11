@@ -16,7 +16,6 @@ public class ApplicationController {
     private LocalityManager localityManager;
     private OrderManager orderManager;
     private OrderLineManager orderLineManager;
-    private PaymentMethodManager paymentMethodManager;
     private ProductManager productManager;
     private VATManager vatManager;
 
@@ -27,7 +26,6 @@ public class ApplicationController {
         localityManager = new LocalityManager();
         orderManager = new OrderManager();
         orderLineManager = new OrderLineManager();
-        paymentMethodManager = new PaymentMethodManager();
         productManager = new ProductManager();
         vatManager = new VATManager();
     }
