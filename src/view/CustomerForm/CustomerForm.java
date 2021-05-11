@@ -14,14 +14,16 @@ public class CustomerForm extends JFrame {
     private Container mainContainer;
     public JCheckBox jCheckBoxIsVIP;
     public JLabel jLabelEmail,jLabelBIC, jLabelCustomerInformation, jLabelFirstName, jLabelIBAN,jLabelIsVIP, jLabelLastName, jLabelLocality, jLabelPhoneNumber, jLabelPostalCode, jLabelRegistrationDate, jLabelStreetWording,jLabelVATNumber,jLabelNickname,jLabelStreetNumber,jLabelBox;
-    public JTextField jTextFieldEmail,jTextFieldBIC,jTextFieldFirstName,jTextFieldIBAN,jTextFieldLastName,jTextFieldLocality,jTextFieldPhoneNumber,jTextFieldStreetWording,jTextFieldVATNumber,jTextFieldNickame,jTextFieldBox,jTextFieldRegistrationDate;
+    public JLabel jLabelRegion,jLabelCountry;
+    public JTextField jTextFieldEmail,jTextFieldBIC,jTextFieldFirstName,jTextFieldIBAN,jTextFieldLastName,jTextFieldLocality,jTextFieldPhoneNumber,jTextFieldStreetWording,jTextFieldVATNumber,jTextFieldNickame,jTextFieldBox,jTextFieldRegistrationDate,jTextFieldRegion;
     public JPanel mainPanel,panelForm,panelButton;
     public JSpinner streetNumberSelector,postalCodeSelector;
+    public JComboBox<String> jComboBoxCountry;
 
     public CustomerForm(String title,Color color){
         setTitle(title);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setBounds(200, 70, 800, 800);
+        setBounds(200, 70, 800, 850);
         setLayout(new FlowLayout());
 
         mainContainer = getContentPane();
@@ -44,7 +46,7 @@ public class CustomerForm extends JFrame {
         panelForm.setBackground(color);
         panelButton.setBackground(color);
 
-        panelForm.setLayout(new GridLayout(15,2,40,10));
+        panelForm.setLayout(new GridLayout(17,2,40,10));
         panelButton.setLayout(new FlowLayout());
 
         jLabelFirstName = new JLabel("First name");
@@ -126,6 +128,20 @@ public class CustomerForm extends JFrame {
         postalCodeSelector = new JSpinner(new SpinnerNumberModel(0,0,100000,1));
         postalCodeSelector.setFont(new Font("Tahoma", 0, 20));
         panelForm.add(postalCodeSelector);
+
+        jLabelRegion = new JLabel("Region");
+        jLabelRegion.setFont(new Font("Tahoma", 0, 20));
+        jTextFieldRegion = new JTextField();
+        jTextFieldRegion.setFont(new Font("Tahoma", 0, 20));
+        panelForm.add(jLabelRegion);
+        panelForm.add(jTextFieldRegion);
+
+        jLabelCountry = new JLabel("Country");
+        jLabelCountry.setFont(new Font("Tahoma", 0, 20));
+        String[] country = { "BE","FR","GER","NL"};
+        jComboBoxCountry = new JComboBox<String>(country);
+        panelForm.add(jLabelCountry);
+        panelForm.add(jComboBoxCountry);
 
         jLabelVATNumber = new JLabel("Vat number");
         jLabelVATNumber.setFont(new Font("Tahoma", 0, 20));
