@@ -1,10 +1,7 @@
 package controller;
 
 import business.*;
-import exception.ConnectionException;
-import exception.CreateQueryException;
-import exception.NullException;
-import exception.SelectQueryException;
+import exception.*;
 import model.*;
 
 import java.util.ArrayList;
@@ -41,6 +38,12 @@ public class ApplicationController {
             throw new NullException(customer.getClass().getName());
         }
         return customerManager.addCustomer(customer);
+    }
+    public boolean delete(Customer customer)throws DeleteQueryException {
+        if (customer == null){
+            throw new NullPointerException();
+        }
+        return  customerManager.delete(customer);
     }
     //endregion
     //region Product

@@ -46,18 +46,4 @@ public class LocalityDBAccess implements LocalityDataAccess{
 
         return allLocalities;
     }
-    public boolean localityExists(String localityName) throws SelectQueryException {
-        String sqlInstruction = "SELECT name from locality where name = \'%" + localityName + "%\';";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
-            ResultSet data = preparedStatement.executeQuery();
-            if(data.wasNull()){
-                return false;
-            }
-
-        } catch (SQLException throwables) {
-            throw new SelectQueryException();
-        }
-        return true;
-    }
 }

@@ -36,6 +36,7 @@ public class CreateCustomerForm extends CustomerForm {
                 jTextFieldFirstName.setText("");
                 jTextFieldLastName.setText("");
                 jTextFieldNickame.setText("");
+                jTextFieldRegistrationDate.setText("");
                 jTextFieldPhoneNumber.setText("");
                 jTextFieldEmail.setText("");
                 jTextFieldStreetWording.setText("");
@@ -46,6 +47,8 @@ public class CreateCustomerForm extends CustomerForm {
                 jTextFieldIBAN.setText("");
                 jTextFieldBIC.setText("");
                 jTextFieldLocality.setText("");
+                jTextFieldRegion.setText("");
+                jComboBoxCountry.setSelectedIndex(0);
                 jCheckBoxIsVIP.setSelected(false);
             }
         });

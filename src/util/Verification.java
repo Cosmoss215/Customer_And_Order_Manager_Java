@@ -11,7 +11,7 @@ public class Verification {
     }
 
     public static boolean phoneNumberVerification(String phoneNumber) {
-        return phoneNumber != null || pattern.matches("\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}", phoneNumber);
+        return phoneNumber != null && pattern.matches("\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}", phoneNumber);
     }
 
     public static boolean emailVerification(String email) {
@@ -19,14 +19,13 @@ public class Verification {
     }
     public static boolean dateVerification(String date) {
         return pattern.matches("^\\d{2}-\\d{2}-\\d{4}$"
-                , date) || pattern.matches("^\\d{2}-\\d{2}-\\d{2}$"
                 , date);
     }
     public static boolean productReferenceVerification(String reference) {
         return pattern.matches( "^\\d{1,10}$",reference);
     }
     public static boolean isAlphabeticCharacters(String character) {
-        return pattern.matches( "/^[A-Za-z]+$/",character);
+        return pattern.matches( "[A-Z]",character);
     }
 
 }

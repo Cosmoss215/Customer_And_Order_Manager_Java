@@ -2,10 +2,7 @@ package business;
 
 import dataAccess.CustomerDataAccess;
 import dataAccess.CustomerDBAccess;
-import exception.ConnectionException;
-import exception.CreateQueryException;
-import exception.NullException;
-import exception.SelectQueryException;
+import exception.*;
 import model.Customer;
 import java.util.ArrayList;
 
@@ -36,5 +33,11 @@ public class CustomerManager {
                 throw new NullPointerException();
             }
             return dao.addCustomer(customer);
+    }
+    public boolean delete(Customer customer)throws DeleteQueryException{
+        if (customer == null){
+            throw new NullPointerException();
+        }
+        return  dao.delete(customer);
     }
 }

@@ -3,6 +3,7 @@ package view;
 
 import controller.ApplicationController;
 import exception.ConnectionException;
+import exception.DeleteQueryException;
 import exception.SelectQueryException;
 
 import javax.swing.*;
@@ -73,8 +74,8 @@ public class CustomerList extends JFrame {
         KeyboardListner keyboardListner = new KeyboardListner();
         jTextFieldSearchBar.addKeyListener(keyboardListner);
 
-        ApplicationController allCustomers = new ApplicationController();
-        customers = allCustomers.getAllCustomers();
+        ApplicationController applicationControllerCustomer = new ApplicationController();
+        customers = applicationControllerCustomer.getAllCustomers();
         AllCustomersModel customersModel = new AllCustomersModel(customers);
 
         jTableCustomerList = new JTable(customersModel);
@@ -114,13 +115,24 @@ public class CustomerList extends JFrame {
                     JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
                 editCustomerForm.setVisible(true);
-
             }
         });
 
         jButtonDeleteCustomer.setBackground(new Color(255, 102, 102));
         jButtonDeleteCustomer.setFont(new Font("Tahoma", 0, 18)); // 
         jButtonDeleteCustomer.setText("Delete customer");
+        jButtonDeleteCustomer.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                Customer customer;
+                int row = jTableCustomerList.getSelectedRow();
+                customer = customersModel.getRow(row);
+                try {
+                    applicationControllerCustomer.delete(customer);
+                } catch (DeleteQueryException exception) {
+                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
 
 
         //region Code de mise en forme

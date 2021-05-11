@@ -228,7 +228,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
         }
         return affectedRowsNb != 0;
     }
-
     /** Use this method to set the params of a PreparedStatement instance which will be used to access the DB in the WRITE mode.
      * @param preparedStatement needs to be initialized before being given to this method.
      * @param customer WARNING ! If you use this method in a CREATE or UPDATE statement, you have to use id as following :

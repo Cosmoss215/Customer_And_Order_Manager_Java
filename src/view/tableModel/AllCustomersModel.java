@@ -17,6 +17,7 @@ public class AllCustomersModel extends AbstractTableModel {
         columnNames.add("Nickname");
         columnNames.add("Registration date");
         columnNames.add("Address");
+        columnNames.add("Country");
         columnNames.add("Phone number");
         columnNames.add("Email");
         columnNames.add("VAT number");
@@ -44,13 +45,13 @@ public class AllCustomersModel extends AbstractTableModel {
             case 2 : return customers.getNickname();
             case 3 : return customers.displayRegistrationDate();
             case 4 : return customers.getAddress();
-            case 5 : return customers.getPhoneNumber();
-            case 6 : return customers.getEmail();
-            case 7 : return customers.getVatNumber();
-            case 8 : return customers.getIban();
-            case 9 : return customers.getBic();
-            case 10: return customers.getVip();
-            // insérer getCountry();
+            case 5 : return customers.getAddress().getLocality().getCountry();
+            case 6 : return customers.getPhoneNumber();
+            case 7 : return customers.getEmail();
+            case 8 : return customers.getVatNumber();
+            case 9 : return customers.getIban();
+            case 10 : return customers.getBic();
+            case 11: return customers.getVip();
             default : return null;
         }
     }
@@ -72,18 +73,21 @@ public class AllCustomersModel extends AbstractTableModel {
                 break;
             case 4: c = String.class;
                 break;
-            case 5: c = Integer.class;
+            case 5: c = String.class;
                 break;
-            case 6: c = String.class;
+            case 6: c = Integer.class;
                 break;
-            case 7: c = Integer.class;
+            case 7: c = String.class;
                 break;
-            case 8: c = String.class;
+            case 8: c = Integer.class;
                 break;
             case 9: c = String.class;
                 break;
-            case 10: c = Boolean.class;
+            case 10: c = String.class;
                 break;
+            case 11: c = Boolean.class;
+                break;
+
             default: c = String.class;
         }
         return c;
