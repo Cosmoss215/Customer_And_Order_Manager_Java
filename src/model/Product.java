@@ -9,14 +9,14 @@ public class Product {
     private VAT vat;
 
     public Product(Integer reference, String wording, Double unitPrice, Integer stockQuantity, String description, VAT vat) {
-        setReference(reference);
-        setWording(wording);
+        this.reference = reference;
+        this.wording = wording;
         setUnitPrice(unitPrice);
         setStockQuantity(stockQuantity);
-        setDescription(description);
-        setVat(vat);
+        this.description = description;
+        this.vat = vat;
     }
-
+    //region getter
     public Integer getReference() {
         return reference;
     }
@@ -40,28 +40,18 @@ public class Product {
     public VAT getVat() {
         return vat;
     }
-
-    private void setReference(Integer reference) {
-        this.reference = reference;
-    }
-
-    private void setWording(String wording) {
-        this.wording = wording;
-    }
-
+    //endregion
+    //region setter
     private void setUnitPrice(Double unitPrice) {
-        this.unitPrice = unitPrice;
+        //>= 0 car un produit pourrai être un échantillions gratuit
+        if (unitPrice >= 0){
+            this.unitPrice = unitPrice;
+        }
     }
-
     private void setStockQuantity(Integer stockQuantity) {
-        this.stockQuantity = stockQuantity;
+        if (stockQuantity >= 0) {
+            this.stockQuantity = stockQuantity;
+        }
     }
-
-    private void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setVat(VAT vat) {
-        this.vat = vat;
-    }
+    //endregion
 }

@@ -5,30 +5,26 @@ public class Country {
     private String name;
 
     public Country(String code, String name) {
-        setCode(code);
-        setName(name);
+        this.code = code;
+        this.name = name;
     }
+    //region overload constructor
     public Country(String code) {
         this(code,null);
     }
-
+    //endregion
+    //region setter
     public String getName() {
         return name;
     }
-
     public String getCode() {
         return code;
     }
-
-    public void setCode(String code){
-        this.code = code;
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
+    //endregion
+    //region Display
     @Override
     public String toString() {
         return code + " " + name;
     }
+    //endregion
 }

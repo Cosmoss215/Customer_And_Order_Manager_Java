@@ -25,4 +25,7 @@ public class Verification {
     public static boolean productReferenceVerification(String reference) {
         return pattern.matches( "^\\d{1,10}$",reference);
     }
+    public static boolean isAlphabeticCharacters(String character) {
+        return pattern.matches( "/^[A-Za-z]+$/",character);
+    }
 }

@@ -9,45 +9,33 @@ public class OrderLine {
     private Double percentageDiscount;
 
     public OrderLine(Order order, Product product, int quantity, double allTaxesIncludedPrice, boolean hasDiscount, double percentageDiscount) {
-        setOrder(order);
-        setProduct(product);
+        this.order = order;
+        this.product = product;
         setQuantity(quantity);
-        setAllTaxesIncludedPrice(allTaxesIncludedPrice); // A MODIFIER !!!!
-        setHasDiscount(hasDiscount);
+        setAllTaxesIncludedPrice(allTaxesIncludedPrice);
+        this.hasDiscount = hasDiscount;
         setPercentageDiscount(percentageDiscount);
     }
-
+    //region getter
     public Order getOrder() { return order; }
-
     public Product getProduct() { return product; }
-
-    public Integer getQuantity() { return quantity; }
-
-    public Double getAllTaxesIncludedPrice() { return allTaxesIncludedPrice; }
-
-    public Boolean getHasDiscount() { return hasDiscount; }
-
-    public Double getPercentageDiscount() { return percentageDiscount; }
-
-    private void setOrder(Order order){ this.order = order; }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
+    //endregion
+    //region setter
     public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
+        if (quantity > 0){
+            this.quantity = quantity;
+        }
 
+    }
     public void setAllTaxesIncludedPrice(Double allTaxesIncludedPrice) {
-        this.allTaxesIncludedPrice = allTaxesIncludedPrice;
+        if (allTaxesIncludedPrice > 0){
+            this.allTaxesIncludedPrice = allTaxesIncludedPrice;
+        }
     }
-
-    public void setHasDiscount(Boolean hasDiscount) {
-        this.hasDiscount = hasDiscount;
-    }
-
     public void setPercentageDiscount(Double percentageDiscount) {
-        this.percentageDiscount = percentageDiscount;
+        if (percentageDiscount > 0) {
+            this.percentageDiscount = percentageDiscount;
+        }
     }
+    //endregion
 }

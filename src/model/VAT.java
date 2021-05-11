@@ -5,23 +5,22 @@ public class VAT {
     private Double rate;
 
     public VAT(String category, Double rate) {
-        setCategory(category);
+        this.category = category;
         setRate(rate);
     }
-
+    //region getter
     public String getCategory() {
         return category;
     }
-
     public Double getRate() {
         return rate;
     }
-
-    private void setCategory(String category){
-        this.category = category;
-    }
-
+    //endregion
+    //region setter
     private void setRate(Double rate){
-        this.rate = rate;
+        if (rate >= 0) {
+            this.rate = rate;
+        }
     }
+    //endregion
 }

@@ -21,19 +21,20 @@ public class Customer {
     private Address address;
 
     public Customer(Integer id, String firstName, String lastName , GregorianCalendar registrationDate, Boolean isVip, String nickname, Integer phoneNumber, String email, Integer vatNumber, String iban, String bic, Address address) {
-        setId(id);
-        setFirstName(firstName);
-        setLastName(lastName);
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
         setRegistrationDate(registrationDate);
-        setIsVip(isVip);
+        this.isVip = isVip;
         setNickname(nickname);
         setPhoneNumber(phoneNumber);
         setEmail(email);
         setVatNumber(vatNumber);
-        setIban(iban);
+        this.iban = iban;
         setBic(bic);
-        setAddress(address);
+        this.address = address;
     }
+    //region overload constructor
     public Customer(String firstName, String lastName , GregorianCalendar registrationDate, Boolean isVip, String nickname, Integer phoneNumber, String email, Integer vatNumber, String iban, String bic, Address address){
         this(null, firstName, lastName, registrationDate, isVip, nickname, phoneNumber, email, vatNumber, iban, bic, address);
     }
@@ -44,7 +45,8 @@ public class Customer {
     public Customer( String firstName, String lastName, GregorianCalendar registrationDate, Boolean isVip, String iban, String bic, Address address) {
         this(null, firstName, lastName, registrationDate, isVip, null, null, null, null, iban, bic, address);
     }
-
+    //endregion
+    //region getter
     public Integer getId() {
         return id;
     }
@@ -61,9 +63,6 @@ public class Customer {
         return registrationDate;
     }
 
-    public String displayRegistrationDate(){
-        return registrationDate.get(Calendar.DAY_OF_MONTH) + "/" + ((registrationDate.get(Calendar.MONTH) + 1)<10?"0":"") + (registrationDate.get(Calendar.MONTH) + 1) + "/" + registrationDate.get(Calendar.YEAR);
-    }
     public Boolean getVip() {
         return isVip;
     }
@@ -95,56 +94,45 @@ public class Customer {
     public Address getAddress() {
         return address;
     }
-
-
-    //Setter
-    public void setId(Integer id){
-        this.id = id;
-    }
-
-    public void setFirstName(String firstName){
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName){
-        this.lastName = lastName;
-    }
-
+    //endregion
+    //region setter
     public void setRegistrationDate(GregorianCalendar date){
-        registrationDate = date;
-    }
+        if(Verification.dateVerification(String.valueOf(date)))
+        {
+            this.registrationDate = date;
+        }
 
-    public void setIsVip(Boolean isVip){
-        this.isVip = isVip;
     }
     public void setNickname(String nickname){
-        this.nickname = nickname;
-    }
+        if (Verification.LengthStringVerification(nickname,0,10)){
+            this.nickname = nickname;
 
+        }
+    }
     public void setPhoneNumber(Integer phoneNumber){
-        this.phoneNumber = phoneNumber;
+        if (Verification.phoneNumberVerification(String.valueOf(phoneNumber))){
+            this.phoneNumber = phoneNumber;
+        }
     }
-
     public void setEmail(String email){
-        this.email = email;
+        if (Verification.emailVerification(email)){
+            this.email = email;
+        }
     }
-
     public void setVatNumber(Integer vatNumber) {
-        this.vatNumber = vatNumber;
+        if (vatNumber >= 0){
+            this.vatNumber = vatNumber;
+        }
     }
-
     public void setBic(String bic) {
         this.bic = bic;
     }
 
-    public void setIban(String iban) {
-        this.iban = iban;
+    //endregion
+    //region display
+    public String displayRegistrationDate(){
+        return registrationDate.get(Calendar.DAY_OF_MONTH) + "/" + ((registrationDate.get(Calendar.MONTH) + 1)<10?"0":"") + (registrationDate.get(Calendar.MONTH) + 1) + "/" + registrationDate.get(Calendar.YEAR);
     }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
     @Override
     public String toString() {
         return "Customer{" +
@@ -162,5 +150,6 @@ public class Customer {
                 ", address=" + address +
                 '}';
     }
+    //endregion
 }
 

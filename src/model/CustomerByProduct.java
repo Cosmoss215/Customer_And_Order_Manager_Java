@@ -12,20 +12,18 @@ public class CustomerByProduct {
         this.quantity = quantity;
         this.wordingPaymentMethod = wordingPaymentMethod;
     }
-
+    //region getter
     public String getLastName() {
         return lastName;
     }
-
     public String getFirstName() {
         return firstName;
     }
-
     public Integer getQuantity() {
         return quantity;
     }
-
     public String getWordingPaymentMethod() {
         return wordingPaymentMethod;
     }
+    //endregion
 }

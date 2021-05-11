@@ -23,9 +23,10 @@ public class Order {
         setCreationDate(creationDate);
         setPaymentDeadline(paymentDeadline);
         setState(state);
-        setCustomer(customer);
-        setPaymentMethod(paymentMethod);
+        this.customer = customer;
+        this.paymentMethod = paymentMethod;
     }
+    //region overload constructor
      /**  SQL DB constructor (auto_incremented ID)
      * Use this constructor if you want to create an order that already exists (FROM VIEW) to put in the DB (which will create a proper ID)
      * */
@@ -41,7 +42,8 @@ public class Order {
         setCreationDate();
     }
     //endregion
-
+    //endregion
+    //region getter
     public Integer getNumber() {
         return number;
     }
@@ -65,9 +67,12 @@ public class Order {
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
-
+    //endregion
+    //region setter
     private void setNumber(Integer number) {
-        this.number = number;
+        if(number > 0){
+            this.number = number;
+        }
     }
 
     private void setCreationDate(GregorianCalendar creationDate) {
@@ -78,11 +83,9 @@ public class Order {
         GregorianCalendar creationDate = new GregorianCalendar(today.getYear(), today.getMonthValue() - 1, today.getDayOfMonth());
         setCreationDate(creationDate);
     }
-
     private void setPaymentDeadline(GregorianCalendar paymentDeadline) {
         PaymentDeadline = paymentDeadline;
     }
-
     private void setState(String state) { // throws OrderStateException ?
 
         if(state.equals(states[0]) || state.equals(states[1]) || state.equals(states[2])){
@@ -95,11 +98,5 @@ public class Order {
     private void setState(){
         setState("pending");
     }
-    private void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    private void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
+   //endregion
 }
