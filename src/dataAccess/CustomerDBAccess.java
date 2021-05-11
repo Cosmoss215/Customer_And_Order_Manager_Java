@@ -94,7 +94,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
             }
 
         } catch (SQLException sqlException) {
-            System.out.println(sqlException.getMessage());
             throw new SelectQueryException();
         }
 
@@ -189,7 +188,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
                 }
             }
         }catch (SQLException sqlException){
-            System.out.println(sqlException.getMessage());
             throw new CreateQueryException();
         }
 
@@ -256,7 +254,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
 
             affectedRowsNb = preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             throw new DeleteQueryException();
         }
         return affectedRowsNb != 0;

@@ -37,7 +37,7 @@ public class CountryDBAccess implements CountryDataAccess {
             }
 
     } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new SelectQueryException();
         }
         return allCountries;
     }

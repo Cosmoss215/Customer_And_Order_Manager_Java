@@ -2,6 +2,7 @@ package view;
 
 import controller.ApplicationController;
 import exception.ConnectionException;
+import exception.NullException;
 import exception.SelectQueryException;
 import model.Customer;
 import model.CustomerByProduct;
@@ -23,7 +24,7 @@ public class SearchByProduct extends JFrame {
     private JTextField jTextFieldFindProduct;
     private JPanel panelSearchBar,panelTableByProduct;
 
-    public SearchByProduct() throws SelectQueryException, ConnectionException {
+    public SearchByProduct() throws SelectQueryException, ConnectionException, NullException {
         panelSearchBar = new JPanel();
         jLabelProduct = new JLabel();
         jTextFieldFindProduct = new JTextField();
@@ -65,8 +66,8 @@ public class SearchByProduct extends JFrame {
                             JOptionPane.showMessageDialog(null,"The given reference is not correct, open the product list to help you", "Incorrect reference ", JOptionPane.INFORMATION_MESSAGE);
                             jTextFieldFindProduct.setBorder(new LineBorder(Color.red,3));
                         }
-                } catch (SelectQueryException selectQueryException) {
-                    selectQueryException.printStackTrace();
+                } catch (SelectQueryException | NullException exception) {
+                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
 
             }

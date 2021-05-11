@@ -124,7 +124,6 @@ public class OrderDBAccess implements OrderDataAccess {
                 allOrders.add(order);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             throw new SelectQueryException();
         }
         return allOrders;

@@ -2,6 +2,7 @@ package view;
 
 import controller.ApplicationController;
 import exception.ConnectionException;
+import exception.NullException;
 import exception.SelectQueryException;
 import model.Customer;
 import view.tableModel.AllCustomersByCountryModel;
@@ -40,17 +41,15 @@ public class SearchByCountry extends JFrame {
                 try {
                     customersByCountry = new ApplicationController();
                 } catch (ConnectionException e) {
-                    JOptionPane.showMessageDialog(null,e.getMessage(), "ConnectionException",
-                            JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null,e.getMessage(), e.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
                 String country = (String) jComboBoxCountryChoose.getSelectedItem();
 
                 ArrayList<Customer> allCustomerByCountry = null;
                 try {
                     allCustomerByCountry = customersByCountry.getCustomersByCountry(country);
-                } catch (SelectQueryException e) {
-                    JOptionPane.showMessageDialog(null,e.getMessage(), "QueryException",
-                            JOptionPane.WARNING_MESSAGE);
+                } catch (SelectQueryException | NullException e) {
+                    JOptionPane.showMessageDialog(null,e.getMessage(), e.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
 
                 AllCustomersByCountryModel customersByCountryModel = new AllCustomersByCountryModel(allCustomerByCountry);

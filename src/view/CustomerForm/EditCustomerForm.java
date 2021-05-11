@@ -1,5 +1,7 @@
 package view.CustomerForm;
 
+import exception.ConnectionException;
+import exception.SelectQueryException;
 import model.Customer;
 
 import javax.swing.*;
@@ -16,7 +18,7 @@ import java.util.GregorianCalendar;
 public class EditCustomerForm extends CustomerForm {
 
     private JButton jButtonCancelCustomer,jButtonEditCustomer;
-    public EditCustomerForm(Color color, String title,Customer customer){
+    public EditCustomerForm(Color color, String title,Customer customer) throws SelectQueryException, ConnectionException {
         super(title,color);
 
         jButtonCancelCustomer = new JButton("Cancel");

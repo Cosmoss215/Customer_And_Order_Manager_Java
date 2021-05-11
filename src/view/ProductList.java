@@ -40,11 +40,8 @@ public class ProductList extends JFrame {
 
 
         ApplicationController allProducts = new ApplicationController();
-
         ArrayList<Product> all = allProducts.getAllProducts();
-
         AllProductsModel productsModel = new AllProductsModel(all);
-
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 

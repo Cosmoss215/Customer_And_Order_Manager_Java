@@ -16,7 +16,6 @@ public class ApplicationController {
     private OrderManager orderManager;
     private OrderLineManager orderLineManager;
     private ProductManager productManager;
-    private VATManager vatManager;
 
     public ApplicationController() throws ConnectionException {
         countryManager = new CountryManager();
@@ -25,33 +24,47 @@ public class ApplicationController {
         orderManager = new OrderManager();
         orderLineManager = new OrderLineManager();
         productManager = new ProductManager();
-        vatManager = new VATManager();
     }
 
+    //region Customer
     public ArrayList<Customer> getAllCustomers() throws SelectQueryException {
         return customerManager.getAllCustomers();
     }
-
-    public ArrayList<Product> getAllProducts() throws SelectQueryException {
-        return productManager.getAllProducts();
-    }
-
-    public ArrayList<Customer> getCustomersByCountry(String countrySearched) throws SelectQueryException {
+    public ArrayList<Customer> getCustomersByCountry(String countrySearched) throws SelectQueryException, NullException {
+        if (countrySearched == null) {
+            throw new NullException(countrySearched.getClass().getName());
+        }
         return customerManager.getCustomersByCountry(countrySearched);
-    }
-
-    public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException {
-        return productManager.getProductByReference(reference);
     }
     public boolean addCustomer(Customer customer) throws CreateQueryException, NullException {
         if (customer == null){
-            throw new NullException();
+            throw new NullException(customer.getClass().getName());
         }
         return customerManager.addCustomer(customer);
     }
+    //endregion
+    //region Product
+    public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException, NullException {
+        if (reference == null){
+            throw new NullException(reference.getClass().getName());
+        }
+        return productManager.getProductByReference(reference);
+    }
+    public ArrayList<Product> getAllProducts() throws SelectQueryException {
+        return productManager.getAllProducts();
+    }
+    //endregion
+    //region Country
     public ArrayList<Country> getAllCountries()throws SelectQueryException {
         ArrayList<Country> countryArrayList = countryManager.getAllCountries();
         return countryArrayList;
     }
+    //endregion
+    //region locality
+    public ArrayList<Locality> getAllLocalities()throws SelectQueryException {
+        ArrayList<Locality> localityArrayList = localityManager.getAllLocalities();
+        return localityArrayList;
+    }
+    //endregion
 
 }

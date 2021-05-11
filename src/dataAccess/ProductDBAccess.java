@@ -47,7 +47,6 @@ public class ProductDBAccess implements ProductDataAccess {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             throw new SelectQueryException();
         }
 

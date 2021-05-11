@@ -1,15 +1,22 @@
 package view.CustomerForm;
 
+import controller.ApplicationController;
+import exception.ConnectionException;
+import exception.SelectQueryException;
 import model.Address;
 import model.Country;
 import model.Customer;
 import model.Locality;
 import org.jdatepicker.JDateComponent;
 import util.Verification;
+import view.SearchOrderListing;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 
@@ -22,8 +29,9 @@ public class CustomerForm extends JFrame {
     public JPanel mainPanel,panelForm,panelButton;
     public JSpinner streetNumberSelector,postalCodeSelector,vatSelector;
     public JComboBox<String> jComboBoxCountry;
+    public ArrayList<Locality> locality;
 
-    public CustomerForm(String title,Color color){
+    public CustomerForm(String title,Color color) throws ConnectionException, SelectQueryException {
         setTitle(title);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(200, 70, 800, 850);
@@ -123,6 +131,13 @@ public class CustomerForm extends JFrame {
         jTextFieldLocality = new JTextField();
         jTextFieldLocality.setFont(new Font("Tahoma", 0, 20));
         panelForm.add(jTextFieldLocality);
+
+
+        ApplicationController applicationController = new ApplicationController();
+        locality = applicationController.getAllLocalities();
+
+        KeyboardListner keyboardListner = new KeyboardListner();
+        jTextFieldLocality.addKeyListener(keyboardListner);
 
         jLabelPostalCode = new JLabel("Postal code");
         jLabelPostalCode.setFont(new Font("Tahoma", 0, 20));
@@ -267,6 +282,79 @@ public class CustomerForm extends JFrame {
         Customer customer = new Customer(firstName, lastName, gregorianCalendar, isVip, nickname, phoneNumber, email, vatNumber, iban, bic, address);
 
         return customer;
+    }
+
+    public void autoComplete (String txt){
+        String localityComplete = "";
+        String regionComplete = "";
+        Integer postalCodeComplete = null;
+        String countryComplete = "";
+        int start = txt.length();
+        int last = txt.length();
+        int a;
+
+        for(a = 0; a < locality.size();a++)
+        {
+            if (locality.get(a).getName().startsWith(txt)) {
+                localityComplete = locality.get(a).getName();
+                regionComplete = locality.get(a).getRegion();
+                postalCodeComplete = locality.get(a).getPostalCode();
+                countryComplete = locality.get(a).getCountry().getCode();
+                last = localityComplete.length();
+                break;
+            }
+        }
+        if (last > start) {
+            jTextFieldLocality.setText(localityComplete);
+            jTextFieldRegion.setText(regionComplete);
+            postalCodeSelector.setValue(postalCodeComplete);
+            int nb = 0;
+            switch (locality.get(a).getCountry().getCode()){
+                case "BE" : nb = 0;
+                    break;
+                case "FR" : nb = 1;
+                    break;
+                case "GER" : nb = 2;
+                    break;
+                case "NL" : nb = 3;
+                    break;
+            }
+            jComboBoxCountry.setSelectedIndex(nb);
+            jTextFieldLocality.setCaretPosition(last);
+            jTextFieldLocality.moveCaretPosition(start);
+        }
+    }
+
+    private class KeyboardListner implements KeyListener {
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent evt) {
+            switch (evt.getKeyCode()) {
+                case KeyEvent.VK_BACK_SPACE:
+                    break;
+                case KeyEvent.VK_ENTER:
+                    jTextFieldLocality.setText(jTextFieldLocality.getText());
+                    break;
+                default:
+                    EventQueue.invokeLater(new Runnable(){
+                        @Override
+
+                        public void run(){
+                            String txt = jTextFieldLocality.getText();
+                            autoComplete(txt);
+                        }
+                    });
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
     }
 
 }

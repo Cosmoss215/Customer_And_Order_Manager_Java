@@ -60,12 +60,7 @@ public class CustomerList extends JFrame {
         jButtonSearch.setFont(new Font("Tahoma", 0, 18));
         jButtonSearch.setText("Search");
 
-        jTextFieldSearchBar.setFont(new Font("Tahoma", 0, 18));
-        jTextFieldSearchBar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //jTextFieldSearchBarActionPerformed(evt);
-            }
-        });
+        jTextFieldSearchBar.setFont(new Font("Tahoma", 0, 18));;
 
         jLabelCustomerName.setFont(new Font("Tahoma", 0, 18));
         jLabelCustomerName.setText("Customer name");
@@ -95,7 +90,12 @@ public class CustomerList extends JFrame {
         jButtonCreateCustomer.setText("Create customer");
         jButtonCreateCustomer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                CreateCustomerForm CreateCustomerForm = new CreateCustomerForm(color,"CreateCustomer");
+                CreateCustomerForm CreateCustomerForm = null;
+                try {
+                    CreateCustomerForm = new CreateCustomerForm(color,"CreateCustomer");
+                } catch (SelectQueryException | ConnectionException exception) {
+                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
+                }
                 CreateCustomerForm.setVisible(true);
             }
         });
@@ -107,7 +107,12 @@ public class CustomerList extends JFrame {
             public void actionPerformed(ActionEvent evt) {
                 Customer customer;
                 customer = customersModel.getRow(jTableCustomerList.getSelectedRow());
-                EditCustomerForm editCustomerForm = new EditCustomerForm(color,"Edit customer",customer);
+                EditCustomerForm editCustomerForm = null;
+                try {
+                    editCustomerForm = new EditCustomerForm(color,"Edit customer",customer);
+                } catch (SelectQueryException | ConnectionException exception) {
+                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
+                }
                 editCustomerForm.setVisible(true);
 
             }

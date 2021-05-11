@@ -42,7 +42,6 @@ public class OrderLineDBAccess implements OrderLineDataAccess{
             Country country;
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             throw new SelectQueryException();
         }
 

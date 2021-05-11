@@ -4,6 +4,7 @@ import controller.ApplicationController;
 import exception.ConnectionException;
 import exception.CreateQueryException;
 import exception.NullException;
+import exception.SelectQueryException;
 import model.Address;
 import model.Customer;
 import model.Locality;
@@ -25,7 +26,7 @@ public class CreateCustomerForm extends CustomerForm {
     private Locality locality;
     private Address address;
 
-    public CreateCustomerForm(Color color,String title){
+    public CreateCustomerForm(Color color,String title) throws SelectQueryException, ConnectionException {
         super(title,color);
 
         jButtonResetCustomer = new JButton("Reset");
