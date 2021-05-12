@@ -15,6 +15,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -76,6 +77,9 @@ public class CustomerForm extends JFrame {
         mainPanel.add(panelForm,BorderLayout.CENTER);
         mainPanel.add(panelButton,BorderLayout.SOUTH);
     }
+    /** This method initializes each output of the form.
+     * @param title is used to define the title
+     */
     private void addOutputFields(String title){
         jLabelCustomerInformation = new JLabel(title);
         jLabelCustomerInformation.setFont(new Font("Tahoma", 0, 20));
@@ -133,57 +137,43 @@ public class CustomerForm extends JFrame {
         jLabelIsVIP.setFont(new Font("Tahoma", 0, 20));
 
     }
-
+    /** This method initializes each input of the form.
+     * @param color is used to define the background color of the JCheckBox.
+     */
     private void addInputFields(Color color){
         jTextFieldFirstName = new JTextField();
         jTextFieldFirstName.setFont(new Font("Tahoma", 0, 20));
         jTextFieldFirstName.setPreferredSize(new Dimension(250,5));
-
         jTextFieldLastName = new JTextField();
         jTextFieldLastName.setFont(new Font("Tahoma", 0, 20));
-
         jTextFieldNickame = new JTextField();
         jTextFieldNickame.setFont(new Font("Tahoma", 0, 20));
-
         jTextFieldRegistrationDate = new JTextField();
         jTextFieldRegistrationDate.setFont(new Font("Tahoma", 0, 20));
-
         jTextFieldPhoneNumber = new JTextField();
         jTextFieldPhoneNumber.setFont(new Font("Tahoma", 0, 20));
-
         jTextFieldEmail = new JTextField();
         jTextFieldEmail.setFont(new Font("Tahoma", 0, 20));
-
         jTextFieldStreetWording = new JTextField();
         jTextFieldStreetWording.setFont(new Font("Tahoma", 0, 20));
-
         streetNumberSelector = new JSpinner(new SpinnerNumberModel(0,0,100000,1));
         streetNumberSelector.setFont(new Font("Tahoma", 0, 20));
-
         jTextFieldBox = new JTextField();
         jTextFieldBox.setFont(new Font("Tahoma", 0, 20));
-
         jTextFieldLocality = new JTextField();
         jTextFieldLocality.setFont(new Font("Tahoma", 0, 20));
-
         postalCodeSelector = new JSpinner(new SpinnerNumberModel(0,0,100000,1));
         postalCodeSelector.setFont(new Font("Tahoma", 0, 20));
-
         jTextFieldRegion = new JTextField();
         jTextFieldRegion.setFont(new Font("Tahoma", 0, 20));
-
         String[] country = { "BE","FR","GER","NL"};
         jComboBoxCountry = new JComboBox<String>(country);
-
         jTextFieldVATNumber = new JTextField();
         jTextFieldVATNumber.setFont(new Font("Tahoma", 0, 20));
-
         jTextFieldIBAN = new JTextField();
         jTextFieldIBAN.setFont(new Font("Tahoma", 0, 20));
-
         jTextFieldBIC = new JTextField();
         jTextFieldBIC.setFont(new Font("Tahoma", 0, 20));
-
         jCheckBoxIsVIP = new JCheckBox();
         jCheckBoxIsVIP.setBackground(color);
         jCheckBoxIsVIP.setFont(new Font("Tahoma", 0, 20));
