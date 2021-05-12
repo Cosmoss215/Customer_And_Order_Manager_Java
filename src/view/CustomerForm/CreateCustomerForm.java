@@ -5,20 +5,9 @@ import exception.ConnectionException;
 import exception.CreateQueryException;
 import exception.NullException;
 import exception.SelectQueryException;
-import model.Address;
 import model.Customer;
-import model.Locality;
-import util.Verification;
-
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
-import static java.awt.Color.*;
 
 public class CreateCustomerForm extends CustomerForm {
     private JButton jButtonResetCustomer,jButtonCreateCustomer;
@@ -26,6 +15,7 @@ public class CreateCustomerForm extends CustomerForm {
 
     public CreateCustomerForm(Color color,String title) throws SelectQueryException, ConnectionException {
         super(title,color);
+
 
         jButtonResetCustomer = new JButton("Reset");
         jButtonResetCustomer.addActionListener(new java.awt.event.ActionListener() {

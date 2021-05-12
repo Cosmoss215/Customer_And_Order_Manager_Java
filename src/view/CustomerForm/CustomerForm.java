@@ -22,16 +22,18 @@ import java.util.GregorianCalendar;
 public class CustomerForm extends JFrame {
     private Container mainContainer;
     public JCheckBox jCheckBoxIsVIP;
-    public JLabel jLabelEmail,jLabelBIC, jLabelCustomerInformation, jLabelFirstName, jLabelIBAN,jLabelIsVIP, jLabelLastName, jLabelLocality, jLabelPhoneNumber, jLabelPostalCode, jLabelRegistrationDate, jLabelStreetWording,jLabelVATNumber,jLabelNickname,jLabelStreetNumber,jLabelBox;
-    public JLabel jLabelRegion,jLabelCountry;
-    public JTextField jTextFieldEmail,jTextFieldBIC,jTextFieldFirstName,jTextFieldIBAN,jTextFieldLastName,jTextFieldLocality,jTextFieldPhoneNumber,jTextFieldStreetWording,jTextFieldVATNumber,jTextFieldNickame,jTextFieldBox,jTextFieldRegistrationDate,jTextFieldRegion;
-    public JPanel mainPanel,panelForm,panelButton;
-    public JSpinner streetNumberSelector,postalCodeSelector,vatSelector;
-    public JComboBox<String> jComboBoxCountry;
-    public ArrayList<Locality> locality;
+    private JLabel jLabelEmail,jLabelBIC, jLabelCustomerInformation, jLabelFirstName, jLabelIBAN,jLabelIsVIP, jLabelLastName, jLabelLocality, jLabelPhoneNumber, jLabelPostalCode, jLabelRegistrationDate, jLabelStreetWording,jLabelVATNumber,jLabelNickname,jLabelStreetNumber,jLabelBox;
+    private JLabel jLabelRegion,jLabelCountry;
+    protected JTextField jTextFieldEmail,jTextFieldBIC,jTextFieldFirstName,jTextFieldIBAN,jTextFieldLastName,jTextFieldLocality,jTextFieldPhoneNumber,jTextFieldStreetWording,jTextFieldVATNumber,jTextFieldNickame,jTextFieldBox,jTextFieldRegistrationDate,jTextFieldRegion;
+    protected JPanel mainPanel,panelForm,panelButton;
+    protected JSpinner streetNumberSelector,postalCodeSelector;
+    protected JComboBox<String> jComboBoxCountry;
+    private ArrayList<Locality> locality;
 
     public CustomerForm(String title,Color color) throws ConnectionException, SelectQueryException {
         setTitle(title);
+
+
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(200, 70, 800, 850);
         setLayout(new FlowLayout());
@@ -46,10 +48,6 @@ public class CustomerForm extends JFrame {
         mainPanel.setBounds(10, 80, 660, 650);
         mainPanel.setLayout(new BorderLayout(25,25));
 
-        jLabelCustomerInformation = new JLabel(title);
-        jLabelCustomerInformation.setFont(new Font("Tahoma", 0, 20));
-        jLabelCustomerInformation.setHorizontalAlignment(SwingConstants.CENTER);
-
         panelForm = new JPanel();
         panelButton = new JPanel();
 
@@ -59,77 +57,13 @@ public class CustomerForm extends JFrame {
         panelForm.setLayout(new GridLayout(17,2,40,10));
         panelButton.setLayout(new FlowLayout());
 
-        jLabelFirstName = new JLabel("First name");
-        jLabelFirstName.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelFirstName);
-        jTextFieldFirstName = new JTextField();
-        jTextFieldFirstName.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jTextFieldFirstName);
-        jTextFieldFirstName.setPreferredSize(new Dimension(250,5));
+        //Allows to add the JLabel
+        addOutputFields(title);
+        //Allows to add all input field
+        addInputFields(color);
 
-        jLabelLastName = new JLabel("Last name");
-        jLabelLastName.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelLastName);
-        jTextFieldLastName = new JTextField();
-        jTextFieldLastName.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jTextFieldLastName);
-
-        jLabelNickname = new JLabel("Nickame");
-        jLabelNickname.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelNickname);
-        jTextFieldNickame = new JTextField();
-        jTextFieldNickame.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jTextFieldNickame);
-
-        jLabelRegistrationDate = new JLabel("Registration date");
-        jLabelRegistrationDate.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelRegistrationDate);
-
-        jTextFieldRegistrationDate = new JTextField();
-        jTextFieldRegistrationDate.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jTextFieldRegistrationDate);
-
-        jLabelPhoneNumber = new JLabel("Phone number");
-        jLabelPhoneNumber.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelPhoneNumber);
-        jTextFieldPhoneNumber = new JTextField();
-        jTextFieldPhoneNumber.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jTextFieldPhoneNumber);
-
-        jLabelEmail = new JLabel("Email");
-        jLabelEmail.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelEmail);
-        jTextFieldEmail = new JTextField();
-        jTextFieldEmail.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jTextFieldEmail);
-
-        jLabelStreetWording = new JLabel("Street name");
-        jLabelStreetWording.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelStreetWording);
-        jTextFieldStreetWording = new JTextField();
-        jTextFieldStreetWording.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jTextFieldStreetWording);
-
-        jLabelStreetNumber = new JLabel("Street number");
-        jLabelStreetNumber.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelStreetNumber);
-        streetNumberSelector = new JSpinner(new SpinnerNumberModel(0,0,100000,1));
-        streetNumberSelector.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(streetNumberSelector);
-
-        jLabelBox = new JLabel("Box");
-        jLabelBox.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelBox);
-        jTextFieldBox = new JTextField();
-        jTextFieldBox.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jTextFieldBox);
-
-        jLabelLocality = new JLabel("Locality");
-        jLabelLocality.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelLocality);
-        jTextFieldLocality = new JTextField();
-        jTextFieldLocality.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jTextFieldLocality);
+        //Allows to add all input and output fields (JLabel, JTextField, ...) in panelForm.
+        addFieldsToPanel();
 
         //region autocomplete
         ApplicationController applicationController = new ApplicationController();
@@ -138,63 +72,194 @@ public class CustomerForm extends JFrame {
         jTextFieldLocality.addKeyListener(keyboardListner);
         //endregion
 
-        jLabelPostalCode = new JLabel("Postal code");
-        jLabelPostalCode.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelPostalCode);
-
-        postalCodeSelector = new JSpinner(new SpinnerNumberModel(0,0,100000,1));
-        postalCodeSelector.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(postalCodeSelector);
-
-        jLabelRegion = new JLabel("Region");
-        jLabelRegion.setFont(new Font("Tahoma", 0, 20));
-        jTextFieldRegion = new JTextField();
-        jTextFieldRegion.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelRegion);
-        panelForm.add(jTextFieldRegion);
-
-        jLabelCountry = new JLabel("Country");
-        jLabelCountry.setFont(new Font("Tahoma", 0, 20));
-        String[] country = { "BE","FR","GER","NL"};
-        jComboBoxCountry = new JComboBox<String>(country);
-        panelForm.add(jLabelCountry);
-        panelForm.add(jComboBoxCountry);
-
-        jLabelVATNumber = new JLabel("Vat number");
-        jLabelVATNumber.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelVATNumber);
-
-        jTextFieldVATNumber = new JTextField();
-        jTextFieldVATNumber.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jTextFieldVATNumber);
-
-        jLabelIBAN = new JLabel("Iban");
-        jLabelIBAN.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelIBAN);
-        jTextFieldIBAN = new JTextField();
-        jTextFieldIBAN.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jTextFieldIBAN);
-
-        jLabelBIC = new JLabel("BIC");
-        jLabelBIC.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelBIC);
-        jTextFieldBIC = new JTextField();
-        jTextFieldBIC.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jTextFieldBIC);
-
-        jLabelIsVIP = new JLabel("Customer is VIP");
-        jLabelIsVIP.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jLabelIsVIP);
-        jCheckBoxIsVIP = new JCheckBox();
-        jCheckBoxIsVIP.setBackground(color);
-        jCheckBoxIsVIP.setFont(new Font("Tahoma", 0, 20));
-        panelForm.add(jCheckBoxIsVIP);
-
         mainPanel.add(jLabelCustomerInformation,BorderLayout.NORTH);
         mainPanel.add(panelForm,BorderLayout.CENTER);
         mainPanel.add(panelButton,BorderLayout.SOUTH);
     }
-    public boolean verification(){
+    private void addOutputFields(String title){
+        jLabelCustomerInformation = new JLabel(title);
+        jLabelCustomerInformation.setFont(new Font("Tahoma", 0, 20));
+        jLabelCustomerInformation.setHorizontalAlignment(SwingConstants.CENTER);
+
+        jLabelFirstName = new JLabel("First name");
+        jLabelFirstName.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelLastName = new JLabel("Last name");
+        jLabelLastName.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelNickname = new JLabel("Nickame");
+        jLabelNickname.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelRegistrationDate = new JLabel("Registration date");
+        jLabelRegistrationDate.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelPhoneNumber = new JLabel("Phone number");
+        jLabelPhoneNumber.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelEmail = new JLabel("Email");
+        jLabelEmail.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelStreetWording = new JLabel("Street name");
+        jLabelStreetWording.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelStreetNumber = new JLabel("Street number");
+        jLabelStreetNumber.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelBox = new JLabel("Box");
+        jLabelBox.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelLocality = new JLabel("Locality");
+        jLabelLocality.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelPostalCode = new JLabel("Postal code");
+        jLabelPostalCode.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelRegion = new JLabel("Region");
+        jLabelRegion.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelCountry = new JLabel("Country");
+        jLabelCountry.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelVATNumber = new JLabel("Vat number");
+        jLabelVATNumber.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelIBAN = new JLabel("Iban");
+        jLabelIBAN.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelBIC = new JLabel("BIC");
+        jLabelBIC.setFont(new Font("Tahoma", 0, 20));
+
+        jLabelIsVIP = new JLabel("Customer is VIP");
+        jLabelIsVIP.setFont(new Font("Tahoma", 0, 20));
+
+    }
+
+    private void addInputFields(Color color){
+        jTextFieldFirstName = new JTextField();
+        jTextFieldFirstName.setFont(new Font("Tahoma", 0, 20));
+        jTextFieldFirstName.setPreferredSize(new Dimension(250,5));
+
+        jTextFieldLastName = new JTextField();
+        jTextFieldLastName.setFont(new Font("Tahoma", 0, 20));
+
+        jTextFieldNickame = new JTextField();
+        jTextFieldNickame.setFont(new Font("Tahoma", 0, 20));
+
+        jTextFieldRegistrationDate = new JTextField();
+        jTextFieldRegistrationDate.setFont(new Font("Tahoma", 0, 20));
+
+        jTextFieldPhoneNumber = new JTextField();
+        jTextFieldPhoneNumber.setFont(new Font("Tahoma", 0, 20));
+
+        jTextFieldEmail = new JTextField();
+        jTextFieldEmail.setFont(new Font("Tahoma", 0, 20));
+
+        jTextFieldStreetWording = new JTextField();
+        jTextFieldStreetWording.setFont(new Font("Tahoma", 0, 20));
+
+        streetNumberSelector = new JSpinner(new SpinnerNumberModel(0,0,100000,1));
+        streetNumberSelector.setFont(new Font("Tahoma", 0, 20));
+
+        jTextFieldBox = new JTextField();
+        jTextFieldBox.setFont(new Font("Tahoma", 0, 20));
+
+        jTextFieldLocality = new JTextField();
+        jTextFieldLocality.setFont(new Font("Tahoma", 0, 20));
+
+        postalCodeSelector = new JSpinner(new SpinnerNumberModel(0,0,100000,1));
+        postalCodeSelector.setFont(new Font("Tahoma", 0, 20));
+
+        jTextFieldRegion = new JTextField();
+        jTextFieldRegion.setFont(new Font("Tahoma", 0, 20));
+
+        String[] country = { "BE","FR","GER","NL"};
+        jComboBoxCountry = new JComboBox<String>(country);
+
+        jTextFieldVATNumber = new JTextField();
+        jTextFieldVATNumber.setFont(new Font("Tahoma", 0, 20));
+
+        jTextFieldIBAN = new JTextField();
+        jTextFieldIBAN.setFont(new Font("Tahoma", 0, 20));
+
+        jTextFieldBIC = new JTextField();
+        jTextFieldBIC.setFont(new Font("Tahoma", 0, 20));
+
+        jCheckBoxIsVIP = new JCheckBox();
+        jCheckBoxIsVIP.setBackground(color);
+        jCheckBoxIsVIP.setFont(new Font("Tahoma", 0, 20));
+    }
+
+    private void addFieldsToPanel(){
+        panelForm.add(jLabelFirstName);
+
+        panelForm.add(jTextFieldFirstName);
+
+        panelForm.add(jLabelLastName);
+
+        panelForm.add(jTextFieldLastName);
+
+        panelForm.add(jLabelNickname);
+
+        panelForm.add(jTextFieldNickame);
+
+        panelForm.add(jLabelRegistrationDate);
+
+        panelForm.add(jTextFieldRegistrationDate);
+
+        panelForm.add(jLabelPhoneNumber);
+
+        panelForm.add(jTextFieldPhoneNumber);
+
+        panelForm.add(jLabelEmail);
+
+        panelForm.add(jTextFieldEmail);
+
+        panelForm.add(jLabelStreetWording);
+
+        panelForm.add(jTextFieldStreetWording);
+
+        panelForm.add(jLabelStreetNumber);
+
+        panelForm.add(streetNumberSelector);
+
+        panelForm.add(jLabelBox);
+
+        panelForm.add(jTextFieldBox);
+
+        panelForm.add(jLabelLocality);
+
+        panelForm.add(jTextFieldLocality);
+
+        panelForm.add(jLabelPostalCode);
+
+        panelForm.add(postalCodeSelector);
+
+        panelForm.add(jLabelRegion);
+
+        panelForm.add(jTextFieldRegion);
+
+        panelForm.add(jLabelCountry);
+
+        panelForm.add(jComboBoxCountry);
+
+        panelForm.add(jLabelVATNumber);
+
+        panelForm.add(jTextFieldVATNumber);
+
+        panelForm.add(jLabelIBAN);
+
+        panelForm.add(jTextFieldIBAN);
+
+        panelForm.add(jLabelBIC);
+
+        panelForm.add(jTextFieldBIC);
+
+        panelForm.add(jLabelIsVIP);
+
+        panelForm.add(jCheckBoxIsVIP);
+    }
+
+    protected boolean verification(){
 
         if (jTextFieldFirstName.getText().length() > 50 || jTextFieldFirstName.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null,"First name field is obligatory and the maximum length is (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
@@ -303,8 +368,7 @@ public class CustomerForm extends JFrame {
         return true;
     }
 
-
-    public Customer addCustomer() {
+    protected Customer addCustomer() {
 
         Boolean isVip;
         String firstName, lastName, iban, bic, streetName, box, localityName, region, code;
@@ -349,7 +413,7 @@ public class CustomerForm extends JFrame {
         return customer;
     }
 
-    public void autoComplete (String txt){
+    protected void autoComplete (String txt){
         String localityComplete = "";
         String regionComplete = "";
         Integer postalCodeComplete = null;
