@@ -76,6 +76,10 @@ public class OrderDBAccess implements OrderDataAccess {
                         data.getString("last_name"),
                         registrationDate,
                         data.getByte("is_vip") == 1,
+                        data.getString("nickname"),
+                        data.getInt("phone_number"),
+                        data.getString("email"),
+                        data.getInt("vat_number"),
                         data.getString("iban"),
                         data.getString("bic"),
                         address
@@ -95,31 +99,6 @@ public class OrderDBAccess implements OrderDataAccess {
                         customer,
                         paymentMethod
                 );
-
-                String nickname = data.getString("nickname");
-                if (!data.wasNull()) {
-                    customer.setNickname(nickname);
-                }
-                Integer phoneNumber = data.getInt("phone_number");
-                if (!data.wasNull()) {
-                    customer.setPhoneNumber(phoneNumber);
-                }
-                String email = data.getString("email");
-                if (!data.wasNull()) {
-                    customer.setEmail(email);
-                }
-                Integer vatNumber = data.getInt("vat_number");
-                if (!data.wasNull()) {
-                    customer.setVatNumber(vatNumber);
-                }
-                String iban = data.getString("iban");
-                if (!data.wasNull()) {
-                    customer.setVatNumber(vatNumber);
-                }
-                String bic = data.getString("bic");
-                if (!data.wasNull()) {
-                    customer.setBic(bic);
-                }
 
                 allOrders.add(order);
             }

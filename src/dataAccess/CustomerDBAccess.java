@@ -3,8 +3,8 @@ package dataAccess;
 import exception.*;
 import model.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.util.*;
 
 public class CustomerDBAccess implements CustomerDataAccess {
 
@@ -34,7 +34,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
 
             while (data.next()) {
                 GregorianCalendar registrationDate = new GregorianCalendar();
-                Date registrationDateSQL =  data.getDate("registration_date");
+                java.sql.Date registrationDateSQL =  data.getDate("registration_date");
                 registrationDate.setTime(registrationDateSQL);
                 // Redondance de code ?
                 country = new Country(
@@ -116,7 +116,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
             ResultSet data = preparedStatement.executeQuery();
 
 
-            if (!data.next()) {
+            if (data.next()) {
                 Country country;
                 String sqlInstructionLocality = "INSERT INTO locality (`name`, postal_code, region, country) VALUES (?,?,?,?)";
                 Locality locality = customer.getAddress().getLocality();
@@ -182,7 +182,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
                 "UPDATE customer " +
                 "SET first_name = ?, " +
                     "last_name = ?, " +
-                    "registration_date = ? " +
+                    "registration_date = ?, " +
                     "is_vip = ?, " +
                     "nickname = ?, " +
                     "phone_number = ?, " +
@@ -212,9 +212,12 @@ public class CustomerDBAccess implements CustomerDataAccess {
      * @throws SQLException needs to be caught with a catch() instruction in another method.
      */
     private void setPreparedWritingStatement(PreparedStatement preparedStatement, Customer customer) throws SQLException {
+        long registrationDate = customer.getRegistrationDate().getTimeInMillis();
+        java.sql.Date sqlRegistrationDate = new java.sql.Date(registrationDate);
+
         preparedStatement.setString(1, customer.getFirstName());
         preparedStatement.setString(2, customer.getLastName());
-        preparedStatement.setDate(3, (Date) customer.getRegistrationDate().getTime());
+        preparedStatement.setDate(3, sqlRegistrationDate);
         preparedStatement.setByte(4, (customer.getVip() ? (byte) 1 : (byte) 0));
         preparedStatement.setString(5, customer.getNickname());
         preparedStatement.setInt(6, customer.getPhoneNumber());
