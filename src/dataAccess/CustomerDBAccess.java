@@ -2,6 +2,8 @@ package dataAccess;
 
 import exception.*;
 import model.*;
+import util.DateFormater;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -212,12 +214,9 @@ public class CustomerDBAccess implements CustomerDataAccess {
      * @throws SQLException needs to be caught with a catch() instruction in another method.
      */
     private void setPreparedWritingStatement(PreparedStatement preparedStatement, Customer customer) throws SQLException {
-        long registrationDate = customer.getRegistrationDate().getTimeInMillis();
-        java.sql.Date sqlRegistrationDate = new java.sql.Date(registrationDate);
-
         preparedStatement.setString(1, customer.getFirstName());
         preparedStatement.setString(2, customer.getLastName());
-        preparedStatement.setDate(3, sqlRegistrationDate);
+        preparedStatement.setDate(3, DateFormater.fromJavaToSqlDate(customer.getRegistrationDate()));
         preparedStatement.setByte(4, (customer.getVip() ? (byte) 1 : (byte) 0));
         preparedStatement.setString(5, customer.getNickname());
         preparedStatement.setInt(6, customer.getPhoneNumber());

@@ -21,4 +21,9 @@ public class DateFormater {
         GregorianCalendar ourDate = new GregorianCalendar(day,month,year);
         return ourDate;
     }
+
+    public static java.sql.Date fromJavaToSqlDate(GregorianCalendar date){
+        java.sql.Date sqlDate = new java.sql.Date(date.getTimeInMillis());
+        return sqlDate;
+    }
 }
