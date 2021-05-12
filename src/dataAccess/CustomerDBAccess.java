@@ -36,7 +36,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
                 GregorianCalendar registrationDate = new GregorianCalendar();
                 Date registrationDateSQL =  data.getDate("registration_date");
                 registrationDate.setTime(registrationDateSQL);
-
+                // Redondance de code ?
                 country = new Country(
                         data.getString("code"),
                         data.getString("name")
@@ -60,35 +60,14 @@ public class CustomerDBAccess implements CustomerDataAccess {
                         data.getString("last_name"),
                         registrationDate,
                         data.getByte("is_vip") == 1,
+                        data.getString("nickname"),
+                        data.getInt("phone_number"),
+                        data.getString("email"),
+                        data.getInt("vat_number"),
                         data.getString("iban"),
                         data.getString("bic"),
                         address
                 );
-
-                String nickname =  data.getString("nickname");
-                if (!data.wasNull()) {
-                    customer.setNickname(nickname);
-                }
-                Integer phoneNumber =  data.getInt("phone_number");
-                if (!data.wasNull()) {
-                    customer.setPhoneNumber(phoneNumber);
-                }
-                String email = data.getString("email");
-                if(!data.wasNull()) {
-                    customer.setEmail(email);
-                }
-                Integer vatNumber = data.getInt("vat_number");
-                if(!data.wasNull()) {
-                    customer.setVatNumber(vatNumber);
-                }
-                String iban = data.getString("iban");
-                if(!data.wasNull()) {
-                    customer.setVatNumber(vatNumber);
-                }
-                String bic = data.getString("bic");
-                if(!data.wasNull()) {
-                    customer.setBic(bic);
-                }
 
                 customers.add(customer);
             }
@@ -127,12 +106,11 @@ public class CustomerDBAccess implements CustomerDataAccess {
     public boolean addCustomer(Customer customer) throws CreateQueryException {
         int affectedRowsNbCustomer = 0;
         int addressId;
-        Boolean localityExists;
 
 
         try{
             //Check if the locality is already present
-            String sqlInstruction = "SELECT name from locality where name = \'%" + customer.getAddress().getLocality().getName() + "%\';";
+            String sqlInstruction = "SELECT `name` from locality where `name` = \'%" + customer.getAddress().getLocality().getName() + "%\';";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             ResultSet data = preparedStatement.executeQuery();
@@ -140,7 +118,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
 
             if (!data.next()) {
                 Country country;
-                String sqlInstructionLocality = "INSERT INTO locality (`name`, postal_code, region, country ) VALUES (?,?,?,?)";
+                String sqlInstructionLocality = "INSERT INTO locality (`name`, postal_code, region, country) VALUES (?,?,?,?)";
                 Locality locality = customer.getAddress().getLocality();
                 PreparedStatement preparedStatementLocality = connection.prepareStatement(sqlInstructionLocality);
                 preparedStatementLocality.setString(1, locality.getName());
@@ -151,46 +129,43 @@ public class CustomerDBAccess implements CustomerDataAccess {
                 preparedStatementLocality.executeUpdate();
             }
 
-                //Add address
-                int affectedRowsNbForAddress;
-                String sqlInstructionAddress= "INSERT INTO address (street_name, street_number, box, locality, postal_code) VALUES(?,?,?,?,?)";
-                Address address = customer.getAddress();
-                PreparedStatement preparedStatementAddress = connection.prepareStatement(sqlInstructionAddress);
-                preparedStatementAddress.setString(1,address.getStreetName());
-                preparedStatementAddress.setInt(2,address.getStreetNumber());
-                preparedStatementAddress.setString(3,address.getBox());
-                preparedStatementAddress.setString(4,address.getLocality().getName());
-                preparedStatementAddress.setInt(5,address.getLocality().getPostalCode());
-                affectedRowsNbForAddress = preparedStatementAddress.executeUpdate();
+            //Add address
+            String sqlInstructionAddress = "INSERT INTO address (street_name, street_number, box, locality, postal_code) VALUES(?,?,?,?,?)";
+            Address address = customer.getAddress();
+            PreparedStatement preparedStatementAddress = connection.prepareStatement(sqlInstructionAddress);
+            preparedStatementAddress.setString(1,address.getStreetName());
+            preparedStatementAddress.setInt(2,address.getStreetNumber());
+            preparedStatementAddress.setString(3,address.getBox());
+            preparedStatementAddress.setString(4,address.getLocality().getName());
+            preparedStatementAddress.setInt(5,address.getLocality().getPostalCode());
 
-                String sqlSelect = "SELECT id FROM address WHERE street_name = ? AND street_number = ? AND postal_code = ? AND locality = ?;";
+            String sqlSelect = "SELECT id FROM address WHERE street_name = ? AND street_number = ? AND postal_code = ? AND locality = ?;";
 
-                PreparedStatement preparedStatementSelectAddress = connection.prepareStatement(sqlSelect);
-                ResultSet dataAddress = preparedStatementSelectAddress.executeQuery();
+            PreparedStatement preparedStatementSelectAddress = connection.prepareStatement(sqlSelect);
+            ResultSet dataAddress = preparedStatementSelectAddress.executeQuery();
 
-                addressId = dataAddress.getInt("id");
-                customer.getAddress().setId(addressId);
+            addressId = dataAddress.getInt("id");
+            customer.getAddress().setId(addressId);
 
-                //addCustomer
-                if (affectedRowsNbForAddress != 0){
-                    String sqlInstructionCustomer = "INSERT INTO customer (" +
-                            "first_name," +
-                            "last_name," +
-                            "registration_date," +
-                            "is_vip," +
-                            "nickname," +
-                            "phone_number," +
-                            "email," +
-                            "vat_number," +
-                            "iban," +
-                            "bic," +
-                            "address) " +
-                            "VALUES(?,?,?,?,?,?,?,?,?,?,?);";
+            //addCustomer
+            String sqlInstructionCustomer = "INSERT INTO customer (" +
+                    "first_name, " +
+                    "last_name, " +
+                    "registration_date, " +
+                    "is_vip, " +
+                    "nickname, " +
+                    "phone_number, " +
+                    "email, " +
+                    "vat_number, " +
+                    "iban, " +
+                    "bic, " +
+                    "address) " +
+                    "VALUES(?,?,?,?,?,?,?,?,?,?,?);";
 
-                    PreparedStatement preparedStatementCustomer = connection.prepareStatement(sqlInstructionCustomer);
-                    setPreparedWritingStatement(preparedStatementCustomer, customer);
-                    affectedRowsNbCustomer = preparedStatementCustomer.executeUpdate();
-                }
+            PreparedStatement preparedStatementCustomer = connection.prepareStatement(sqlInstructionCustomer);
+            setPreparedWritingStatement(preparedStatementCustomer, customer);
+            affectedRowsNbCustomer = preparedStatementCustomer.executeUpdate();
+
 
         }catch (SQLException sqlException){
             System.out.println(sqlException.getMessage());
@@ -207,6 +182,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
                 "UPDATE customer " +
                 "SET first_name = ?, " +
                     "last_name = ?, " +
+                    "registration_date = ? " +
                     "is_vip = ?, " +
                     "nickname = ?, " +
                     "phone_number = ?, " +
@@ -219,7 +195,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             setPreparedWritingStatement(preparedStatement, customer);
-            preparedStatement.setInt(11, customer.getId());
+            preparedStatement.setInt(12, customer.getId());
 
             affectedRowsNb = preparedStatement.executeUpdate();
         } catch (SQLException sqlException) {
@@ -238,14 +214,15 @@ public class CustomerDBAccess implements CustomerDataAccess {
     private void setPreparedWritingStatement(PreparedStatement preparedStatement, Customer customer) throws SQLException {
         preparedStatement.setString(1, customer.getFirstName());
         preparedStatement.setString(2, customer.getLastName());
-        preparedStatement.setByte(3, (customer.getVip() ? (byte) 1 : (byte) 0));
-        preparedStatement.setString(4, customer.getNickname());
-        preparedStatement.setInt(5, customer.getPhoneNumber());
-        preparedStatement.setString(6, customer.getEmail());
-        preparedStatement.setInt(7, customer.getVatNumber());
-        preparedStatement.setString(8, customer.getIban());
-        preparedStatement.setString(9, customer.getBic());
-        preparedStatement.setInt(10, customer.getAddress().getId());
+        preparedStatement.setDate(3, (Date) customer.getRegistrationDate().getTime());
+        preparedStatement.setByte(4, (customer.getVip() ? (byte) 1 : (byte) 0));
+        preparedStatement.setString(5, customer.getNickname());
+        preparedStatement.setInt(6, customer.getPhoneNumber());
+        preparedStatement.setString(7, customer.getEmail());
+        preparedStatement.setInt(8, customer.getVatNumber());
+        preparedStatement.setString(9, customer.getIban());
+        preparedStatement.setString(10, customer.getBic());
+        preparedStatement.setInt(11, customer.getAddress().getId());
     }
 
     @Override

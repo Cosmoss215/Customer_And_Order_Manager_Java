@@ -32,7 +32,7 @@ public class Customer {
         setEmail(email);
         setVatNumber(vatNumber);
         this.iban = iban;
-        setBic(bic);
+        this.bic = bic;
         this.address = address;
     }
     //region overload constructor
@@ -111,9 +111,6 @@ public class Customer {
     }
     public void setVatNumber(Integer vatNumber) {
         this.vatNumber = vatNumber;
-    }
-    public void setBic(String bic) {
-        this.bic = bic;
     }
 
     //endregion

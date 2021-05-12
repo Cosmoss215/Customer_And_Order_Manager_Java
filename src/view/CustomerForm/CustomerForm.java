@@ -7,11 +7,8 @@ import model.Address;
 import model.Country;
 import model.Customer;
 import model.Locality;
-import org.jdatepicker.JDateComponent;
 import util.DateFormater;
-import util.OurDate;
 import util.Verification;
-import view.SearchOrderListing;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -339,9 +336,7 @@ public class CustomerForm extends JFrame {
         region = jTextFieldRegion.getText();
         code = (String) jComboBoxCountry.getSelectedItem();
         isVip = jCheckBoxIsVIP.isSelected();
-        OurDate registrationDateToFormat = DateFormater.take(jTextFieldRegistrationDate.getText());
-
-        GregorianCalendar registrationDate = new GregorianCalendar(registrationDateToFormat.getYear(),registrationDateToFormat.getMonth(),registrationDateToFormat.getDay());
+        GregorianCalendar registrationDate = DateFormater.ourDate(jTextFieldRegistrationDate.getText());
 
         postalCode = (Integer) postalCodeSelector.getValue();
         streetNumber = (Integer) streetNumberSelector.getValue();

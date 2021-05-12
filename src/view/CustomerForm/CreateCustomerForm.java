@@ -23,8 +23,6 @@ import static java.awt.Color.*;
 public class CreateCustomerForm extends CustomerForm {
     private JButton jButtonResetCustomer,jButtonCreateCustomer;
     private Customer customer;
-    private Locality locality;
-    private Address address;
 
     public CreateCustomerForm(Color color,String title) throws SelectQueryException, ConnectionException {
         super(title,color);
@@ -61,7 +59,6 @@ public class CreateCustomerForm extends CustomerForm {
 
                 if (verification())
                 {
-
                     customer = addCustomer();
                     ApplicationController applicationController = null;
                     try {
