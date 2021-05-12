@@ -25,20 +25,13 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 public class CustomerList extends JFrame {
-    private javax.swing.JButton jButtonCreateCustomer;
-    private javax.swing.JButton jButtonDeleteCustomer;
-    private javax.swing.JButton jButtonReadCustomer;
-    private javax.swing.JButton jButtonSearch;
-    private javax.swing.JButton jButtonUpdateCustomer;
-    private javax.swing.JLabel jLabelCustomerName;
-    private javax.swing.JLabel jLabelNickname;
-    private javax.swing.JScrollPane jScrollCustomerTable;
-    private javax.swing.JTable jTableCustomerList;
-    private javax.swing.JTextField jTextFieldSearchBar;
-    private javax.swing.JTextField jTextFieldSearchBar1;
-    private javax.swing.JPanel panelButtonCRUD;
-    private javax.swing.JPanel panelCustomerTable;
-    private javax.swing.JPanel panelSearchBar;
+    private final JButton jButtonCreateCustomer,jButtonDeleteCustomer, jButtonReadCustomer, jButtonSearch, jButtonUpdateCustomer;
+    private final JLabel jLabelCustomerName,jLabelNickname;
+    private JScrollPane jScrollCustomerTable;
+    private JTable jTableCustomerList;
+    private final JTextField jTextFieldSearchBar, jTextFieldSearchBar1;
+    private final JPanel panelButtonCRUD, panelCustomerTable, panelSearchBar;
+
     private ArrayList<Customer> customers;
     public CustomerList() throws ConnectionException, SelectQueryException {
         panelSearchBar = new JPanel();
@@ -133,9 +126,11 @@ public class CustomerList extends JFrame {
                 }
             }
         });
+        WindowFormattingCode();
+        pack();
+    }
 
-
-        //region Code de mise en forme
+    private void WindowFormattingCode(){
         GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
         panelSearchBar.setLayout(panelSearchBarLayout);
         panelSearchBarLayout.setHorizontalGroup(
@@ -223,9 +218,6 @@ public class CustomerList extends JFrame {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(panelButtonCRUD, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        //endregion
-
-        pack();
     }
 
     public void autoComplete (String txt){

@@ -12,19 +12,20 @@ import java.awt.event.*;
 import java.net.URI;
 
 public class Menu extends JFrame {
-    private JMenuBar jMenuBar;
-    private JMenu jMenuNavigate,jMenuSearch,jMenuFile;
-    private JMenuItem jMenuItemCustomer, jMenuItemCreateOrder,jMenuItemProductList,jMenuItemExit,jMenuItemSearch1,jMenuItemSearch2,jMenuItemSearch3;
-    private JLabel welcomeMessage,info;
-    private Container mainContainer;
+    private JMenuItem jMenuItemCustomer;
+    private JMenuItem jMenuItemCreateOrder;
+    private JMenuItem jMenuItemProductList;
+    private JMenuItem jMenuItemSearch1;
+    private JMenuItem jMenuItemSearch2;
+    private JMenuItem jMenuItemSearch3;
+    private final Container mainContainer;
 
     public Menu(){
+
         super("Menu With a Thread");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(800,600));
-
-        //Container
         mainContainer = getContentPane();
         try{
             PaneThread paneThread = new PaneThread();
@@ -34,17 +35,45 @@ public class Menu extends JFrame {
                     JOptionPane.WARNING_MESSAGE);
         }
 
-        jMenuBar = new JMenuBar();
+        arrangeJMenuBar();
+        messageDisplay();
 
-        jMenuFile = new JMenu("File");
-        jMenuSearch = new JMenu("Search");
-        jMenuNavigate = new JMenu("Navigate");
+        pack();
+        setLocationRelativeTo(null);//Met la fenêtre au millieux de l'écran
+        setVisible(true);
+    }
+    private void messageDisplay(){
+        JLabel welcomeMessage = new JLabel("Welcome to the Order and Invoice Manager", JLabel.CENTER);
+        welcomeMessage.setFont(new Font("Tahoma", Font.BOLD, 30));
+        welcomeMessage.setForeground(new Color(102,102,255));
+        mainContainer.add(welcomeMessage,BorderLayout.NORTH);
+        JLabel info = new JLabel("You can visit this link to learn more about the program", JLabel.CENTER);
+        info.setForeground(Color.BLUE);
+        info.setFont(new Font("Tahoma", Font.ITALIC, 20));
+        info.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try{
+                    Desktop.getDesktop().browse(new URI("https://github.com/Cosmoss215/OrderAndInvoiceManager"));
+
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null,exception.getMessage(), "Exception",JOptionPane.WARNING_MESSAGE);
+                }
+            }});
+        mainContainer.add(info,BorderLayout.SOUTH);
+    }
+
+    private void arrangeJMenuBar(){
+        JMenuBar jMenuBar = new JMenuBar();
+        JMenu jMenuFile = new JMenu("File");
+        JMenu jMenuSearch = new JMenu("Search");
+        JMenu jMenuNavigate = new JMenu("Navigate");
 
         jMenuBar.add(jMenuFile);
         jMenuBar.add(jMenuSearch);
         jMenuBar.add(jMenuNavigate);
 
-        jMenuItemExit = new JMenuItem("Exit");
+        JMenuItem jMenuItemExit = new JMenuItem("Exit");
         jMenuItemExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 System.exit(0);
@@ -52,6 +81,21 @@ public class Menu extends JFrame {
         });
         jMenuFile.add(jMenuItemExit);
 
+        arrangeJMenuItem();
+
+        jMenuNavigate.add(jMenuItemCustomer);
+        jMenuNavigate.add(jMenuItemCreateOrder);
+        jMenuNavigate.add(jMenuItemProductList);
+
+        jMenuSearch.add(jMenuItemSearch1);
+        jMenuSearch.add(jMenuItemSearch2);
+        jMenuSearch.add(jMenuItemSearch3);
+
+        setJMenuBar(jMenuBar);
+
+    }
+
+    private void arrangeJMenuItem(){
 
         jMenuItemCustomer = new JMenuItem("Customer list");
         jMenuItemCustomer.addActionListener(new ActionListener() {
@@ -89,9 +133,6 @@ public class Menu extends JFrame {
                 productList.setVisible(true);
             }
         });
-        jMenuNavigate.add(jMenuItemCustomer);
-        jMenuNavigate.add(jMenuItemCreateOrder);
-        jMenuNavigate.add(jMenuItemProductList);
 
         jMenuItemSearch1 = new JMenuItem("Search 1 Order listing");
         jMenuItemSearch1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.ALT_DOWN_MASK));
@@ -135,36 +176,7 @@ public class Menu extends JFrame {
                 }
             }
         });
-        jMenuSearch.add(jMenuItemSearch1);
-        jMenuSearch.add(jMenuItemSearch2);
-        jMenuSearch.add(jMenuItemSearch3);
-
-        setJMenuBar(jMenuBar);
-
-        //Welcome Message
-        welcomeMessage = new JLabel("Welcome to the Order and Invoice Manager",JLabel.CENTER);
-        welcomeMessage.setFont(new Font("Tahoma", Font.BOLD, 30));
-        welcomeMessage.setForeground(new Color(102,102,255));
-        mainContainer.add(welcomeMessage,BorderLayout.NORTH);
-        info = new JLabel("You can visit this link to learn more about the program",JLabel.CENTER);
-        info.setForeground(Color.BLUE);
-        info.setFont(new Font("Tahoma", Font.ITALIC, 20));
-        info.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try{
-                    Desktop.getDesktop().browse(new URI("https://github.com/Cosmoss215/OrderAndInvoiceManager"));
-
-                } catch (Exception exception) {
-                    JOptionPane.showMessageDialog(null,exception.getMessage(), "Exception",JOptionPane.WARNING_MESSAGE);
-                }
-            }
-        });
-        mainContainer.add(info,BorderLayout.SOUTH);
-
-        pack();
-        setLocationRelativeTo(null);//Met la fenêtre au millieux de l'écran
-        setVisible(true);
     }
+
 
 }

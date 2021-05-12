@@ -7,18 +7,17 @@ import exception.SelectQueryException;
 import model.Customer;
 import view.tableModel.AllCustomersByCountryModel;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class SearchByCountry extends JFrame {
-    private JComboBox<String> jComboBoxCountryChoose;
-    private JLabel jLabelCountry;
-    private JScrollPane jScrollPane1;
-    private JTable jTableCustomerByCountry;
-    private JPanel panelCountrySelector,panelTableCustomer;
+    private final JComboBox<String> jComboBoxCountryChoose;
+    private final JLabel jLabelCountry;
+    private final JScrollPane jScrollPane1;
+    private final JTable jTableCustomerByCountry;
+    private final JPanel panelCountrySelector, panelTableCustomer;
 
     public SearchByCountry() throws ConnectionException, SelectQueryException {
         panelCountrySelector = new JPanel();
@@ -58,7 +57,10 @@ public class SearchByCountry extends JFrame {
                 jTableCustomerByCountry.setModel(customersByCountryModel);
             }
         });
-        //region Code de mise en forme
+        WindowFormattingCode();
+        pack();
+    }
+    private void WindowFormattingCode(){
         GroupLayout panelCountrySelectorLayout = new GroupLayout(panelCountrySelector);
         panelCountrySelector.setLayout(panelCountrySelectorLayout);
         panelCountrySelectorLayout.setHorizontalGroup(
@@ -114,10 +116,5 @@ public class SearchByCountry extends JFrame {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(panelTableCustomer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        //endregion
-        pack();
-    }
-    public void tableCustomers(){
-
     }
 }

@@ -171,7 +171,11 @@ public class CreateOrder extends JFrame {
         jButtonCancel1.setFont(new Font("Tahoma", 0, 18)); // 
         jButtonCancel1.setText("Cancel");
 
-        //region Code de mise en forme
+        WindowFormattingCode();
+        pack();
+    }
+
+    private void WindowFormattingCode(){
         GroupLayout panelOrderInformationLayout = new GroupLayout(panelOrderInformation);
         panelOrderInformation.setLayout(panelOrderInformationLayout);
         panelOrderInformationLayout.setHorizontalGroup(
@@ -213,7 +217,7 @@ public class CreateOrder extends JFrame {
                                 .addGroup(panelOrderInformationLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelCustomer)
                                         .addComponent(jTextFieldCustomerName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                            )
+                                )
                                 .addGap(18, 18, 18)
                                 .addGroup(panelOrderInformationLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelCreationDate)
@@ -299,12 +303,9 @@ public class CreateOrder extends JFrame {
                                 .addComponent(panelOrder, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
-        //endregion
-
-        pack();
     }
 
-    public void autoComplete (String txt){
+    private void autoComplete (String txt){
         String complete = "";
         int start = txt.length();
         int last = txt.length();

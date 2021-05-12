@@ -74,7 +74,6 @@ public class Order {
             this.number = number;
         }
     }
-
     private void setCreationDate(GregorianCalendar creationDate) {
         this.creationDate = creationDate;
     }

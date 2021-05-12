@@ -18,11 +18,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class SearchByProduct extends JFrame {
-    private JLabel jLabelProduct;
-    private JScrollPane jScrollPane1;
-    private JTable jTableCustomersByProduct;
-    private JTextField jTextFieldFindProduct;
-    private JPanel panelSearchBar,panelTableByProduct;
+    private final JLabel jLabelProduct;
+    private final JScrollPane jScrollPane1;
+    private final JTable jTableCustomersByProduct;
+    private final JTextField jTextFieldFindProduct;
+    private final JPanel panelSearchBar;
+    private final JPanel panelTableByProduct;
 
     public SearchByProduct() throws SelectQueryException, ConnectionException, NullException {
         panelSearchBar = new JPanel();
@@ -72,7 +73,10 @@ public class SearchByProduct extends JFrame {
 
             }
         });
-        //region Code de mise en forme
+        WindowFormattingCode();
+        pack();
+    }
+    private void WindowFormattingCode(){
         GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
         panelSearchBar.setLayout(panelSearchBarLayout);
         panelSearchBarLayout.setHorizontalGroup(
@@ -129,7 +133,6 @@ public class SearchByProduct extends JFrame {
                                         .addGap(0, 66, Short.MAX_VALUE)
                                         .addComponent(panelTableByProduct, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
         );
-        //endregion
-        pack();
+
     }
 }

@@ -13,13 +13,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ProductList extends JFrame {
-    private JButton jButtonSearch;
-    private JLabel jLabelProductList;
-    private JScrollPane jScrollPane1;
-    private JTable jTable1;
-    private JTextField jTextFieldSearch;
-    private JPanel panelAllProducts;
-    private JPanel panelSearchBar;
+    private final JButton jButtonSearch;
+    private final JLabel jLabelProductList;
+    private final JScrollPane jScrollPane1;
+    private final JTextField jTextFieldSearch;
+    private final JPanel panelAllProducts, panelSearchBar;
 
     public ProductList() throws ConnectionException, SelectQueryException {
         panelSearchBar = new JPanel();
@@ -45,7 +43,7 @@ public class ProductList extends JFrame {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
-        jTable1 = new JTable(productsModel);
+        JTable jTable1 = new JTable(productsModel);
         jTable1.setAutoCreateRowSorter(true);
         jTable1.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         jTable1.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
@@ -53,13 +51,12 @@ public class ProductList extends JFrame {
         jTable1.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
         jTable1.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
         jScrollPane1 = new JScrollPane(jTable1);
-
         jScrollPane1.setViewportView(jTable1);
-        //-------------------------------------------------------------------------------------
+        WindowFormattingCode();
+        pack();
+    }
 
-
-
-        //region Code de mise en forme
+    private void WindowFormattingCode(){
         GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
         panelSearchBar.setLayout(panelSearchBarLayout);
         panelSearchBarLayout.setHorizontalGroup(
@@ -114,8 +111,5 @@ public class ProductList extends JFrame {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(panelAllProducts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
-        //endregion
-
-        pack();
     }
 }

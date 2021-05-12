@@ -13,17 +13,17 @@ import java.util.ArrayList;
 
 
 public class SearchOrderListing extends JFrame {
-    private SpinnerDateModel jDatePickerModelStart,jDatePickerModelEnd;
-    private JSpinner startDateSelector;
-    private JSpinner endDateSelector;
-    private JLabel jLabelCustomerName;
-    private JLabel jLabelFrom;
-    private JLabel jLabelTo;
-    private JScrollPane jScrollTableOrderList;
-    private JTable jTableOrderList;
-    private JTextField jTextFieldSearchBar;
-    private JPanel panelSearchBar;
-    private JPanel panelTableOrderList;
+    private final SpinnerDateModel jDatePickerModelStart,jDatePickerModelEnd;
+    private final JSpinner startDateSelector;
+    private final JSpinner endDateSelector;
+    private final JLabel jLabelCustomerName;
+    private final JLabel jLabelFrom;
+    private final JLabel jLabelTo;
+    private final JScrollPane jScrollTableOrderList;
+    private final JTable jTableOrderList;
+    private final JTextField jTextFieldSearchBar;
+    private final JPanel panelSearchBar;
+    private final JPanel panelTableOrderList;
     private ArrayList<Customer> customers;
 
     public SearchOrderListing() throws ConnectionException, SelectQueryException {
@@ -99,9 +99,10 @@ public class SearchOrderListing extends JFrame {
             }
         });
         jScrollTableOrderList.setViewportView(jTableOrderList);
-
-
-        //region Code de mise en forme
+        WindowFormattingCode();
+        pack();
+    }
+    private void WindowFormattingCode(){
         GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
         panelSearchBar.setLayout(panelSearchBarLayout);
         panelSearchBarLayout.setHorizontalGroup(
@@ -181,9 +182,6 @@ public class SearchOrderListing extends JFrame {
                                         .addComponent(panelTableOrderList, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addContainerGap()))
         );
-        //endregion
-
-        pack();
     }
     public void autoComplete (String txt){
         String complete = "";
