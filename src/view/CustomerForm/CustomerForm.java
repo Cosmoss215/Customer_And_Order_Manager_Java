@@ -140,6 +140,7 @@ public class CustomerForm extends JFrame {
     /** This method initializes each input of the form.
      * @param color is used to define the background color of the JCheckBox.
      */
+
     private void addInputFields(Color color){
         jTextFieldFirstName = new JTextField();
         jTextFieldFirstName.setFont(new Font("Tahoma", 0, 20));
