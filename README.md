@@ -1,5 +1,6 @@
 # Projet Java 2021 - Order and Invoice Manager
-## Ce projet java s'inscrit dans le cadre de nos études d'informatique de gestion à l'Henallux de namur. 
+
+Ce projet java s'inscrit dans le cadre de nos études d'informatique de gestion à l'Henallux de namur.
 
 Le projet compte package différent :
 
@@ -12,3 +13,7 @@ Le projet compte package différent :
 * et pour finir les couches
   * Exception, comprenant toutes les classes relevant les exceptions
   * Ressource, ce package comprend toutes les ressources tel que les images pour le thread
+
+
+
+
