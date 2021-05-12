@@ -111,7 +111,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
         try {
 
                 String sqlInstruction = "SELECT `name`,postal_code FROM locality WHERE `name` = \'%" + customer.getAddress().getLocality().getName() + "%\';";
-
                 PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
                 ResultSet data = preparedStatement.executeQuery();
 
@@ -193,6 +192,20 @@ public class CustomerDBAccess implements CustomerDataAccess {
 
     @Override
     public boolean update(Customer customer) throws UpdateQueryException {
+
+        try {
+
+            String sqlSelectInstruction = "SELECT `name`,postal_code FROM locality WHERE `name` = \'%" + customer.getAddress().getLocality().getName() + "%\';";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlSelectInstruction);
+            ResultSet data = preparedStatement.executeQuery();
+
+            if (!data.next()){
+                //Locality is changed
+            }
+        }catch (SQLException throwables) {
+            throw  new UpdateQueryException(throwables.getMessage());
+        }
+
         int affectedRowsNb;
         String sqlInstruction =
                 "UPDATE customer " +
@@ -215,8 +228,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
 
             affectedRowsNb = preparedStatement.executeUpdate();
         } catch (SQLException sqlException) {
-            System.out.println(sqlException.getMessage());
-            throw new UpdateQueryException();
+            throw  new UpdateQueryException(sqlException.getMessage());
         }
         return affectedRowsNb != 0;
     }
@@ -250,8 +262,8 @@ public class CustomerDBAccess implements CustomerDataAccess {
             preparedStatement.setInt(1,customer.getId());
 
             affectedRowsNb = preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DeleteQueryException();
+        } catch (SQLException exception) {
+            throw new DeleteQueryException(exception.getMessage());
         }
         return affectedRowsNb != 0;
     }

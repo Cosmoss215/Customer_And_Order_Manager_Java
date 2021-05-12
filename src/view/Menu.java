@@ -12,16 +12,10 @@ import java.awt.event.*;
 import java.net.URI;
 
 public class Menu extends JFrame {
-    private JMenuItem jMenuItemCustomer;
-    private JMenuItem jMenuItemCreateOrder;
-    private JMenuItem jMenuItemProductList;
-    private JMenuItem jMenuItemSearch1;
-    private JMenuItem jMenuItemSearch2;
-    private JMenuItem jMenuItemSearch3;
+    private JMenuItem jMenuItemCustomer,jMenuItemCreateOrder,jMenuItemProductList,jMenuItemSearch1,jMenuItemSearch2,jMenuItemSearch3;
     private final Container mainContainer;
 
     public Menu(){
-
         super("Menu With a Thread");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -34,12 +28,11 @@ public class Menu extends JFrame {
             JOptionPane.showMessageDialog(null,threadException.getMessage(), threadException.getTypeError(),
                     JOptionPane.WARNING_MESSAGE);
         }
-
         arrangeJMenuBar();
         messageDisplay();
 
         pack();
-        setLocationRelativeTo(null);//Met la fenêtre au millieux de l'écran
+        setLocationRelativeTo(null);//Met la fenêtre au millieu de l'écran
         setVisible(true);
     }
     private void messageDisplay(){
@@ -80,7 +73,6 @@ public class Menu extends JFrame {
             }
         });
         jMenuFile.add(jMenuItemExit);
-
         arrangeJMenuItem();
 
         jMenuNavigate.add(jMenuItemCustomer);
@@ -90,7 +82,6 @@ public class Menu extends JFrame {
         jMenuSearch.add(jMenuItemSearch1);
         jMenuSearch.add(jMenuItemSearch2);
         jMenuSearch.add(jMenuItemSearch3);
-
         setJMenuBar(jMenuBar);
 
     }
@@ -159,8 +150,6 @@ public class Menu extends JFrame {
                 } catch (SelectQueryException selectQueryException) {
                     JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "QueryException", JOptionPane.WARNING_MESSAGE);
                 }
-
-
             }
         });
         jMenuItemSearch3 = new JMenuItem("Search 3 Product");
