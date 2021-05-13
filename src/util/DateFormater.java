@@ -16,7 +16,7 @@ public class DateFormater {
         int month = Integer.parseInt(date.substring(3,5));
         int year = Integer.parseInt(date.substring(6,10));
 
-        GregorianCalendar ourDate = new GregorianCalendar(day,month,year);
+        GregorianCalendar ourDate = new GregorianCalendar(year,month-1,day);
         return ourDate;
     }
 

@@ -276,7 +276,7 @@ public class CustomerForm extends JFrame {
         }
 
         if (!Verification.dateVerification(jTextFieldRegistrationDate.getText()) || jTextFieldRegistrationDate.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null,"This date is incorrect, should be dd-mm-yyyy (01-01-2021)", "FormException", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"This date is incorrect, should be yyyy-mm-dd (05-12-2020)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldRegistrationDate.setBorder(new LineBorder(Color.red,3));
             return false;
         }

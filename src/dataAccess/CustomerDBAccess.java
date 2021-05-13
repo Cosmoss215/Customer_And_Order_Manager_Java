@@ -240,6 +240,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
      * @throws SQLException needs to be caught with a catch() instruction in another method.
      */
     private void setPreparedWritingStatement(PreparedStatement preparedStatement, Customer customer) throws SQLException {
+
         preparedStatement.setString(1, customer.getFirstName());
         preparedStatement.setString(2, customer.getLastName());
         preparedStatement.setDate(3, DateFormater.fromJavaToSqlDate(customer.getRegistrationDate()));

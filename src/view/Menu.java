@@ -73,6 +73,7 @@ public class Menu extends JFrame {
             }
         });
         jMenuFile.add(jMenuItemExit);
+
         arrangeJMenuItem();
 
         jMenuNavigate.add(jMenuItemCustomer);
