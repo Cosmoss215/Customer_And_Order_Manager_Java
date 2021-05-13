@@ -17,9 +17,13 @@ public class Menu extends JFrame {
 
     public Menu(){
         super("Menu With a Thread");
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(800,600));
+
+        setPreferredSize(new Dimension(800,500));
+
         mainContainer = getContentPane();
         try{
             PaneThread paneThread = new PaneThread();
@@ -28,13 +32,17 @@ public class Menu extends JFrame {
             JOptionPane.showMessageDialog(null,threadException.getMessage(), threadException.getTypeError(),
                     JOptionPane.WARNING_MESSAGE);
         }
-        arrangeJMenuBar();
+        initMenuBar();
+
         messageDisplay();
 
         pack();
+
         setLocationRelativeTo(null);//Met la fenêtre au millieu de l'écran
+
         setVisible(true);
     }
+
     private void messageDisplay(){
         JLabel welcomeMessage = new JLabel("Welcome to the Order and Invoice Manager", JLabel.CENTER);
         welcomeMessage.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -56,7 +64,7 @@ public class Menu extends JFrame {
         mainContainer.add(info,BorderLayout.SOUTH);
     }
 
-    private void arrangeJMenuBar(){
+    private void initMenuBar(){
         JMenuBar jMenuBar = new JMenuBar();
         JMenu jMenuFile = new JMenu("File");
         JMenu jMenuSearch = new JMenu("Search");
@@ -69,12 +77,14 @@ public class Menu extends JFrame {
         JMenuItem jMenuItemExit = new JMenuItem("Exit");
         jMenuItemExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
+                JOptionPane.showMessageDialog(null,"The task failed succesfully","ouch",
+                        JOptionPane.WARNING_MESSAGE);
                 System.exit(0);
             }
         });
         jMenuFile.add(jMenuItemExit);
 
-        arrangeJMenuItem();
+        initJMenuItem();
 
         jMenuNavigate.add(jMenuItemCustomer);
         jMenuNavigate.add(jMenuItemCreateOrder);
@@ -87,8 +97,7 @@ public class Menu extends JFrame {
 
     }
 
-    private void arrangeJMenuItem(){
-
+    private void initJMenuItem(){
         jMenuItemCustomer = new JMenuItem("Customer list");
         jMenuItemCustomer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {

@@ -36,7 +36,16 @@ public class ProductList extends JFrame {
         jButtonSearch.setFont(new Font("Tahoma", 0, 18));
         jButtonSearch.setText("Search");
 
+        jScrollPane1 = new JScrollPane();
 
+        initTable();
+
+        WindowFormattingCode();
+
+        pack();
+    }
+
+    private void initTable() throws ConnectionException, SelectQueryException {
         ApplicationController allProducts = new ApplicationController();
         ArrayList<Product> all = allProducts.getAllProducts();
         AllProductsModel productsModel = new AllProductsModel(all);
@@ -50,10 +59,8 @@ public class ProductList extends JFrame {
         jTable1.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
         jTable1.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
         jTable1.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
-        jScrollPane1 = new JScrollPane(jTable1);
+
         jScrollPane1.setViewportView(jTable1);
-        WindowFormattingCode();
-        pack();
     }
 
     private void WindowFormattingCode(){

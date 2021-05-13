@@ -71,8 +71,6 @@ public class SearchOrderListing extends JFrame {
         jLabelTo.setFont(new Font("Dialog", 0, 18));
         jLabelTo.setText("to");
 
-
-
         jTableOrderList.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
                         {null, null, null, null, null},
@@ -98,10 +96,15 @@ public class SearchOrderListing extends JFrame {
                 return canEdit [columnIndex];
             }
         });
+
+
         jScrollTableOrderList.setViewportView(jTableOrderList);
         WindowFormattingCode();
         pack();
     }
+
+
+
     private void WindowFormattingCode(){
         GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
         panelSearchBar.setLayout(panelSearchBarLayout);
@@ -183,7 +186,8 @@ public class SearchOrderListing extends JFrame {
                                         .addContainerGap()))
         );
     }
-    public void autoComplete (String txt){
+
+    private void autoComplete (String txt){
         String complete = "";
         int start = txt.length();
         int last = txt.length();

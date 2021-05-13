@@ -34,6 +34,7 @@ public class SearchByCountry extends JFrame {
 
         jComboBoxCountryChoose.setFont(new Font("Tahoma", 0, 18));
         jComboBoxCountryChoose.setModel(new DefaultComboBoxModel<>(new String[] { "Belgium", "France", "Netherlands", "Spain", "Germany" }));
+
         jComboBoxCountryChoose.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 ApplicationController customersByCountry = null;
@@ -57,6 +58,7 @@ public class SearchByCountry extends JFrame {
                 jTableCustomerByCountry.setModel(customersByCountryModel);
             }
         });
+
         WindowFormattingCode();
         pack();
     }

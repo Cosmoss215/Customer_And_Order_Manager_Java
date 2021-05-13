@@ -16,15 +16,30 @@ import java.util.ArrayList;
 
 public class CreateOrder extends JFrame {
 
-    private JButton jButtonAddProduct, jButtonCancel, jButtonCancel1,jButtonDeleteProduct;
-    private JComboBox<String> jComboBoxDeadline, jComboBoxPaymentmethod;
-    private JLabel jLabelAddProduct, jLabelAddProduct1,jLabelCreationDate, jLabelCustomer,jLabelDate, jLabelDateOfTheDay,jLabelPaymentDealine,jLabelPaymentDealine1,jLabelPaymentMethod;
-    private JScrollPane jScrollPaneOrderInformation,jScrollPaneTotal;
-    private JTable jTableOrderInformation,jTableTotal;
-    private JTextField jTextFieldAddProductChoose,jTextFieldCustomerName;
-    private JPanel panelOrder,panelOrderInformation;
-    private JSpinner quantitySelector;
-    private ArrayList<Customer> customers;
+    private final JButton jButtonAddProduct;
+    private final JButton jButtonCancel;
+    private final JButton jButtonCancel1;
+    private final JButton jButtonDeleteProduct;
+    private final JComboBox<String> jComboBoxDeadline;
+    private final JComboBox<String> jComboBoxPaymentmethod;
+    private final JLabel jLabelAddProduct;
+    private final JLabel jLabelAddProduct1;
+    private final JLabel jLabelCreationDate;
+    private final JLabel jLabelCustomer;
+    private final JLabel jLabelDate;
+    private final JLabel jLabelDateOfTheDay;
+    private final JLabel jLabelPaymentDealine;
+    private final JLabel jLabelPaymentDealine1;
+    private final JLabel jLabelPaymentMethod;
+    private final JScrollPane jScrollPaneOrderInformation;
+    private final JScrollPane jScrollPaneTotal;
+    private final JTextField jTextFieldAddProductChoose;
+    private final JTextField jTextFieldCustomerName;
+    private final JPanel panelOrder;
+    private final JPanel panelOrderInformation;
+    private final JSpinner quantitySelector;
+    private final ArrayList<Customer> customers;
+    JTable jTableTotal,jTableOrderInformation;
 
     public CreateOrder() throws ConnectionException, SelectQueryException {
         panelOrderInformation = new JPanel();
@@ -40,60 +55,100 @@ public class CreateOrder extends JFrame {
         jLabelDateOfTheDay = new JLabel();
         panelOrder = new JPanel();
         jScrollPaneOrderInformation = new JScrollPane();
-        jTableOrderInformation = new JTable();
         jLabelAddProduct = new JLabel();
         jTextFieldAddProductChoose = new JTextField();
         jLabelAddProduct1 = new JLabel();
         jButtonAddProduct = new JButton();
         jScrollPaneTotal = new JScrollPane();
-        jTableTotal = new JTable();
         jButtonDeleteProduct = new JButton();
         jButtonCancel = new JButton();
         jButtonCancel1 = new JButton();
+        jTableOrderInformation = new JTable();
+        jTableTotal = new JTable();
+        quantitySelector = new JSpinner();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        panelOrder.setBackground(new Color(0, 153, 153));
 
-        jLabelCustomer.setFont(new Font("Tahoma", 0, 18)); // 
-        jLabelCustomer.setText("Customer");
-
-        jTextFieldCustomerName.setFont(new Font("Tahoma", 0, 18)); // 
-        jTextFieldCustomerName.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //jTextFieldCustomerNameActionPerformed(evt);
-            }
-        });
-
+        //region Autocomplete
         ApplicationController allCustomers = new ApplicationController();
         customers = allCustomers.getAllCustomers();
         KeyboardListner keyboardListner = new KeyboardListner();
         jTextFieldCustomerName.addKeyListener(keyboardListner);
+        //endregion
 
-        jLabelPaymentMethod.setFont(new Font("Tahoma", 0, 18)); // 
-        jLabelPaymentMethod.setText("Payment method");
+        initTextFieldComboBoxSpinner();
 
-        jComboBoxPaymentmethod.setFont(new Font("Tahoma", 0, 18)); // 
+        initJLabel();
+
+        initJTable();
+
+        initJButton();
+
+        WindowFormattingCode();
+
+        pack();
+    }
+
+    private void initTextFieldComboBoxSpinner(){
+
+
+        jComboBoxPaymentmethod.setFont(new Font("Tahoma", 0, 18));
         jComboBoxPaymentmethod.setModel(new DefaultComboBoxModel<>(new String[] { "Paypal", "transfer" }));
 
-        jLabelPaymentDealine.setFont(new Font("Tahoma", 0, 18)); // 
-        jLabelPaymentDealine.setText("Payment deadline");
-
-        jComboBoxDeadline.setFont(new Font("Tahoma", 0, 18)); // 
+        jComboBoxDeadline.setFont(new Font("Tahoma", 0, 18));
         jComboBoxDeadline.setModel(new DefaultComboBoxModel<>(new String[] { "8", "15", "30" }));
 
-        jLabelPaymentDealine1.setFont(new Font("Tahoma", 0, 18)); // 
+        jTextFieldCustomerName.setFont(new Font("Tahoma", 0, 18));
+        jTextFieldCustomerName.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+
+            }
+        });
+
+        jTextFieldAddProductChoose.setFont(new Font("Tahoma", 0, 18));
+        jTextFieldAddProductChoose.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+
+            }
+        });
+        quantitySelector.setModel(new SpinnerNumberModel(0,0,100000,1));
+        quantitySelector.setFont(new Font("Tahoma", 0, 18));
+    }
+
+
+    private void initJLabel(){
+        jLabelCustomer.setFont(new Font("Tahoma", 0, 18));
+        jLabelCustomer.setText("Customer");
+
+        jLabelPaymentMethod.setFont(new Font("Tahoma", 0, 18));
+        jLabelPaymentMethod.setText("Payment method");
+
+        jLabelPaymentDealine.setFont(new Font("Tahoma", 0, 18));
+        jLabelPaymentDealine.setText("Payment deadline");
+
+        jLabelPaymentDealine1.setFont(new Font("Tahoma", 0, 18));
         jLabelPaymentDealine1.setText("days");
 
-        jLabelCreationDate.setFont(new Font("Tahoma", 0, 18)); // 
+        jLabelCreationDate.setFont(new Font("Tahoma", 0, 18));
         jLabelCreationDate.setText("Creation date");
 
-        jLabelDate.setFont(new Font("Tahoma", 0, 18)); // 
+        jLabelDate.setFont(new Font("Tahoma", 0, 18));
 
-        jLabelDateOfTheDay.setFont(new Font("Tahoma", 0, 18)); // 
+        jLabelDateOfTheDay.setFont(new Font("Tahoma", 0, 18));
         jLabelDateOfTheDay.setText("Date of the day");
 
-        panelOrder.setBackground(new Color(0, 153, 153));
+        jLabelAddProduct.setFont(new Font("Tahoma", 0, 18));
+        jLabelAddProduct.setForeground(new Color(255, 255, 255));
+        jLabelAddProduct.setText("Quantity");
 
-        jTableOrderInformation.setFont(new Font("Tahoma", 0, 12)); // 
+        jLabelAddProduct1.setFont(new Font("Tahoma", 0, 18));
+        jLabelAddProduct1.setForeground(new Color(255, 255, 255));
+        jLabelAddProduct1.setText("Add product");
+    }
+
+    private void initJTable(){
+        jTableOrderInformation.setFont(new Font("Tahoma", 0, 12));
         jTableOrderInformation.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
                         {null, null, null, null, null, null},
@@ -105,7 +160,7 @@ public class CreateOrder extends JFrame {
                         "Product", "Quantity", "Unit Price", "Discount", "VAT", "Subtotal"
                 }
         ) {
-            Class[] types = new Class [] {
+            final Class[] types = new Class [] {
                     java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class
             };
 
@@ -114,31 +169,7 @@ public class CreateOrder extends JFrame {
             }
         });
         jScrollPaneOrderInformation.setViewportView(jTableOrderInformation);
-
-        jLabelAddProduct.setFont(new Font("Tahoma", 0, 18)); // 
-        jLabelAddProduct.setForeground(new Color(255, 255, 255));
-        jLabelAddProduct.setText("Quantity");
-
-        jTextFieldAddProductChoose.setFont(new Font("Tahoma", 0, 18)); // 
-        jTextFieldAddProductChoose.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //jTextFieldAddProductChooseActionPerformed(evt);
-            }
-        });
-
-        jLabelAddProduct1.setFont(new Font("Tahoma", 0, 18)); // 
-        jLabelAddProduct1.setForeground(new Color(255, 255, 255));
-        jLabelAddProduct1.setText("Add product");
-
-
-        quantitySelector = new JSpinner(new SpinnerNumberModel(0,0,100000,1));
-        quantitySelector.setFont(new Font("Tahoma", 0, 18));
-
-        jButtonAddProduct.setBackground(new Color(0, 204, 51));
-        jButtonAddProduct.setFont(new Font("Tahoma", 0, 18)); // 
-        jButtonAddProduct.setText("Add");
-
-        jTableTotal.setFont(new Font("Tahoma", 0, 12)); // 
+        jTableTotal.setFont(new Font("Tahoma", 0, 12)); //
         jTableTotal.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
                         {"Total excluding VAT", null},
@@ -149,7 +180,7 @@ public class CreateOrder extends JFrame {
                         "", ""
                 }
         ) {
-            Class[] types = new Class [] {
+            final Class[] types = new Class [] {
                     java.lang.String.class, java.lang.Double.class
             };
 
@@ -158,21 +189,24 @@ public class CreateOrder extends JFrame {
             }
         });
         jScrollPaneTotal.setViewportView(jTableTotal);
+    }
+
+    private void initJButton(){
+        jButtonAddProduct.setBackground(new Color(0, 204, 51));
+        jButtonAddProduct.setFont(new Font("Tahoma", 0, 18)); //
+        jButtonAddProduct.setText("Add");
 
         jButtonDeleteProduct.setBackground(new Color(255, 255, 0));
-        jButtonDeleteProduct.setFont(new Font("Tahoma", 0, 18)); // 
+        jButtonDeleteProduct.setFont(new Font("Tahoma", 0, 18)); //
         jButtonDeleteProduct.setText("Delete product");
 
         jButtonCancel.setBackground(new Color(0, 204, 0));
-        jButtonCancel.setFont(new Font("Tahoma", 0, 18)); // 
+        jButtonCancel.setFont(new Font("Tahoma", 0, 18)); //
         jButtonCancel.setText("Create order");
 
         jButtonCancel1.setBackground(new Color(255, 0, 0));
-        jButtonCancel1.setFont(new Font("Tahoma", 0, 18)); // 
+        jButtonCancel1.setFont(new Font("Tahoma", 0, 18)); //
         jButtonCancel1.setText("Cancel");
-
-        WindowFormattingCode();
-        pack();
     }
 
     private void WindowFormattingCode(){

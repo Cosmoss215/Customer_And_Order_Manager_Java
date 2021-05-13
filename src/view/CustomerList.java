@@ -53,16 +53,26 @@ public class CustomerList extends JFrame {
         jButtonUpdateCustomer = new JButton();
         jButtonDeleteCustomer = new JButton();
 
-        applicationControllerCustomer = new ApplicationController();
-        customers = applicationControllerCustomer.getAllCustomers();
-        customersModel = new AllCustomersModel(customers);
-        jTableCustomerList = new JTable(customersModel);
-        jTableCustomerList.setAutoCreateRowSorter(true);
-        jScrollCustomerTable = new JScrollPane(jTableCustomerList);
-        jTableCustomerList.getTableHeader().setReorderingAllowed(false);
-        jScrollCustomerTable.setViewportView(jTableCustomerList);
-
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+        initPanelSearchBar();
+
+        initTable();
+
+        initPanelButton();
+
+        WindowFormattingCode();
+
+        pack();
+    }
+
+
+    private void initPanelSearchBar(){
+        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18));
+        jLabelCustomerName.setText("Customer name");
+
+        jLabelNickname.setFont(new Font("Tahoma", 0, 18));
+        jLabelNickname.setText("Nickname");
 
         jButtonSearch.setFont(new Font("Tahoma", 0, 18));
         jButtonSearch.setText("Refresh");
@@ -79,20 +89,28 @@ public class CustomerList extends JFrame {
         });
 
         jTextFieldSearchBar.setFont(new Font("Tahoma", 0, 18));;
-        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18));
-        jLabelCustomerName.setText("Customer name");
-
-        jLabelNickname.setFont(new Font("Tahoma", 0, 18));
-        jLabelNickname.setText("Nickname");
-
         jTextFieldSearchBar1.setFont(new Font("Tahoma", 0, 18));
 
         KeyboardListner keyboardListner = new KeyboardListner();
         jTextFieldSearchBar.addKeyListener(keyboardListner);
+    }
 
+    private void initTable() throws ConnectionException, SelectQueryException {
+        applicationControllerCustomer = new ApplicationController();
+        customers = applicationControllerCustomer.getAllCustomers();
+        customersModel = new AllCustomersModel(customers);
+        jTableCustomerList = new JTable(customersModel);
+        jTableCustomerList.setAutoCreateRowSorter(true);
+        jScrollCustomerTable = new JScrollPane(jTableCustomerList);
+        jTableCustomerList.getTableHeader().setReorderingAllowed(false);
+        jScrollCustomerTable.setViewportView(jTableCustomerList);
+    }
+
+    private void initPanelButton(){
         Color color = new Color(166, 207, 147);
+
         jButtonCreateCustomer.setBackground(new Color(0, 204, 0));
-        jButtonCreateCustomer.setFont(new Font("Tahoma", 0, 18)); // 
+        jButtonCreateCustomer.setFont(new Font("Tahoma", 0, 18)); //
         jButtonCreateCustomer.setText("Create customer");
         jButtonCreateCustomer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -122,7 +140,7 @@ public class CustomerList extends JFrame {
             }
         });
         jButtonDeleteCustomer.setBackground(new Color(255, 102, 102));
-        jButtonDeleteCustomer.setFont(new Font("Tahoma", 0, 18)); // 
+        jButtonDeleteCustomer.setFont(new Font("Tahoma", 0, 18)); //
         jButtonDeleteCustomer.setText("Delete customer");
         jButtonDeleteCustomer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -136,10 +154,8 @@ public class CustomerList extends JFrame {
                 }
             }
         });
-        WindowFormattingCode();
-        pack();
-    }
 
+    }
     private void WindowFormattingCode(){
         GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
         panelSearchBar.setLayout(panelSearchBarLayout);
@@ -230,9 +246,7 @@ public class CustomerList extends JFrame {
         );
     }
 
-
-
-    public void autoComplete (String txt){
+    private void autoComplete (String txt){
         String complete = "";
         int start = txt.length();
         int last = txt.length();
