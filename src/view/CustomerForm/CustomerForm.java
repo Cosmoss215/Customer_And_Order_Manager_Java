@@ -29,11 +29,11 @@ public class CustomerForm extends JFrame {
     protected JPanel mainPanel,panelForm,panelButton;
     protected JSpinner streetNumberSelector,postalCodeSelector;
     protected JComboBox<String> jComboBoxCountry;
+    protected Customer customer;
     private ArrayList<Locality> locality;
 
     public CustomerForm(String title,Color color) throws ConnectionException, SelectQueryException {
         setTitle(title);
-
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(200, 70, 800, 850);
