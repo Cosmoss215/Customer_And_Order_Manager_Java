@@ -18,8 +18,8 @@ public class OrderDBAccess implements OrderDataAccess {
         this.connection = SingletonConnection.getInstance();
     }
 
-    public ArrayList<Order> getOrders(String sqlWhereClause) throws SelectQueryException {
-        ArrayList<Order> allOrders = new ArrayList<>();
+    public ArrayList<OrderByCustomer> getOrders(String sqlWhereClause) throws SelectQueryException {
+        ArrayList<OrderByCustomer> allOrders = new ArrayList<>();
         try {
             String sqlInstruction = "SELECT o.*, p.*, c.*, a.*, l.*, co.* " +
                     "FROM order o " +
@@ -33,14 +33,13 @@ public class OrderDBAccess implements OrderDataAccess {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             ResultSet data = preparedStatement.executeQuery();
 
-            Order order;
+            OrderByCustomer orderByCustomer;
             Customer customer;
             Address address;
             Locality locality;
             Country country;
 
             while (data.next()) {
-                // créer une classe Util.Format (package Util) ayant comme méthode static setDate(dateJava, "column_label") qui renvoie un GregorianCalendar?
                 GregorianCalendar registrationDate = new GregorianCalendar();
                 Date registrationDateSQL = data.getDate("registration_date");
                 registrationDate.setTime(registrationDateSQL);
@@ -91,16 +90,15 @@ public class OrderDBAccess implements OrderDataAccess {
                         data.getString("bic")
                 );
 
-                order = new Order(
+                orderByCustomer = new OrderByCustomer(
                         data.getInt("id"),
                         creationDate,
                         paymentDeadline,
-                        data.getString("state"),
+                        120.00,//Test
                         customer,
                         paymentMethod
                 );
-
-                allOrders.add(order);
+                allOrders.add(orderByCustomer);
             }
         } catch (SQLException e) {
             throw new SelectQueryException();
@@ -108,13 +106,14 @@ public class OrderDBAccess implements OrderDataAccess {
         return allOrders;
     }
 
+
     @Override
-    public ArrayList<Order> getAllOrders() throws SelectQueryException{
+    public ArrayList<OrderByCustomer> getAllOrders() throws SelectQueryException{
         return getOrders("");
     }
 
     @Override
-    public ArrayList<Order> getOrdersByCustomer(Customer customer, GregorianCalendar startDate, GregorianCalendar endDate) throws SelectQueryException {
+    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId, GregorianCalendar startDate, GregorianCalendar endDate) throws SelectQueryException {
         String sqlWhereClause = "WHERE o.creation_date " +
                 "BETWEEN " +
                     "STR_TO_DATE(\'" + startDate.get(Calendar.DAY_OF_MONTH) + "/" +
@@ -124,7 +123,7 @@ public class OrderDBAccess implements OrderDataAccess {
                     "STR_TO_DATE(\'" + endDate.get(Calendar.DAY_OF_MONTH) + "/" +
                     endDate.get(Calendar.MONTH+1) + "/" +
                     endDate.get(Calendar.YEAR) + "\', '%d/%m/%y') " +
-                "AND c.id IN(\'" + customer.getId() + "\');";
+                "AND c.id IN(\'" + customerId + "\');";
 
         return getOrders(sqlWhereClause);
     }

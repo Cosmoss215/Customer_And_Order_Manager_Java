@@ -21,7 +21,7 @@ public class OrderLineDBAccess implements OrderLineDataAccess{
     public ArrayList<OrderLine> getOrderLines(String sqlWhereClause) throws SelectQueryException{
         ArrayList<OrderLine> allOrderLine = new ArrayList<>();
         try {
-            String sqlInstruction = "SELECT DISTINCT ol.*, o.*, pr.*, v.*, pm.*, c.*, a.*, l.*, co.* " +
+            String sqlInstruction = "SELECT DISTINCT ol.*, o.*, p.*, v.*, pm.*, c.*, a.*, l.*, co.* " +
                     "FROM order_line ol " +
                     "JOIN order o ON ol.order = o.number " +
                     "JOIN payment_method pm ON o.payment_method = p.wording " +

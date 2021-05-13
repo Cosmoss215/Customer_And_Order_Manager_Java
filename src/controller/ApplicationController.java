@@ -5,6 +5,7 @@ import exception.*;
 import model.*;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class ApplicationController {
     private CountryManager countryManager;
@@ -52,6 +53,9 @@ public class ApplicationController {
         return  customerManager.delete(customer);
     }
     //endregion
+
+
+
     //region Product
     public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException, NullException {
         if (reference == null){
@@ -63,16 +67,35 @@ public class ApplicationController {
         return productManager.getAllProducts();
     }
     //endregion
+
+
+
     //region Country
     public ArrayList<Country> getAllCountries()throws SelectQueryException {
         ArrayList<Country> countryArrayList = countryManager.getAllCountries();
         return countryArrayList;
     }
     //endregion
+
+
     //region locality
     public ArrayList<Locality> getAllLocalities()throws SelectQueryException {
         ArrayList<Locality> localityArrayList = localityManager.getAllLocalities();
         return localityArrayList;
+    }
+    //endregion
+
+
+    //region
+    public ArrayList<OrderByCustomer> getAllOrders()throws SelectQueryException {
+        ArrayList<OrderByCustomer> orderArrayList = orderManager.getAllOrders();
+        return orderArrayList;
+    }
+
+    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId, GregorianCalendar startDate, GregorianCalendar endDate) throws SelectQueryException {
+        ArrayList<OrderByCustomer> orderByCustomer = orderManager.getAllOrders();
+        return orderByCustomer;
+
     }
     //endregion
 

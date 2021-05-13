@@ -4,51 +4,57 @@ import controller.ApplicationController;
 import exception.ConnectionException;
 import exception.SelectQueryException;
 import model.Customer;
+import model.CustomerByProduct;
+import model.OrderByCustomer;
+import util.DateFormater;
+import view.tableModel.AllCustomersByProductModel;
+import view.tableModel.AllCustomersModel;
+import view.tableModel.AllOrderByCustomerModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 
 public class SearchOrderListing extends JFrame {
-    private final SpinnerDateModel jDatePickerModelStart,jDatePickerModelEnd;
-    private final JSpinner startDateSelector;
-    private final JSpinner endDateSelector;
+    private final JTextField startDateSelector;
+    private final JTextField endDateSelector;
     private final JLabel jLabelCustomerName;
     private final JLabel jLabelFrom;
     private final JLabel jLabelTo;
-    private final JScrollPane jScrollTableOrderList;
-    private final JTable jTableOrderList;
+    private JScrollPane jScrollTableOrderList;
     private final JTextField jTextFieldSearchBar;
     private final JPanel panelSearchBar;
     private final JPanel panelTableOrderList;
+    private JTable jTableOrderList;
     private ArrayList<Customer> customers;
+
+    private JButton searchButton;
+
+    int customerId;
 
     public SearchOrderListing() throws ConnectionException, SelectQueryException {
         panelSearchBar = new JPanel();
         jLabelCustomerName = new JLabel();
         jTextFieldSearchBar = new JTextField();
-        jDatePickerModelStart = new SpinnerDateModel();
-        jDatePickerModelEnd = new SpinnerDateModel();
         jLabelFrom = new JLabel();
-        startDateSelector = new JSpinner();
-        endDateSelector = new JSpinner();
         jLabelTo = new JLabel();
         panelTableOrderList = new JPanel();
         jScrollTableOrderList = new JScrollPane();
-        jTableOrderList = new JTable();
-
 
         ApplicationController allCustomers = new ApplicationController();
         customers = allCustomers.getAllCustomers();
 
-
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18));
-        jLabelCustomerName.setText("Customer's name");
+
+        initJLabel();
+
 
         jTextFieldSearchBar.setFont(new Font("Dialog", 0, 18));
         jTextFieldSearchBar.setText("");
@@ -57,54 +63,69 @@ public class SearchOrderListing extends JFrame {
         KeyboardListner keyboardListner = new KeyboardListner();
         jTextFieldSearchBar.addKeyListener(keyboardListner);
 
+        startDateSelector = new JTextField();
+        endDateSelector = new JTextField();
 
-        startDateSelector.setModel(jDatePickerModelStart);
-        endDateSelector.setModel(jDatePickerModelEnd);
+        startDateSelector.setPreferredSize(new Dimension(100,30));
+        endDateSelector.setPreferredSize(new Dimension(100,30));
+
         startDateSelector.setFont(new Font("Tahoma", 0, 18));
         endDateSelector.setFont(new Font("Tahoma", 0, 18));
 
+        searchButton = new JButton("Search");
+        searchButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                Customer customer;
+                GregorianCalendar startDate = DateFormater.ourDate("05-05-2020");
+                GregorianCalendar endDate = DateFormater.ourDate("05-05-2020");
 
-        jLabelFrom.setFont(new Font("Dialog", 0, 18));
-        jLabelFrom.setText("From");
-
-
-        jLabelTo.setFont(new Font("Dialog", 0, 18));
-        jLabelTo.setText("to");
-
-        jTableOrderList.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null}
-                },
-                new String [] {
-                        "Order number", "Date order", "Price", "Payment method", "Payment deadline"
+                try {
+                    initTable(customerId,startDate,endDate);
+                } catch (ConnectionException | SelectQueryException exception) {
+                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
-        ) {
-            Class[] types = new Class [] {
-                    java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                    false, false, true, false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
 
+        GregorianCalendar startDate = DateFormater.ourDate("05-05-2020");
+        GregorianCalendar endDate = DateFormater.ourDate("05-05-2020");
+
+        ApplicationController orderByCustomer = new ApplicationController();
+        ArrayList<OrderByCustomer> orderByCustomers = orderByCustomer.getOrdersByCustomer(1,startDate,endDate);
+        AllOrderByCustomerModel allOrderByCustomerModel = new AllOrderByCustomerModel(orderByCustomers);
+        jTableOrderList = new JTable(allOrderByCustomerModel);
 
         jScrollTableOrderList.setViewportView(jTableOrderList);
         WindowFormattingCode();
         pack();
     }
 
+    private void initTable(int customerId, GregorianCalendar startDate,GregorianCalendar endDate) throws ConnectionException, SelectQueryException {
+
+        /*
+
+         */
 
 
+        ApplicationController applicationControllerCustomer = new ApplicationController();
+        customers = applicationControllerCustomer.getAllCustomers();
+        AllCustomersModel customersModel = new AllCustomersModel(customers);
+        jTableOrderList = new JTable(customersModel);
+        jTableOrderList.setAutoCreateRowSorter(true);
+        jScrollTableOrderList = new JScrollPane(jTableOrderList);
+        jTableOrderList.getTableHeader().setReorderingAllowed(false);
+        jScrollTableOrderList.setViewportView(jTableOrderList);
+    }
+
+    private void initJLabel(){
+        jLabelCustomerName.setFont(new Font("Tahoma", 0, 18));
+        jLabelCustomerName.setText("Customer's name");
+
+        jLabelFrom.setFont(new Font("Dialog", 0, 18));
+        jLabelFrom.setText("From");
+        jLabelTo.setFont(new Font("Dialog", 0, 18));
+        jLabelTo.setText("to");
+    }
     private void WindowFormattingCode(){
         GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
         panelSearchBar.setLayout(panelSearchBarLayout);
@@ -124,7 +145,10 @@ public class SearchOrderListing extends JFrame {
                                 .addComponent(jLabelTo)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(endDateSelector, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGap(169, 169, 169))
+                                .addGap(18, 18, 18)
+                                .addComponent(searchButton)
+                                .addGap(62, 62, 62)
+                        )
         );
         panelSearchBarLayout.setVerticalGroup(
                 panelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -136,7 +160,8 @@ public class SearchOrderListing extends JFrame {
                                                 .addComponent(endDateSelector, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(startDateSelector, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jLabelFrom)
-                                                .addComponent(jTextFieldSearchBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jTextFieldSearchBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(searchButton))
                                         .addGroup(GroupLayout.Alignment.TRAILING, panelSearchBarLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                 .addComponent(jLabelCustomerName)))
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -197,6 +222,7 @@ public class SearchOrderListing extends JFrame {
         {
             if (customers.get(a).getFirstName().startsWith(txt) || customers.get(a).getLastName().startsWith(txt)) {
                 complete = customers.get(a).getLastName() + " " +customers.get(a).getFirstName();
+                customerId = customers.get(a).getId();
                 last = complete.length();
                 break;
             }
