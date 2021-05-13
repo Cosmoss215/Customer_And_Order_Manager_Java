@@ -39,7 +39,7 @@ public class EditCustomerForm extends CustomerForm {
 
         jButtonEditCustomer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                boolean isOk = false;
+                boolean updateResult = false;
                 if (verification())
                 {
                     customer2 = addCustomer();
@@ -50,14 +50,14 @@ public class EditCustomerForm extends CustomerForm {
                         JOptionPane.showMessageDialog(null,connectionException.getMessage(), connectionException.getTypeError(), JOptionPane.WARNING_MESSAGE);
                     }
                     try {
-                       isOk = applicationController.update(customer);
+                        updateResult = applicationController.update(customer);
                     } catch (UpdateQueryException createQueryException) {
                         JOptionPane.showMessageDialog(null,createQueryException.getMessage(), createQueryException.getTypeError(), JOptionPane.WARNING_MESSAGE);
                     } catch (NullException nullException) {
                         JOptionPane.showMessageDialog(null,nullException.getMessage(), nullException.getTypeError(), JOptionPane.WARNING_MESSAGE);
                     }
                 }
-                if (isOk){
+                if (updateResult){
                     JOptionPane.showMessageDialog(null,"The customer has been updated","Customer updated", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
