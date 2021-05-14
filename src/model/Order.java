@@ -12,6 +12,7 @@ public class Order {
     private String state;
     private Customer customer;
     private PaymentMethod paymentMethod;
+
     public static final String [] states = { "pending", "payed", "delivered" };
     public static final int STATES_NUMBER = 3;
 

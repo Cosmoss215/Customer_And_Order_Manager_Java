@@ -94,7 +94,7 @@ public class OrderDBAccess implements OrderDataAccess {
                         data.getInt("id"),
                         creationDate,
                         paymentDeadline,
-                        120.00,//Test
+                        120.00,//Test // sumMontantOrderLine
                         customer,
                         paymentMethod
                 );

@@ -114,7 +114,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
                 PreparedStatement preparedStatementSelectLocality = connection.prepareStatement(sqlInstruction);
 
                 if (!preparedStatementSelectLocality.execute()){
-                    Country country;
                     String sqlInstructionLocality = "INSERT INTO locality (`name`, postal_code, region, country) VALUES (?,?,?,?)";
                     Locality locality = customer.getAddress().getLocality();
                     PreparedStatement preparedStatementLocality = connection.prepareStatement(sqlInstructionLocality);
@@ -225,6 +224,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
             return affectedRowsNb != 0;
     }
     /** Use this method to set the params of a PreparedStatement instance which will be used to access the DB in the WRITE mode.
+     * Note : because the setInt required a int type (primitive type) we need to place it in an if instruction because this int cannot be null.
      * @param preparedStatement needs to be initialized before being given to this method.
      * @param customer WARNING ! If you use this method in a CREATE or UPDATE statement, you have to use id as following :
      *                 CREATE : no need to add something else : the DB will auto-increment the customer's id
@@ -237,9 +237,21 @@ public class CustomerDBAccess implements CustomerDataAccess {
         preparedStatement.setDate(3, DateFormater.fromJavaToSqlDate(customer.getRegistrationDate()));
         preparedStatement.setByte(4, (customer.getVip() ? (byte) 1 : (byte) 0));
         preparedStatement.setString(5, customer.getNickname());
-        preparedStatement.setInt(6, customer.getPhoneNumber());
+
+        if (customer.getPhoneNumber() != null){
+            preparedStatement.setInt(6, customer.getPhoneNumber());
+        }
+        else{
+            preparedStatement.setNull(6,java.sql.Types.NULL);
+        }
         preparedStatement.setString(7, customer.getEmail());
-        preparedStatement.setInt(8, customer.getVatNumber());
+
+        if (customer.getVatNumber() != null){
+            preparedStatement.setInt(8, customer.getVatNumber());
+        }
+        else{
+            preparedStatement.setNull(8,java.sql.Types.NULL);
+        }
         preparedStatement.setString(9, customer.getIban());
         preparedStatement.setString(10, customer.getBic());
         preparedStatement.setInt(11, customer.getAddress().getId());

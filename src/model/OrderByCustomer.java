@@ -34,6 +34,7 @@ public class OrderByCustomer {
     public Double getPrice() {
         return price;
     }
+
     public Customer getCustomer() {
         return customer;
     }
@@ -41,6 +42,5 @@ public class OrderByCustomer {
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
-
 
 }

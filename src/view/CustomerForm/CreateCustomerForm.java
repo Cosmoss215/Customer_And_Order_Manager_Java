@@ -50,6 +50,7 @@ public class CreateCustomerForm extends CustomerForm {
                 if (verification())
                 {
                     customer = addCustomer();
+                    System.out.println(customer);
                     ApplicationController applicationController = null;
                     try {
                         applicationController = new ApplicationController();

@@ -361,10 +361,10 @@ public class CustomerForm extends JFrame {
     protected Customer addCustomer() {
 
         Boolean isVip;
-        String firstName, lastName, iban, bic, streetName, box, localityName, region, code;
+        String firstName, lastName, iban, bic, streetName, localityName, region, code;
         Integer streetNumber, postalCode;
         Integer phoneNumber = null, vatNumber = null;
-        String nickname = null, email = null;
+        String nickname = null, email = null,box = null;
 
         firstName = jTextFieldFirstName.getText();
         lastName = jTextFieldLastName.getText();
@@ -382,10 +382,12 @@ public class CustomerForm extends JFrame {
         if (!jTextFieldVATNumber.getText().isEmpty()){
             vatNumber = Integer.valueOf(jTextFieldVATNumber.getText());
         }
+        if (!jTextFieldBox.getText().isEmpty()){
+            box = jTextFieldBox.getText();
+        }
         iban = jTextFieldIBAN.getText();
         bic = jTextFieldBIC.getText();
         streetName = jTextFieldStreetWording.getText();
-        box = jTextFieldBox.getText();
         localityName = jTextFieldLocality.getText();
         region = jTextFieldRegion.getText();
         code = (String) jComboBoxCountry.getSelectedItem();
