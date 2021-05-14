@@ -29,13 +29,10 @@ public class ProductList extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         jTextFieldSearch.setFont(new Font("Tahoma", 0, 18));
-
         jLabelProductList.setFont(new Font("Tahoma", 0, 18));
         jLabelProductList.setText("Product list");
-
         jButtonSearch.setFont(new Font("Tahoma", 0, 18));
         jButtonSearch.setText("Search");
-
         jScrollPane1 = new JScrollPane();
 
         initTable();

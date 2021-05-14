@@ -49,31 +49,28 @@ public class SearchByProduct extends JFrame {
         jTextFieldFindProduct.setText("");
         jTextFieldFindProduct.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                ApplicationController getProductByReference = null;
+                ApplicationController getProductByReference;
                 try {
                     getProductByReference = new ApplicationController();
-                } catch (ConnectionException connectionException) {
-                    connectionException.printStackTrace();
-                }
-                ArrayList<CustomerByProduct> customersByProduct = null;
-                try {
-                        if (Verification.productReferenceVerification(jTextFieldFindProduct.getText()))
-                        {
-                            customersByProduct = getProductByReference.getProductByReference(Integer.valueOf(jTextFieldFindProduct.getText()));
-                            AllCustomersByProductModel customersByProductModel = new AllCustomersByProductModel(customersByProduct);
-                            jTableCustomersByProduct.setModel(customersByProductModel);
-                        }
-                        else {
-                            JOptionPane.showMessageDialog(null,"The given reference is not correct, open the product list to help you", "Incorrect reference ", JOptionPane.INFORMATION_MESSAGE);
-                            jTextFieldFindProduct.setBorder(new LineBorder(Color.red,3));
-                        }
-                } catch (SelectQueryException | NullException exception) {
+                    ArrayList<CustomerByProduct> customersByProduct = null;
+                    if (Verification.productReferenceVerification(jTextFieldFindProduct.getText()))
+                    {
+                        customersByProduct = getProductByReference.getProductByReference(Integer.valueOf(jTextFieldFindProduct.getText()));
+                        AllCustomersByProductModel customersByProductModel = new AllCustomersByProductModel(customersByProduct);
+                        jTableCustomersByProduct.setModel(customersByProductModel);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null,"The given reference is not correct, open the product list to help you", "Incorrect reference ", JOptionPane.INFORMATION_MESSAGE);
+                        jTextFieldFindProduct.setBorder(new LineBorder(Color.red,3));
+                    }
+                } catch (ConnectionException | SelectQueryException | NullException exception) {
                     JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
-
             }
         });
+
         WindowFormattingCode();
+
         pack();
     }
     private void WindowFormattingCode(){

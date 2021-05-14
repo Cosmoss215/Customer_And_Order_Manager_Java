@@ -75,38 +75,23 @@ public class SearchOrderListing extends JFrame {
         searchButton = new JButton("Search");
         searchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                Customer customer;
-                GregorianCalendar startDate = DateFormater.ourDate("05-05-2020");
-                GregorianCalendar endDate = DateFormater.ourDate("05-05-2020");
-
+                GregorianCalendar startDate = DateFormater.ourDate(startDateSelector.getText());
+                GregorianCalendar endDate = DateFormater.ourDate(endDateSelector.getText());
                 try {
                     initTable(customerId,startDate,endDate);
+                    jScrollTableOrderList.setViewportView(jTableOrderList);
                 } catch (ConnectionException | SelectQueryException exception) {
                     JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
 
-        GregorianCalendar startDate = DateFormater.ourDate("05-05-2020");
-        GregorianCalendar endDate = DateFormater.ourDate("05-05-2020");
-
-        ApplicationController orderByCustomer = new ApplicationController();
-        ArrayList<OrderByCustomer> orderByCustomers = orderByCustomer.getOrdersByCustomer(1,startDate,endDate);
-        AllOrderByCustomerModel allOrderByCustomerModel = new AllOrderByCustomerModel(orderByCustomers);
-        jTableOrderList = new JTable(allOrderByCustomerModel);
-
-        jScrollTableOrderList.setViewportView(jTableOrderList);
         WindowFormattingCode();
+
         pack();
     }
 
     private void initTable(int customerId, GregorianCalendar startDate,GregorianCalendar endDate) throws ConnectionException, SelectQueryException {
-
-        /*
-
-         */
-
-
         ApplicationController applicationControllerCustomer = new ApplicationController();
         customers = applicationControllerCustomer.getAllCustomers();
         AllCustomersModel customersModel = new AllCustomersModel(customers);

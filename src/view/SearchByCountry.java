@@ -39,23 +39,17 @@ public class SearchByCountry extends JFrame {
             public void actionPerformed(ActionEvent evt) {
                 ApplicationController customersByCountry = null;
                 try {
+                    ArrayList<Customer> allCustomerByCountry = null;
+                    String country = (String) jComboBoxCountryChoose.getSelectedItem();
                     customersByCountry = new ApplicationController();
-                } catch (ConnectionException e) {
+                    allCustomerByCountry = customersByCountry.getCustomersByCountry(country);
+                    AllCustomersByCountryModel customersByCountryModel = new AllCustomersByCountryModel(allCustomerByCountry);
+                    jTableCustomerByCountry.setModel(customersByCountryModel);
+
+                } catch (ConnectionException | SelectQueryException | NullException e) {
                     JOptionPane.showMessageDialog(null,e.getMessage(), e.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
-                String country = (String) jComboBoxCountryChoose.getSelectedItem();
 
-                ArrayList<Customer> allCustomerByCountry = null;
-                try {
-                    allCustomerByCountry = customersByCountry.getCustomersByCountry(country);
-                } catch (SelectQueryException | NullException exception) {
-                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                }
-
-                AllCustomersByCountryModel customersByCountryModel = new AllCustomersByCountryModel(allCustomerByCountry);
-
-                customersByCountryModel.fireTableDataChanged();
-                jTableCustomerByCountry.setModel(customersByCountryModel);
             }
         });
 

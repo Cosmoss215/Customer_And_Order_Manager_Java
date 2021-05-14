@@ -19,7 +19,6 @@ public class SingletonConnection {
             throw new ConnectionException();
         }
     }
-
     public static Connection getInstance() throws ConnectionException {
         if (connection == null) {
             new SingletonConnection();
