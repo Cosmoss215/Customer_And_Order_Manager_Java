@@ -126,32 +126,27 @@ public class CustomerList extends JFrame {
         jButtonUpdateCustomer.setBackground(new Color(0, 153, 153));
         jButtonUpdateCustomer.setFont(new Font("Tahoma", 0, 18));
         jButtonUpdateCustomer.setText("Edit customer");
-        jButtonUpdateCustomer.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                Customer customer;
-                customer = customersModel.getRow(jTableCustomerList.getSelectedRow());
-                EditCustomerForm editCustomerForm = null;
-                try {
-                    editCustomerForm = new EditCustomerForm(color,"Edit customer",customer);
-                    editCustomerForm.setVisible(true);
-                } catch (SelectQueryException | ConnectionException exception) {
-                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                }
+        jButtonUpdateCustomer.addActionListener(evt -> {
+            Customer customer;
+            customer = customersModel.getRow(jTableCustomerList.getSelectedRow());
+            try {
+                EditCustomerForm editCustomerForm = new EditCustomerForm(color,"Edit customer",customer);
+                editCustomerForm.setVisible(true);
+            } catch (SelectQueryException | ConnectionException exception) {
+                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
         });
         jButtonDeleteCustomer.setBackground(new Color(255, 102, 102));
         jButtonDeleteCustomer.setFont(new Font("Tahoma", 0, 18)); //
         jButtonDeleteCustomer.setText("Delete customer");
-        jButtonDeleteCustomer.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                Customer customer;
-                int row = jTableCustomerList.getSelectedRow();
-                customer = customersModel.getRow(row);
-                try {
-                    applicationControllerCustomer.delete(customer);
-                } catch (DeleteQueryException exception) {
-                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                }
+        jButtonDeleteCustomer.addActionListener(evt -> {
+            Customer customer;
+            int row = jTableCustomerList.getSelectedRow();
+            customer = customersModel.getRow(row);
+            try {
+                applicationControllerCustomer.delete(customer);
+            } catch (DeleteQueryException exception) {
+                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
         });
 

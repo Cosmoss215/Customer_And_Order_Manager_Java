@@ -75,12 +75,9 @@ public class Menu extends JFrame {
         jMenuBar.add(jMenuNavigate);
 
         JMenuItem jMenuItemExit = new JMenuItem("Exit");
-        jMenuItemExit.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                JOptionPane.showMessageDialog(null,"The task failed succesfully","ouch",
-                        JOptionPane.WARNING_MESSAGE);
-                System.exit(0);
-            }
+        jMenuItemExit.addActionListener(evt -> {
+            JOptionPane.showMessageDialog(null,"The task failed succesfully","ouch", JOptionPane.WARNING_MESSAGE); //Il s'agit bien évidament d'un référence à un blague mythique : https://medium.com/swlh/the-ten-most-ridiculous-error-messages-in-the-history-of-software-4198d710ea8e
+            System.exit(0);
         });
         jMenuFile.add(jMenuItemExit);
 
@@ -99,81 +96,65 @@ public class Menu extends JFrame {
 
     private void initJMenuItem(){
         jMenuItemCustomer = new JMenuItem("Customer list");
-        jMenuItemCustomer.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                CustomerList customerList = null;
-                try {
-                    customerList = new CustomerList();
-                } catch (ConnectionException | SelectQueryException exception) {
-                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                }
+        jMenuItemCustomer.addActionListener(evt -> {
+            try {
+                CustomerList customerList = new CustomerList();
                 customerList.setVisible(true);
+            } catch (ConnectionException | SelectQueryException exception) {
+                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
+
         });
         jMenuItemCreateOrder = new JMenuItem("Create Order");
-        jMenuItemCreateOrder.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                CreateOrder createOrder = null;
-                try {
-                    createOrder = new CreateOrder();
-                    createOrder.setVisible(true);
-                } catch (ConnectionException | SelectQueryException exception) {
-                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                }
-
+        jMenuItemCreateOrder.addActionListener(evt -> {
+            try {
+                CreateOrder createOrder = new CreateOrder();
+                createOrder.setVisible(true);
+            } catch (ConnectionException | SelectQueryException exception) {
+                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
+
         });
         jMenuItemProductList = new JMenuItem("Product List");
-        jMenuItemProductList.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                ProductList productList = null;
-                try {
-                    productList = new ProductList();
-                    productList.setVisible(true);
-                } catch (ConnectionException | SelectQueryException exception) {
-                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                }
+        jMenuItemProductList.addActionListener(evt -> {
+            try {
+                ProductList productList = new ProductList();
+                productList.setVisible(true);
+            } catch (ConnectionException | SelectQueryException exception) {
+                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
         });
 
         jMenuItemSearch1 = new JMenuItem("Search 1 Order listing");
         jMenuItemSearch1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.ALT_DOWN_MASK));
-        jMenuItemSearch1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                SearchOrderListing orderListing = null;
-                try {
-                    orderListing = new SearchOrderListing();
-                    orderListing.setVisible(true);
-                } catch (ConnectionException | SelectQueryException exception) {
-                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                }
+        jMenuItemSearch1.addActionListener(evt -> {
+            try {
+                SearchOrderListing orderListing = new SearchOrderListing();
+                orderListing.setVisible(true);
+            } catch (ConnectionException | SelectQueryException exception) {
+                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
         });
         jMenuItemSearch2 = new JMenuItem("Search 2 Customer by country");
         jMenuItemSearch2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,InputEvent.ALT_DOWN_MASK));
-        jMenuItemSearch2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                try {
-                    SearchByCountry searchByCountry = new SearchByCountry();
-                    searchByCountry.setVisible(true);
-                } catch (ConnectionException connectionException) {
-                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException", JOptionPane.WARNING_MESSAGE);
-                } catch (SelectQueryException selectQueryException) {
-                    JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "QueryException", JOptionPane.WARNING_MESSAGE);
-                }
+        jMenuItemSearch2.addActionListener(evt -> {
+            try {
+                SearchByCountry searchByCountry = new SearchByCountry();
+                searchByCountry.setVisible(true);
+            } catch (ConnectionException connectionException) {
+                JOptionPane.showMessageDialog(null,connectionException.getMessage(), "ConnectionException", JOptionPane.WARNING_MESSAGE);
+            } catch (SelectQueryException selectQueryException) {
+                JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "QueryException", JOptionPane.WARNING_MESSAGE);
             }
         });
         jMenuItemSearch3 = new JMenuItem("Search 3 Product");
         jMenuItemSearch3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.ALT_DOWN_MASK));
-        jMenuItemSearch3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-
-                try {
-                    SearchByProduct searchByProduct = new SearchByProduct();
-                    searchByProduct.setVisible(true);
-                } catch (SelectQueryException | ConnectionException | NullException exception) {
-                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                }
+        jMenuItemSearch3.addActionListener(evt -> {
+            try {
+                SearchByProduct searchByProduct = new SearchByProduct();
+                searchByProduct.setVisible(true);
+            } catch (SelectQueryException | ConnectionException | NullException exception) {
+                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
         });
     }

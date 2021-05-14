@@ -52,9 +52,7 @@ public class SearchOrderListing extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-
         initJLabel();
-
 
         jTextFieldSearchBar.setFont(new Font("Dialog", 0, 18));
         jTextFieldSearchBar.setText("");
@@ -73,16 +71,14 @@ public class SearchOrderListing extends JFrame {
         endDateSelector.setFont(new Font("Tahoma", 0, 18));
 
         searchButton = new JButton("Search");
-        searchButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                GregorianCalendar startDate = DateFormater.ourDate(startDateSelector.getText());
-                GregorianCalendar endDate = DateFormater.ourDate(endDateSelector.getText());
-                try {
-                    initTable(customerId,startDate,endDate);
-                    jScrollTableOrderList.setViewportView(jTableOrderList);
-                } catch (ConnectionException | SelectQueryException exception) {
-                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                }
+        searchButton.addActionListener(evt -> {
+            GregorianCalendar startDate = DateFormater.ourDate(startDateSelector.getText());
+            GregorianCalendar endDate = DateFormater.ourDate(endDateSelector.getText());
+            try {
+                initTable(customerId,startDate,endDate);
+                jScrollTableOrderList.setViewportView(jTableOrderList);
+            } catch (ConnectionException | SelectQueryException exception) {
+                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
         });
 

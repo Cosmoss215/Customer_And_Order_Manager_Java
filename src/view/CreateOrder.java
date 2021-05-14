@@ -92,7 +92,6 @@ public class CreateOrder extends JFrame {
 
     private void initTextFieldComboBoxSpinner(){
 
-
         jComboBoxPaymentmethod.setFont(new Font("Tahoma", 0, 18));
         jComboBoxPaymentmethod.setModel(new DefaultComboBoxModel<>(new String[] { "Paypal", "transfer" }));
 
@@ -100,17 +99,13 @@ public class CreateOrder extends JFrame {
         jComboBoxDeadline.setModel(new DefaultComboBoxModel<>(new String[] { "8", "15", "30" }));
 
         jTextFieldCustomerName.setFont(new Font("Tahoma", 0, 18));
-        jTextFieldCustomerName.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jTextFieldCustomerName.addActionListener(evt -> {
 
-            }
         });
 
         jTextFieldAddProductChoose.setFont(new Font("Tahoma", 0, 18));
-        jTextFieldAddProductChoose.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        jTextFieldAddProductChoose.addActionListener(evt -> {
 
-            }
         });
         quantitySelector.setModel(new SpinnerNumberModel(0,0,100000,1));
         quantitySelector.setFont(new Font("Tahoma", 0, 18));

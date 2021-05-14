@@ -35,22 +35,20 @@ public class SearchByCountry extends JFrame {
         jComboBoxCountryChoose.setFont(new Font("Tahoma", 0, 18));
         jComboBoxCountryChoose.setModel(new DefaultComboBoxModel<>(new String[] { "Belgium", "France", "Netherlands", "Spain", "Germany" }));
 
-        jComboBoxCountryChoose.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                ApplicationController customersByCountry = null;
-                try {
-                    ArrayList<Customer> allCustomerByCountry = null;
-                    String country = (String) jComboBoxCountryChoose.getSelectedItem();
-                    customersByCountry = new ApplicationController();
-                    allCustomerByCountry = customersByCountry.getCustomersByCountry(country);
-                    AllCustomersByCountryModel customersByCountryModel = new AllCustomersByCountryModel(allCustomerByCountry);
-                    jTableCustomerByCountry.setModel(customersByCountryModel);
+        jComboBoxCountryChoose.addActionListener(evt -> {
+            ApplicationController customersByCountry;
+            try {
+                ArrayList<Customer> allCustomerByCountry;
+                String country = (String) jComboBoxCountryChoose.getSelectedItem();
+                customersByCountry = new ApplicationController();
+                allCustomerByCountry = customersByCountry.getCustomersByCountry(country);
+                AllCustomersByCountryModel customersByCountryModel = new AllCustomersByCountryModel(allCustomerByCountry);
+                jTableCustomerByCountry.setModel(customersByCountryModel);
 
-                } catch (ConnectionException | SelectQueryException | NullException e) {
-                    JOptionPane.showMessageDialog(null,e.getMessage(), e.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                }
-
+            } catch (ConnectionException | SelectQueryException | NullException e) {
+                JOptionPane.showMessageDialog(null,e.getMessage(), e.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
+
         });
 
         WindowFormattingCode();
