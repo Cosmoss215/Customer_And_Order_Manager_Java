@@ -116,10 +116,11 @@ public class Menu extends JFrame {
                 CreateOrder createOrder = null;
                 try {
                     createOrder = new CreateOrder();
+                    createOrder.setVisible(true);
                 } catch (ConnectionException | SelectQueryException exception) {
                     JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
-                createOrder.setVisible(true);
+
             }
         });
         jMenuItemProductList = new JMenuItem("Product List");
@@ -128,10 +129,10 @@ public class Menu extends JFrame {
                 ProductList productList = null;
                 try {
                     productList = new ProductList();
+                    productList.setVisible(true);
                 } catch (ConnectionException | SelectQueryException exception) {
                     JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
-                productList.setVisible(true);
             }
         });
 
@@ -142,10 +143,10 @@ public class Menu extends JFrame {
                 SearchOrderListing orderListing = null;
                 try {
                     orderListing = new SearchOrderListing();
+                    orderListing.setVisible(true);
                 } catch (ConnectionException | SelectQueryException exception) {
                     JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
-                orderListing.setVisible(true);
             }
         });
         jMenuItemSearch2 = new JMenuItem("Search 2 Customer by country");

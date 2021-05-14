@@ -117,10 +117,10 @@ public class CustomerList extends JFrame {
                 CreateCustomerForm CreateCustomerForm = null;
                 try {
                     CreateCustomerForm = new CreateCustomerForm(color,"CreateCustomer");
+                    CreateCustomerForm.setVisible(true);
                 } catch (SelectQueryException | ConnectionException exception) {
                     JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
-                CreateCustomerForm.setVisible(true);
             }
         });
         jButtonUpdateCustomer.setBackground(new Color(0, 153, 153));
@@ -133,10 +133,10 @@ public class CustomerList extends JFrame {
                 EditCustomerForm editCustomerForm = null;
                 try {
                     editCustomerForm = new EditCustomerForm(color,"Edit customer",customer);
+                    editCustomerForm.setVisible(true);
                 } catch (SelectQueryException | ConnectionException exception) {
                     JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
-                editCustomerForm.setVisible(true);
             }
         });
         jButtonDeleteCustomer.setBackground(new Color(255, 102, 102));
