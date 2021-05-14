@@ -11,7 +11,7 @@ public class DateFormater {
     public static GregorianCalendar setDateFromData(Date date, String columnLabel){
 
     } */
-    public static GregorianCalendar ourDate(String date ){
+    public static GregorianCalendar ourDate(String date ) {
         int day = Integer.parseInt(date.substring(0,2));
         int month = Integer.parseInt(date.substring(3,5));
         int year = Integer.parseInt(date.substring(6,10));
@@ -20,7 +20,7 @@ public class DateFormater {
         return ourDate;
     }
 
-    public static java.sql.Date fromJavaToSqlDate(GregorianCalendar date){
+    public static java.sql.Date fromJavaToSqlDate(GregorianCalendar date) {
         java.sql.Date sqlDate = new java.sql.Date(date.getTimeInMillis());
         return sqlDate;
     }
