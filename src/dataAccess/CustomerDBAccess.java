@@ -290,8 +290,10 @@ public class CustomerDBAccess implements CustomerDataAccess {
                     preparedDeleteStatement.setInt(1, customer.getId());
 
                     affectedRowsNb = preparedDeleteStatement.executeUpdate();
+                    if(affectedRowsNb == 0) {
+                        connection.prepareStatement("ROLLBACK;").executeUpdate();
+                    }
                 } catch (SQLException exception) {
-
                     throw new DeleteQueryException(exception.getMessage());
                 }
             }
