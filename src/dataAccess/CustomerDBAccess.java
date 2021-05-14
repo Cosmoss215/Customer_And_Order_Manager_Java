@@ -154,7 +154,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
                         "VALUES(?,?,?,?,?,?,?,?,?,?,?);";
 
                 PreparedStatement preparedStatementCustomer = connection.prepareStatement(sqlInstructionCustomer);
-                setPreparedWritingStatement(preparedStatementCustomer, customer);
+                setPreparedWritingStatementForCustomer(preparedStatementCustomer, customer);
                 affectedRowsNbCustomer = preparedStatementCustomer.executeUpdate();
             }catch (SQLException throwables) {
                 throw  new CreateQueryException(throwables.getMessage());
@@ -185,7 +185,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
 
         try {
             //Add address
-            String sqlInstructionAddress = "UPDATE address SET street_name = ?, street_number = ?, box = ?, locality = ?, postal_code = ? ";
+            String sqlInstructionAddress = "UPDATE address SET street_name = ?, street_number = ?, box = ?, locality = ?, postal_code = ? WHERE id = ?;";
 
             Address address = customer.getAddress();
             PreparedStatement preparedStatementAddress = connection.prepareStatement(sqlInstructionAddress);
@@ -224,7 +224,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
                     "WHERE customer.id = ?;";
 
                 PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
-                setPreparedWritingStatement(preparedStatement, customer);
+                setPreparedWritingStatementForCustomer(preparedStatement, customer);
                 preparedStatement.setInt(12, customer.getId());
                 affectedRowsNb = preparedStatement.executeUpdate();
 
@@ -240,8 +240,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
      *                 UPDATE : you will need to add a setInt() instruction in order to get the customer's id which already exists
      * @throws SQLException needs to be caught with a catch() instruction in another method.
      */
-    private void setPreparedWritingStatement(PreparedStatement preparedStatement, Customer customer) throws SQLException {
-
+    private void setPreparedWritingStatementForCustomer(PreparedStatement preparedStatement, Customer customer) throws SQLException {
         preparedStatement.setString(1, customer.getFirstName());
         preparedStatement.setString(2, customer.getLastName());
         preparedStatement.setDate(3, DateFormater.fromJavaToSqlDate(customer.getRegistrationDate()));
@@ -262,6 +261,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
         preparedStatementAddress.setString(3, address.getBox());
         preparedStatementAddress.setString(4, address.getLocality().getName());
         preparedStatementAddress.setInt(5, address.getLocality().getPostalCode());
+        preparedStatementAddress.setInt(6, address.getId());
     }
     private void setPreparedWritingStatementForLocality(PreparedStatement preparedStatementLocality, Locality locality) throws SQLException {
 
@@ -285,6 +285,17 @@ public class CustomerDBAccess implements CustomerDataAccess {
             affectedRowsNb = preparedStatement.executeUpdate();
         } catch (SQLException exception) {
             throw new DeleteQueryException(exception.getMessage());
+        }
+        if(affectedRowsNb != 0){
+            try{
+                sqlInstruction = "DELETE FROM address WHERE address.id = ?;";
+                PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+                preparedStatement.setInt(1, customer.getAddress().getId());
+
+                affectedRowsNb = preparedStatement.executeUpdate();
+            } catch (SQLException exception) {
+                throw new DeleteQueryException(exception.getMessage());
+            }
         }
         return affectedRowsNb != 0;
     }
