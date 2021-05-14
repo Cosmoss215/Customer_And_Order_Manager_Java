@@ -34,7 +34,7 @@ public class CustomerManager {
     public boolean update(Customer customer) throws UpdateQueryException{
         return dao.update(customer);
     }
-    public boolean delete(Customer customer)throws DeleteQueryException{
+    public boolean delete(Customer customer)throws DeleteQueryException, UpdateQueryException{
         if (customer == null){
             throw new NullPointerException();
         }

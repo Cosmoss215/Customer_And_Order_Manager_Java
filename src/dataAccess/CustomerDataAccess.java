@@ -15,7 +15,7 @@ public interface CustomerDataAccess {
     ArrayList<Customer> getCustomersByName(String name) throws SelectQueryException;
 
     boolean update(Customer customer) throws UpdateQueryException;
-    boolean delete(Customer customer) throws DeleteQueryException;
+    boolean delete(Customer customer) throws DeleteQueryException, UpdateQueryException;
 }
 
 

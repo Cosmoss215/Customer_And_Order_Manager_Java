@@ -272,30 +272,31 @@ public class CustomerDBAccess implements CustomerDataAccess {
         preparedStatementLocality.setString(4, country.getCode());
     }
 
-
     @Override
-    public boolean delete(Customer customer) throws DeleteQueryException {
+    public boolean delete(Customer customer) throws DeleteQueryException, UpdateQueryException {
         int affectedRowsNb;
-        String sqlInstruction = "DELETE FROM customer WHERE customer.id = ?;";
+        String sqlUpdateInstruction = "UPDATE `order` SET `order`.customer = 0 WHERE `order`.customer = ? ;";
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
-            preparedStatement.setInt(1,customer.getId());
+            PreparedStatement preparedUpdateStatement = connection.prepareStatement(sqlUpdateInstruction);
+            preparedUpdateStatement.setInt(1,customer.getId());
 
-            affectedRowsNb = preparedStatement.executeUpdate();
-        } catch (SQLException exception) {
-            throw new DeleteQueryException(exception.getMessage());
-        }
-        if(affectedRowsNb != 0){
-            try{
-                sqlInstruction = "DELETE FROM address WHERE address.id = ?;";
-                PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
-                preparedStatement.setInt(1, customer.getAddress().getId());
+            affectedRowsNb = preparedUpdateStatement.executeUpdate();
 
-                affectedRowsNb = preparedStatement.executeUpdate();
-            } catch (SQLException exception) {
-                throw new DeleteQueryException(exception.getMessage());
+            if(affectedRowsNb != 0) {
+                String sqlDeleteInstruction = "DELETE FROM customer WHERE customer.id = ?;";
+                try {
+                    PreparedStatement preparedDeleteStatement = connection.prepareStatement(sqlDeleteInstruction);
+                    preparedDeleteStatement.setInt(1, customer.getId());
+
+                    affectedRowsNb = preparedDeleteStatement.executeUpdate();
+                } catch (SQLException exception) {
+
+                    throw new DeleteQueryException(exception.getMessage());
+                }
             }
+        } catch (SQLException exception) {
+            throw new UpdateQueryException(exception.getMessage());
         }
         return affectedRowsNb != 0;
     }

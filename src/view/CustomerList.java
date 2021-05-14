@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 
+import exception.UpdateQueryException;
 import model.*;
 import view.CustomerForm.CreateCustomerForm;
 import view.CustomerForm.CustomerForm;
@@ -145,7 +146,7 @@ public class CustomerList extends JFrame {
             customer = customersModel.getRow(row);
             try {
                 applicationControllerCustomer.delete(customer);
-            } catch (DeleteQueryException exception) {
+            } catch (DeleteQueryException | UpdateQueryException exception) {
                 JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
         });
