@@ -5,11 +5,11 @@ import model.*;
 import util.DateFormater;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.*;
 
 public class CustomerDBAccess implements CustomerDataAccess {
 
+    private static final String WITHOUT_DELETED = " AND c.id != 0";
     private Connection connection;
 
     public CustomerDBAccess() throws ConnectionException {
@@ -74,8 +74,8 @@ public class CustomerDBAccess implements CustomerDataAccess {
                 customers.add(customer);
             }
 
-        } catch (SQLException sqlException) {
-            throw new SelectQueryException();
+        } catch (SQLException exception) {
+            throw new SelectQueryException(exception.getMessage());
         }
 
         return customers;
@@ -83,30 +83,27 @@ public class CustomerDBAccess implements CustomerDataAccess {
 
     @Override
     public ArrayList<Customer> getAllCustomers() throws SelectQueryException {
-        return getCustomers("");
+        return getCustomers("WHERE c.id != 0");
     }
 
     @Override
     public ArrayList<Customer> getCustomersByCountry(String countrySearched) throws SelectQueryException {
-        String sqlWhereClause = "WHERE co.name IN ('" + countrySearched + "')";
-        return getCustomers(sqlWhereClause);
+        return getCustomers("WHERE co.name IN ('" + countrySearched + "')" + WITHOUT_DELETED);
     }
 
     @Override
     public ArrayList<Customer> getCustomersByNickname(String nickname) throws SelectQueryException {
-        String sqlWhereClause = "WHERE c.nickname LIKE ('%" + nickname + "%')";
-        return getCustomers(sqlWhereClause);
+        return getCustomers("WHERE c.nickname LIKE ('%" + nickname + "%')" + WITHOUT_DELETED);
     }
 
     @Override
     public ArrayList<Customer> getCustomersByName(String name) throws SelectQueryException {
-        String sqlWhereClause = "WHERE c.first_name LIKE ('%" + name + "%') OR c.last_name LIKE ('%" + name + "%')";
-        return getCustomers(sqlWhereClause);
+        return getCustomers("WHERE c.first_name LIKE ('%" + name + "%') OR c.last_name LIKE ('%" + name + "%')" + WITHOUT_DELETED);
     }
 
     @Override
     public boolean addCustomer(Customer customer) throws CreateQueryException {
-        int affectedRowsNbCustomer = 0;
+        int affectedRowsNbCustomer;
         int addressId;
         try {
 
@@ -155,8 +152,8 @@ public class CustomerDBAccess implements CustomerDataAccess {
                 PreparedStatement preparedStatementCustomer = connection.prepareStatement(sqlInstructionCustomer);
                 setPreparedWritingStatementForCustomer(preparedStatementCustomer, customer);
                 affectedRowsNbCustomer = preparedStatementCustomer.executeUpdate();
-            }catch (SQLException throwables) {
-                throw  new CreateQueryException(throwables.getMessage());
+            } catch (SQLException exception) {
+                throw  new CreateQueryException(exception.getMessage());
             }
 
         return affectedRowsNbCustomer != 0;
@@ -164,7 +161,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
 
     @Override
     public boolean update(Customer customer) throws UpdateQueryException {
-        int affectedRowsNb = 0;
+        int affectedRowsNb;
         try {
             String sqlSelectInstruction = "SELECT `name`,postal_code FROM locality WHERE `name` = \'%" + customer.getAddress().getLocality().getName() + "%\';";
             PreparedStatement preparedStatementSelectLocality = connection.prepareStatement(sqlSelectInstruction);
@@ -235,23 +232,11 @@ public class CustomerDBAccess implements CustomerDataAccess {
         preparedStatement.setString(1, customer.getFirstName());
         preparedStatement.setString(2, customer.getLastName());
         preparedStatement.setDate(3, DateFormater.fromJavaToSqlDate(customer.getRegistrationDate()));
-        preparedStatement.setByte(4, (customer.getVip() ? (byte) 1 : (byte) 0));
+        preparedStatement.setByte(4, customer.getVip() ? (byte) 1 : (byte) 0);
         preparedStatement.setString(5, customer.getNickname());
-
-        if (customer.getPhoneNumber() != null){
-            preparedStatement.setInt(6, customer.getPhoneNumber());
-        }
-        else{
-            preparedStatement.setNull(6,java.sql.Types.NULL);
-        }
+        preparedStatement.setInt(6, customer.getPhoneNumber() != null ? customer.getPhoneNumber() : java.sql.Types.NULL);
         preparedStatement.setString(7, customer.getEmail());
-
-        if (customer.getVatNumber() != null){
-            preparedStatement.setInt(8, customer.getVatNumber());
-        }
-        else{
-            preparedStatement.setNull(8,java.sql.Types.NULL);
-        }
+        preparedStatement.setInt(8, customer.getVatNumber() != null ? customer.getVatNumber() : java.sql.Types.NULL);
         preparedStatement.setString(9, customer.getIban());
         preparedStatement.setString(10, customer.getBic());
         preparedStatement.setInt(11, customer.getAddress().getId());
@@ -280,6 +265,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
         String sqlUpdateInstruction = "UPDATE `order` SET `order`.customer = 0 WHERE `order`.customer = ? ;";
 
         try {
+            connection.setSavepoint();
             PreparedStatement preparedUpdateStatement = connection.prepareStatement(sqlUpdateInstruction);
             preparedUpdateStatement.setInt(1,customer.getId());
 
@@ -292,8 +278,17 @@ public class CustomerDBAccess implements CustomerDataAccess {
                     preparedDeleteStatement.setInt(1, customer.getId());
 
                     affectedRowsNb = preparedDeleteStatement.executeUpdate();
-                    if(affectedRowsNb == 0) {
-                        connection.prepareStatement("ROLLBACK;").executeUpdate();
+                    if(affectedRowsNb == 0 || affectedRowsNb > 12) {
+                        connection.rollback();
+                    }
+                    else {
+                        preparedDeleteStatement = connection.prepareStatement("DELETE FROM address WHERE id = ? ");
+                        preparedDeleteStatement.setInt(1, customer.getId());
+
+                        int affectedAddressDeleteRowsNb = preparedDeleteStatement.executeUpdate();
+                        if(affectedAddressDeleteRowsNb == 0) {
+                            connection.rollback();
+                        }
                     }
                 } catch (SQLException exception) {
                     throw new DeleteQueryException(exception.getMessage());
@@ -302,6 +297,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
         } catch (SQLException exception) {
             throw new UpdateQueryException(exception.getMessage());
         }
-        return affectedRowsNb != 0;
+        return affectedRowsNb == 12;
     }
 }

@@ -14,9 +14,8 @@ public class SingletonConnection {
     private SingletonConnection() throws ConnectionException {
         try{
             connection = DriverManager.getConnection(url, id, password);
-        } catch (SQLException troubles) {
-            System.out.println(troubles.getMessage());
-            throw new ConnectionException();
+        } catch (SQLException exception) {
+            throw new ConnectionException(exception.getMessage());
         }
     }
     public static Connection getInstance() throws ConnectionException {

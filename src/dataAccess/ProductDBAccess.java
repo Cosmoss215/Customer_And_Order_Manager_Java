@@ -46,14 +46,13 @@ public class ProductDBAccess implements ProductDataAccess {
                 allProducts.add(product);
             }
 
-        } catch (SQLException e) {
-            throw new SelectQueryException();
+        } catch (SQLException exception) {
+            throw new SelectQueryException(exception.getMessage());
         }
 
         return allProducts;
     }
 
-    // ATTENTION : créer une exception qui va gérer en affichage les mauvaises insertions (strings);
     @Override
     public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException {
         ArrayList<CustomerByProduct> productByReference = new ArrayList<>();
@@ -80,9 +79,8 @@ public class ProductDBAccess implements ProductDataAccess {
                 );
                 productByReference.add(customerByProduct);
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new SelectQueryException();
+        } catch (SQLException exception) {
+            throw new SelectQueryException(exception.getMessage());
         }
 
         return productByReference;

@@ -8,7 +8,12 @@ public class NullException extends MainException{
     public NullException(String object){
         this.object = object;
     }
-    public String getTypeError(){ return typeError; }
 
-    public String getMessage(){ return message + "It was : " + object ; }
+    public String getTypeError(){
+        return typeError;
+    }
+
+    public String getMessage(){
+        return message + "It was : " + object ;
+    }
 }

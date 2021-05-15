@@ -100,8 +100,8 @@ public class OrderDBAccess implements OrderDataAccess {
                 );
                 allOrders.add(orderByCustomer);
             }
-        } catch (SQLException e) {
-            throw new SelectQueryException();
+        } catch (SQLException exception) {
+            throw new SelectQueryException(exception.getMessage());
         }
         return allOrders;
     }

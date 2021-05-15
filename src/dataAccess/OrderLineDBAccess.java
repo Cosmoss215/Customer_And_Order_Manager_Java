@@ -41,8 +41,8 @@ public class OrderLineDBAccess implements OrderLineDataAccess{
             Locality locality;
             Country country;
 
-        } catch (SQLException e) {
-            throw new SelectQueryException();
+        } catch (SQLException exception) {
+            throw new SelectQueryException(exception.getMessage());
         }
 
         return allOrderLine;

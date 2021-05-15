@@ -15,6 +15,6 @@ public class OrderStateException extends MainException {
         for(int i = 0; i < Order.STATES_NUMBER; i++){
             values += "\"" + Order.states[i] + "\" ";
         }
-        return values += ".";
+        return values;
     }
 }

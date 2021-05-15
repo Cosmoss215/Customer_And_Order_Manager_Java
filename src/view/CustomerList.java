@@ -128,13 +128,18 @@ public class CustomerList extends JFrame {
         jButtonUpdateCustomer.setFont(new Font("Tahoma", 0, 18));
         jButtonUpdateCustomer.setText("Edit customer");
         jButtonUpdateCustomer.addActionListener(evt -> {
-            Customer customer;
-            customer = customersModel.getRow(jTableCustomerList.getSelectedRow());
-            try {
-                EditCustomerForm editCustomerForm = new EditCustomerForm(color,"Edit customer",customer);
-                editCustomerForm.setVisible(true);
-            } catch (SelectQueryException | ConnectionException exception) {
-                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
+            if (jTableCustomerList.getSelectedRow() != -1) {
+                try {
+                    Customer customer;
+                    customer = customersModel.getRow(jTableCustomerList.getSelectedRow());
+                    EditCustomerForm editCustomerForm = new EditCustomerForm(color, "Edit customer", customer);
+                    editCustomerForm.setVisible(true);
+                } catch (SelectQueryException | ConnectionException exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Please select the customer you want to edit.", "Edit error", JOptionPane.WARNING_MESSAGE);
             }
         });
         jButtonDeleteCustomer.setBackground(new Color(255, 102, 102));

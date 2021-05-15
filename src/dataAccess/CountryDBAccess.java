@@ -36,8 +36,8 @@ public class CountryDBAccess implements CountryDataAccess {
                 allCountries.add(country);
             }
 
-    } catch (SQLException throwables) {
-            throw new SelectQueryException();
+    } catch (SQLException exception) {
+            throw new SelectQueryException(exception.getMessage());
         }
         return allCountries;
     }

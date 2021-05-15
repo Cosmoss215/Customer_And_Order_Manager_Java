@@ -40,8 +40,8 @@ public class LocalityDBAccess implements LocalityDataAccess{
                 );
                 allLocalities.add(locality);
             }
-        } catch (SQLException throwables) {
-            throw new SelectQueryException();
+        } catch (SQLException exception) {
+            throw new SelectQueryException(exception.getMessage());
         }
 
         return allLocalities;

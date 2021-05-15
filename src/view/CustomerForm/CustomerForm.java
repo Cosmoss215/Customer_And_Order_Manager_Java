@@ -255,7 +255,8 @@ public class CustomerForm extends JFrame {
             JOptionPane.showMessageDialog(null,"First name field is obligatory and the maximum length is (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldFirstName.setBorder(new LineBorder(Color.red,3));
             return false;
-        }else {
+        }
+        else {
             jTextFieldFirstName.setBorder(new LineBorder(Color.BLACK,1));
         }
 
@@ -263,7 +264,8 @@ public class CustomerForm extends JFrame {
             JOptionPane.showMessageDialog(null,"Last name field is obligatory and the maximum length is (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldLastName.setBorder(new LineBorder(Color.red,3));
             return false;
-        }else {
+        }
+        else {
             jTextFieldLastName.setBorder(new LineBorder(Color.BLACK,1));
         }
 
@@ -271,7 +273,8 @@ public class CustomerForm extends JFrame {
             JOptionPane.showMessageDialog(null,"The maximum length is reached (10)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldNickame.setBorder(new LineBorder(Color.red,3));
             return false;
-        }else {
+        }
+        else {
             jTextFieldNickame.setBorder(new LineBorder(Color.BLACK,1));
         }
 
