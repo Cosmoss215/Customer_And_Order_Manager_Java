@@ -265,21 +265,21 @@ public class CustomerDBAccess implements CustomerDataAccess {
         String sqlUpdateInstruction = "UPDATE `order` SET `order`.customer = 0 WHERE `order`.customer = ? ;";
 
         try {
-            //connection.setSavepoint();
+            connection.setAutoCommit(false);
+            connection.setSavepoint();
             PreparedStatement preparedUpdateStatement = connection.prepareStatement(sqlUpdateInstruction);
             preparedUpdateStatement.setInt(1,customer.getId());
 
             affectedRowsNb = preparedUpdateStatement.executeUpdate();
 
-            if(affectedRowsNb != 0) {
+            if(affectedRowsNb >= 0) {
                 String sqlDeleteInstruction = "DELETE FROM customer WHERE customer.id = ?;";
                 try {
                     PreparedStatement preparedDeleteStatement = connection.prepareStatement(sqlDeleteInstruction);
                     preparedDeleteStatement.setInt(1, customer.getId());
 
                     affectedRowsNb = preparedDeleteStatement.executeUpdate();
-                    if(affectedRowsNb == 0 || affectedRowsNb > 12) {
-                        System.out.println("ROLLBACK ! erreur delete custo");
+                    if(affectedRowsNb != 1) {
                         connection.rollback();
                     }
                     else {
@@ -287,8 +287,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
                         preparedDeleteStatement.setInt(1, customer.getAddress().getId());
 
                         int affectedAddressDeleteRowsNb = preparedDeleteStatement.executeUpdate();
-                        if(affectedAddressDeleteRowsNb == 0) {
-                            System.out.println("ROLLBACK ! erreur delete address");
+                        if(affectedAddressDeleteRowsNb != 1) {
                             connection.rollback();
                         }
                     }
