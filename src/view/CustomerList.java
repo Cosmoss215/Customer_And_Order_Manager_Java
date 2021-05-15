@@ -143,16 +143,20 @@ public class CustomerList extends JFrame {
             }
         });
         jButtonDeleteCustomer.setBackground(new Color(255, 102, 102));
-        jButtonDeleteCustomer.setFont(new Font("Tahoma", 0, 18)); //
+        jButtonDeleteCustomer.setFont(new Font("Tahoma", 0, 18));
         jButtonDeleteCustomer.setText("Delete customer");
         jButtonDeleteCustomer.addActionListener(evt -> {
-            Customer customer;
-            int row = jTableCustomerList.getSelectedRow();
-            customer = customersModel.getRow(row);
-            try {
-                applicationControllerCustomer.delete(customer);
-            } catch (DeleteQueryException | UpdateQueryException exception) {
-                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
+            if(jTableCustomerList.getSelectedRow() != -1) {
+                Customer customerToDelete;
+                customerToDelete = customersModel.getRow(jTableCustomerList.getSelectedRow());
+                try {
+                    applicationControllerCustomer.delete(customerToDelete);
+                } catch (DeleteQueryException | UpdateQueryException exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Please select the customer you want to delete.", "Delete error", JOptionPane.WARNING_MESSAGE);
             }
         });
 
