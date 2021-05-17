@@ -10,4 +10,8 @@ public class PaymentMethod {
         this.iban = iban;
         this.bic = bic;
     }
+
+    public String getWording() {
+        return wording;
+    }
 }

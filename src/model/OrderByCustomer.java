@@ -9,9 +9,9 @@ public class OrderByCustomer {
     private GregorianCalendar paymentDeadline;
     private Double price;
     private Customer customer;
-    private PaymentMethod paymentMethod;
+    private String paymentMethod;
 
-    public OrderByCustomer(Integer number, GregorianCalendar creationDate, GregorianCalendar paymentDeadline, Double price, Customer customer, PaymentMethod paymentMethod) {
+    public OrderByCustomer(Integer number, GregorianCalendar creationDate, GregorianCalendar paymentDeadline, Double price, Customer customer, String paymentMethod) {
         this.number = number;
         this.creationDate = creationDate;
         this.paymentDeadline = paymentDeadline;
@@ -40,7 +40,7 @@ public class OrderByCustomer {
         return customer;
     }
 
-    public PaymentMethod getPaymentMethod() {
+    public String getPaymentMethod() {
         return paymentMethod;
     }
 

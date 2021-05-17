@@ -88,13 +88,14 @@ public class OrderDBAccess implements OrderDataAccess {
                         data.getString("bic")
                 );
 
+
                 orderByCustomer = new OrderByCustomer(
                         data.getInt("id"),
                         creationDate,
                         paymentDeadline,
                         data.getDouble("sum"),
                         customer,
-                        paymentMethod
+                        paymentMethod.getWording()
                 );
                 arrayOfOrdersByCustomer.add(orderByCustomer);
             }
