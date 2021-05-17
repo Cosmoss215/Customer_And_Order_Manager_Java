@@ -9,17 +9,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class EditCustomerForm extends CustomerForm {
 
     private JButton jButtonCancelCustomer,jButtonEditCustomer;
     private Customer customer2;
-    public EditCustomerForm(Color color, String title,Customer customer) throws SelectQueryException, ConnectionException {
+    public EditCustomerForm(Color color, String title, Customer customer) throws SelectQueryException, ConnectionException {
         super(title,color);
 
         jButtonCancelCustomer = new JButton("Cancel");
@@ -40,17 +35,14 @@ public class EditCustomerForm extends CustomerForm {
         jButtonEditCustomer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 boolean updateResult = false;
-                if (verification())
-                {
+                if (isValidForm()) {
                     customer2 = addCustomer();
-                    ApplicationController applicationController = null;
+                    System.out.println("ici EditCustomerForm (ligne 40)"+customer2);
                     try {
-                        applicationController = new ApplicationController();
+                        ApplicationController applicationController = new ApplicationController();
+                        updateResult = applicationController.update(customer);
                     } catch (ConnectionException connectionException) {
                         JOptionPane.showMessageDialog(null,connectionException.getMessage(), connectionException.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                    }
-                    try {
-                        updateResult = applicationController.update(customer);
                     } catch (UpdateQueryException createQueryException) {
                         JOptionPane.showMessageDialog(null,createQueryException.getMessage(), createQueryException.getTypeError(), JOptionPane.WARNING_MESSAGE);
                     } catch (NullException nullException) {
@@ -63,6 +55,7 @@ public class EditCustomerForm extends CustomerForm {
             }
         });
 
+        // Pourquoi ne pas placer dans DateFormater ?
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         format.setCalendar(customer.getRegistrationDate());
         String dateFormatted = format.format(customer.getRegistrationDate().getTime());
@@ -75,7 +68,6 @@ public class EditCustomerForm extends CustomerForm {
         if (customer.getPhoneNumber() != null){
             jTextFieldPhoneNumber.setText(String.valueOf(customer.getPhoneNumber()));
         }
-
         jTextFieldEmail.setText(String.valueOf(customer.getEmail()));
         jTextFieldStreetWording.setText(customer.getAddress().getStreetName());
         streetNumberSelector.setValue(customer.getAddress().getStreetNumber());
@@ -86,7 +78,5 @@ public class EditCustomerForm extends CustomerForm {
         jTextFieldBIC.setText(customer.getBic());
         jTextFieldVATNumber.setText(String.valueOf(customer.getVatNumber()));
         jCheckBoxIsVIP.setSelected(customer.getVip());
-
-
     }
 }

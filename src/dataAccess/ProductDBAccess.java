@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ProductDBAccess implements ProductDataAccess {
-    private Connection connection;
+    private final Connection connection;
 
     public ProductDBAccess() throws ConnectionException {
         this.connection = SingletonConnection.getInstance();
@@ -20,7 +20,8 @@ public class ProductDBAccess implements ProductDataAccess {
 
         String sqlInstruction = "SELECT p.reference, p.wording, p.unit_price, p.stock_quantity, p.description, p.vat_code, v.rate " +
                                 "FROM product p " +
-                                "JOIN vat v ON p.vat_code = v.category;";
+                                "JOIN vat v ON p.vat_code = v.category " +
+                                "ORDER BY p.reference;";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);

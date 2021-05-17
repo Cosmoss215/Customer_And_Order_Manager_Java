@@ -26,6 +26,7 @@ public class SearchByProduct extends JFrame {
     private final JPanel panelTableByProduct;
 
     public SearchByProduct() throws SelectQueryException, ConnectionException, NullException {
+        super("Search product with reference");
         panelSearchBar = new JPanel();
         jLabelProduct = new JLabel();
         jTextFieldFindProduct = new JTextField();

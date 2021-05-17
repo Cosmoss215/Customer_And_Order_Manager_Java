@@ -15,7 +15,7 @@ public class Order {
     private PaymentMethod paymentMethod;
     private ArrayList<OrderLine> orderLines;
 
-    public static final String [] states = { "pending", "payed", "delivered" };
+    public static final String [] states = { "pending", "paid", "delivered" };
     public static final int STATES_NUMBER = 3;
 
     //region Constructors
@@ -95,4 +95,18 @@ public class Order {
         setState("pending");
     }
    //endregion
+
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "number=" + number +
+                ", creationDate=" + DateFormater.toString(creationDate) +
+                ", PaymentDeadline=" + DateFormater.toString(PaymentDeadline) +
+                ", state='" + state + '\'' +
+                ", customer=" + customer +
+                ", paymentMethod=" + paymentMethod +
+                ", orderLines=" + orderLines +
+                '}';
+    }
 }

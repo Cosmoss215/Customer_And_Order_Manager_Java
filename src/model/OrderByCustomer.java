@@ -1,6 +1,7 @@
 package model;
 
-import java.util.Calendar;
+import util.DateFormater;
+
 import java.util.GregorianCalendar;
 
 public class OrderByCustomer {
@@ -9,9 +10,9 @@ public class OrderByCustomer {
     private GregorianCalendar paymentDeadline;
     private Double price;
     private Customer customer;
-    private String paymentMethod;
+    private PaymentMethod paymentMethod;
 
-    public OrderByCustomer(Integer number, GregorianCalendar creationDate, GregorianCalendar paymentDeadline, Double price, Customer customer, String paymentMethod) {
+    public OrderByCustomer(Integer number, GregorianCalendar creationDate, GregorianCalendar paymentDeadline, Double price, Customer customer, PaymentMethod paymentMethod) {
         this.number = number;
         this.creationDate = creationDate;
         this.paymentDeadline = paymentDeadline;
@@ -40,23 +41,16 @@ public class OrderByCustomer {
         return customer;
     }
 
-    public String getPaymentMethod() {
+    public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
 
-    public String displayCreationDate(){
-        return creationDate.get(Calendar.DAY_OF_MONTH) + "/" + ((creationDate.get(Calendar.MONTH) + 1)<10?"0":"") + (creationDate.get(Calendar.MONTH) + 1) + "/" + creationDate.get(Calendar.YEAR);
-    }
-
-    public String displayPaymentDeadline(){
-        return paymentDeadline.get(Calendar.DAY_OF_MONTH) + "/" + ((paymentDeadline.get(Calendar.MONTH) + 1)<10?"0":"") + (paymentDeadline.get(Calendar.MONTH) + 1) + "/" + paymentDeadline.get(Calendar.YEAR);
-    }
     @Override
     public String toString() {
         return "OrderByCustomer{" +
                 "number=" + number +
-                ", creationDate=" + creationDate +
-                ", paymentDeadline=" + paymentDeadline +
+                ", creationDate=" + DateFormater.toString(creationDate)  +
+                ", paymentDeadline=" + DateFormater.toString(paymentDeadline) +
                 ", price=" + price +
                 ", customer=" + customer +
                 ", paymentMethod=" + paymentMethod +

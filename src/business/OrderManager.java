@@ -28,8 +28,13 @@ public class OrderManager {
     }
 
     public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId, GregorianCalendar startDate, GregorianCalendar endDate) throws SelectQueryException {
-        ArrayList<OrderByCustomer> orderByCustomer = dao.getAllOrders();
+        ArrayList<OrderByCustomer> orderByCustomer = dao.getOrdersByCustomer(customerId, startDate, endDate);
         return orderByCustomer;
 
+    }
+
+    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException {
+        ArrayList<OrderByCustomer> orderByCustomers = dao.getOrdersByCustomer(customerId);
+        return orderByCustomers;
     }
 }

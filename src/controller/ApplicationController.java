@@ -44,6 +44,7 @@ public class ApplicationController {
         if (customer == null){
             throw new NullException(customer.getClass().getName());
         }
+        System.out.println("ici ApplicationControler (ligne 47)" + customer);
         return customerManager.update(customer);
     }
     public boolean delete(Customer customer) throws DeleteQueryException, UpdateQueryException {
@@ -93,9 +94,13 @@ public class ApplicationController {
     }
 
     public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId, GregorianCalendar startDate, GregorianCalendar endDate) throws SelectQueryException {
-        ArrayList<OrderByCustomer> orderByCustomer = orderManager.getAllOrders();
+        ArrayList<OrderByCustomer> orderByCustomer = orderManager.getOrdersByCustomer(customerId, startDate, endDate);
         return orderByCustomer;
+    }
 
+    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException {
+        ArrayList<OrderByCustomer> orderByCustomers = orderManager.getOrdersByCustomer(customerId);
+        return orderByCustomers;
     }
     //endregion
 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class OrderLineDBAccess implements OrderLineDataAccess {
 
-    private Connection connection;
+    private final Connection connection;
 
     public OrderLineDBAccess()throws ConnectionException {
         this.connection = SingletonConnection.getInstance();

@@ -20,6 +20,7 @@ public class ProductList extends JFrame {
     private final JPanel panelAllProducts, panelSearchBar;
 
     public ProductList() throws ConnectionException, SelectQueryException {
+        super("Product List");
         panelSearchBar = new JPanel();
         jTextFieldSearch = new JTextField();
         jLabelProductList = new JLabel();

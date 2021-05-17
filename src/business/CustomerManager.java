@@ -29,6 +29,7 @@ public class CustomerManager {
         return customerArrayList;
     }
     public boolean addCustomer(Customer customer) throws CreateQueryException {
+        System.out.println("ici CustomerManager (ligne 32) " + customer);
             return dao.addCustomer(customer);
     }
     public boolean update(Customer customer) throws UpdateQueryException{

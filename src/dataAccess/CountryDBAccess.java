@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class CountryDBAccess implements CountryDataAccess {
 
-    private Connection connection;
+    private final Connection connection;
 
     public CountryDBAccess()throws ConnectionException {
         this.connection = SingletonConnection.getInstance();

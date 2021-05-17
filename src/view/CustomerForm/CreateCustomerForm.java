@@ -47,7 +47,7 @@ public class CreateCustomerForm extends CustomerForm {
         jButtonCreateCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
-                if (verification())
+                if (isValidForm())
                 {
                     customer = addCustomer();
                     System.out.println(customer);

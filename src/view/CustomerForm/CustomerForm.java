@@ -249,7 +249,7 @@ public class CustomerForm extends JFrame {
         panelForm.add(jCheckBoxIsVIP);
     }
 
-    protected boolean verification(){
+    protected boolean isValidForm(){
 
         if (jTextFieldFirstName.getText().length() > 50 || jTextFieldFirstName.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null,"First name field is obligatory and the maximum length is (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
@@ -405,6 +405,7 @@ public class CustomerForm extends JFrame {
         Address address = new Address(streetName, streetNumber, box, locality);
         Customer customer = new Customer(firstName, lastName, registrationDate, isVip, nickname, phoneNumber, email, vatNumber, iban, bic, address);
 
+        System.out.println("ici CustomerForm (ligne 408) :" + customer);
         return customer;
     }
 

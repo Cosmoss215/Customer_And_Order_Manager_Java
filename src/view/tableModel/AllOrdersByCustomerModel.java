@@ -1,24 +1,25 @@
 package view.tableModel;
 
+import model.Customer;
 import model.OrderByCustomer;
+import model.PaymentMethod;
 
 import javax.swing.table.AbstractTableModel;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class AllOrderByCustomerModel extends AbstractTableModel {
+public class AllOrdersByCustomerModel extends AbstractTableModel {
     private ArrayList<String> columnNames;
     private ArrayList<OrderByCustomer> content;
 
-    public AllOrderByCustomerModel(ArrayList<OrderByCustomer> customers) {
-        content = customers;
+    public AllOrdersByCustomerModel(ArrayList<OrderByCustomer> orders) {
+        content = orders;
         columnNames = new ArrayList<>();
         columnNames.add("Order number");
-        columnNames.add("Date Order");
+        columnNames.add("Creation Date");
+        columnNames.add("Payment deadline");
         columnNames.add("Total price");
         columnNames.add("Payment method");
-        columnNames.add("Payment deadline");
     }
 
     @Override
@@ -36,10 +37,10 @@ public class AllOrderByCustomerModel extends AbstractTableModel {
         OrderByCustomer orderByCustomer = content.get(rowIndex);
         switch(columnIndex) {
             case 0 : return orderByCustomer.getNumber();
-            case 1 : return orderByCustomer.displayCreationDate();
-            case 2 : return orderByCustomer.getPrice();
-            case 3 : return orderByCustomer.getPaymentMethod();
-            case 4 : return orderByCustomer.displayPaymentDeadline();
+            case 1 : return orderByCustomer.getCreationDate();
+            case 2 : return orderByCustomer.getPaymentDeadline();
+            case 3 : return orderByCustomer.getPrice();
+            case 4 : return orderByCustomer.getPaymentMethod();
             default : return null;
         }
     }
@@ -54,13 +55,12 @@ public class AllOrderByCustomerModel extends AbstractTableModel {
         {
             case 0: c = Integer.class;
                 break;
-            case 1: c = LocalDate.class;
+            case 1:
+            case 2: c = GregorianCalendar.class;
                 break;
-            case 2: c = Double.class;
+            case 3: c = Integer.class;
                 break;
-            case 3: c = String.class;
-                break;
-            case 4: c = LocalDate.class;
+            case 4: c = String.class;
                 break;
             default: c = String.class;
         }

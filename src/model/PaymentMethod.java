@@ -11,7 +11,12 @@ public class PaymentMethod {
         this.bic = bic;
     }
 
-    public String getWording() {
-        return wording;
+    @Override
+    public String toString() {
+        return "PaymentMethod{" +
+                "wording='" + wording + '\'' +
+                ", iban='" + iban + '\'' +
+                ", bic='" + bic + '\'' +
+                '}';
     }
 }

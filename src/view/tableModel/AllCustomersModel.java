@@ -4,6 +4,9 @@ import model.Customer;
 import javax.swing.table.AbstractTableModel;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
+import util.*;
 
 public class AllCustomersModel extends AbstractTableModel {
     private ArrayList<String> columnNames;
@@ -43,7 +46,7 @@ public class AllCustomersModel extends AbstractTableModel {
             case 0 : return customers.getId();
             case 1 : return customers.getFirstName()+" "+customers.getLastName();
             case 2 : return customers.getNickname();
-            case 3 : return customers.displayRegistrationDate();
+            case 3 : return DateFormater.toString(customers.getRegistrationDate());
             case 4 : return customers.getAddress();
             case 5 : return customers.getAddress().getLocality().getCountry();
             case 6 : return customers.getPhoneNumber();
@@ -69,7 +72,7 @@ public class AllCustomersModel extends AbstractTableModel {
                 break;
             case 2: c = String.class;
                 break;
-            case 3: c = LocalDate.class;
+            case 3: c = GregorianCalendar.class;
                 break;
             case 4: c = String.class;
                 break;

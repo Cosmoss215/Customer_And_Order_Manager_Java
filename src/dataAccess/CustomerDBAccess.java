@@ -9,8 +9,8 @@ import java.util.*;
 
 public class CustomerDBAccess implements CustomerDataAccess {
 
-    private static final String WITHOUT_DELETED = " AND c.id != 0";
-    private Connection connection;
+    private static final String WITHOUT_DELETED = " AND c.id != 0 ";
+    private final Connection connection;
 
     public CustomerDBAccess() throws ConnectionException {
         this.connection = SingletonConnection.getInstance();
@@ -24,7 +24,8 @@ public class CustomerDBAccess implements CustomerDataAccess {
                     "JOIN address a ON c.address = a.id " +
                     "JOIN locality l ON l.name = a.locality AND l.postal_code = a.postal_code " +
                     "JOIN country co ON l.country = co.code " +
-                    sqlWhereClause + ";";
+                    sqlWhereClause + " " +
+                    "ORDER BY c.id;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             ResultSet data = preparedStatement.executeQuery();
@@ -49,7 +50,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
                         country
                 );
                 address = new Address(
-                        data.getInt("id"),
+                        data.getInt("address"),
                         data.getString("street_name"),
                         data.getInt("street_number"),
                         data.getString("box"),
@@ -69,7 +70,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
                         data.getString("bic"),
                         address
                 );
-
+                System.out.println(country + " " + locality + " " + address + " " + customer);
                 customers.add(customer);
             }
 
@@ -103,36 +104,27 @@ public class CustomerDBAccess implements CustomerDataAccess {
     @Override
     public boolean addCustomer(Customer customer) throws CreateQueryException {
         int affectedRowsNbCustomer;
-        int addressId;
         try {
+                String sqlSelectLocality = "SELECT `name`, postal_code FROM locality " +
+                    "WHERE `name` = '" + customer.getAddress().getLocality().getName() + "' " +
+                    "AND postal_code = " + customer.getAddress().getLocality().getPostalCode() + ";";
 
-                String sqlSelectLocality = "SELECT `name`,postal_code FROM locality WHERE `name` = \'%" + customer.getAddress().getLocality().getName() + "%\';";
                 PreparedStatement preparedStatementSelectLocality = connection.prepareStatement(sqlSelectLocality);
 
                 if (!preparedStatementSelectLocality.execute()){
-                    String sqlInsertLocality = "INSERT INTO locality (`name`, postal_code, region, country) VALUES (?,?,?,?)";
+                    String sqlInsertLocality = "INSERT INTO locality (`name`, postal_code, region, country) VALUES (?,?,?,?);";
                     Locality locality = customer.getAddress().getLocality();
                     PreparedStatement preparedStatementLocality = connection.prepareStatement(sqlInsertLocality);
                     setPreparedWritingStatementForLocality(preparedStatementLocality,locality);
                     preparedStatementLocality.executeUpdate();
                 }
-                //Add address
-                String sqlInsertAddress = "INSERT INTO address (street_name, street_number, box, locality, postal_code) VALUES(?,?,?,?,?)";
+                //Create address
+                String sqlInsertAddress = "INSERT INTO address (street_name, street_number, box, locality, postal_code) VALUES(?,?,?,?,?);";
                 Address address = customer.getAddress();
                 PreparedStatement preparedStatementAddress = connection.prepareStatement(sqlInsertAddress);
 
                 setPreparedWritingStatementForAddress(preparedStatementAddress,address);
-
                 preparedStatementAddress.executeUpdate();
-
-                String sqlSelectAddress = "SELECT id  FROM address WHERE street_name IN (\'" + customer.getAddress().getStreetName() + "\') AND street_number IN (\'" + customer.getAddress().getStreetNumber() + "\')";
-                PreparedStatement preparedStatementSelectAddress = connection.prepareStatement(sqlSelectAddress);
-                ResultSet dataAddress = preparedStatementSelectAddress.executeQuery();
-
-                while (dataAddress.next()){
-                    addressId = dataAddress.getInt("id");
-                    customer.getAddress().setId(addressId);
-                }
 
                 String sqlInsertCustomer = "INSERT INTO customer (" +
                         "first_name, " +
@@ -150,6 +142,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
 
                 PreparedStatement preparedStatementCustomer = connection.prepareStatement(sqlInsertCustomer);
                 setPreparedWritingStatementForCustomer(preparedStatementCustomer, customer);
+                preparedStatementCustomer.setInt(11, customer.getAddress().getId());
                 affectedRowsNbCustomer = preparedStatementCustomer.executeUpdate();
             } catch (SQLException exception) {
                 throw  new CreateQueryException(exception.getMessage());
@@ -160,40 +153,38 @@ public class CustomerDBAccess implements CustomerDataAccess {
 
     @Override
     public boolean update(Customer customer) throws UpdateQueryException {
+        System.out.println("ici l'update (ligne 156) :" + customer);
         int affectedRowsNb;
         try {
-            String sqlSelectLocality = "SELECT `name`,postal_code FROM locality WHERE `name` = \'%" + customer.getAddress().getLocality().getName() + "%\';";
+            String sqlSelectLocality = "SELECT `name`, postal_code FROM locality " +
+                    "WHERE `name` = '" + customer.getAddress().getLocality().getName() + "' " +
+                    "AND postal_code = " + customer.getAddress().getLocality().getPostalCode() + ";";
+
             PreparedStatement preparedStatementSelectLocality = connection.prepareStatement(sqlSelectLocality);
 
-            if (!preparedStatementSelectLocality.execute()) {
-                //Locality was changed
-                String sqlUpdateLocality = "UPDATE locality SET `name` = ?, postal_code = ?, region = ?, country = ? " +
-                        "WHERE locality.name = ? AND locality.postal_code = ?;";
+            if (!preparedStatementSelectLocality.execute()){
+                //Create new locality
+                String sqlInsertLocality = "INSERT INTO locality (`name`, postal_code, region, country) VALUES (?,?,?,?);";
                 Locality locality = customer.getAddress().getLocality();
-                PreparedStatement preparedStatementLocality = connection.prepareStatement(sqlUpdateLocality);
+                PreparedStatement preparedStatementLocality = connection.prepareStatement(sqlInsertLocality);
                 setPreparedWritingStatementForLocality(preparedStatementLocality,locality);
-                preparedStatementLocality.setString(5, locality.getName());
-                preparedStatementLocality.setInt(6, locality.getPostalCode());
                 preparedStatementLocality.executeUpdate();
             }
-            //Add address
-            String sqlUpdateAddress = "UPDATE address SET street_name = ?, street_number = ?, box = ?, locality = ?, postal_code = ? WHERE id = ?;";
+            //Update address
+            String sqlUpdateAddress = "UPDATE address " +
+                    "SET street_name = ?, " +
+                    "street_number = ?, " +
+                    "box = ?, " +
+                    "locality = ?, " +
+                    "postal_code = ? " +
+                    "WHERE id = ?;";
 
             Address address = customer.getAddress();
             PreparedStatement preparedStatementAddress = connection.prepareStatement(sqlUpdateAddress);
+
             setPreparedWritingStatementForAddress(preparedStatementAddress,address);
-            preparedStatementAddress.setInt(6, address.getId());
+            preparedStatementAddress.setInt(6, customer.getAddress().getId());
             preparedStatementAddress.executeUpdate();
-
-            String sqlSelectAddress = "SELECT id  FROM address WHERE street_name IN (\'" + customer.getAddress().getStreetName() + "\') AND street_number IN (\'" + customer.getAddress().getStreetNumber() + "\')";
-            PreparedStatement preparedStatementSelectAddress = connection.prepareStatement(sqlSelectAddress);
-            ResultSet dataAddress = preparedStatementSelectAddress.executeQuery();
-
-            while (dataAddress.next()) {
-                int addressId = dataAddress.getInt("id");
-                customer.getAddress().setId(addressId);
-            }
-
             String sqlInstruction =
                     "UPDATE customer " +
                     "SET first_name = ?, " +
@@ -205,13 +196,12 @@ public class CustomerDBAccess implements CustomerDataAccess {
                         "email = ?, " +
                         "vat_number = ?, " +
                         "iban = ?, " +
-                        "bic = ?, " +
-                        "address = ? " +
-                    "WHERE customer.id = ?;";
+                        "bic = ? " +
+                    "WHERE id = ?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             setPreparedWritingStatementForCustomer(preparedStatement, customer);
-            preparedStatement.setInt(12, customer.getId());
+            preparedStatement.setInt(11, customer.getId());
             affectedRowsNb = preparedStatement.executeUpdate();
 
             } catch (SQLException sqlException) {
@@ -238,7 +228,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
         preparedStatement.setInt(8, customer.getVatNumber() != null ? customer.getVatNumber() : java.sql.Types.NULL);
         preparedStatement.setString(9, customer.getIban());
         preparedStatement.setString(10, customer.getBic());
-        preparedStatement.setInt(11, customer.getAddress().getId());
     }
 
     private void setPreparedWritingStatementForAddress(PreparedStatement preparedStatementAddress, Address address) throws SQLException {
@@ -248,6 +237,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
         preparedStatementAddress.setString(3, address.getBox());
         preparedStatementAddress.setString(4, address.getLocality().getName());
         preparedStatementAddress.setInt(5, address.getLocality().getPostalCode());
+
     }
     private void setPreparedWritingStatementForLocality(PreparedStatement preparedStatementLocality, Locality locality) throws SQLException {
 

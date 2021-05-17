@@ -7,21 +7,20 @@ import util.DateFormater;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class OrderDBAccess implements OrderDataAccess {
 
-    private Connection connection;
+    private final Connection connection;
 
     public OrderDBAccess() throws ConnectionException {
         this.connection = SingletonConnection.getInstance();
     }
 
     public ArrayList<OrderByCustomer> getOrders(String sqlWhereClause) throws SelectQueryException {
-        ArrayList<OrderByCustomer> arrayOfOrdersByCustomer = new ArrayList<>();
+        ArrayList<OrderByCustomer> ordersByCustomer = new ArrayList<>();
         try {
-            String sqlInstruction = "SELECT o.*, p.*, c.*, a.*, l.*, co.*, sum(ol.all_taxes_included_price * ol.quantity) as 'sum' " +
+            String sqlInstruction = "SELECT DISTINCT o.*, p.*, c.*, a.*, l.*, co.*, SUM(ol.all_taxes_included_price * ol.quantity) AS 'sum' " +
                     "FROM `order` o " +
                     "JOIN order_line ol ON ol.order = o.number " +
                     "JOIN payment_method p ON o.payment_method = p.wording " +
@@ -29,7 +28,8 @@ public class OrderDBAccess implements OrderDataAccess {
                     "JOIN address a ON c.address = a.id " +
                     "JOIN locality l ON l.name = a.locality AND l.postal_code = a.postal_code " +
                     "JOIN country co ON l.country = co.code " +
-                    sqlWhereClause + ";";
+                    sqlWhereClause + " AND c.id != 0 " +
+                    "GROUP BY o.number ORDER BY c.id AND o.creation_date;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             ResultSet data = preparedStatement.executeQuery();
@@ -88,21 +88,20 @@ public class OrderDBAccess implements OrderDataAccess {
                         data.getString("bic")
                 );
 
-
                 orderByCustomer = new OrderByCustomer(
-                        data.getInt("id"),
+                        data.getInt("number"),
                         creationDate,
                         paymentDeadline,
                         data.getDouble("sum"),
                         customer,
-                        paymentMethod.getWording()
+                        paymentMethod
                 );
-                arrayOfOrdersByCustomer.add(orderByCustomer);
+                ordersByCustomer.add(orderByCustomer);
             }
         } catch (SQLException exception) {
             throw new SelectQueryException(exception.getMessage());
         }
-        return arrayOfOrdersByCustomer;
+        return ordersByCustomer;
     }
 
 
@@ -115,14 +114,17 @@ public class OrderDBAccess implements OrderDataAccess {
     public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId, GregorianCalendar startDate, GregorianCalendar endDate) throws SelectQueryException {
         String sqlWhereClause = "WHERE o.creation_date " +
                 "BETWEEN " +
-                    "STR_TO_DATE('" + startDate.get(Calendar.DAY_OF_MONTH) + "/" +
-                    startDate.get(Calendar.MONTH+1) + "/" +
-                    startDate.get(Calendar.YEAR) + "', '%d/%m/%Y') " +
+                    "STR_TO_DATE('" + DateFormater.toString(startDate) + "', '%d/%m/%Y') " +
                     "AND " +
-                    "STR_TO_DATE('" + endDate.get(Calendar.DAY_OF_MONTH) + "/" +
-                    endDate.get(Calendar.MONTH+1) + "/" +
-                    endDate.get(Calendar.YEAR) + "', '%d/%m/%Y') " +
-                "AND c.id = " + customerId + ";";
+                    "STR_TO_DATE('" + DateFormater.toString(endDate) + "', '%d/%m/%Y') " +
+                "AND c.id = " + customerId;
+
+        return getOrders(sqlWhereClause);
+    }
+    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException {
+        String sqlWhereClause = "WHERE o.creation_date " +
+                "BETWEEN c.registration_date AND SYSDATE() " +
+                "AND c.id = " + customerId;
 
         return getOrders(sqlWhereClause);
     }

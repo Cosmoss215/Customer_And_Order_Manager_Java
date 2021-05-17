@@ -42,6 +42,7 @@ public class CreateOrder extends JFrame {
     JTable jTableTotal,jTableOrderInformation;
 
     public CreateOrder() throws ConnectionException, SelectQueryException {
+        super("Create Order");
         panelOrderInformation = new JPanel();
         jLabelCustomer = new JLabel();
         jTextFieldCustomerName = new JTextField();

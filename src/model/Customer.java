@@ -1,5 +1,6 @@
 package model;
 
+import util.DateFormater;
 import util.Verification;
 
 import java.time.LocalDate;
@@ -115,18 +116,14 @@ public class Customer {
 
     //endregion
     //region display
-    public String displayRegistrationDate(){
-        return registrationDate.get(Calendar.DAY_OF_MONTH) + "/" + ((registrationDate.get(Calendar.MONTH) + 1)<10?"0":"") + (registrationDate.get(Calendar.MONTH) + 1) + "/" + registrationDate.get(Calendar.YEAR);
-    }
+
     @Override
     public String toString() {
         return "Customer{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", registrationDate=" + registrationDate.get(Calendar.DAY_OF_MONTH) + "/"
-                                      + registrationDate.get(Calendar.MONTH+1) + "/"
-                                      + registrationDate.get(Calendar.YEAR) +
+                ", registrationDate=" + DateFormater.toString(registrationDate) +
                 ", isVip=" + isVip +
                 ", nickname='" + nickname + '\'' +
                 ", phoneNumber=" + phoneNumber +
