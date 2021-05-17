@@ -1,8 +1,9 @@
 package model;
 
 import exception.OrderStateException;
+import util.DateFormater;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Order {
@@ -12,6 +13,7 @@ public class Order {
     private String state;
     private Customer customer;
     private PaymentMethod paymentMethod;
+    private ArrayList<OrderLine> orderLines;
 
     public static final String [] states = { "pending", "payed", "delivered" };
     public static final int STATES_NUMBER = 3;
@@ -19,28 +21,28 @@ public class Order {
     //region Constructors
     /** Full constructor
     */
-    public Order(Integer number, GregorianCalendar creationDate, GregorianCalendar paymentDeadline, String state, Customer customer, PaymentMethod paymentMethod) {
+    public Order(Integer number, GregorianCalendar creationDate, GregorianCalendar paymentDeadline, String state, Customer customer, PaymentMethod paymentMethod, ArrayList<OrderLine> orderLines) {
         setNumber(number);
         setCreationDate(creationDate);
         setPaymentDeadline(paymentDeadline);
         setState(state);
         this.customer = customer;
         this.paymentMethod = paymentMethod;
+        this.orderLines = orderLines;
     }
     //region overload constructor
      /**  SQL DB constructor (auto_incremented ID)
      * Use this constructor if you want to create an order that already exists (FROM VIEW) to put in the DB (which will create a proper ID)
      * */
     public Order(GregorianCalendar creationDate, GregorianCalendar paymentDeadline, String state, Customer customer, PaymentMethod paymentMethod) {
-        this(null, creationDate, paymentDeadline, state, customer, paymentMethod);
+        this(null, creationDate, paymentDeadline, state, customer, paymentMethod, null);
     }
     /** Light constructor
-    * It will let DB set the ID, the default creation date will be set to today() and the default state will be set to "pending"
+    * It will let DB set the ID, the default creation date will be set to this current day and the default state will be set to "pending"
     */
     public Order(GregorianCalendar paymentDeadline, Customer customer, PaymentMethod paymentMethod) {
-        this(null, null, paymentDeadline, "pending", customer, paymentMethod);
+        this(null, DateFormater.today(), paymentDeadline, "pending", customer, paymentMethod, null);
         setState();
-        setCreationDate();
     }
     //endregion
     //endregion
@@ -78,17 +80,11 @@ public class Order {
     private void setCreationDate(GregorianCalendar creationDate) {
         this.creationDate = creationDate;
     }
-    private void setCreationDate(){
-        LocalDate today = LocalDate.now();
-        GregorianCalendar creationDate = new GregorianCalendar(today.getYear(), today.getMonthValue() - 1, today.getDayOfMonth());
-        setCreationDate(creationDate);
-    }
     private void setPaymentDeadline(GregorianCalendar paymentDeadline) {
         PaymentDeadline = paymentDeadline;
     }
     private void setState(String state) { // throws OrderStateException ?
-
-        if(state.equals(states[0]) || state.equals(states[1]) || state.equals(states[2])){
+        if(state.equals(states[0]) || state.equals(states[1]) || state.equals(states[2])) {
             this.state = state;
         }
         else {

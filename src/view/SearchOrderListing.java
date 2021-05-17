@@ -7,6 +7,7 @@ import model.Customer;
 import model.CustomerByProduct;
 import model.OrderByCustomer;
 import util.DateFormater;
+import util.Verification;
 import view.tableModel.AllCustomersByProductModel;
 import view.tableModel.AllCustomersModel;
 import view.tableModel.AllOrderByCustomerModel;
@@ -17,7 +18,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 
@@ -72,10 +75,15 @@ public class SearchOrderListing extends JFrame {
 
         searchButton = new JButton("Search");
         searchButton.addActionListener(evt -> {
-            GregorianCalendar startDate = DateFormater.ourDate(startDateSelector.getText());
-            GregorianCalendar endDate = DateFormater.ourDate(endDateSelector.getText());
             try {
-                initTable(customerId,startDate,endDate);
+                if(Verification.dateVerification(startDateSelector.getText()) && Verification.dateVerification(endDateSelector.getText())) {
+                    GregorianCalendar startDate = DateFormater.ourDate(startDateSelector.getText());
+                    GregorianCalendar endDate = DateFormater.ourDate(endDateSelector.getText());
+                    initTable(customerId, startDate, endDate);
+                }
+                else {
+                    initTable(customerId);
+                }
                 jScrollTableOrderList.setViewportView(jTableOrderList);
             } catch (ConnectionException | SelectQueryException exception) {
                 JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
@@ -96,6 +104,10 @@ public class SearchOrderListing extends JFrame {
         jScrollTableOrderList = new JScrollPane(jTableOrderList);
         jTableOrderList.getTableHeader().setReorderingAllowed(false);
         jScrollTableOrderList.setViewportView(jTableOrderList);
+    }
+
+    private void initTable(int customerId) throws ConnectionException, SelectQueryException {
+        initTable(customerId, customers.get(0).getRegistrationDate(), DateFormater.today());
     }
 
     private void initJLabel(){

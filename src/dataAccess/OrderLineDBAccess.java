@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OrderLineDBAccess implements OrderLineDataAccess{
+public class OrderLineDBAccess implements OrderLineDataAccess {
 
     private Connection connection;
 
@@ -52,4 +52,11 @@ public class OrderLineDBAccess implements OrderLineDataAccess{
     public ArrayList<OrderLine> getAllOrderLine() throws SelectQueryException {
         return getOrderLines("");
     }
+    /*
+    public ArrayList<OrderLine> getOrderLinesByOrder(int orderNumber) throws SelectQueryException {
+        try {
+            String sqlSelect = "SELECT DISTINCT "
+        }
+    }
+    */
 }

@@ -57,13 +57,13 @@ public class AllOrderByCustomerModel extends AbstractTableModel {
         {
             case 0: c = Integer.class;
                 break;
-            case 1: c = LocalDate.class;
+            case 1: c = GregorianCalendar.class;
                 break;
             case 2: c = Integer.class;
                 break;
             case 3: c = String.class;
                 break;
-            case 4: c = LocalDate.class;
+            case 4: c = GregorianCalendar.class;
                 break;
             default: c = String.class;
         }

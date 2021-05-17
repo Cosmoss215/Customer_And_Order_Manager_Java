@@ -124,7 +124,9 @@ public class Customer {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", registrationDate=" + registrationDate +
+                ", registrationDate=" + registrationDate.get(Calendar.DAY_OF_MONTH) + "/"
+                                      + registrationDate.get(Calendar.MONTH+1) + "/"
+                                      + registrationDate.get(Calendar.YEAR) +
                 ", isVip=" + isVip +
                 ", nickname='" + nickname + '\'' +
                 ", phoneNumber=" + phoneNumber +
