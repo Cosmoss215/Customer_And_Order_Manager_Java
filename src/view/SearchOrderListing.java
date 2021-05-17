@@ -36,6 +36,10 @@ public class SearchOrderListing extends JFrame {
     private final JPanel panelTableOrderList;
     private JTable jTableOrderList;
     private ArrayList<Customer> customers;
+    protected ArrayList<OrderByCustomer> orderByCustomer;
+
+    private ApplicationController applicationControllerCustomer;
+    private  AllOrderByCustomerModel orderByCustomerModel;
 
     private JButton searchButton;
 
@@ -49,6 +53,8 @@ public class SearchOrderListing extends JFrame {
         jLabelTo = new JLabel();
         panelTableOrderList = new JPanel();
         jScrollTableOrderList = new JScrollPane();
+
+        jTableOrderList = new JTable();
 
         ApplicationController allCustomers = new ApplicationController();
         customers = allCustomers.getAllCustomers();
@@ -74,17 +80,24 @@ public class SearchOrderListing extends JFrame {
         endDateSelector.setFont(new Font("Tahoma", 0, 18));
 
         searchButton = new JButton("Search");
+
+        GregorianCalendar startDates = new GregorianCalendar(2021,1,1);
+        GregorianCalendar endDates = new GregorianCalendar(2021,1,05);
+
+        initTable(customerId, startDates, endDates);
+
         searchButton.addActionListener(evt -> {
             try {
                 if(Verification.dateVerification(startDateSelector.getText()) && Verification.dateVerification(endDateSelector.getText())) {
+                    System.out.println(customerId);
                     GregorianCalendar startDate = DateFormater.ourDate(startDateSelector.getText());
                     GregorianCalendar endDate = DateFormater.ourDate(endDateSelector.getText());
+
                     initTable(customerId, startDate, endDate);
                 }
                 else {
                     initTable(customerId);
                 }
-                jScrollTableOrderList.setViewportView(jTableOrderList);
             } catch (ConnectionException | SelectQueryException exception) {
                 JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
@@ -96,15 +109,16 @@ public class SearchOrderListing extends JFrame {
     }
 
     private void initTable(int customerId, GregorianCalendar startDate,GregorianCalendar endDate) throws ConnectionException, SelectQueryException {
-        ApplicationController applicationControllerCustomer = new ApplicationController();
-        customers = applicationControllerCustomer.getAllCustomers();
-        AllCustomersModel customersModel = new AllCustomersModel(customers);
-        jTableOrderList = new JTable(customersModel);
+        applicationControllerCustomer = new ApplicationController();
+        orderByCustomer = applicationControllerCustomer.getOrdersByCustomer(customerId,startDate,endDate);
+        orderByCustomerModel = new AllOrderByCustomerModel(orderByCustomer);
+        jTableOrderList = new JTable(orderByCustomerModel);
         jTableOrderList.setAutoCreateRowSorter(true);
         jScrollTableOrderList = new JScrollPane(jTableOrderList);
         jTableOrderList.getTableHeader().setReorderingAllowed(false);
         jScrollTableOrderList.setViewportView(jTableOrderList);
     }
+
 
     private void initTable(int customerId) throws ConnectionException, SelectQueryException {
         initTable(customerId, customers.get(0).getRegistrationDate(), DateFormater.today());

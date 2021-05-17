@@ -1,13 +1,10 @@
 package view.tableModel;
 
-import model.Customer;
 import model.OrderByCustomer;
-import model.PaymentMethod;
 
 import javax.swing.table.AbstractTableModel;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class AllOrderByCustomerModel extends AbstractTableModel {
@@ -39,10 +36,10 @@ public class AllOrderByCustomerModel extends AbstractTableModel {
         OrderByCustomer orderByCustomer = content.get(rowIndex);
         switch(columnIndex) {
             case 0 : return orderByCustomer.getNumber();
-            case 1 : return orderByCustomer.getCreationDate();
+            case 1 : return orderByCustomer.displayCreationDate();
             case 2 : return orderByCustomer.getPrice();
             case 3 : return orderByCustomer.getPaymentMethod();
-            case 4 : return orderByCustomer.getPaymentDeadline();
+            case 4 : return orderByCustomer.displayPaymentDeadline();
             default : return null;
         }
     }
@@ -57,13 +54,13 @@ public class AllOrderByCustomerModel extends AbstractTableModel {
         {
             case 0: c = Integer.class;
                 break;
-            case 1: c = GregorianCalendar.class;
+            case 1: c = LocalDate.class;
                 break;
-            case 2: c = Integer.class;
+            case 2: c = Double.class;
                 break;
             case 3: c = String.class;
                 break;
-            case 4: c = GregorianCalendar.class;
+            case 4: c = LocalDate.class;
                 break;
             default: c = String.class;
         }

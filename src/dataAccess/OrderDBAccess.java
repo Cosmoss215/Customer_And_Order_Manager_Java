@@ -19,7 +19,7 @@ public class OrderDBAccess implements OrderDataAccess {
     }
 
     public ArrayList<OrderByCustomer> getOrders(String sqlWhereClause) throws SelectQueryException {
-        ArrayList<OrderByCustomer> ordersByCustomer = new ArrayList<>();
+        ArrayList<OrderByCustomer> arrayOfOrdersByCustomer = new ArrayList<>();
         try {
             String sqlInstruction = "SELECT o.*, p.*, c.*, a.*, l.*, co.*, sum(ol.all_taxes_included_price * ol.quantity) as 'sum' " +
                     "FROM `order` o " +
@@ -96,12 +96,12 @@ public class OrderDBAccess implements OrderDataAccess {
                         customer,
                         paymentMethod
                 );
-                ordersByCustomer.add(orderByCustomer);
+                arrayOfOrdersByCustomer.add(orderByCustomer);
             }
         } catch (SQLException exception) {
             throw new SelectQueryException(exception.getMessage());
         }
-        return ordersByCustomer;
+        return arrayOfOrdersByCustomer;
     }
 
 
