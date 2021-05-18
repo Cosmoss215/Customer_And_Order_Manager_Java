@@ -256,16 +256,19 @@ public class CustomerList extends JFrame {
         String complete = "";
         int start = txt.length();
         int last = txt.length();
-        int a;
 
-        for(a = 0; a < customers.size();a++)
-        {
-            if (customers.get(a).getFirstName().startsWith(txt) || customers.get(a).getLastName().startsWith(txt)) {
-                complete = customers.get(a).getLastName() + " " +customers.get(a).getFirstName();
+        int currentCustomer = 0;
+        Boolean isFind = false;
+        while (currentCustomer < customers.size() && !isFind){
+
+            if (customers.get(currentCustomer).getFirstName().startsWith(txt) || customers.get(currentCustomer).getLastName().startsWith(txt)) {
+                complete = customers.get(currentCustomer).getLastName() + " " +customers.get(currentCustomer).getFirstName();
                 last = complete.length();
-                break;
+                isFind = true;
             }
+            currentCustomer++;
         }
+
         if (last > start) {
             jTextFieldSearchBar.setText(complete);
             jTextFieldSearchBar.setCaretPosition(last);

@@ -414,24 +414,39 @@ public class CustomerForm extends JFrame {
         Integer postalCodeComplete = null;
         int start = txt.length();
         int last = txt.length();
-        int a;
 
-        for(a = 0; a < locality.size();a++)
+        int currentLocality = 0;
+        Boolean isFind = false;
+
+        while (currentLocality < locality.size() && !isFind){
+
+            if (locality.get(currentLocality).getName().startsWith(txt)) {
+                localityComplete = locality.get(currentLocality).getName();
+                regionComplete = locality.get(currentLocality).getRegion();
+                postalCodeComplete = locality.get(currentLocality).getPostalCode();
+                last = localityComplete.length();
+                isFind = true;
+            }
+            currentLocality++;
+        }
+
+        for(currentLocality = 0; currentLocality < locality.size();currentLocality++)
         {
-            if (locality.get(a).getName().startsWith(txt)) {
-                localityComplete = locality.get(a).getName();
-                regionComplete = locality.get(a).getRegion();
-                postalCodeComplete = locality.get(a).getPostalCode();
+            if (locality.get(currentLocality).getName().startsWith(txt)) {
+                localityComplete = locality.get(currentLocality).getName();
+                regionComplete = locality.get(currentLocality).getRegion();
+                postalCodeComplete = locality.get(currentLocality).getPostalCode();
                 last = localityComplete.length();
                 break;
             }
         }
+
         if (last > start) {
             jTextFieldLocality.setText(localityComplete);
             jTextFieldRegion.setText(regionComplete);
             postalCodeSelector.setValue(postalCodeComplete);
             int nb = 0;
-            switch (locality.get(a).getCountry().getCode()){
+            switch (locality.get(currentLocality).getCountry().getCode()){
                 case "BE" : nb = 0;
                     break;
                 case "FR" : nb = 1;
