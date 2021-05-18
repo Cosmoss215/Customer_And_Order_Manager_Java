@@ -213,17 +213,18 @@ public class SearchOrderListing extends JFrame {
         int start = txt.length();
         int last = txt.length();
 
-        int currentCustomer = 0;
-        Boolean isFind = false;
-        while (currentCustomer < customers.size() && !isFind){
 
-            if (customers.get(currentCustomer).getFirstName().startsWith(txt) || customers.get(currentCustomer).getLastName().startsWith(txt)) {
-                complete = customers.get(currentCustomer).getLastName() + " " +customers.get(currentCustomer).getFirstName();
-                customerId = customers.get(currentCustomer).getId();
+        int iCurrentCustomer = 0;
+        Boolean isFind = false;
+        while (iCurrentCustomer < customers.size() && !isFind){
+            Customer currentCustomer = customers.get(iCurrentCustomer);
+            if (currentCustomer .getFirstName().startsWith(txt) || currentCustomer .getLastName().startsWith(txt)) {
+                complete = currentCustomer.getLastName() + " " +currentCustomer.getFirstName();
+                customerId = currentCustomer.getId();
                 last = complete.length();
                 isFind = true;
             }
-            currentCustomer++;
+            iCurrentCustomer++;
         }
 
         if (last > start) {
