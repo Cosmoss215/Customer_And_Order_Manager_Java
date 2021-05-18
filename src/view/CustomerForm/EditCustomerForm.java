@@ -60,12 +60,14 @@ public class EditCustomerForm extends CustomerForm {
         jTextFieldRegistrationDate.setText(DateFormater.toString(customerFromView.getRegistrationDate()));
 
         if (customerFromView.getPhoneNumber() != null){
-            jTextFieldPhoneNumber.setText("0" +customerFromView.getPhoneNumber());
+            jTextFieldPhoneNumber.setText(String.valueOf(customerFromView.getPhoneNumber()));
         }
+
 
         if (customerFromView.getEmail() != null){
             jTextFieldEmail.setText(String.valueOf(customerFromView.getEmail()));
         }
+
 
         jTextFieldStreetWording.setText(customerFromView.getAddress().getStreetName());
         streetNumberSelector.setValue(customerFromView.getAddress().getStreetNumber());
