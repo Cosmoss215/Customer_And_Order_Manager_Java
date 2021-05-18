@@ -109,14 +109,12 @@ public class SearchOrderListing extends JFrame {
     private void initTable(int customerId) throws ConnectionException, SelectQueryException {
         ApplicationController applicationController = new ApplicationController();
         orders = applicationController.getOrdersByCustomer(customerId);
-
         initJTableOrderList(orders);
     }
 
     private void initJLabel(){
         jLabelCustomerName.setFont(new Font("Tahoma", 0, 18));
         jLabelCustomerName.setText("Customer's name");
-
         jLabelFrom.setFont(new Font("Dialog", 0, 18));
         jLabelFrom.setText("From");
         jLabelTo.setFont(new Font("Dialog", 0, 18));
