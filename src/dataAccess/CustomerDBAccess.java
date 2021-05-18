@@ -258,7 +258,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
     public boolean delete(Customer customer) throws DeleteQueryException, UpdateQueryException {
         int affectedRowsNb;
         String sqlUpdateInstruction = "UPDATE `order` SET `order`.customer = 0 WHERE `order`.customer = ? ;";
-
         try {
             connection.setAutoCommit(false);
             connection.setSavepoint();
@@ -286,6 +285,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
                             connection.rollback();
                         }
                     }
+                    connection.commit();
                 } catch (SQLException exception) {
                     throw new DeleteQueryException(exception.getMessage());
                 }

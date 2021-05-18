@@ -75,16 +75,14 @@ public class CustomerList extends JFrame {
 
         jButtonSearch.setFont(new Font("Tahoma", 0, 18));
         jButtonSearch.setText("Refresh");
-        jButtonSearch.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                try {
-                    customers =  applicationControllerCustomer.getAllCustomers();
-                } catch (SelectQueryException exception) {
-                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                }
-                customersModel = new AllCustomersModel(customers);
-                jTableCustomerList.setModel(customersModel);
+        jButtonSearch.addActionListener(evt -> {
+            try {
+                customers =  applicationControllerCustomer.getAllCustomers();
+            } catch (SelectQueryException exception) {
+                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
+            customersModel = new AllCustomersModel(customers);
+            jTableCustomerList.setModel(customersModel);
         });
 
         jTextFieldSearchBar.setFont(new Font("Tahoma", 0, 18));;
@@ -111,15 +109,13 @@ public class CustomerList extends JFrame {
         jButtonCreateCustomer.setBackground(new Color(0, 204, 0));
         jButtonCreateCustomer.setFont(new Font("Tahoma", 0, 18)); //
         jButtonCreateCustomer.setText("Create customer");
-        jButtonCreateCustomer.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                CreateCustomerForm CreateCustomerForm = null;
-                try {
-                    CreateCustomerForm = new CreateCustomerForm(color,"CreateCustomer");
-                    CreateCustomerForm.setVisible(true);
-                } catch (SelectQueryException | ConnectionException exception) {
-                    JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                }
+        jButtonCreateCustomer.addActionListener(evt -> {
+            CreateCustomerForm createCustomerForm = null;
+            try {
+                createCustomerForm = new CreateCustomerForm(color,"CreateCustomer");
+                createCustomerForm.setVisible(true);
+            } catch (SelectQueryException | ConnectionException exception) {
+                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
         });
         jButtonUpdateCustomer.setBackground(new Color(0, 153, 153));
@@ -147,10 +143,15 @@ public class CustomerList extends JFrame {
             if(jTableCustomerList.getSelectedRow() != -1) {
                 Customer customerToDelete;
                 customerToDelete = customersModel.getRow(jTableCustomerList.getSelectedRow());
-                try {
-                    applicationControllerCustomer.delete(customerToDelete);
-                } catch (DeleteQueryException | UpdateQueryException | NullException exception) {
-                    JOptionPane.showMessageDialog(null, exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
+
+                int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (response == JOptionPane.YES_OPTION) {
+                    try {
+                        applicationControllerCustomer.delete(customerToDelete);
+                        refreshJtable();
+                    } catch (DeleteQueryException | UpdateQueryException | NullException exception) {
+                        JOptionPane.showMessageDialog(null, exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
             else {
@@ -159,6 +160,20 @@ public class CustomerList extends JFrame {
         });
 
     }
+    private void refreshJtable(){
+        try {
+            customers =  applicationControllerCustomer.getAllCustomers();
+        } catch (SelectQueryException exception) {
+            JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
+        }
+        customersModel = new AllCustomersModel(customers);
+        jTableCustomerList.setModel(customersModel);
+    }
+
+    public void refresh(){
+        refreshJtable();
+    }
+
     private void WindowFormattingCode(){
         GroupLayout panelSearchBarLayout = new GroupLayout(panelSearchBar);
         panelSearchBar.setLayout(panelSearchBarLayout);
