@@ -27,8 +27,9 @@ public class SearchOrderListing extends JFrame {
     private JTable jTableOrderList;
     private ArrayList<Customer> customers;
     private ArrayList<OrderByCustomer> orders;
-
     private JButton searchButton;
+    private ApplicationController applicationControllerCustomer;
+
 
     int customerId;
 
@@ -41,6 +42,7 @@ public class SearchOrderListing extends JFrame {
         jLabelTo = new JLabel();
         panelTableOrderList = new JPanel();
         jScrollTableOrderList = new JScrollPane();
+        jTableOrderList = new JTable();
 
         ApplicationController allCustomers = new ApplicationController();
         customers = allCustomers.getAllCustomers();
@@ -71,6 +73,7 @@ public class SearchOrderListing extends JFrame {
                 if(Verification.dateVerification(startDateSelector.getText()) && Verification.dateVerification(endDateSelector.getText())) {
                     GregorianCalendar startDate = DateFormater.ourDate(startDateSelector.getText());
                     GregorianCalendar endDate = DateFormater.ourDate(endDateSelector.getText());
+
                     initTable(customerId, startDate, endDate);
                 }
                 else {
@@ -82,27 +85,19 @@ public class SearchOrderListing extends JFrame {
             }
         });
 
+        jScrollTableOrderList = new JScrollPane(jTableOrderList);
+        jTableOrderList.getTableHeader().setReorderingAllowed(false);
+        jTableOrderList.setAutoCreateRowSorter(true);
+        jScrollTableOrderList.setViewportView(jTableOrderList);
+
         WindowFormattingCode();
 
         pack();
     }
 
-    private void initJTableOrderList(ArrayList<OrderByCustomer> orders) {
-        for(int i = 0; i < orders.size(); i++)
-            System.out.println("order " + i + ": " + orders.get(i));
-        AllOrdersByCustomerModel ordersByCustomerModel = new AllOrdersByCustomerModel(orders);
-        jTableOrderList = new JTable(ordersByCustomerModel);
-        jTableOrderList.setAutoCreateRowSorter(true);
-        jScrollTableOrderList = new JScrollPane(jTableOrderList);
-        jTableOrderList.getTableHeader().setReorderingAllowed(false);
-        jScrollTableOrderList.setViewportView(jTableOrderList);
-        /*
-        jTableCustomerList = new JTable(customersModel);
-        jTableCustomerList.setAutoCreateRowSorter(true);
-        jScrollCustomerTable = new JScrollPane(jTableCustomerList);
-        jTableCustomerList.getTableHeader().setReorderingAllowed(false);
-        jScrollCustomerTable.setViewportView(jTableCustomerList);
-         */
+    private void initJTableOrderList(ArrayList<OrderByCustomer> orders) throws ConnectionException {
+        AllOrdersByCustomerModel orderByCustomerModel = new AllOrdersByCustomerModel(orders);
+        jTableOrderList.setModel(orderByCustomerModel);
     }
 
     private void initTable(int customerId, GregorianCalendar startDate,GregorianCalendar endDate) throws ConnectionException, SelectQueryException {

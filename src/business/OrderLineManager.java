@@ -20,7 +20,6 @@ public class OrderLineManager {
 
     public ArrayList<OrderLine> getAllOrderLine()throws SelectQueryException {
         ArrayList<OrderLine> orderLineArrayList = dao.getAllOrderLine();
-        //Traitements éventuels sur la liste de livres
         return orderLineArrayList;
     }
 }

@@ -20,7 +20,6 @@ public class LocalityManager {
 
     public ArrayList<Locality> getAllLocalities()throws SelectQueryException {
         ArrayList<Locality> localityArrayList = dao.getAllLocalities();
-        //Traitements éventuels sur la liste de livres
         return localityArrayList;
     }
 }

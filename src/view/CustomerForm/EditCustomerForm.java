@@ -37,7 +37,6 @@ public class EditCustomerForm extends CustomerForm {
                 boolean updateResult = false;
                 if (isValidForm()) {
                     customer2 = addCustomer();
-                    System.out.println("ici EditCustomerForm (ligne 40)"+customer2);
                     try {
                         ApplicationController applicationController = new ApplicationController();
                         updateResult = applicationController.update(customer);

@@ -44,7 +44,6 @@ public class ApplicationController {
         if (customer == null){
             throw new NullException(customer.getClass().getName());
         }
-        System.out.println("ici ApplicationControler (ligne 47)" + customer);
         return customerManager.update(customer);
     }
     public boolean delete(Customer customer) throws DeleteQueryException, UpdateQueryException {
@@ -54,8 +53,6 @@ public class ApplicationController {
         return  customerManager.delete(customer);
     }
     //endregion
-
-
 
     //region Product
     public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException, NullException {
@@ -68,8 +65,6 @@ public class ApplicationController {
         return productManager.getAllProducts();
     }
     //endregion
-
-
 
     //region Country
     public ArrayList<Country> getAllCountries()throws SelectQueryException {

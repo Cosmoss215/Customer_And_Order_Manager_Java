@@ -19,17 +19,14 @@ public class CustomerManager {
 
     public ArrayList<Customer> getAllCustomers()throws SelectQueryException {
         ArrayList<Customer> customerArrayList = dao.getAllCustomers();
-        //Traitements éventuels
         return customerArrayList;
     }
 
     public ArrayList<Customer> getCustomersByCountry(String countrySearched)throws SelectQueryException {
         ArrayList<Customer> customerArrayList = dao.getCustomersByCountry(countrySearched);
-        //Traitements éventuels
         return customerArrayList;
     }
     public boolean addCustomer(Customer customer) throws CreateQueryException {
-        System.out.println("ici CustomerManager (ligne 32) " + customer);
             return dao.addCustomer(customer);
     }
     public boolean update(Customer customer) throws UpdateQueryException{
