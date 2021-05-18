@@ -131,9 +131,9 @@ public class CustomerList extends JFrame {
         jButtonUpdateCustomer.addActionListener(evt -> {
             if (jTableCustomerList.getSelectedRow() != -1) {
                 try {
-                    Customer customer;
-                    customer = customersModel.getRow(jTableCustomerList.getSelectedRow());
-                    EditCustomerForm editCustomerForm = new EditCustomerForm(color, "Edit customer", customer);
+                    Customer customerToEdit;
+                    customerToEdit = customersModel.getRow(jTableCustomerList.getSelectedRow());
+                    EditCustomerForm editCustomerForm = new EditCustomerForm(color, "Edit customer", customerToEdit);
                     editCustomerForm.setVisible(true);
                 } catch (SelectQueryException | ConnectionException exception) {
                     JOptionPane.showMessageDialog(null, exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);

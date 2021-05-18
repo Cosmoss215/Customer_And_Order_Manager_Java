@@ -13,16 +13,12 @@ import java.text.SimpleDateFormat;
 public class EditCustomerForm extends CustomerForm {
 
     private JButton jButtonCancelCustomer,jButtonEditCustomer;
-    private Customer customer2;
-    public EditCustomerForm(Color color, String title, Customer customer) throws SelectQueryException, ConnectionException {
+    private Customer customer;
+    public EditCustomerForm(Color color, String title, Customer customerFromView) throws SelectQueryException, ConnectionException {
         super(title,color);
 
         jButtonCancelCustomer = new JButton("Cancel");
-        jButtonCancelCustomer.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                EditCustomerForm.super.dispose();
-            }
-        });
+        jButtonCancelCustomer.addActionListener(evt -> EditCustomerForm.super.dispose());
         jButtonCancelCustomer.setFont(new Font("Tahoma", 0, 20));
         panelButton.add(jButtonCancelCustomer);
 
@@ -30,52 +26,51 @@ public class EditCustomerForm extends CustomerForm {
         jButtonEditCustomer.setFont(new Font("Tahoma", 0, 20));
         panelButton.add(jButtonEditCustomer);
 
-        customer2 = customer;
 
-        jButtonEditCustomer.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                boolean updateResult = false;
-                if (isValidForm()) {
-                    customer2 = addCustomer();
-                    try {
-                        ApplicationController applicationController = new ApplicationController();
-                        updateResult = applicationController.update(customer);
-                    } catch (ConnectionException connectionException) {
-                        JOptionPane.showMessageDialog(null,connectionException.getMessage(), connectionException.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                    } catch (UpdateQueryException createQueryException) {
-                        JOptionPane.showMessageDialog(null,createQueryException.getMessage(), createQueryException.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                    } catch (NullException nullException) {
-                        JOptionPane.showMessageDialog(null,nullException.getMessage(), nullException.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                    }
+        jButtonEditCustomer.addActionListener(evt -> {
+            boolean updateResult = false;
+            if (isValidForm()) {
+                customer = addCustomer();
+                customer.setId(customerFromView.getId());
+                customer.getAddress().setId(customerFromView.getAddress().getId());
+                try {
+                    ApplicationController applicationController = new ApplicationController();
+                    updateResult = applicationController.update(customer);
+                } catch (ConnectionException connectionException) {
+                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), connectionException.getTypeError(), JOptionPane.WARNING_MESSAGE);
+                } catch (UpdateQueryException createQueryException) {
+                    JOptionPane.showMessageDialog(null,createQueryException.getMessage(), createQueryException.getTypeError(), JOptionPane.WARNING_MESSAGE);
+                } catch (NullException nullException) {
+                    JOptionPane.showMessageDialog(null,nullException.getMessage(), nullException.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
-                if (updateResult){
-                    JOptionPane.showMessageDialog(null,"The customer has been updated","Customer updated", JOptionPane.INFORMATION_MESSAGE);
-                }
+            }
+            if (updateResult){
+                JOptionPane.showMessageDialog(null,"The customer has been updated","Customer updated", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
         // Pourquoi ne pas placer dans DateFormater ?
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        format.setCalendar(customer.getRegistrationDate());
-        String dateFormatted = format.format(customer.getRegistrationDate().getTime());
+        format.setCalendar(customerFromView.getRegistrationDate());
+        String dateFormatted = format.format(customerFromView.getRegistrationDate().getTime());
 
-        jTextFieldFirstName.setText(customer.getFirstName());
-        jTextFieldLastName.setText(customer.getLastName());
-        jTextFieldNickame.setText(customer.getNickname());
+        jTextFieldFirstName.setText(customerFromView.getFirstName());
+        jTextFieldLastName.setText(customerFromView.getLastName());
+        jTextFieldNickame.setText(customerFromView.getNickname());
         jTextFieldRegistrationDate.setText(dateFormatted);
-
-        if (customer.getPhoneNumber() != null){
-            jTextFieldPhoneNumber.setText(String.valueOf(customer.getPhoneNumber()));
+        if (customerFromView.getPhoneNumber() != null){
+            jTextFieldPhoneNumber.setText("0" +customerFromView.getPhoneNumber());
         }
-        jTextFieldEmail.setText(String.valueOf(customer.getEmail()));
-        jTextFieldStreetWording.setText(customer.getAddress().getStreetName());
-        streetNumberSelector.setValue(customer.getAddress().getStreetNumber());
-        jTextFieldBox.setText(customer.getAddress().getBox());
-        jTextFieldLocality.setText(String.valueOf(customer.getAddress().getLocality()));
-        postalCodeSelector.setValue(customer.getAddress().getLocality().getPostalCode());
-        jTextFieldIBAN.setText(customer.getIban());
-        jTextFieldBIC.setText(customer.getBic());
-        jTextFieldVATNumber.setText(String.valueOf(customer.getVatNumber()));
-        jCheckBoxIsVIP.setSelected(customer.getVip());
+        jTextFieldEmail.setText(String.valueOf(customerFromView.getEmail()));
+        jTextFieldStreetWording.setText(customerFromView.getAddress().getStreetName());
+        streetNumberSelector.setValue(customerFromView.getAddress().getStreetNumber());
+        jTextFieldBox.setText(customerFromView.getAddress().getBox());
+        jTextFieldLocality.setText(String.valueOf(customerFromView.getAddress().getLocality().getName()));
+        jTextFieldRegion.setText(customerFromView.getAddress().getLocality().getRegion());
+        postalCodeSelector.setValue(customerFromView.getAddress().getLocality().getPostalCode());
+        jTextFieldIBAN.setText(customerFromView.getIban());
+        jTextFieldBIC.setText(customerFromView.getBic());
+        jTextFieldVATNumber.setText(String.valueOf(customerFromView.getVatNumber()));
+        jCheckBoxIsVIP.setSelected(customerFromView.getVip());
     }
 }

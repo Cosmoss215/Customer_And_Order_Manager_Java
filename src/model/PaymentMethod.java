@@ -13,10 +13,6 @@ public class PaymentMethod {
 
     @Override
     public String toString() {
-        return "PaymentMethod{" +
-                "wording='" + wording + '\'' +
-                ", iban='" + iban + '\'' +
-                ", bic='" + bic + '\'' +
-                '}';
+        return wording;
     }
 }

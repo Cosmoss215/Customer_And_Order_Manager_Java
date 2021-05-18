@@ -72,11 +72,9 @@ public class CustomerDBAccess implements CustomerDataAccess {
                 );
                 customers.add(customer);
             }
-
         } catch (SQLException exception) {
             throw new SelectQueryException(exception.getMessage());
         }
-
         return customers;
     }
 
@@ -103,6 +101,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
     @Override
     public boolean addCustomer(Customer customer) throws CreateQueryException {
         int affectedRowsNbCustomer;
+        int addressId;
         try {
                 String sqlSelectLocality = "SELECT `name`, postal_code FROM locality " +
                     "WHERE `name` = '" + customer.getAddress().getLocality().getName() + "' " +
@@ -125,7 +124,16 @@ public class CustomerDBAccess implements CustomerDataAccess {
                 setPreparedWritingStatementForAddress(preparedStatementAddress,address);
                 preparedStatementAddress.executeUpdate();
 
-                String sqlInsertCustomer = "INSERT INTO customer (" +
+
+            String sqlSelectAddress = "SELECT id  FROM address WHERE street_name IN (\'" + customer.getAddress().getStreetName() + "\') AND street_number IN (\'" + customer.getAddress().getStreetNumber() + "\')";
+            PreparedStatement preparedStatementSelectAddress = connection.prepareStatement(sqlSelectAddress);
+            ResultSet dataAddress = preparedStatementSelectAddress.executeQuery();
+
+            while (dataAddress.next()){
+                addressId = dataAddress.getInt("id");
+                customer.getAddress().setId(addressId);
+            }
+            String sqlInsertCustomer = "INSERT INTO customer (" +
                         "first_name, " +
                         "last_name, " +
                         "registration_date, " +
@@ -153,6 +161,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
     @Override
     public boolean update(Customer customer) throws UpdateQueryException {
         int affectedRowsNb;
+        System.out.println(customer);
         try {
             String sqlSelectLocality = "SELECT `name`, postal_code FROM locality " +
                     "WHERE `name` = '" + customer.getAddress().getLocality().getName() + "' " +

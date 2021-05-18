@@ -114,6 +114,9 @@ public class Customer {
         this.vatNumber = vatNumber;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
     //endregion
     //region display
 

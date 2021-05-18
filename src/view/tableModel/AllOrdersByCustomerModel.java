@@ -3,6 +3,7 @@ package view.tableModel;
 import model.Customer;
 import model.OrderByCustomer;
 import model.PaymentMethod;
+import util.DateFormater;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -37,9 +38,9 @@ public class AllOrdersByCustomerModel extends AbstractTableModel {
         OrderByCustomer orderByCustomer = content.get(rowIndex);
         switch(columnIndex) {
             case 0 : return orderByCustomer.getNumber();
-            case 1 : return orderByCustomer.getCreationDate();
-            case 2 : return orderByCustomer.getPaymentDeadline();
-            case 3 : return orderByCustomer.getPrice();
+            case 1 : return DateFormater.toString(orderByCustomer.getCreationDate());
+            case 2 : return DateFormater.toString(orderByCustomer.getPaymentDeadline());
+            case 3 : return "€ " + orderByCustomer.getPrice();
             case 4 : return orderByCustomer.getPaymentMethod();
             default : return null;
         }
@@ -56,10 +57,8 @@ public class AllOrdersByCustomerModel extends AbstractTableModel {
             case 0: c = Integer.class;
                 break;
             case 1:
-            case 2: c = GregorianCalendar.class;
-                break;
-            case 3: c = Integer.class;
-                break;
+            case 2:
+            case 3:
             case 4: c = String.class;
                 break;
             default: c = String.class;

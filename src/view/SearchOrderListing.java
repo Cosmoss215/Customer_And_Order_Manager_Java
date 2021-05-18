@@ -95,7 +95,7 @@ public class SearchOrderListing extends JFrame {
         pack();
     }
 
-    private void initJTableOrderList(ArrayList<OrderByCustomer> orders) throws ConnectionException {
+    private void initJTableOrderList(ArrayList<OrderByCustomer> orders){
         AllOrdersByCustomerModel orderByCustomerModel = new AllOrdersByCustomerModel(orders);
         jTableOrderList.setModel(orderByCustomerModel);
     }
@@ -109,6 +109,7 @@ public class SearchOrderListing extends JFrame {
     private void initTable(int customerId) throws ConnectionException, SelectQueryException {
         ApplicationController applicationController = new ApplicationController();
         orders = applicationController.getOrdersByCustomer(customerId);
+
         initJTableOrderList(orders);
     }
 
