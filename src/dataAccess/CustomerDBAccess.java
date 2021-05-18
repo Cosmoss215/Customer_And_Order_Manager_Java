@@ -70,7 +70,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
                         data.getString("bic"),
                         address
                 );
-                System.out.println(country + " " + locality + " " + address + " " + customer);
                 customers.add(customer);
             }
 

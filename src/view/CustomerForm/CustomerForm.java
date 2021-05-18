@@ -405,7 +405,6 @@ public class CustomerForm extends JFrame {
         Address address = new Address(streetName, streetNumber, box, locality);
         Customer customer = new Customer(firstName, lastName, registrationDate, isVip, nickname, phoneNumber, email, vatNumber, iban, bic, address);
 
-        System.out.println("ici CustomerForm (ligne 408) :" + customer);
         return customer;
     }
 
