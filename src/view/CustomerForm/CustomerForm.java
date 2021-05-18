@@ -148,6 +148,7 @@ public class CustomerForm extends JFrame {
         jTextFieldLastName.setFont(new Font("Tahoma", 0, 20));
         jTextFieldNickame = new JTextField();
         jTextFieldNickame.setFont(new Font("Tahoma", 0, 20));
+        jTextFieldNickame.setToolTipText("acronym of the name");
         jTextFieldRegistrationDate = new JTextField();
         jTextFieldRegistrationDate.setFont(new Font("Tahoma", 0, 20));
         jTextFieldPhoneNumber = new JTextField();
@@ -415,30 +416,20 @@ public class CustomerForm extends JFrame {
         int start = txt.length();
         int last = txt.length();
 
-        int currentLocality = 0;
+        int iLocality = 0;
         Boolean isFind = false;
 
-        while (currentLocality < locality.size() && !isFind){
+        while (iLocality < locality.size() && !isFind){
 
-            if (locality.get(currentLocality).getName().startsWith(txt)) {
-                localityComplete = locality.get(currentLocality).getName();
-                regionComplete = locality.get(currentLocality).getRegion();
-                postalCodeComplete = locality.get(currentLocality).getPostalCode();
+            Locality currentLocality = locality.get(iLocality);
+            if (currentLocality.getName().startsWith(txt)) {
+                localityComplete = currentLocality.getName();
+                regionComplete = currentLocality.getRegion();
+                postalCodeComplete = currentLocality.getPostalCode();
                 last = localityComplete.length();
                 isFind = true;
             }
-            currentLocality++;
-        }
-
-        for(currentLocality = 0; currentLocality < locality.size();currentLocality++)
-        {
-            if (locality.get(currentLocality).getName().startsWith(txt)) {
-                localityComplete = locality.get(currentLocality).getName();
-                regionComplete = locality.get(currentLocality).getRegion();
-                postalCodeComplete = locality.get(currentLocality).getPostalCode();
-                last = localityComplete.length();
-                break;
-            }
+            iLocality++;
         }
 
         if (last > start) {
@@ -446,7 +437,7 @@ public class CustomerForm extends JFrame {
             jTextFieldRegion.setText(regionComplete);
             postalCodeSelector.setValue(postalCodeComplete);
             int nb = 0;
-            switch (locality.get(currentLocality).getCountry().getCode()){
+            switch (locality.get(iLocality).getCountry().getCode()){
                 case "BE" : nb = 0;
                     break;
                 case "FR" : nb = 1;
@@ -461,13 +452,10 @@ public class CustomerForm extends JFrame {
             jTextFieldLocality.moveCaretPosition(start);
         }
     }
-
     private class KeyboardListner implements KeyListener {
         @Override
         public void keyTyped(KeyEvent e) {
-
         }
-
         @Override
         public void keyPressed(KeyEvent evt) {
             switch (evt.getKeyCode()) {
@@ -487,12 +475,14 @@ public class CustomerForm extends JFrame {
                     });
             }
         }
-
         @Override
         public void keyReleased(KeyEvent e) {
 
         }
     }
+
+
+
 
 }
 

@@ -257,16 +257,16 @@ public class CustomerList extends JFrame {
         int start = txt.length();
         int last = txt.length();
 
-        int currentCustomer = 0;
-        Boolean isFind = false;
-        while (currentCustomer < customers.size() && !isFind){
-
-            if (customers.get(currentCustomer).getFirstName().startsWith(txt) || customers.get(currentCustomer).getLastName().startsWith(txt)) {
-                complete = customers.get(currentCustomer).getLastName() + " " +customers.get(currentCustomer).getFirstName();
+        int iCustomer = 0;
+        boolean isFind = false;
+        while (iCustomer < customers.size() && !isFind){
+            Customer currentCustomer = customers.get(iCustomer);
+            if (currentCustomer.getFirstName().startsWith(txt) ||currentCustomer.getLastName().startsWith(txt)) {
+                complete = customers.get(iCustomer).getLastName() + " " +customers.get(iCustomer).getFirstName();
                 last = complete.length();
                 isFind = true;
             }
-            currentCustomer++;
+            iCustomer++;
         }
 
         if (last > start) {
