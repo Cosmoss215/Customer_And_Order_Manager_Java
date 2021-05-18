@@ -2,15 +2,12 @@ package view;
 
 
 import controller.ApplicationController;
-import exception.ConnectionException;
-import exception.DeleteQueryException;
-import exception.SelectQueryException;
+import exception.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 
-import exception.UpdateQueryException;
 import model.*;
 import view.CustomerForm.CreateCustomerForm;
 import view.CustomerForm.CustomerForm;
@@ -102,7 +99,7 @@ public class CustomerList extends JFrame {
         customers = applicationControllerCustomer.getAllCustomers();
         customersModel = new AllCustomersModel(customers);
         jTableCustomerList = new JTable(customersModel);
-        jTableCustomerList.setAutoCreateRowSorter(true);
+        jTableCustomerList.setAutoCreateRowSorter(false);
         jScrollCustomerTable = new JScrollPane(jTableCustomerList);
         jTableCustomerList.getTableHeader().setReorderingAllowed(false);
         jScrollCustomerTable.setViewportView(jTableCustomerList);
@@ -152,7 +149,7 @@ public class CustomerList extends JFrame {
                 customerToDelete = customersModel.getRow(jTableCustomerList.getSelectedRow());
                 try {
                     applicationControllerCustomer.delete(customerToDelete);
-                } catch (DeleteQueryException | UpdateQueryException exception) {
+                } catch (DeleteQueryException | UpdateQueryException | NullException exception) {
                     JOptionPane.showMessageDialog(null, exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
             }
@@ -170,7 +167,7 @@ public class CustomerList extends JFrame {
                         .addGroup(GroupLayout.Alignment.TRAILING, panelSearchBarLayout.createSequentialGroup()
                                 .addGap(142, 142, 142)
                                 .addComponent(jLabelCustomerName)
-                                .addGap(18, 18, 18)
+                                .addGap(25, 25, 25)
                                 .addComponent(jTextFieldSearchBar, GroupLayout.PREFERRED_SIZE, 383, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabelNickname)

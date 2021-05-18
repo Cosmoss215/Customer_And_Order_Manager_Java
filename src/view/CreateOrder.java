@@ -16,33 +16,59 @@ import java.util.ArrayList;
 
 public class CreateOrder extends JFrame {
 
-    private final JButton jButtonAddProduct;
-    private final JButton jButtonCancel;
-    private final JButton jButtonCancel1;
-    private final JButton jButtonDeleteProduct;
-    private final JComboBox<String> jComboBoxDeadline;
-    private final JComboBox<String> jComboBoxPaymentmethod;
-    private final JLabel jLabelAddProduct;
-    private final JLabel jLabelAddProduct1;
-    private final JLabel jLabelCreationDate;
-    private final JLabel jLabelCustomer;
-    private final JLabel jLabelDate;
-    private final JLabel jLabelDateOfTheDay;
-    private final JLabel jLabelPaymentDealine;
-    private final JLabel jLabelPaymentDealine1;
-    private final JLabel jLabelPaymentMethod;
-    private final JScrollPane jScrollPaneOrderInformation;
-    private final JScrollPane jScrollPaneTotal;
-    private final JTextField jTextFieldAddProductChoose;
-    private final JTextField jTextFieldCustomerName;
-    private final JPanel panelOrder;
-    private final JPanel panelOrderInformation;
-    private final JSpinner quantitySelector;
-    private final ArrayList<Customer> customers;
+    private JButton jButtonAddProduct;
+    private JButton jButtonCancel;
+    private JButton jButtonCancel1;
+    private JButton jButtonDeleteProduct;
+    private JComboBox<String> jComboBoxDeadline;
+    private JComboBox<String> jComboBoxPaymentmethod;
+    private JLabel jLabelAddProduct;
+    private JLabel jLabelAddProduct1;
+    private JLabel jLabelCreationDate;
+    private JLabel jLabelCustomer;
+    private JLabel jLabelDate;
+    private JLabel jLabelDateOfTheDay;
+    private JLabel jLabelPaymentDealine;
+    private JLabel jLabelPaymentDealine1;
+    private JLabel jLabelPaymentMethod;
+    private JScrollPane jScrollPaneOrderInformation;
+    private JScrollPane jScrollPaneTotal;
+    private JTextField jTextFieldAddProductChoose;
+    private JTextField jTextFieldCustomerName;
+    private JPanel panelOrder;
+    private JPanel panelOrderInformation;
+    private JSpinner quantitySelector;
+    private ArrayList<Customer> customers;
     JTable jTableTotal,jTableOrderInformation;
 
     public CreateOrder() throws ConnectionException, SelectQueryException {
         super("Create Order");
+
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        init();
+        panelOrder.setBackground(new Color(0, 153, 153));
+
+        //region Autocomplete
+        ApplicationController allCustomers = new ApplicationController();
+        customers = allCustomers.getAllCustomers();
+        KeyboardListner keyboardListner = new KeyboardListner();
+        jTextFieldCustomerName.addKeyListener(keyboardListner);
+        //endregion
+
+        initTextFieldComboBoxSpinner();
+
+        initJLabel();
+
+        initJTable();
+
+        initJButton();
+
+        WindowFormattingCode();
+
+        pack();
+    }
+
+    private void init(){
         panelOrderInformation = new JPanel();
         jLabelCustomer = new JLabel();
         jTextFieldCustomerName = new JTextField();
@@ -67,28 +93,6 @@ public class CreateOrder extends JFrame {
         jTableOrderInformation = new JTable();
         jTableTotal = new JTable();
         quantitySelector = new JSpinner();
-
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        panelOrder.setBackground(new Color(0, 153, 153));
-
-        //region Autocomplete
-        ApplicationController allCustomers = new ApplicationController();
-        customers = allCustomers.getAllCustomers();
-        KeyboardListner keyboardListner = new KeyboardListner();
-        jTextFieldCustomerName.addKeyListener(keyboardListner);
-        //endregion
-
-        initTextFieldComboBoxSpinner();
-
-        initJLabel();
-
-        initJTable();
-
-        initJButton();
-
-        WindowFormattingCode();
-
-        pack();
     }
 
     private void initTextFieldComboBoxSpinner(){
@@ -101,12 +105,10 @@ public class CreateOrder extends JFrame {
 
         jTextFieldCustomerName.setFont(new Font("Tahoma", 0, 18));
         jTextFieldCustomerName.addActionListener(evt -> {
-
         });
 
         jTextFieldAddProductChoose.setFont(new Font("Tahoma", 0, 18));
         jTextFieldAddProductChoose.addActionListener(evt -> {
-
         });
         quantitySelector.setModel(new SpinnerNumberModel(0,0,100000,1));
         quantitySelector.setFont(new Font("Tahoma", 0, 18));

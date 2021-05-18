@@ -11,6 +11,7 @@ public class OrderStateException extends MainException {
     public String getMessage(){ return message + getValues(); }
 
     private String getValues(){
+        //String builder
         String values = "";
         for(int i = 0; i < Order.STATES_NUMBER; i++){
             values += "\"" + Order.states[i] + "\" ";

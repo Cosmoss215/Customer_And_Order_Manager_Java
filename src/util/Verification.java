@@ -18,7 +18,7 @@ public class Verification {
         return pattern.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", email);
     }
     public static boolean dateVerification(String date) {
-        return pattern.matches("^\\d{2}-\\d{2}-\\d{4}$" , date);
+        return pattern.matches("^\\d{2}/\\d{2}/\\d{4}$" , date);
     }
     public static boolean productReferenceVerification(String reference) {
         return pattern.matches( "^\\d{1,10}$",reference);

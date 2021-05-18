@@ -3,6 +3,7 @@ package business;
 import dataAccess.OrderDataAccess;
 import dataAccess.OrderDBAccess;
 import exception.ConnectionException;
+import exception.NullException;
 import exception.SelectQueryException;
 import model.Customer;
 import model.Order;
@@ -27,13 +28,19 @@ public class OrderManager {
         return orderArrayList;
     }
 
-    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId, GregorianCalendar startDate, GregorianCalendar endDate) throws SelectQueryException {
+    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId, GregorianCalendar startDate, GregorianCalendar endDate) throws SelectQueryException, NullException {
+        if (customerId < 0 || startDate == null || endDate == null){
+            throw new NullException("Customer id or date are null were they shouldn't be" );
+        }
         ArrayList<OrderByCustomer> orderByCustomer = dao.getOrdersByCustomer(customerId, startDate, endDate);
         return orderByCustomer;
 
     }
 
-    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException {
+    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException, NullException {
+        if (customerId < 0){
+            throw new NullException("Customer id is null were it shouldn't be" );
+        }
         ArrayList<OrderByCustomer> orderByCustomers = dao.getOrdersByCustomer(customerId);
         return orderByCustomers;
     }

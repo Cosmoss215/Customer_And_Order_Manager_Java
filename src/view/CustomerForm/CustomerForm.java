@@ -85,16 +85,16 @@ public class CustomerForm extends JFrame {
         jLabelCustomerInformation.setFont(new Font("Tahoma", 0, 20));
         jLabelCustomerInformation.setHorizontalAlignment(SwingConstants.CENTER);
 
-        jLabelFirstName = new JLabel("First name");
+        jLabelFirstName = new JLabel("First name *");
         jLabelFirstName.setFont(new Font("Tahoma", 0, 20));
 
-        jLabelLastName = new JLabel("Last name");
+        jLabelLastName = new JLabel("Last name *");
         jLabelLastName.setFont(new Font("Tahoma", 0, 20));
 
         jLabelNickname = new JLabel("Nickame");
         jLabelNickname.setFont(new Font("Tahoma", 0, 20));
 
-        jLabelRegistrationDate = new JLabel("Registration date");
+        jLabelRegistrationDate = new JLabel("Registration date *");
         jLabelRegistrationDate.setFont(new Font("Tahoma", 0, 20));
 
         jLabelPhoneNumber = new JLabel("Phone number");
@@ -103,37 +103,37 @@ public class CustomerForm extends JFrame {
         jLabelEmail = new JLabel("Email");
         jLabelEmail.setFont(new Font("Tahoma", 0, 20));
 
-        jLabelStreetWording = new JLabel("Street name");
+        jLabelStreetWording = new JLabel("Street name *");
         jLabelStreetWording.setFont(new Font("Tahoma", 0, 20));
 
-        jLabelStreetNumber = new JLabel("Street number");
+        jLabelStreetNumber = new JLabel("Street number *");
         jLabelStreetNumber.setFont(new Font("Tahoma", 0, 20));
 
         jLabelBox = new JLabel("Box");
         jLabelBox.setFont(new Font("Tahoma", 0, 20));
 
-        jLabelLocality = new JLabel("Locality");
+        jLabelLocality = new JLabel("Locality *");
         jLabelLocality.setFont(new Font("Tahoma", 0, 20));
 
-        jLabelPostalCode = new JLabel("Postal code");
+        jLabelPostalCode = new JLabel("Postal code *");
         jLabelPostalCode.setFont(new Font("Tahoma", 0, 20));
 
-        jLabelRegion = new JLabel("Region");
+        jLabelRegion = new JLabel("Region *");
         jLabelRegion.setFont(new Font("Tahoma", 0, 20));
 
-        jLabelCountry = new JLabel("Country");
+        jLabelCountry = new JLabel("Country *");
         jLabelCountry.setFont(new Font("Tahoma", 0, 20));
 
         jLabelVATNumber = new JLabel("Vat number");
         jLabelVATNumber.setFont(new Font("Tahoma", 0, 20));
 
-        jLabelIBAN = new JLabel("Iban");
+        jLabelIBAN = new JLabel("Iban *");
         jLabelIBAN.setFont(new Font("Tahoma", 0, 20));
 
-        jLabelBIC = new JLabel("BIC");
+        jLabelBIC = new JLabel("BIC *");
         jLabelBIC.setFont(new Font("Tahoma", 0, 20));
 
-        jLabelIsVIP = new JLabel("Customer is VIP");
+        jLabelIsVIP = new JLabel("Customer is VIP *");
         jLabelIsVIP.setFont(new Font("Tahoma", 0, 20));
 
     }
@@ -144,37 +144,62 @@ public class CustomerForm extends JFrame {
         jTextFieldFirstName = new JTextField();
         jTextFieldFirstName.setFont(new Font("Tahoma", 0, 20));
         jTextFieldFirstName.setPreferredSize(new Dimension(250,5));
+
         jTextFieldLastName = new JTextField();
         jTextFieldLastName.setFont(new Font("Tahoma", 0, 20));
         jTextFieldNickame = new JTextField();
+
         jTextFieldNickame.setFont(new Font("Tahoma", 0, 20));
-        jTextFieldNickame.setToolTipText("acronym of the name");
+        jTextFieldNickame.setToolTipText("Acronym of the name");
+
         jTextFieldRegistrationDate = new JTextField();
         jTextFieldRegistrationDate.setFont(new Font("Tahoma", 0, 20));
+        jTextFieldRegistrationDate.setToolTipText("Format : dd/mm/yyyy");
+
         jTextFieldPhoneNumber = new JTextField();
         jTextFieldPhoneNumber.setFont(new Font("Tahoma", 0, 20));
+        jTextFieldPhoneNumber.setToolTipText("Format : 0xxxxxxxxxx      Example : 0476717615");
+
         jTextFieldEmail = new JTextField();
         jTextFieldEmail.setFont(new Font("Tahoma", 0, 20));
+        jTextFieldEmail.setToolTipText("Format : xxxxx@xxxx.xxx");
+
         jTextFieldStreetWording = new JTextField();
         jTextFieldStreetWording.setFont(new Font("Tahoma", 0, 20));
+        jTextFieldStreetWording.setToolTipText("You must put the name of the street");
+
         streetNumberSelector = new JSpinner(new SpinnerNumberModel(0,0,100000,1));
         streetNumberSelector.setFont(new Font("Tahoma", 0, 20));
+
         jTextFieldBox = new JTextField();
         jTextFieldBox.setFont(new Font("Tahoma", 0, 20));
+        jTextFieldBox.setToolTipText("You must put a letter such as A, B, ..., Z ");
+
         jTextFieldLocality = new JTextField();
         jTextFieldLocality.setFont(new Font("Tahoma", 0, 20));
+        jTextFieldLocality.setToolTipText("There is an autocompletion that will help you choose your location");
+
         postalCodeSelector = new JSpinner(new SpinnerNumberModel(0,0,100000,1));
         postalCodeSelector.setFont(new Font("Tahoma", 0, 20));
+
         jTextFieldRegion = new JTextField();
         jTextFieldRegion.setFont(new Font("Tahoma", 0, 20));
+
         String[] country = { "BE","FR","GER","NL"};
         jComboBoxCountry = new JComboBox<String>(country);
+
         jTextFieldVATNumber = new JTextField();
         jTextFieldVATNumber.setFont(new Font("Tahoma", 0, 20));
+        jTextFieldVATNumber.setToolTipText("The VAT number is your business number assigned by the ECB (crossroads bank for enterprises)");
+
         jTextFieldIBAN = new JTextField();
         jTextFieldIBAN.setFont(new Font("Tahoma", 0, 20));
+        jTextFieldIBAN.setToolTipText("Format : AAxx xxxx xxxx xxxx x");
+
         jTextFieldBIC = new JTextField();
         jTextFieldBIC.setFont(new Font("Tahoma", 0, 20));
+        jTextFieldBIC.setToolTipText("Example : GKCCBEBB");
+
         jCheckBoxIsVIP = new JCheckBox();
         jCheckBoxIsVIP.setBackground(color);
         jCheckBoxIsVIP.setFont(new Font("Tahoma", 0, 20));
@@ -280,7 +305,7 @@ public class CustomerForm extends JFrame {
         }
 
         if (!Verification.dateVerification(jTextFieldRegistrationDate.getText()) || jTextFieldRegistrationDate.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null,"This date is incorrect, should be yyyy-mm-dd (05-12-2020)", "FormException", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"This date is incorrect, should be yyyy/mm/dd (05/12/2020)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldRegistrationDate.setBorder(new LineBorder(Color.red,3));
             return false;
         }
@@ -379,7 +404,6 @@ public class CustomerForm extends JFrame {
         if (!jTextFieldPhoneNumber.getText().isEmpty()){
             phoneNumber = Integer.valueOf(jTextFieldPhoneNumber.getText());
         }
-
         if (!jTextFieldEmail.getText().isEmpty()){
             email = jTextFieldEmail.getText();
         }
@@ -391,10 +415,12 @@ public class CustomerForm extends JFrame {
         }
         iban = jTextFieldIBAN.getText();
         bic = jTextFieldBIC.getText();
+
         streetName = jTextFieldStreetWording.getText();
         localityName = jTextFieldLocality.getText();
         region = jTextFieldRegion.getText();
         code = (String) jComboBoxCountry.getSelectedItem();
+
         isVip = jCheckBoxIsVIP.isSelected();
         GregorianCalendar registrationDate = DateFormater.ourDate(jTextFieldRegistrationDate.getText());
 

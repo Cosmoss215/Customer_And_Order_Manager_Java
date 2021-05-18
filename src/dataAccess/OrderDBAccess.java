@@ -20,7 +20,7 @@ public class OrderDBAccess implements OrderDataAccess {
     public ArrayList<OrderByCustomer> getOrders(String sqlWhereClause) throws SelectQueryException {
         ArrayList<OrderByCustomer> ordersByCustomer = new ArrayList<>();
         try {
-            String sqlInstruction = "SELECT DISTINCT o.*, p.*, c.*, a.*, l.*, co.*, SUM(ol.all_taxes_included_price * ol.quantity) AS 'sum' " +
+            String sqlSelectOrders = "SELECT DISTINCT o.*, p.*, c.*, a.*, l.*, co.*, SUM(ol.all_taxes_included_price * ol.quantity) AS 'sum' " +
                     "FROM `order` o " +
                     "JOIN order_line ol ON ol.order = o.number " +
                     "JOIN payment_method p ON o.payment_method = p.wording " +
@@ -31,7 +31,7 @@ public class OrderDBAccess implements OrderDataAccess {
                     sqlWhereClause + " AND c.id != 0 " +
                     "GROUP BY o.number ORDER BY c.id AND o.creation_date;";
 
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlSelectOrders);
             ResultSet data = preparedStatement.executeQuery();
 
             OrderByCustomer orderByCustomer;
@@ -104,11 +104,11 @@ public class OrderDBAccess implements OrderDataAccess {
         return ordersByCustomer;
     }
 
-
     @Override
     public ArrayList<OrderByCustomer> getAllOrders() throws SelectQueryException{
         return getOrders("");
     }
+
     @Override
     public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId, GregorianCalendar startDate, GregorianCalendar endDate) throws SelectQueryException {
         String sqlWhereClause = "WHERE o.creation_date " +
@@ -120,6 +120,7 @@ public class OrderDBAccess implements OrderDataAccess {
 
         return getOrders(sqlWhereClause);
     }
+
     public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException {
         String sqlWhereClause = "WHERE o.creation_date " +
                 "BETWEEN c.registration_date AND SYSDATE() " +

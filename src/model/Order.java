@@ -41,8 +41,7 @@ public class Order {
     * It will let DB set the ID, the default creation date will be set to this current day and the default state will be set to "pending"
     */
     public Order(GregorianCalendar paymentDeadline, Customer customer, PaymentMethod paymentMethod) {
-        this(null, DateFormater.today(), paymentDeadline, null, customer, paymentMethod, null);
-        setState();
+        this(null, DateFormater.today(), paymentDeadline, states[0], customer, paymentMethod, null);
     }
     //endregion
     //endregion
@@ -83,16 +82,13 @@ public class Order {
     private void setPaymentDeadline(GregorianCalendar paymentDeadline) {
         PaymentDeadline = paymentDeadline;
     }
-    private void setState(String state) { // throws OrderStateException ?
+    private void setState(String state) {
         if(state.equals(states[0]) || state.equals(states[1]) || state.equals(states[2])) {
             this.state = state;
         }
         else {
             this.state = states[0];
         }
-    }
-    private void setState(){
-        setState("pending");
     }
    //endregion
 

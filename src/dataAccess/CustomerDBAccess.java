@@ -161,7 +161,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
     @Override
     public boolean update(Customer customer) throws UpdateQueryException {
         int affectedRowsNb;
-        System.out.println(customer);
         try {
             String sqlSelectLocality = "SELECT `name`, postal_code FROM locality " +
                     "WHERE `name` = '" + customer.getAddress().getLocality().getName() + "' " +

@@ -4,17 +4,13 @@ import controller.ApplicationController;
 import exception.ConnectionException;
 import exception.NullException;
 import exception.SelectQueryException;
-import model.Customer;
 import model.CustomerByProduct;
 import util.Verification;
 import view.tableModel.AllCustomersByProductModel;
-import view.tableModel.AllCustomersModel;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class SearchByProduct extends JFrame {
@@ -27,6 +23,7 @@ public class SearchByProduct extends JFrame {
 
     public SearchByProduct() throws SelectQueryException, ConnectionException, NullException {
         super("Search product with reference");
+        this.setResizable(false);
         panelSearchBar = new JPanel();
         jLabelProduct = new JLabel();
         jTextFieldFindProduct = new JTextField();

@@ -3,6 +3,7 @@ package view.CustomerForm;
 import controller.ApplicationController;
 import exception.*;
 import model.Customer;
+import util.DateFormater;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,28 +50,42 @@ public class EditCustomerForm extends CustomerForm {
             }
         });
 
-        // Pourquoi ne pas placer dans DateFormater ?
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        format.setCalendar(customerFromView.getRegistrationDate());
-        String dateFormatted = format.format(customerFromView.getRegistrationDate().getTime());
-
         jTextFieldFirstName.setText(customerFromView.getFirstName());
         jTextFieldLastName.setText(customerFromView.getLastName());
-        jTextFieldNickame.setText(customerFromView.getNickname());
-        jTextFieldRegistrationDate.setText(dateFormatted);
+
+        if (customerFromView.getNickname() != null){
+            jTextFieldNickame.setText(customerFromView.getNickname());
+        }
+
+        jTextFieldRegistrationDate.setText(DateFormater.toString(customerFromView.getRegistrationDate()));
+
         if (customerFromView.getPhoneNumber() != null){
             jTextFieldPhoneNumber.setText("0" +customerFromView.getPhoneNumber());
         }
-        jTextFieldEmail.setText(String.valueOf(customerFromView.getEmail()));
+
+        if (customerFromView.getEmail() != null){
+            jTextFieldEmail.setText(String.valueOf(customerFromView.getEmail()));
+        }
+
         jTextFieldStreetWording.setText(customerFromView.getAddress().getStreetName());
         streetNumberSelector.setValue(customerFromView.getAddress().getStreetNumber());
-        jTextFieldBox.setText(customerFromView.getAddress().getBox());
+
+        if (customerFromView.getAddress().getBox() != null){
+            jTextFieldBox.setText(customerFromView.getAddress().getBox());
+        }
+
         jTextFieldLocality.setText(String.valueOf(customerFromView.getAddress().getLocality().getName()));
         jTextFieldRegion.setText(customerFromView.getAddress().getLocality().getRegion());
         postalCodeSelector.setValue(customerFromView.getAddress().getLocality().getPostalCode());
         jTextFieldIBAN.setText(customerFromView.getIban());
+
         jTextFieldBIC.setText(customerFromView.getBic());
-        jTextFieldVATNumber.setText(String.valueOf(customerFromView.getVatNumber()));
+
+        if (customerFromView.getVatNumber() != null){
+            jTextFieldVATNumber.setText(String.valueOf(customerFromView.getVatNumber()));
+        }
+
+
         jCheckBoxIsVIP.setSelected(customerFromView.getVip());
     }
 }

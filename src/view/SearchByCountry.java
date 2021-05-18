@@ -21,6 +21,7 @@ public class SearchByCountry extends JFrame {
 
     public SearchByCountry() throws ConnectionException, SelectQueryException {
         super("Search Customers by Country");
+        this.setResizable(false);
         panelCountrySelector = new JPanel();
         jLabelCountry = new JLabel();
         jComboBoxCountryChoose = new JComboBox<>();

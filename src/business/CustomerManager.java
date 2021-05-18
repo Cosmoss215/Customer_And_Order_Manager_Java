@@ -26,15 +26,21 @@ public class CustomerManager {
         ArrayList<Customer> customerArrayList = dao.getCustomersByCountry(countrySearched);
         return customerArrayList;
     }
-    public boolean addCustomer(Customer customer) throws CreateQueryException {
+    public boolean addCustomer(Customer customer) throws CreateQueryException, NullException {
+        if (customer == null){
+            throw new NullException(customer.getClass().getName());
+        }
             return dao.addCustomer(customer);
     }
-    public boolean update(Customer customer) throws UpdateQueryException{
+    public boolean update(Customer customer) throws UpdateQueryException, NullException {
+        if (customer == null){
+            throw new NullException(customer.getClass().getName());
+        }
         return dao.update(customer);
     }
-    public boolean delete(Customer customer)throws DeleteQueryException, UpdateQueryException{
+    public boolean delete(Customer customer) throws DeleteQueryException, UpdateQueryException, NullException {
         if (customer == null){
-            throw new NullPointerException();
+            throw new NullException(customer.getClass().getName());
         }
         return  dao.delete(customer);
     }

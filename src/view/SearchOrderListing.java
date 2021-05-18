@@ -80,7 +80,7 @@ public class SearchOrderListing extends JFrame {
                     initTable(customerId);
                 }
                 jScrollTableOrderList.setViewportView(jTableOrderList);
-            } catch (ConnectionException | SelectQueryException exception) {
+            } catch (ConnectionException | SelectQueryException | NullException exception) {
                 JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
         });
@@ -100,13 +100,13 @@ public class SearchOrderListing extends JFrame {
         jTableOrderList.setModel(orderByCustomerModel);
     }
 
-    private void initTable(int customerId, GregorianCalendar startDate,GregorianCalendar endDate) throws ConnectionException, SelectQueryException {
+    private void initTable(int customerId, GregorianCalendar startDate,GregorianCalendar endDate) throws ConnectionException, SelectQueryException, NullException {
         ApplicationController applicationController = new ApplicationController();
         orders = applicationController.getOrdersByCustomer(customerId, startDate, endDate);
         initJTableOrderList(orders);
     }
 
-    private void initTable(int customerId) throws ConnectionException, SelectQueryException {
+    private void initTable(int customerId) throws ConnectionException, SelectQueryException, NullException {
         ApplicationController applicationController = new ApplicationController();
         orders = applicationController.getOrdersByCustomer(customerId);
         initJTableOrderList(orders);

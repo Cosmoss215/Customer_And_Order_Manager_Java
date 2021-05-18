@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class ApplicationController {
-    private CountryManager countryManager;
     private CustomerManager customerManager;
     private LocalityManager localityManager;
     private OrderManager orderManager;
@@ -16,7 +15,6 @@ public class ApplicationController {
     private ProductManager productManager;
 
     public ApplicationController() throws ConnectionException {
-        countryManager = new CountryManager();
         customerManager = new CustomerManager();
         localityManager = new LocalityManager();
         orderManager = new OrderManager();
@@ -46,9 +44,9 @@ public class ApplicationController {
         }
         return customerManager.update(customer);
     }
-    public boolean delete(Customer customer) throws DeleteQueryException, UpdateQueryException {
+    public boolean delete(Customer customer) throws DeleteQueryException, UpdateQueryException, NullException {
         if (customer == null){
-            throw new NullPointerException();
+            throw new NullException(customer.getClass().getName());
         }
         return  customerManager.delete(customer);
     }
@@ -66,14 +64,6 @@ public class ApplicationController {
     }
     //endregion
 
-    //region Country
-    public ArrayList<Country> getAllCountries()throws SelectQueryException {
-        ArrayList<Country> countryArrayList = countryManager.getAllCountries();
-        return countryArrayList;
-    }
-    //endregion
-
-
     //region locality
     public ArrayList<Locality> getAllLocalities()throws SelectQueryException {
         ArrayList<Locality> localityArrayList = localityManager.getAllLocalities();
@@ -88,12 +78,18 @@ public class ApplicationController {
         return orderArrayList;
     }
 
-    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId, GregorianCalendar startDate, GregorianCalendar endDate) throws SelectQueryException {
+    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId, GregorianCalendar startDate, GregorianCalendar endDate) throws SelectQueryException, NullException {
+        if (customerId < 0 || startDate == null || endDate == null){
+            throw new NullException("Customer id or date are null were they shouldn't be" );
+        }
         ArrayList<OrderByCustomer> orderByCustomer = orderManager.getOrdersByCustomer(customerId, startDate, endDate);
         return orderByCustomer;
     }
 
-    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException {
+    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException, NullException {
+        if (customerId < 0){
+            throw new NullException("Customer id is null were it shouldn't be" );
+        }
         ArrayList<OrderByCustomer> orderByCustomers = orderManager.getOrdersByCustomer(customerId);
         return orderByCustomers;
     }

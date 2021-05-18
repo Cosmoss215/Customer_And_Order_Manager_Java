@@ -3,6 +3,7 @@ package business;
 import dataAccess.ProductDataAccess;
 import dataAccess.ProductDBAccess;
 import exception.ConnectionException;
+import exception.NullException;
 import exception.SelectQueryException;
 import model.CustomerByProduct;
 import model.Product;
@@ -23,7 +24,11 @@ public class ProductManager {
         ArrayList<Product> productArrayList = dao.getAllProducts();
         return productArrayList;
     }
-    public ArrayList<CustomerByProduct> getProductByReference(Integer reference)throws SelectQueryException {
+
+    public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException, NullException {
+        if (reference == null){
+            throw new NullException("Reference cannot be null");
+        }
         ArrayList<CustomerByProduct> productArrayList = dao.getProductByReference(reference);
         return productArrayList;
     }
