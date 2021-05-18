@@ -22,7 +22,6 @@ public class ProductDBAccess implements ProductDataAccess {
                                 "FROM product p " +
                                 "JOIN vat v ON p.vat_code = v.category " +
                                 "ORDER BY p.reference;";
-
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             ResultSet data = preparedStatement.executeQuery();
@@ -53,7 +52,6 @@ public class ProductDBAccess implements ProductDataAccess {
 
         return allProducts;
     }
-
     @Override
     public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException {
         ArrayList<CustomerByProduct> productByReference = new ArrayList<>();
@@ -83,7 +81,6 @@ public class ProductDBAccess implements ProductDataAccess {
         } catch (SQLException exception) {
             throw new SelectQueryException(exception.getMessage());
         }
-
         return productByReference;
     }
 }

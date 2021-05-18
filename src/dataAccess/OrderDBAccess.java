@@ -109,7 +109,6 @@ public class OrderDBAccess implements OrderDataAccess {
     public ArrayList<OrderByCustomer> getAllOrders() throws SelectQueryException{
         return getOrders("");
     }
-
     @Override
     public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId, GregorianCalendar startDate, GregorianCalendar endDate) throws SelectQueryException {
         String sqlWhereClause = "WHERE o.creation_date " +
@@ -127,48 +126,5 @@ public class OrderDBAccess implements OrderDataAccess {
                 "AND c.id = " + customerId;
 
         return getOrders(sqlWhereClause);
-    }
-
-    /* Work in progress : returning only the detailed order lines related to a specified order (via its order number)
-        and also the total price of each order line (via a select sum())
-    private ArrayList<OrderLine> getOrderLines(int orderNumber) throws SelectQueryException {
-        ArrayList<OrderLine> orderLines = new ArrayList<>();
-        try {
-            String sqlInstruction = "SELECT DISTINCT o.*, ol.*, sum(ol.allTaxesIncludedPrice * ol.quantity) as 'sum' " +
-                                    "FROM order o " +
-                                    "JOIN order_line ol ON o.number = ol.order " +
-                                    "WHERE o.number =" + orderNumber + ";";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
-            ResultSet data = preparedStatement.executeQuery();
-
-            Order order;
-
-        }
-        catch (SQLException exception){
-            throw new SelectQueryException(exception.getMessage());
-        }
-        return orderLines;
-    }
-     */
-
-    @Override
-    public boolean addOrder(Order order) {
-        return false;
-    }
-
-    @Override
-    public Order getOrderById(Integer id) {
-        return null;
-    }
-
-    @Override
-    public boolean update(Order order) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(Order order) {
-        return false;
     }
 }

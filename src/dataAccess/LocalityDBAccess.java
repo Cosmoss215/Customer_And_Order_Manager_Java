@@ -21,8 +21,8 @@ public class LocalityDBAccess implements LocalityDataAccess{
     public ArrayList<Locality> getAllLocalities() throws SelectQueryException {
         ArrayList<Locality> allLocalities = new ArrayList<>();
         try {
-            String sqlInstruction = "SELECT l.*,c.* from locality l join country c on c.code = l.country;";
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            String sqlSelectLocality = "SELECT l.*,c.* from locality l join country c on c.code = l.country;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlSelectLocality);
             ResultSet data = preparedStatement.executeQuery();
             Locality locality;
             Country country;

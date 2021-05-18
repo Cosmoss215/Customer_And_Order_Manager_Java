@@ -23,8 +23,8 @@ public class CountryDBAccess implements CountryDataAccess {
     public ArrayList<Country> getAllCountries() throws SelectQueryException {
         ArrayList<Country> allCountries = new ArrayList<>();
         try {
-            String sqlInstruction = "SELECT name FROM country;";
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            String sqlSelectCountry = "SELECT name FROM country;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlSelectCountry);
             ResultSet data = preparedStatement.executeQuery();
             Country country;
 

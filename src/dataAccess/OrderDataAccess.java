@@ -13,8 +13,4 @@ public interface OrderDataAccess{
     ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId, GregorianCalendar startDate, GregorianCalendar endDate) throws SelectQueryException;
     ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException;
 
-    boolean addOrder(Order order);
-    Order getOrderById(Integer id);
-    boolean update(Order order);
-    boolean delete(Order order);
 }
