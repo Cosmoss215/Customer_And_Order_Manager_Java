@@ -8,6 +8,8 @@ import model.OrderBusinessTask;
 import model.StatisticsModel;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Statistics extends JFrame {
@@ -39,11 +41,6 @@ public class Statistics extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         searchProductReference.setFont(new java.awt.Font("Tahoma", 0, 18));
-        searchProductReference.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-
-            }
-        });
 
         SearchButton.setFont(new java.awt.Font("Tahoma", 0, 18));
         SearchButton.setText("Search");
