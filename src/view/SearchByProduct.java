@@ -143,24 +143,24 @@ public class SearchByProduct extends JFrame {
         int start = txt.length();
         int last = txt.length();
 
-        int iCustomer = 0;
+        int iProduct = 0;
         boolean isFind = false;
-        while (iCustomer < products.size() && !isFind){
-            Product currentProduct = products.get(iCustomer);
+        while (iProduct < products.size() && !isFind){
+            Product currentProduct = products.get(iProduct);
             if (currentProduct.getWording().startsWith(txt) ||currentProduct.getReference().toString().startsWith(txt)) {
-                complete = products.get(iCustomer).getWording() + " " + products.get(iCustomer).getReference();
-                currentReference = products.get(iCustomer).getReference();
+                complete = products.get(iProduct).getWording() + " " + products.get(iProduct).getReference();
+                currentReference = products.get(iProduct).getReference();
                 last = complete.length();
                 isFind = true;
             }
-            iCustomer++;
+            iProduct++;
         }
 
         if (last > start) {
             jTextFieldFindProduct.setText(complete);
             jTextFieldFindProduct.setCaretPosition(last);
             jTextFieldFindProduct.moveCaretPosition(start);
-            currentReference = products.get(iCustomer).getReference();
+            currentReference = products.get(iProduct).getReference();
         }
     }
 

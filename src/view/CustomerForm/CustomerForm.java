@@ -280,8 +280,7 @@ public class CustomerForm extends JFrame {
         else {
             jTextFieldRegistrationDate.setBorder(new LineBorder(Color.BLACK,1));
         }
-
-        if (!Verification.isToday(DateFormater.ourDate(jTextFieldRegistrationDate.getText()))) {
+        if (!Verification.isDateCorrect(DateFormater.ourDate(jTextFieldRegistrationDate.getText()))) {
             JOptionPane.showMessageDialog(null,"The recording date cannot be greater than the current date. Must be " + LocalDate.now() + " or earlier", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldRegistrationDate.setBorder(new LineBorder(Color.red,3));
             return false;
@@ -289,7 +288,6 @@ public class CustomerForm extends JFrame {
         else {
             jTextFieldRegistrationDate.setBorder(new LineBorder(Color.BLACK,1));
         }
-        //can be null
         if (!jTextFieldPhoneNumber.getText().isEmpty() && !Verification.phoneNumberVerification(jTextFieldPhoneNumber.getText())) {
             JOptionPane.showMessageDialog(null,"The phone number is incorrect", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldPhoneNumber.setBorder(new LineBorder(Color.red,3));
@@ -298,7 +296,6 @@ public class CustomerForm extends JFrame {
         else {
             jTextFieldPhoneNumber.setBorder(new LineBorder(Color.BLACK,1));
         }
-        //can be null
         if (!jTextFieldEmail.getText().isEmpty() && !Verification.emailVerification(jTextFieldEmail.getText())) {
             JOptionPane.showMessageDialog(null,"The email is incorrect (must be xxxx@xxxx.ccc", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldEmail.setBorder(new LineBorder(Color.red,3));
@@ -325,7 +322,6 @@ public class CustomerForm extends JFrame {
         else {
             streetNumberSelector.setBorder(new LineBorder(Color.BLACK,1));
         }
-        //can be null
         if (!jTextFieldBox.getText().isEmpty() && !Verification.isAlphabeticCharacters(jTextFieldBox.getText())){
             JOptionPane.showMessageDialog(null,"The box must be a character or short string (A,AB,..)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldBox.setBorder(new LineBorder(Color.red,3));
@@ -334,7 +330,6 @@ public class CustomerForm extends JFrame {
         else {
             jTextFieldBox.setBorder(new LineBorder(Color.BLACK,1));
         }
-        //can be null
         if (!jTextFieldVATNumber.getText().isEmpty() && Integer.parseInt(jTextFieldVATNumber.getText()) < 0) {
             JOptionPane.showMessageDialog(null,"VAT isn't good", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldVATNumber.setBorder(new LineBorder(Color.red,3));

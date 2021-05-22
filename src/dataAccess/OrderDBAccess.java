@@ -44,10 +44,10 @@ public class OrderDBAccess implements OrderDataAccess {
                 java.sql.Date registrationDateSQL =  data.getDate("registration_date");
                 GregorianCalendar registrationDate = DateFormater.fromSqlToGregorianDate(registrationDateSQL);
 
-                Date creationDateSQL = data.getDate("creation_date");
+                java.sql.Date creationDateSQL = data.getDate("creation_date");
                 GregorianCalendar creationDate = DateFormater.fromSqlToGregorianDate(creationDateSQL);
 
-                Date paymentDeadlineSQL = data.getDate("payment_deadline");
+                java.sql.Date paymentDeadlineSQL = data.getDate("payment_deadline");
                 GregorianCalendar paymentDeadline = DateFormater.fromSqlToGregorianDate(paymentDeadlineSQL);
 
                 country = new Country(
@@ -128,4 +128,11 @@ public class OrderDBAccess implements OrderDataAccess {
 
         return getOrders(sqlWhereClause);
     }
+    /*
+    public ArrayList<OrderBusinessTask> getAllOrdersBusinessTask(){
+
+    }
+
+     */
+
 }
