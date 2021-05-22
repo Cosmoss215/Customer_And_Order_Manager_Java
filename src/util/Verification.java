@@ -47,4 +47,13 @@ public class Verification {
     }
 
 
+    public static String escapeString(String input){
+        String output = "";
+        for(int i = 0; i < input.length(); i++){
+            if(input.charAt(i) == '\'')
+                output += "\\'";
+            output += input.charAt(i);
+        }
+        return output;
+    }
 }

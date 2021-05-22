@@ -128,11 +128,48 @@ public class OrderDBAccess implements OrderDataAccess {
 
         return getOrders(sqlWhereClause);
     }
-    /*
-    public ArrayList<OrderBusinessTask> getAllOrdersBusinessTask(){
 
+    public ArrayList<OrderBusinessTask> getAllOrderBusinessTask () throws SelectQueryException {
+        ArrayList<OrderBusinessTask> orders = new ArrayList<>();
+        try {
+            String sqlInstruction = "SELECT o.*, c.first_name, c.last_name, c.id " +
+                    "FROM `order` o " +
+                    "JOIN customer c ON c.id = o.customer;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
+            ResultSet data = preparedStatement.executeQuery();
+
+            OrderBusinessTask order;
+
+            while(data.next()){
+                java.sql.Date creationDateSQL = data.getDate("creation_date");
+                GregorianCalendar creationDate = DateFormater.fromSqlToGregorianDate(creationDateSQL);
+
+                java.sql.Date paymentDeadlineSQL = data.getDate("payment_deadline");
+                GregorianCalendar paymentDeadline = DateFormater.fromSqlToGregorianDate(paymentDeadlineSQL);
+
+                order = new OrderBusinessTask(
+                        data.getInt("number"),
+                        creationDate,
+                        paymentDeadline,
+                        data.getString("state"),
+                        data.getInt("id"),
+                        data.getString("first_name") + " " +  data.getString("last_name")
+                );
+                orders.add(order);
+            }
+
+            for(OrderBusinessTask o : orders){
+                ArrayList<OrderLineBusinessTask> orderLines = new OrderLineDBAccess().getAllOrderLine(
+                        "WHERE ol.order = " + o.getOrderNumber()
+                );
+                o.setOrdersLines(orderLines);
+            }
+
+        } catch(SQLException | ConnectionException exception){
+            throw new SelectQueryException(exception.getMessage());
+        }
+
+        return orders;
     }
-
-     */
-
 }

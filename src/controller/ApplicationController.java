@@ -72,7 +72,7 @@ public class ApplicationController {
     //endregion
 
 
-    //region
+    //region order
     public ArrayList<OrderByCustomer> getAllOrders()throws SelectQueryException {
         ArrayList<OrderByCustomer> orderArrayList = orderManager.getAllOrders();
         return orderArrayList;
@@ -93,8 +93,11 @@ public class ApplicationController {
         ArrayList<OrderByCustomer> orderByCustomers = orderManager.getOrdersByCustomer(customerId);
         return orderByCustomers;
     }
+
+    public ArrayList<OrderBusinessTask> getAllOrderBusinessTask () throws SelectQueryException {
+        ArrayList<OrderBusinessTask> orderBusinessTasks = orderManager.getAllOrderBusinessTask();
+        return orderBusinessTasks;
+    }
     //endregion
-
-
 
 }

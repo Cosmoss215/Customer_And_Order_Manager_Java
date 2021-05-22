@@ -32,4 +32,13 @@ public class ProductManager {
         ArrayList<CustomerByProduct> productArrayList = dao.getProductByReference(reference);
         return productArrayList;
     }
+    /** This method returns the total value of the products that are currently stored into the stocks
+     */
+    public double getStockValue (ArrayList<Product> products){
+        double sum = 0;
+        for(Product p : products){
+            sum += p.getUnitPrice() * p.getStockQuantity();
+        }
+        return sum;
+    }
 }

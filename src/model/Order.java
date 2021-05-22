@@ -91,18 +91,4 @@ public class Order {
         }
     }
    //endregion
-
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "number=" + number +
-                ", creationDate=" + DateFormater.toString(creationDate) +
-                ", PaymentDeadline=" + DateFormater.toString(PaymentDeadline) +
-                ", state='" + state + '\'' +
-                ", customer=" + customer +
-                ", paymentMethod=" + paymentMethod +
-                ", orderLines=" + orderLines +
-                '}';
-    }
 }

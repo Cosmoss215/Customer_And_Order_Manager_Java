@@ -1,13 +1,12 @@
 package business;
 
+import com.mysql.cj.conf.ConnectionUrlParser;
 import dataAccess.OrderDataAccess;
 import dataAccess.OrderDBAccess;
 import exception.ConnectionException;
 import exception.NullException;
 import exception.SelectQueryException;
-import model.Customer;
-import model.Order;
-import model.OrderByCustomer;
+import model.*;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -43,5 +42,49 @@ public class OrderManager {
         }
         ArrayList<OrderByCustomer> orderByCustomers = dao.getOrdersByCustomer(customerId);
         return orderByCustomers;
+    }
+
+    public ArrayList<OrderBusinessTask> getAllOrderBusinessTask () throws SelectQueryException {
+        ArrayList<OrderBusinessTask> orderBusinessTasks = dao.getAllOrderBusinessTask();
+        return orderBusinessTasks;
+    }
+
+    public StatisticsModel getStatsFromAllSales (ArrayList<OrderBusinessTask> orders, int reference) {
+        double max = 0;
+        double profit = 0;
+        double averageOrdersPrices = 0;
+        int totalProductCount = 0;
+        int referencedProductCount = 0;
+        double referencedProductTotalPrice = 0;
+        double percentageRepresentativeness;
+
+        for(OrderBusinessTask o : orders){
+            double totalPrice = 0;
+            double currentPrice;
+
+            for(OrderLineBusinessTask ol : o.getOrdersLines()){
+                currentPrice = ol.getPriceSold() * ol.getQuantity();
+                if(ol.getProductReference() == reference){
+                    referencedProductCount += ol.getQuantity();
+                    referencedProductTotalPrice += currentPrice;
+                }
+                totalProductCount += ol.getQuantity();
+                totalPrice += currentPrice;
+
+                if(ol.getHasDiscount()){
+                    totalPrice -= totalPrice * ol.getPercentageDiscount();
+                }
+            }
+            profit += totalPrice;
+            if(max < totalPrice){
+                max = totalPrice;
+            }
+        }
+        if(orders.size() != 0){
+            averageOrdersPrices = profit / orders.size();
+        }
+        percentageRepresentativeness = referencedProductCount / totalProductCount * 100;
+
+        return new StatisticsModel(max, profit, averageOrdersPrices, totalProductCount, referencedProductCount, referencedProductTotalPrice, percentageRepresentativeness);
     }
 }

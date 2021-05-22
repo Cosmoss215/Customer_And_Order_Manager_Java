@@ -1,5 +1,7 @@
 package model;
 
+import util.DateFormater;
+
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -20,6 +22,24 @@ public class OrderBusinessTask {
         this.customerId = customerId;
         this.customerName = customerName;
         this.ordersLines = ordersLines;
+    }
+
+    public OrderBusinessTask(Integer orderNumber, GregorianCalendar creationDate, GregorianCalendar paymentDeadline, String orderState, Integer customerId, String customerName) {
+        OrderNumber = orderNumber;
+        this.creationDate = creationDate;
+        this.paymentDeadline = paymentDeadline;
+        this.orderState = orderState;
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.ordersLines = null;
+    }
+
+    public void setOrdersLines(ArrayList<OrderLineBusinessTask> ordersLines) {
+        this.ordersLines = ordersLines;
+    }
+
+    public ArrayList<OrderLineBusinessTask> getOrdersLines(){
+        return this.ordersLines;
     }
 
     public GregorianCalendar getCreationDate() {

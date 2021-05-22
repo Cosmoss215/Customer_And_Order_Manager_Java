@@ -4,15 +4,15 @@ public class OrderLine {
     private Order order;
     private Product product;
     private Integer quantity;
-    private Double allTaxesIncludedPrice;
+    private Double priceSold;
     private Boolean hasDiscount;
     private Double percentageDiscount;
 
-    public OrderLine(Order order, Product product, int quantity, double allTaxesIncludedPrice, boolean hasDiscount, double percentageDiscount) {
+    public OrderLine(Order order, Product product, int quantity, double priceSold, boolean hasDiscount, double percentageDiscount) {
         this.order = order;
         this.product = product;
         setQuantity(quantity);
-        setAllTaxesIncludedPrice(allTaxesIncludedPrice);
+        setpriceSold(priceSold);
         this.hasDiscount = hasDiscount;
         setPercentageDiscount(percentageDiscount);
     }
@@ -27,9 +27,9 @@ public class OrderLine {
         }
 
     }
-    public void setAllTaxesIncludedPrice(Double allTaxesIncludedPrice) {
-        if (allTaxesIncludedPrice > 0){
-            this.allTaxesIncludedPrice = allTaxesIncludedPrice;
+    public void setpriceSold(Double priceSold) {
+        if (priceSold > 0){
+            this.priceSold = priceSold;
         }
     }
     public void setPercentageDiscount(Double percentageDiscount) {

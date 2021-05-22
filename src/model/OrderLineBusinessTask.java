@@ -6,15 +6,15 @@ public class OrderLineBusinessTask {
     private Integer productReference;
     private String productWording;
     private Integer quantity;
-    private Double allTaxesIncludedPrice;
+    private Double priceSold;
     private Boolean hasDiscount;
     private Double percentageDiscount;
 
-    public OrderLineBusinessTask(Integer productReference, String productWording, Integer quantity, Double allTaxesIncludedPrice, Boolean hasDiscount, Double percentageDiscount) {
+    public OrderLineBusinessTask(Integer productReference, String productWording, Integer quantity, Double priceSold, Boolean hasDiscount, Double percentageDiscount) {
         this.productReference = productReference;
         this.productWording = productWording;
         this.quantity = quantity;
-        this.allTaxesIncludedPrice = allTaxesIncludedPrice;
+        this.priceSold = priceSold;
         this.hasDiscount = hasDiscount;
         this.percentageDiscount = percentageDiscount;
     }
@@ -27,8 +27,8 @@ public class OrderLineBusinessTask {
         return hasDiscount;
     }
 
-    public Double getAllTaxesIncludedPrice() {
-        return allTaxesIncludedPrice;
+    public Double getPriceSold() {
+        return priceSold;
     }
 
     public Double getPercentageDiscount() {

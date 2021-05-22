@@ -76,7 +76,7 @@ public class Menu extends JFrame {
 
         JMenuItem jMenuItemExit = new JMenuItem("Exit");
         jMenuItemExit.addActionListener(evt -> {
-            JOptionPane.showMessageDialog(null,"The task failed succesfully","ouch", JOptionPane.WARNING_MESSAGE); //Il s'agit bien évidament d'un référence à un blague mythique : https://medium.com/swlh/the-ten-most-ridiculous-error-messages-in-the-history-of-software-4198d710ea8e
+            JOptionPane.showMessageDialog(null,"The task failed succesfully","ouch", JOptionPane.WARNING_MESSAGE); //Il s'agit bien évidement d'un référence à un blague mythique : https://medium.com/swlh/the-ten-most-ridiculous-error-messages-in-the-history-of-software-4198d710ea8e
             System.exit(0);
         });
         jMenuFile.add(jMenuItemExit);
