@@ -35,7 +35,7 @@ public class OrderManager {
 
     }
 
-    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException, NullException {
+    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException, NullException, ConnectionException {
         if (customerId < 0){
             throw new NullException("Customer id is null were it shouldn't be" );
         }

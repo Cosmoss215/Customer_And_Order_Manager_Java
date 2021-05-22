@@ -121,7 +121,7 @@ public class OrderDBAccess implements OrderDataAccess {
         return getOrders(sqlWhereClause);
     }
 
-    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException {
+    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException, ConnectionException {
         String sqlWhereClause = "WHERE o.creation_date " +
                 "BETWEEN c.registration_date AND SYSDATE() " +
                 "AND c.id = " + customerId;

@@ -12,7 +12,7 @@ import java.awt.event.*;
 import java.net.URI;
 
 public class Menu extends JFrame {
-    private JMenuItem jMenuItemCustomer,jMenuItemCreateOrder,jMenuItemProductList,jMenuItemSearch1,jMenuItemSearch2,jMenuItemSearch3;
+    private JMenuItem jMenuItemCustomer,jMenuItemCreateOrder,jMenuItemProductList,jMenuItemStatistics,jMenuItemSearch1,jMenuItemSearch2,jMenuItemSearch3;
     private final Container mainContainer;
 
     public Menu(){
@@ -29,8 +29,7 @@ public class Menu extends JFrame {
             PaneThread paneThread = new PaneThread();
             mainContainer.add(paneThread,BorderLayout.CENTER);
         } catch (ThreadException threadException) {
-            JOptionPane.showMessageDialog(null,threadException.getMessage(), threadException.getTypeError(),
-                    JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,threadException.getMessage(), threadException.getTypeError(), JOptionPane.WARNING_MESSAGE);
         }
         initMenuBar();
 
@@ -86,6 +85,7 @@ public class Menu extends JFrame {
         jMenuNavigate.add(jMenuItemCustomer);
         jMenuNavigate.add(jMenuItemCreateOrder);
         jMenuNavigate.add(jMenuItemProductList);
+        jMenuNavigate.add(jMenuItemStatistics);
 
         jMenuSearch.add(jMenuItemSearch1);
         jMenuSearch.add(jMenuItemSearch2);
@@ -124,7 +124,11 @@ public class Menu extends JFrame {
                 JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
         });
-
+        jMenuItemStatistics = new JMenuItem("Statistics");
+        jMenuItemStatistics.addActionListener(evt -> {
+            Statistics statisticsView = new Statistics();
+            statisticsView.setVisible(true);
+        });
         jMenuItemSearch1 = new JMenuItem("Search 1 Order listing");
         jMenuItemSearch1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.ALT_DOWN_MASK));
         jMenuItemSearch1.addActionListener(evt -> {

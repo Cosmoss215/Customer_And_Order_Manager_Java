@@ -31,8 +31,11 @@ public class StatisticsModel {
         return averageOrdersPrices;
     }
 
-
     public double getReferencedProductTotalPrice() {
         return referencedProductTotalPrice;
+    }
+
+    public double getPercentageRepresentativeness() {
+        return percentageRepresentativeness;
     }
 }

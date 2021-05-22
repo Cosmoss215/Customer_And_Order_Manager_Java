@@ -86,7 +86,7 @@ public class ApplicationController {
         return orderByCustomer;
     }
 
-    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException, NullException {
+    public ArrayList<OrderByCustomer> getOrdersByCustomer(int customerId) throws SelectQueryException, NullException, ConnectionException {
         if (customerId < 0){
             throw new NullException("Customer id is null were it shouldn't be" );
         }
@@ -97,6 +97,10 @@ public class ApplicationController {
     public ArrayList<OrderBusinessTask> getAllOrderBusinessTask () throws SelectQueryException {
         ArrayList<OrderBusinessTask> orderBusinessTasks = orderManager.getAllOrderBusinessTask();
         return orderBusinessTasks;
+    }
+
+    public StatisticsModel getStatsFromAllSales (ArrayList<OrderBusinessTask> orders, int reference){
+        return orderManager.getStatsFromAllSales( orders,reference);
     }
     //endregion
 
