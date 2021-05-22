@@ -98,6 +98,7 @@ public class CustomerList extends JFrame {
         customersModel = new AllCustomersModel(customers);
         jTableCustomerList = new JTable(customersModel);
         jTableCustomerList.setAutoCreateRowSorter(false);
+        jTableCustomerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//Allows selection of a single line
         jScrollCustomerTable = new JScrollPane(jTableCustomerList);
         jTableCustomerList.getTableHeader().setReorderingAllowed(false);
         jScrollCustomerTable.setViewportView(jTableCustomerList);
