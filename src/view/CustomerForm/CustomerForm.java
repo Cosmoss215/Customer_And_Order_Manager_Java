@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -279,6 +280,15 @@ public class CustomerForm extends JFrame {
         else {
             jTextFieldRegistrationDate.setBorder(new LineBorder(Color.BLACK,1));
         }
+
+        if (!Verification.isToday(DateFormater.ourDate(jTextFieldRegistrationDate.getText()))) {
+            JOptionPane.showMessageDialog(null,"The recording date cannot be greater than the current date. Must be " + LocalDate.now() + " or earlier", "FormException", JOptionPane.INFORMATION_MESSAGE);
+            jTextFieldRegistrationDate.setBorder(new LineBorder(Color.red,3));
+            return false;
+        }
+        else {
+            jTextFieldRegistrationDate.setBorder(new LineBorder(Color.BLACK,1));
+        }
         //can be null
         if (!jTextFieldPhoneNumber.getText().isEmpty() && !Verification.phoneNumberVerification(jTextFieldPhoneNumber.getText())) {
             JOptionPane.showMessageDialog(null,"The phone number is incorrect", "FormException", JOptionPane.INFORMATION_MESSAGE);
@@ -336,6 +346,14 @@ public class CustomerForm extends JFrame {
 
         if (jTextFieldIBAN.getText().length() > 35 || jTextFieldIBAN.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null,"Iban field is obligatory and the maximum length is (35)", "FormException", JOptionPane.INFORMATION_MESSAGE);
+            jTextFieldIBAN.setBorder(new LineBorder(Color.red,3));
+            return false;
+        }
+        else {
+            jTextFieldIBAN.setBorder(new LineBorder(Color.BLACK,1));
+        }
+        if (!Verification.ibanVerification(jTextFieldIBAN.getText())) {
+            JOptionPane.showMessageDialog(null,"The iban number you mentioned is not accepted by this program. Please enter it correctly or contact customer services.", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldIBAN.setBorder(new LineBorder(Color.red,3));
             return false;
         }
