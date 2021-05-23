@@ -6,88 +6,108 @@ import exception.ConnectionException;
 import exception.SelectQueryException;
 import model.OrderBusinessTask;
 import model.StatisticsModel;
-
+import util.NumberFormater;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Statistics extends JFrame {
-    private javax.swing.JButton SearchButton;
-    private javax.swing.JLabel jLabelAverage;
-    private javax.swing.JLabel jLabelMaxPrice;
-    private javax.swing.JLabel jLabelProfit1;
-    private javax.swing.JLabel jLabelRepresentativeness;
-    private javax.swing.JTextField profitTextField;
-    private javax.swing.JTextField maxTextField;
-    private javax.swing.JTextField averageTextField;
-    private javax.swing.JTextField reprentativeness;
-    private javax.swing.JPanel mainPanel;
-    private javax.swing.JTextField searchProductReference;
+    private  JButton SearchButton;
+    private  JLabel jLabelAverage,jLabelMaxPrice,jLabelProfit1,jLabelRepresentativeness, jLabelTotalProductPrice,jLabelProductReference,jLabelTitle;
+    private  JTextField profitTextField,maxTextField,averageTextField,reprentativeness,searchProductReference,referencedProductTotalPrice;
+    private  JPanel mainPanel;
+    private Container frameContainer;
 
     public Statistics(){
-        mainPanel = new javax.swing.JPanel();
-        searchProductReference = new javax.swing.JTextField();
-        SearchButton = new javax.swing.JButton();
-        jLabelMaxPrice = new javax.swing.JLabel();
-        jLabelAverage = new javax.swing.JLabel();
-        jLabelProfit1 = new javax.swing.JLabel();
-        jLabelRepresentativeness = new javax.swing.JLabel();
-        profitTextField = new javax.swing.JTextField();
-        maxTextField = new javax.swing.JTextField();
-        averageTextField = new javax.swing.JTextField();
-        reprentativeness = new javax.swing.JTextField();
 
+        super("Statistics");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        searchProductReference.setFont(new java.awt.Font("Tahoma", 0, 18));
+        initLabelAndTextField();
+        WindowFormattingCode();
 
-        SearchButton.setFont(new java.awt.Font("Tahoma", 0, 18));
-        SearchButton.setText("Search");
         SearchButton.addActionListener(evt -> {
             try {
                 ApplicationController applicationController = new ApplicationController();
                 ArrayList<OrderBusinessTask> orderBusinessTasks = applicationController.getAllOrderBusinessTask();
 
                 StatisticsModel statisticsModel = applicationController.getStatsFromAllSales(orderBusinessTasks, Integer.parseInt(searchProductReference.getText()));
-                maxTextField.setText(String.valueOf(statisticsModel.getMax()));
-                profitTextField.setText(String.valueOf(statisticsModel.getProfit()));
-                averageTextField.setText(String.valueOf(statisticsModel.getAverageOrdersPrices()));
-                reprentativeness.setText(String.valueOf(statisticsModel.getPercentageRepresentativeness()));
+                maxTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getMax()) + " €");
+                profitTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getProfit()) + " €");
+                averageTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getAverageOrdersPrices()) + " €");
+                reprentativeness.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getPercentageRepresentativeness()) + " %");
+                referencedProductTotalPrice.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getReferencedProductTotalPrice()) + " €");
+
 
             } catch (ConnectionException | SelectQueryException exception) {
                 JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
 
         });
-        jLabelMaxPrice.setFont(new java.awt.Font("Tahoma", 0, 14));
-        jLabelMaxPrice.setText("Maximum price of an order");
-
-        jLabelAverage.setFont(new java.awt.Font("Tahoma", 0, 14));
-        jLabelAverage.setText("Average orders prices");
-
-        jLabelProfit1.setFont(new java.awt.Font("Tahoma", 0, 14));
-        jLabelProfit1.setText("Company profit");
-
-        jLabelRepresentativeness.setFont(new java.awt.Font("Tahoma", 0, 14));
-        jLabelRepresentativeness.setText("Representativeness of the ordered product");
-
-        profitTextField.setFont(new java.awt.Font("Tahoma", 0, 14));
-        profitTextField.setText("");
-
-        maxTextField.setFont(new java.awt.Font("Tahoma", 0, 14));
-        maxTextField.setText("");
-
-        averageTextField.setFont(new java.awt.Font("Tahoma", 0, 14));
-        averageTextField.setText("");
-
-        reprentativeness.setFont(new java.awt.Font("Tahoma", 0, 14));
-        reprentativeness.setText("");
-
-        WindowFormattingCode();
 
     }
-    private void WindowFormattingCode(){
+    private void initLabelAndTextField(){
+        mainPanel = new JPanel();
+        searchProductReference = new JTextField();
+        SearchButton = new JButton();
+        jLabelMaxPrice = new JLabel();
+        jLabelAverage = new JLabel();
+        jLabelProfit1 = new JLabel();
+        jLabelRepresentativeness = new JLabel();
+        jLabelTotalProductPrice = new JLabel();
+        profitTextField = new JTextField();
+        maxTextField = new JTextField();
+        averageTextField = new JTextField();
+        reprentativeness = new JTextField();
+        referencedProductTotalPrice = new JTextField();
+        jLabelProductReference = new javax.swing.JLabel();
+        jLabelTitle = new javax.swing.JLabel();
+
+        jLabelProductReference.setFont(new java.awt.Font("Tahoma", 0, 16));
+        jLabelProductReference.setText("Product reference");
+
+        jLabelTitle.setFont(new java.awt.Font("Tahoma", 0, 16));
+        jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTitle.setText("Statistics");
+
+        searchProductReference.setFont(new java.awt.Font("Tahoma", 0, 16));
+        searchProductReference.setToolTipText("Insert the reference of a product (you can find them in the list of products window).");
+
+        SearchButton.setFont(new java.awt.Font("Tahoma", 0, 16));
+        SearchButton.setText("Search");
+
+        jLabelMaxPrice.setFont(new java.awt.Font("Tahoma", 0, 16));
+        jLabelMaxPrice.setText("Maximum price of an order");
+
+        jLabelAverage.setFont(new java.awt.Font("Tahoma", 0, 16));
+        jLabelAverage.setText("Average orders prices");
+
+        jLabelProfit1.setFont(new java.awt.Font("Tahoma", 0, 16));
+        jLabelProfit1.setText("Company profit");
+
+        jLabelRepresentativeness.setFont(new java.awt.Font("Tahoma", 0, 16));
+        jLabelRepresentativeness.setText("Representativeness of the ordered product");
+
+        jLabelTotalProductPrice.setFont(new java.awt.Font("Tahoma", 0, 16));
+        jLabelTotalProductPrice.setText("Referenced product total price");
+
+        profitTextField.setFont(new java.awt.Font("Tahoma", 0, 16));
+        profitTextField.setHorizontalAlignment(SwingConstants.CENTER);
+
+        maxTextField.setFont(new java.awt.Font("Tahoma", 0, 16));
+        maxTextField.setHorizontalAlignment(SwingConstants.CENTER);
+
+        averageTextField.setFont(new java.awt.Font("Tahoma", 0, 16));
+        averageTextField.setHorizontalAlignment(SwingConstants.CENTER);
+
+        reprentativeness.setFont(new java.awt.Font("Tahoma", 0, 16));
+        reprentativeness.setHorizontalAlignment(SwingConstants.CENTER);
+
+        referencedProductTotalPrice.setFont(new java.awt.Font("Tahoma", 0, 16));
+        referencedProductTotalPrice.setHorizontalAlignment(SwingConstants.CENTER);
+    }
+
+    public void WindowFormattingCode(){
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -95,33 +115,53 @@ public class Statistics extends JFrame {
                         .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(searchProductReference)
-                                        .addGroup(mainPanelLayout.createSequentialGroup()
-                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabelProfit1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabelMaxPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabelAverage, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabelRepresentativeness))
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(mainPanelLayout.createSequentialGroup()
-                                                .addGap(0, 115, Short.MAX_VALUE)
-                                                .addComponent(SearchButton))
-                                        .addComponent(profitTextField)
-                                        .addComponent(maxTextField)
-                                        .addComponent(averageTextField)
-                                        .addComponent(reprentativeness))
-                                .addGap(31, 31, 31))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(mainPanelLayout.createSequentialGroup()
+                                                                .addComponent(jLabelTotalProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(101, 101, 101)
+                                                                .addComponent(referencedProductTotalPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                                                        .addGroup(mainPanelLayout.createSequentialGroup()
+                                                                .addComponent(jLabelRepresentativeness)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(reprentativeness)))
+                                                .addGap(33, 33, 33))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addGroup(mainPanelLayout.createSequentialGroup()
+                                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(mainPanelLayout.createSequentialGroup()
+                                                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addComponent(jLabelProfit1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(jLabelMaxPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(jLabelAverage, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                                                .addComponent(jLabelProductReference, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGap(161, 161, 161)))
+                                                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                                                                .addComponent(searchProductReference, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                                                                .addGap(18, 18, 18)
+                                                                                .addComponent(SearchButton))
+                                                                        .addComponent(maxTextField)
+                                                                        .addComponent(profitTextField)
+                                                                        .addComponent(averageTextField))))
+                                                .addGap(33, 33, 33))))
         );
         mainPanelLayout.setVerticalGroup(
                 mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(searchProductReference, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(SearchButton))
-                                .addGap(35, 35, 35)
+                                        .addComponent(SearchButton)
+                                        .addComponent(jLabelProductReference))
+                                .addGap(38, 38, 38)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelProfit1)
                                         .addComponent(profitTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -129,15 +169,19 @@ public class Statistics extends JFrame {
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelMaxPrice)
                                         .addComponent(maxTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(41, 41, 41)
+                                .addGap(38, 38, 38)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelAverage)
                                         .addComponent(averageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                                .addGap(38, 38, 38)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelRepresentativeness)
                                         .addComponent(reprentativeness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29))
+                                .addGap(38, 38, 38)
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(referencedProductTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabelTotalProductPrice))
+                                .addGap(38, 38, 38))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -148,9 +192,12 @@ public class Statistics extends JFrame {
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }
+
+
+
 }

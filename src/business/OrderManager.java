@@ -82,7 +82,7 @@ public class OrderManager {
         if(orders.size() != 0){
             averageOrdersPrices = profit / orders.size();
         }
-        percentageRepresentativeness = referencedProductCount / totalProductCount * 100;
+        percentageRepresentativeness = ((double)referencedProductCount / totalProductCount) * 100;
 
         return new StatisticsModel(max, profit, averageOrdersPrices, totalProductCount, referencedProductCount, referencedProductTotalPrice, percentageRepresentativeness);
     }

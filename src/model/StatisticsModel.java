@@ -1,5 +1,7 @@
 package model;
 
+import java.text.DecimalFormat;
+
 public class StatisticsModel {
     private double max;
     private double profit;
@@ -36,6 +38,6 @@ public class StatisticsModel {
     }
 
     public double getPercentageRepresentativeness() {
-        return percentageRepresentativeness;
+      return percentageRepresentativeness;
     }
 }
