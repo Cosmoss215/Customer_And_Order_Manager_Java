@@ -94,7 +94,7 @@ En sélectionnant un produit en en cliquant sur "Search" nous obtiendrons la rep
 
 
 ## Feedback
-Un premier feedback à été données par notre professeur à été donnée le 18/05/2021.  Les voici commentés.
+Un premier feedback à été données par notre professeur le 18/05/2021. Voici les modifications commentés.
 
 * Vérification sur l'iban dans le formulaire :
   * Cette vérification oblige l'utilisateur à rentré un iban correcte composé de 3 ou 4 chiffres après le code du pays et la clef de contrpole (certains pays sont composé de 4 chiffres après la cléf, la belgique elle est composé de 3 chiffres).
