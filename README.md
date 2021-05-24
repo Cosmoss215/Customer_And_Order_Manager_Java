@@ -33,15 +33,15 @@ Cette recherche doit être améliorée. En effet l'autocomplétion ne permet pas
 ![image](https://user-images.githubusercontent.com/48365113/119388930-37792000-bccb-11eb-9b60-bc4c4fd6e394.png)
 
 Le menu est composé de trois menus comportements chacun des items. Chaque item dirige vers une fenêtre qui sera expliquée plus loin.
-•	File
-o	Exit : Contiens un raccourci pour quitter la fenêtre
-•	Search
-o	Search 1 Order listing  ALT O
-o	Search 2 Customer by country  ALT C
-o	Search 3 By product  ALT P
-•	Navigate
-o	Customer list  CTRL C
-o	Create Order  CTRL O (cette fenêtre est là à titre d'exemple)
-o	Product list  CTRL P
-o	Statistics  ALT S
+* File
+ * Exit : Contiens un raccourci pour quitter la fenêtre
+*	Search
+ *	Search 1 Order listing -> ALT O
+ *	Search 2 Customer by country -> ALT C
+ *	Search 3 By product -> ALT P
+*	Navigate
+ *	Customer list -> CTRL C
+ *	Create Order -> CTRL O (cette fenêtre est là à titre d'exemple)
+ *	Product list -> CTRL P
+ *	Statistics -> ALT S
 
