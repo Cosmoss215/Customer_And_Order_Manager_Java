@@ -105,7 +105,7 @@ public class Customer {
         this.nickname = nickname;
     }
     public void setPhoneNumber(Integer phoneNumber) {
-        this.phoneNumber = phoneNumber;
+            this.phoneNumber = phoneNumber;
     }
     public void setEmail(String email){
         this.email = email;
