@@ -25,7 +25,7 @@ Ce projet comportera toutes les fonctionnalités citée et expliquée ci-dessous
 ## Le thread
 Un thread a été créé pour répondre aux contraintes du projet. Celui-ci est une image PNG se déplaçant de gauche à droite dans la fenêtre.
 
-## Amélioration 
+## Amélioration possible
 ### Recherche numéro 1 : Order listing - Autocompletion
 Cette recherche doit être améliorée. En effet l'autocomplétion ne permet pas de sélectionner un client ayant le même prénom ou nom qu'un autre client. Le premier client sera toujours sélectionné au détriment du bon client. Par manque de temps nous n'avons pas pu corriger cette erreur.
 
@@ -66,7 +66,7 @@ Cette fenêtre permet d'afficher les commandes ou ce produit se retrouve, le nom
 ### Customer list
 ![image](https://user-images.githubusercontent.com/48365113/119389682-401e2600-bccc-11eb-8cc6-61a796f52bba.png)
 
-Cette fenêtre est sans doute la plus importante. Elle permet d'effectuer toutes les opérations CRUD sur les clients.
+Cette fenêtre est sans doute la plus **importante**. Elle permet d'effectuer toutes les opérations **CRUD** sur les clients.
 Le bouton refresh permettra de refresh la table après l'ajout d'un client.
 Pour supprimer un client, il suffit de le sélectionner dans la table et ensuite de cliquer sur "Delete customer"
 L'ajout et l'édition d'un client enverront vers une fenêtre de formulaire permettant d'effectuer la tâche demandée.
@@ -75,7 +75,7 @@ Note : Le champ customer name et nickname n'ont pas été implémenter par manqu
 ### Le formulaire
 ![image](https://user-images.githubusercontent.com/48365113/119389807-680d8980-bccc-11eb-9994-455c8034e03e.png)
 
-Chaque champ suivi d'une étoile est un champ obligatoire. Une fois ceux-ci remplis (et correctement remplis) le client pourra être créé. 
+Chaque champ suivi d'une *étoile* est un champ **obligatoire**. Une fois ceux-ci remplis (et correctement remplis) le client pourra être créé. 
 Si un ou plusieurs champs ne répondent pas aux l'exigence. Alors les champs seront mis en rouge et expliqueront pourquoi la donnée entrée n'est pas bonne. 
 Si l'on passe le curseur sur un champ à remplir, une petite indication montre la bonne manière de remplir le champ.
 La fenêtre pou l'édition d'un client est sensiblement la même, les champs seront simplement près remplis des données du client et prête à être modifié. 
@@ -88,7 +88,18 @@ Cette fenêtre est un simple affichage de tous les produits de l'entreprise. Ell
 
 ### Statistics
 ![image](https://user-images.githubusercontent.com/48365113/119390101-d5b9b580-bccc-11eb-850d-c4329e51dc7c.png)
-Cette fenêtre correspond à la tâche métier. Elle affichera des statistiques élémentaires sur l'entreprise avec par exemple "Company profit" qui correspond au chiffre d'affaires (et non au bénéfice" de l'entreprise.
-En sélectionnant un produit en en cliquant sur "Search" nous obtiendrons la représentativité de ce produit sur l'ensemble des achats ainsi que son prix total de ventes cumulé. 
 
+Cette fenêtre correspond à la tâche métier. Elle affichera des statistiques élémentaires sur l'entreprise avec par exemple "Company profit" qui correspond au chiffre d'affaires (et non au bénéfice" de l'entreprise).
+En sélectionnant un produit en en cliquant sur "Search" nous obtiendrons la représentativité de ce produit sur l'ensemble des achats ainsi que son prix total de ventes cumulé.
+
+
+## Feedback
+Un premier feedback à été données par notre professeur à été donnée le 18/05/2021.  Les voici commentés.
+
+* Vérification sur l'iban dans le formulaire
+ * Cette vérification oblige l'utilisateur à rentré un iban correcte composé de 3 ou 4 chiffres après le code du pays et la clef de contrpole (certains pays sont composé de 4 chiffres après la cléf, la belgique elle est composé de 3 chiffres).
+* Registration date 
+ * Lors de la création d'un client, il faut indiqué la date de création du client. Maintenant si la date est supérieure à celle du jour alors un message d'erreur apparait et empêche la continuité du formulaire.
+* Sélection de plusieurs lignes dans un jTable
+ * Il n'est désormais plus possible de sélectionner plusieurs lignes dans la table customerList. Ainsi lors de la suppression d'un client, seul le client sélectionné sera supprimé après confirmation.
 
