@@ -2,17 +2,25 @@
 
 Ce projet java s'inscrit dans le cadre de nos études d'informatique de gestion à l'Henallux de namur.
 
-Le projet compte package différent :
+Ce projet comportera toutes les fonctionnalités citée et expliquée ci-dessous.
 
-* 5 packages concernant la découpe en couche
-  * View, comprend toutes les classes lié à l'interface
-  * Model
-  * Controller
-  * Business
-  * DataAccess
-* et pour finir les couches
-  * Exception, comprenant toutes les classes relevant les exceptions
-  * Ressource, ce package comprend toutes les ressources tel que les images pour le thread
+* Les opérations CRUD (Create, read, update, delete) sur un client. Celle-ci seront disponible dans la fenêtre Customer List et permettrons à l'utilisateur (CTRL C): 
+ * De créer un client via un formulaire demandant toutes les informations nécessaires à la bonne création du client dans la base de données. Les valeurs non obligatoires seront indiquées par un *.
+ * D'éditer un client en le sélectionnant dans le tableau et ensuite en appuyant sur le bouton "Update". Toutes les informations seront mises à jour dans la base de données.
+ * Supprimer un client, en sélectionnant le client dans le tableau et en cliquant sur le bouton "Delete".
+
+* Effectué une recherche sur les commandes d'un client en particulier. (Recherche numéro 1 - Order listing) - ALT O
+* Effectué une recherche sur les clients venant d'un pays sélectionner (Recherche numéro 2 - Customer by country). ALT C
+* Effectué une recherche sur un produit donné et les clients l'ayant commandé (Recherche 3 - by product). ALT P
+* Une liste de tous les produits (CTRL P)
+* Des statistiques globales sur les commandes avec (ALT S) : 
+  * Le profit générer par la compagnie
+  * Le prix maximum d'une commande
+  * Le prix moyen d'une commande,
+* des statistiques sur un produit données en entrée (champ product wording).
+  * La représentativité d'un produit par rapport aux autres (son nombre de commandes divisé par le total des commandes x 100).
+  * Le montant total de ce produit commandé.
+
 
 
 
