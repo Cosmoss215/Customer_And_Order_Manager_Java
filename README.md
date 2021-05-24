@@ -36,12 +36,12 @@ Le menu est composé de trois menus comportements chacun des items. Chaque item 
 * File
  * Exit : Contiens un raccourci pour quitter la fenêtre
 *	Search
- *	Search 1 Order listing -> ALT O
- *	Search 2 Customer by country -> ALT C
- *	Search 3 By product -> ALT P
+  *	Search 1 Order listing -> ALT O
+  *	Search 2 Customer by country -> ALT C
+  *	Search 3 By product -> ALT P
 *	Navigate
- *	Customer list -> CTRL C
- *	Create Order -> CTRL O (cette fenêtre est là à titre d'exemple)
- *	Product list -> CTRL P
- *	Statistics -> ALT S
+  *	Customer list -> CTRL C
+  *	Create Order -> CTRL O (cette fenêtre est là à titre d'exemple)
+  *	Product list -> CTRL P
+  *	Statistics -> ALT S
 
