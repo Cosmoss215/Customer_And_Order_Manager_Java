@@ -29,5 +29,19 @@ Un thread a été créé pour répondre aux contraintes du projet. Celui-ci est 
 ### Recherche numéro 1 : Order listing - Autocompletion
 Cette recherche doit être améliorée. En effet l'autocomplétion ne permet pas de sélectionner un client ayant le même prénom ou nom qu'un autre client. Le premier client sera toujours sélectionné au détriment du bon client. Par manque de temps nous n'avons pas pu corriger cette erreur.
 
+## Comment utiliser le programme
 ![image](https://user-images.githubusercontent.com/48365113/119388930-37792000-bccb-11eb-9b60-bc4c4fd6e394.png)
+
+Le menu est composé de trois menus comportements chacun des items. Chaque item dirige vers une fenêtre qui sera expliquée plus loin.
+•	File
+o	Exit : Contiens un raccourci pour quitter la fenêtre
+•	Search
+o	Search 1 Order listing  ALT O
+o	Search 2 Customer by country  ALT C
+o	Search 3 By product  ALT P
+•	Navigate
+o	Customer list  CTRL C
+o	Create Order  CTRL O (cette fenêtre est là à titre d'exemple)
+o	Product list  CTRL P
+o	Statistics  ALT S
 
