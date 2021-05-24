@@ -53,11 +53,11 @@ public class ApplicationController {
     //endregion
 
     //region Product
-    public ArrayList<CustomerByProduct> getProductByReference(String wording) throws SelectQueryException, NullException {
+    public ArrayList<CustomerByProduct> getProductByWording(String wording) throws SelectQueryException, NullException {
         if (wording == null){
             throw new NullException(wording.getClass().getName());
         }
-        return productManager.getProductByReference(wording);
+        return productManager.getProductByWording(wording);
     }
     public ArrayList<Product> getAllProducts() throws SelectQueryException {
         return productManager.getAllProducts();

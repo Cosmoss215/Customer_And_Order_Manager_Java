@@ -9,16 +9,14 @@ public class StatisticsModel {
     private int totalProductCount;
     private int referencedProductCount;
     private double referencedProductTotalPrice;
-    private double percentageRepresentativeness;
 
-    public StatisticsModel(double max, double profit, double averageOrdersPrices, int totalProductCount, int referencedProductCount, double referencedProductTotalPrice, double percentageRepresentativeness) {
+    public StatisticsModel(double max, double profit, double averageOrdersPrices, int totalProductCount, int referencedProductCount, double referencedProductTotalPrice) {
         this.max = max;
         this.profit = profit;
         this.averageOrdersPrices = averageOrdersPrices;
         this.totalProductCount = totalProductCount;
         this.referencedProductCount = referencedProductCount;
         this.referencedProductTotalPrice = referencedProductTotalPrice;
-        this.percentageRepresentativeness = percentageRepresentativeness;
     }
 
     public double getMax() {
@@ -37,7 +35,11 @@ public class StatisticsModel {
         return referencedProductTotalPrice;
     }
 
-    public double getPercentageRepresentativeness() {
-      return percentageRepresentativeness;
+    public double getPercentageRepresentativeness(){
+        if(totalProductCount > 0){
+            return ((double)referencedProductCount / totalProductCount) * 100;
+        }
+        return 0;
     }
+
 }

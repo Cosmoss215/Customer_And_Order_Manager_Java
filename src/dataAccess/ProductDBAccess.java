@@ -53,7 +53,7 @@ public class ProductDBAccess implements ProductDataAccess {
         return allProducts;
     }
     @Override
-    public ArrayList<CustomerByProduct> getProductByReference(String wording) throws SelectQueryException {
+    public ArrayList<CustomerByProduct> getProductByWording(String wording) throws SelectQueryException {
         ArrayList<CustomerByProduct> productByReference = new ArrayList<>();
 
         String sqlInstruction = "SELECT cu.last_name, cu.first_name, ol.quantity, pm.wording " +

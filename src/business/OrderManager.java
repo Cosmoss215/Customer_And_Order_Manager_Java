@@ -55,7 +55,7 @@ public class OrderManager {
         int totalProductCount = 0;
         int referencedProductCount = 0;
         double referencedProductTotalPrice = 0;
-        double percentageRepresentativeness;
+        double percentageRepresentativeness = 0;
 
         for(OrderBusinessTask o : orders){
             double totalPrice = 0;
@@ -82,8 +82,8 @@ public class OrderManager {
         if(orders.size() != 0){
             averageOrdersPrices = profit / orders.size();
         }
-        percentageRepresentativeness = ((double)referencedProductCount / totalProductCount) * 100;
 
-        return new StatisticsModel(max, profit, averageOrdersPrices, totalProductCount, referencedProductCount, referencedProductTotalPrice, percentageRepresentativeness);
+
+        return new StatisticsModel(max, profit, averageOrdersPrices, totalProductCount, referencedProductCount, referencedProductTotalPrice);
     }
 }

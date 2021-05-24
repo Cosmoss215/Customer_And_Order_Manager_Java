@@ -4,8 +4,11 @@ import java.text.DecimalFormat;
 
 public class NumberFormater {
     public static String primaryDecimalFormater(double numberToFormat){
-        DecimalFormat format = new DecimalFormat("#.00");
-        String numberFormated = format.format(numberToFormat);
+        String numberFormated = "N/A";
+        if (numberToFormat > 0){
+            DecimalFormat format = new DecimalFormat("#.00");
+            numberFormated = format.format(numberToFormat);
+        }
         return numberFormated;
     }
 }

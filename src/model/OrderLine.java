@@ -12,7 +12,7 @@ public class OrderLine {
         this.order = order;
         this.product = product;
         setQuantity(quantity);
-        setpriceSold(priceSold);
+        setPriceSold(priceSold);
         this.hasDiscount = hasDiscount;
         setPercentageDiscount(percentageDiscount);
     }
@@ -27,7 +27,7 @@ public class OrderLine {
         }
 
     }
-    public void setpriceSold(Double priceSold) {
+    public void setPriceSold(Double priceSold) {
         if (priceSold > 0){
             this.priceSold = priceSold;
         }
@@ -38,4 +38,5 @@ public class OrderLine {
         }
     }
     //endregion
+
 }

@@ -35,11 +35,9 @@ public class OrderLineBusinessTask {
         return percentageDiscount;
     }
 
-    public Integer getProductReference() {
-        return productReference;
-    }
-
     public String getProductWording() {
         return productWording;
     }
+
+
 }

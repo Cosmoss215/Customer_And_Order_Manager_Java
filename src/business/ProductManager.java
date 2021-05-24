@@ -25,11 +25,11 @@ public class ProductManager {
         return productArrayList;
     }
 
-    public ArrayList<CustomerByProduct> getProductByReference(String wording) throws SelectQueryException, NullException {
+    public ArrayList<CustomerByProduct> getProductByWording(String wording) throws SelectQueryException, NullException {
         if (wording == null){
             throw new NullException("Reference cannot be null");
         }
-        ArrayList<CustomerByProduct> productArrayList = dao.getProductByReference(wording);
+        ArrayList<CustomerByProduct> productArrayList = dao.getProductByWording(wording);
         return productArrayList;
     }
     /** This method returns the total value of the products that are currently stored into the stocks

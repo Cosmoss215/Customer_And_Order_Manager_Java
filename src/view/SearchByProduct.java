@@ -6,14 +6,9 @@ import exception.NullException;
 import exception.SelectQueryException;
 import model.CustomerByProduct;
 import model.Product;
-import util.Verification;
 import view.tableModel.AllCustomersByProductModel;
-
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class SearchByProduct extends JFrame {
@@ -24,7 +19,7 @@ public class SearchByProduct extends JFrame {
     private final JPanel panelSearchBar;
     private final JPanel panelTableByProduct;
     private ArrayList<Product> products;
-    private Integer currentReference;
+
 
     public SearchByProduct() throws SelectQueryException, ConnectionException, NullException {
         super("Search product with reference");
@@ -38,8 +33,8 @@ public class SearchByProduct extends JFrame {
         jLabelProduct.setFont(new Font("Tahoma", 0, 18));
         jLabelProduct.setText("Product");
 
-        ApplicationController getProductByReference = new ApplicationController();
-        products = getProductByReference.getAllProducts();
+        ApplicationController getProductByWording = new ApplicationController();
+        products = getProductByWording.getAllProducts();
 
 
         int i = 0;
@@ -52,22 +47,18 @@ public class SearchByProduct extends JFrame {
         jTextFieldFindProduct = new JComboBox<>(pattern);
         jTextFieldFindProduct.setFont(new Font("Tahoma", 0, 16));
 
-
-
-
-        ArrayList<CustomerByProduct> customersByProduct = getProductByReference.getProductByReference(jTextFieldFindProduct.getSelectedItem().toString());
+        ArrayList<CustomerByProduct> customersByProduct = getProductByWording.getProductByWording(jTextFieldFindProduct.getSelectedItem().toString());
         AllCustomersByProductModel customersByProductModel = new AllCustomersByProductModel(customersByProduct);
         jTableCustomersByProduct = new JTable(customersByProductModel);
         jTableCustomersByProduct.setAutoCreateRowSorter(true);
         jScrollPane1 = new JScrollPane(jTableCustomersByProduct);
         jScrollPane1.setViewportView(jTableCustomersByProduct);
 
-
         jTextFieldFindProduct.addActionListener(evt -> {
             try {
-                ApplicationController getProductByReference1 = new ApplicationController();
+                ApplicationController getProductByWording1 = new ApplicationController();
                 ArrayList<CustomerByProduct> customersByProduct1;
-                customersByProduct1 = getProductByReference1.getProductByReference(jTextFieldFindProduct.getSelectedItem().toString());
+                customersByProduct1 = getProductByWording1.getProductByWording(jTextFieldFindProduct.getSelectedItem().toString());
                 AllCustomersByProductModel customersByProductModel1 = new AllCustomersByProductModel(customersByProduct1);
                 jTableCustomersByProduct.setModel(customersByProductModel1);
             } catch (ConnectionException | SelectQueryException | NullException exception) {
