@@ -113,7 +113,6 @@ public class Customer {
     public void setVatNumber(Integer vatNumber) {
         this.vatNumber = vatNumber;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }

@@ -229,12 +229,27 @@ public class CustomerDBAccess implements CustomerDataAccess {
         preparedStatement.setDate(3, DateFormater.fromJavaToSqlDate(customer.getRegistrationDate()));
         preparedStatement.setByte(4, customer.getVip() ? (byte) 1 : (byte) 0);
         preparedStatement.setString(5, customer.getNickname());
-        preparedStatement.setInt(6, customer.getPhoneNumber() != null ? customer.getPhoneNumber() : java.sql.Types.NULL);
+        //preparedStatement.setInt(6, customer.getPhoneNumber() != null ? customer.getPhoneNumber() : Types.NULL);
+        if (customer.getPhoneNumber() != null){
+            preparedStatement.setInt(6, customer.getPhoneNumber());
+        }
+        else{
+            preparedStatement.setNull(6, Types.NULL);
+        }
+
         preparedStatement.setString(7, customer.getEmail());
-        preparedStatement.setInt(8, customer.getVatNumber() != null ? customer.getVatNumber() : java.sql.Types.NULL);
+        //preparedStatement.setInt(8, customer.getVatNumber() != null ? customer.getVatNumber() : Types.NULL);
+        if (customer.getVatNumber() != null){
+            preparedStatement.setInt(8, customer.getVatNumber());
+        }
+        else{
+            preparedStatement.setNull(8, Types.NULL);
+        }
+
         preparedStatement.setString(9, customer.getIban());
         preparedStatement.setString(10, customer.getBic());
     }
+
 
     private void setPreparedWritingStatementForAddress(PreparedStatement preparedStatementAddress, Address address) throws SQLException {
 

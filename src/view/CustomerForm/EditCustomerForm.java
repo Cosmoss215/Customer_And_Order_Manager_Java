@@ -63,10 +63,11 @@ public class EditCustomerForm extends CustomerForm {
 
         jTextFieldRegistrationDate.setText(DateFormater.toString(customerFromView.getRegistrationDate()));
 
-        if (customerFromView.getPhoneNumber() != null){
+        if (customerFromView.getPhoneNumber() != 0){
             jTextFieldPhoneNumber.setText(String.valueOf(customerFromView.getPhoneNumber()));
+        }else {
+            jTextFieldPhoneNumber.setText("");
         }
-
 
         if (customerFromView.getEmail() != null){
             jTextFieldEmail.setText(String.valueOf(customerFromView.getEmail()));

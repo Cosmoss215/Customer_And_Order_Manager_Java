@@ -195,7 +195,7 @@ public class CustomerForm extends JFrame {
 
         jTextFieldIBAN = new JTextField();
         jTextFieldIBAN.setFont(new Font("Tahoma", 0, 20));
-        jTextFieldIBAN.setToolTipText("Format : AAxx xxxx xxxx xxxx x");
+        jTextFieldIBAN.setToolTipText("Format : QQxx xxxx xxxx xxxx OR QQxx xxxx xxxx xxxx");
 
         jTextFieldBIC = new JTextField();
         jTextFieldBIC.setFont(new Font("Tahoma", 0, 20));
