@@ -25,47 +25,41 @@ public class Statistics extends JFrame {
         super("Statistics");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        initLabelAndTextField();
-
         ApplicationController applicationController = new ApplicationController();
         ArrayList<Product> products = applicationController.getAllProducts();
 
         int i = 0;
         String [] pattern = new String[products.size()];
         for (Product p : products){
-            pattern[i] = p.getWording() + " : " + p.getReference();
+            pattern[i] = p.getWording();
             i++;
         }
         searchProductReference = new JComboBox<>(pattern);
-        searchProductReference.setFont(new java.awt.Font("Tahoma", 0, 16));
-        searchProductReference.setToolTipText("Insert the reference of a product (you can find them in the list of products window).");
+
+        initLabelAndTextField();
+
         WindowFormattingCode();
 
         SearchButton.addActionListener(evt -> {
             try {
                 ArrayList<OrderBusinessTask> orderBusinessTasks = applicationController.getAllOrderBusinessTask();
+                StatisticsModel statisticsModel = applicationController.getStatsFromAllSales(orderBusinessTasks,searchProductReference.getSelectedItem().toString());
 
-                StatisticsModel statisticsModel = applicationController.getStatsFromAllSales(orderBusinessTasks,searchProductReference.getSelectedIndex()-1);
                 maxTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getMax()) + " €");
                 profitTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getProfit()) + " €");
                 averageTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getAverageOrdersPrices()) + " €");
                 reprentativeness.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getPercentageRepresentativeness()) + " %");
                 referencedProductTotalPrice.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getReferencedProductTotalPrice()) + " €");
 
-
             } catch (SelectQueryException exception) {
                 JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
-
         });
 
     }
     private void initLabelAndTextField(){
         mainPanel = new JPanel();
-
-        //searchProductReference = new JTextField();
         SearchButton = new JButton();
-
         jLabelMaxPrice = new JLabel();
         jLabelAverage = new JLabel();
         jLabelProfit1 = new JLabel();
@@ -80,7 +74,7 @@ public class Statistics extends JFrame {
         jLabelTitle = new javax.swing.JLabel();
 
         jLabelProductReference.setFont(new java.awt.Font("Tahoma", 0, 16));
-        jLabelProductReference.setText("Product reference");
+        jLabelProductReference.setText("Product wording");
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 0, 16));
         jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -88,6 +82,9 @@ public class Statistics extends JFrame {
 
         SearchButton.setFont(new java.awt.Font("Tahoma", 0, 16));
         SearchButton.setText("Search");
+
+        searchProductReference.setFont(new java.awt.Font("Tahoma", 0, 16));
+        searchProductReference.setToolTipText("Choose your product (The product list will give you more information - CTRL P in the menu)");
 
         jLabelMaxPrice.setFont(new java.awt.Font("Tahoma", 0, 16));
         jLabelMaxPrice.setText("Maximum price of an order");

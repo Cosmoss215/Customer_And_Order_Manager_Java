@@ -4,7 +4,6 @@ import controller.ApplicationController;
 import exception.ConnectionException;
 import exception.NullException;
 import exception.SelectQueryException;
-import model.Customer;
 import model.CustomerByProduct;
 import model.Product;
 import util.Verification;
@@ -21,7 +20,7 @@ public class SearchByProduct extends JFrame {
     private final JLabel jLabelProduct;
     private final JScrollPane jScrollPane1;
     private final JTable jTableCustomersByProduct;
-    private final JTextField jTextFieldFindProduct;
+    private final JComboBox<String> jTextFieldFindProduct;
     private final JPanel panelSearchBar;
     private final JPanel panelTableByProduct;
     private ArrayList<Product> products;
@@ -32,7 +31,6 @@ public class SearchByProduct extends JFrame {
         this.setResizable(false);
         panelSearchBar = new JPanel();
         jLabelProduct = new JLabel();
-        jTextFieldFindProduct = new JTextField();
         panelTableByProduct = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -42,33 +40,36 @@ public class SearchByProduct extends JFrame {
 
         ApplicationController getProductByReference = new ApplicationController();
         products = getProductByReference.getAllProducts();
-        ArrayList<CustomerByProduct> customersByProduct = getProductByReference.getProductByReference(0);
-        AllCustomersByProductModel customersByProductModel = new AllCustomersByProductModel(customersByProduct);
 
+
+        int i = 0;
+        String [] pattern = new String[products.size()];
+        for (Product p : products){
+            pattern[i] = p.getWording();
+            i++;
+        }
+
+        jTextFieldFindProduct = new JComboBox<>(pattern);
+        jTextFieldFindProduct.setFont(new Font("Tahoma", 0, 16));
+
+
+
+
+        ArrayList<CustomerByProduct> customersByProduct = getProductByReference.getProductByReference(jTextFieldFindProduct.getSelectedItem().toString());
+        AllCustomersByProductModel customersByProductModel = new AllCustomersByProductModel(customersByProduct);
         jTableCustomersByProduct = new JTable(customersByProductModel);
         jTableCustomersByProduct.setAutoCreateRowSorter(true);
         jScrollPane1 = new JScrollPane(jTableCustomersByProduct);
         jScrollPane1.setViewportView(jTableCustomersByProduct);
 
-        jTextFieldFindProduct.setFont(new Font("Tahoma", 0, 16));
-        jTextFieldFindProduct.setText("");
-        KeyboardListner keyboardListner = new KeyboardListner();
-        jTextFieldFindProduct.addKeyListener(keyboardListner);
 
         jTextFieldFindProduct.addActionListener(evt -> {
             try {
                 ApplicationController getProductByReference1 = new ApplicationController();
                 ArrayList<CustomerByProduct> customersByProduct1;
-                if (Verification.productReferenceVerification(currentReference.toString()))
-                {
-                    customersByProduct1 = getProductByReference1.getProductByReference(currentReference);
-                    AllCustomersByProductModel customersByProductModel1 = new AllCustomersByProductModel(customersByProduct1);
-                    jTableCustomersByProduct.setModel(customersByProductModel1);
-                }
-                else {
-                    JOptionPane.showMessageDialog(null,"The given reference is not correct, open the product list to help you", "Incorrect reference ", JOptionPane.INFORMATION_MESSAGE);
-                    jTextFieldFindProduct.setBorder(new LineBorder(Color.red,3));
-                }
+                customersByProduct1 = getProductByReference1.getProductByReference(jTextFieldFindProduct.getSelectedItem().toString());
+                AllCustomersByProductModel customersByProductModel1 = new AllCustomersByProductModel(customersByProduct1);
+                jTableCustomersByProduct.setModel(customersByProductModel1);
             } catch (ConnectionException | SelectQueryException | NullException exception) {
                 JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
@@ -138,60 +139,4 @@ public class SearchByProduct extends JFrame {
 
     }
 
-    private void autoComplete (String txt){
-        String complete = "";
-        int start = txt.length();
-        int last = txt.length();
-
-        int iProduct = 0;
-        boolean isFind = false;
-        while (iProduct < products.size() && !isFind){
-            Product currentProduct = products.get(iProduct);
-            if (currentProduct.getWording().startsWith(txt) ||currentProduct.getReference().toString().startsWith(txt)) {
-                complete = products.get(iProduct).getWording() + " " + products.get(iProduct).getReference();
-                currentReference = products.get(iProduct).getReference();
-                last = complete.length();
-                isFind = true;
-            }
-            iProduct++;
-        }
-
-        if (last > start) {
-            jTextFieldFindProduct.setText(complete);
-            jTextFieldFindProduct.setCaretPosition(last);
-            jTextFieldFindProduct.moveCaretPosition(start);
-            currentReference = products.get(iProduct).getReference();
-        }
-    }
-
-    private class KeyboardListner implements KeyListener {
-        @Override
-        public void keyTyped(KeyEvent e) {
-
-        }
-
-        @Override
-        public void keyPressed(KeyEvent evt) {
-            switch (evt.getKeyCode()) {
-                case KeyEvent.VK_BACK_SPACE:
-                    break;
-                case KeyEvent.VK_ENTER:
-                    jTextFieldFindProduct.setText(jTextFieldFindProduct.getText());
-                    break;
-                default:
-                    EventQueue.invokeLater(new Runnable(){
-                        @Override
-
-                        public void run(){
-                            String txt = jTextFieldFindProduct.getText();
-                            autoComplete(txt);
-                        }
-                    });
-            }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {
-
-        }
-    }
 }

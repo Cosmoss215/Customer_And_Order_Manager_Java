@@ -9,5 +9,5 @@ import java.util.ArrayList;
 public interface ProductDataAccess {
     ArrayList<Product> getAllProducts() throws SelectQueryException;
 
-    ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException;
+    ArrayList<CustomerByProduct> getProductByReference(String wording) throws SelectQueryException;
 }

@@ -306,7 +306,6 @@ public class CustomerList extends JFrame {
                 default:
                     EventQueue.invokeLater(new Runnable(){
                         @Override
-
                         public void run(){
                             String txt = jTextFieldSearchBar.getText();
                             autoComplete(txt);

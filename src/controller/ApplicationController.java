@@ -53,11 +53,11 @@ public class ApplicationController {
     //endregion
 
     //region Product
-    public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException, NullException {
-        if (reference == null){
-            throw new NullException(reference.getClass().getName());
+    public ArrayList<CustomerByProduct> getProductByReference(String wording) throws SelectQueryException, NullException {
+        if (wording == null){
+            throw new NullException(wording.getClass().getName());
         }
-        return productManager.getProductByReference(reference);
+        return productManager.getProductByReference(wording);
     }
     public ArrayList<Product> getAllProducts() throws SelectQueryException {
         return productManager.getAllProducts();
@@ -99,8 +99,8 @@ public class ApplicationController {
         return orderBusinessTasks;
     }
 
-    public StatisticsModel getStatsFromAllSales (ArrayList<OrderBusinessTask> orders, int reference){
-        return orderManager.getStatsFromAllSales( orders,reference);
+    public StatisticsModel getStatsFromAllSales (ArrayList<OrderBusinessTask> orders, String wording){
+        return orderManager.getStatsFromAllSales( orders,wording);
     }
     //endregion
 

@@ -22,9 +22,7 @@ public class Verification {
     public static boolean dateVerification(String date) {
         return pattern.matches("^\\d{2}/\\d{2}/\\d{4}$" , date);
     }
-    public static boolean productReferenceVerification(String reference) {
-        return pattern.matches( "^\\d{1,10}$",reference);
-    }
+
     public static boolean isAlphabeticCharacters(String character) {
         return pattern.matches( "[A-Z]",character);
     }

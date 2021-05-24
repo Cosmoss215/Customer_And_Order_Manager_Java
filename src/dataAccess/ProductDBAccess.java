@@ -53,7 +53,7 @@ public class ProductDBAccess implements ProductDataAccess {
         return allProducts;
     }
     @Override
-    public ArrayList<CustomerByProduct> getProductByReference(Integer reference) throws SelectQueryException {
+    public ArrayList<CustomerByProduct> getProductByReference(String wording) throws SelectQueryException {
         ArrayList<CustomerByProduct> productByReference = new ArrayList<>();
 
         String sqlInstruction = "SELECT cu.last_name, cu.first_name, ol.quantity, pm.wording " +
@@ -62,7 +62,7 @@ public class ProductDBAccess implements ProductDataAccess {
                 "JOIN `order` o ON o.number = ol.`order` " +
                 "JOIN customer cu ON cu.id = o.customer " +
                 "JOIN payment_method pm ON pm.wording = o.payment_method " +
-                "WHERE p.reference = "+reference+";";
+                "WHERE p.wording = '"+wording+"';";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlInstruction);
             ResultSet data = preparedStatement.executeQuery();

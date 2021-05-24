@@ -48,7 +48,7 @@ public class OrderManager {
         return orderBusinessTasks;
     }
 
-    public StatisticsModel getStatsFromAllSales (ArrayList<OrderBusinessTask> orders, int reference) {
+    public StatisticsModel getStatsFromAllSales (ArrayList<OrderBusinessTask> orders, String wording) {
         double max = 0;
         double profit = 0;
         double averageOrdersPrices = 0;
@@ -63,7 +63,7 @@ public class OrderManager {
 
             for(OrderLineBusinessTask ol : o.getOrdersLines()){
                 currentPrice = ol.getPriceSold() * ol.getQuantity();
-                if(ol.getProductReference() == reference){
+                if(ol.getProductWording().equals(wording)){
                     referencedProductCount += ol.getQuantity();
                     referencedProductTotalPrice += currentPrice;
                 }
