@@ -12,7 +12,7 @@ import java.awt.event.*;
 import java.net.URI;
 
 public class Menu extends JFrame {
-    private JMenuItem jMenuItemCustomer,jMenuItemCreateOrder,jMenuItemProductList,jMenuItemStatistics,jMenuItemSearch1,jMenuItemSearch2,jMenuItemSearch3;
+    private JMenuItem jMenuItemCustomer,jMenuItemExit,jMenuItemCreateOrder,jMenuItemProductList,jMenuItemStatistics,jMenuItemSearch1,jMenuItemSearch2,jMenuItemSearch3;
     private final Container mainContainer;
 
     public Menu(){
@@ -73,15 +73,9 @@ public class Menu extends JFrame {
         jMenuBar.add(jMenuSearch);
         jMenuBar.add(jMenuNavigate);
 
-        JMenuItem jMenuItemExit = new JMenuItem("Exit");
-        jMenuItemExit.addActionListener(evt -> {
-            JOptionPane.showMessageDialog(null,"The task failed succesfully","ouch", JOptionPane.WARNING_MESSAGE); //Il s'agit bien évidement d'un référence à un blague mythique : https://medium.com/swlh/the-ten-most-ridiculous-error-messages-in-the-history-of-software-4198d710ea8e
-            System.exit(0);
-        });
-        jMenuFile.add(jMenuItemExit);
-
         initJMenuItem();
 
+        jMenuFile.add(jMenuItemExit);
         jMenuNavigate.add(jMenuItemCustomer);
         jMenuNavigate.add(jMenuItemCreateOrder);
         jMenuNavigate.add(jMenuItemProductList);
@@ -91,11 +85,18 @@ public class Menu extends JFrame {
         jMenuSearch.add(jMenuItemSearch2);
         jMenuSearch.add(jMenuItemSearch3);
         setJMenuBar(jMenuBar);
-
     }
 
     private void initJMenuItem(){
+        jMenuItemExit = new JMenuItem("Exit");
+        jMenuItemExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4,InputEvent.ALT_DOWN_MASK));
+        jMenuItemExit.addActionListener(evt -> {
+            JOptionPane.showMessageDialog(null,"The task failed succesfully","ouch", JOptionPane.WARNING_MESSAGE); //Il s'agit bien évidement d'un référence à un blague mythique : https://medium.com/swlh/the-ten-most-ridiculous-error-messages-in-the-history-of-software-4198d710ea8e
+            System.exit(0);
+        });
+
         jMenuItemCustomer = new JMenuItem("Customer list");
+        jMenuItemCustomer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,InputEvent.CTRL_DOWN_MASK));
         jMenuItemCustomer.addActionListener(evt -> {
             try {
                 CustomerList customerList = new CustomerList();
@@ -106,6 +107,7 @@ public class Menu extends JFrame {
 
         });
         jMenuItemCreateOrder = new JMenuItem("Create Order");
+        jMenuItemCreateOrder.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,InputEvent.CTRL_DOWN_MASK));
         jMenuItemCreateOrder.addActionListener(evt -> {
             try {
                 CreateOrder createOrder = new CreateOrder();
@@ -116,6 +118,7 @@ public class Menu extends JFrame {
 
         });
         jMenuItemProductList = new JMenuItem("Product List");
+        jMenuItemProductList.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_DOWN_MASK));
         jMenuItemProductList.addActionListener(evt -> {
             try {
                 ProductList productList = new ProductList();
@@ -125,12 +128,13 @@ public class Menu extends JFrame {
             }
         });
         jMenuItemStatistics = new JMenuItem("Statistics");
+        jMenuItemStatistics.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.ALT_DOWN_MASK));
         jMenuItemStatistics.addActionListener(evt -> {
             Statistics statisticsView = new Statistics();
             statisticsView.setVisible(true);
         });
         jMenuItemSearch1 = new JMenuItem("Search 1 Order listing");
-        jMenuItemSearch1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.ALT_DOWN_MASK));
+        jMenuItemSearch1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,InputEvent.ALT_DOWN_MASK));
         jMenuItemSearch1.addActionListener(evt -> {
             try {
                 SearchOrderListing orderListing = new SearchOrderListing();
