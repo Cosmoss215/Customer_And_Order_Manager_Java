@@ -2,6 +2,7 @@
 
 Ce projet java s'inscrit dans le cadre de nos études d'informatique de gestion à l'Henallux de namur.
 
+## Fonctionnalité
 Ce projet comportera toutes les fonctionnalités citée et expliquée ci-dessous.
 
 * Les opérations CRUD (Create, read, update, delete) sur un client. Celle-ci seront disponible dans la fenêtre Customer List et permettrons à l'utilisateur (CTRL C): 
