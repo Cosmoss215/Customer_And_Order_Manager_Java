@@ -189,7 +189,6 @@ public class SearchByProduct extends JFrame {
                     });
             }
         }
-
         @Override
         public void keyReleased(KeyEvent e) {
 

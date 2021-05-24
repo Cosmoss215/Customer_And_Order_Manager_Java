@@ -5,6 +5,7 @@ import controller.ApplicationController;
 import exception.ConnectionException;
 import exception.SelectQueryException;
 import model.OrderBusinessTask;
+import model.Product;
 import model.StatisticsModel;
 import util.NumberFormater;
 import javax.swing.*;
@@ -14,24 +15,37 @@ import java.util.ArrayList;
 public class Statistics extends JFrame {
     private  JButton SearchButton;
     private  JLabel jLabelAverage,jLabelMaxPrice,jLabelProfit1,jLabelRepresentativeness, jLabelTotalProductPrice,jLabelProductReference,jLabelTitle;
-    private  JTextField profitTextField,maxTextField,averageTextField,reprentativeness,searchProductReference,referencedProductTotalPrice;
+    private  JTextField profitTextField,maxTextField,averageTextField,reprentativeness,referencedProductTotalPrice;
+    private JComboBox<String> searchProductReference;
     private  JPanel mainPanel;
     private Container frameContainer;
 
-    public Statistics(){
+    public Statistics() throws ConnectionException, SelectQueryException {
 
         super("Statistics");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         initLabelAndTextField();
+
+        ApplicationController applicationController = new ApplicationController();
+        ArrayList<Product> products = applicationController.getAllProducts();
+
+        int i = 0;
+        String [] pattern = new String[products.size()];
+        for (Product p : products){
+            pattern[i] = p.getWording() + " : " + p.getReference();
+            i++;
+        }
+        searchProductReference = new JComboBox<>(pattern);
+        searchProductReference.setFont(new java.awt.Font("Tahoma", 0, 16));
+        searchProductReference.setToolTipText("Insert the reference of a product (you can find them in the list of products window).");
         WindowFormattingCode();
 
         SearchButton.addActionListener(evt -> {
             try {
-                ApplicationController applicationController = new ApplicationController();
                 ArrayList<OrderBusinessTask> orderBusinessTasks = applicationController.getAllOrderBusinessTask();
 
-                StatisticsModel statisticsModel = applicationController.getStatsFromAllSales(orderBusinessTasks, Integer.parseInt(searchProductReference.getText()));
+                StatisticsModel statisticsModel = applicationController.getStatsFromAllSales(orderBusinessTasks,searchProductReference.getSelectedIndex()-1);
                 maxTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getMax()) + " €");
                 profitTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getProfit()) + " €");
                 averageTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getAverageOrdersPrices()) + " €");
@@ -39,7 +53,7 @@ public class Statistics extends JFrame {
                 referencedProductTotalPrice.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getReferencedProductTotalPrice()) + " €");
 
 
-            } catch (ConnectionException | SelectQueryException exception) {
+            } catch (SelectQueryException exception) {
                 JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
             }
 
@@ -48,8 +62,10 @@ public class Statistics extends JFrame {
     }
     private void initLabelAndTextField(){
         mainPanel = new JPanel();
-        searchProductReference = new JTextField();
+
+        //searchProductReference = new JTextField();
         SearchButton = new JButton();
+
         jLabelMaxPrice = new JLabel();
         jLabelAverage = new JLabel();
         jLabelProfit1 = new JLabel();
@@ -69,9 +85,6 @@ public class Statistics extends JFrame {
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 0, 16));
         jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitle.setText("Statistics");
-
-        searchProductReference.setFont(new java.awt.Font("Tahoma", 0, 16));
-        searchProductReference.setToolTipText("Insert the reference of a product (you can find them in the list of products window).");
 
         SearchButton.setFont(new java.awt.Font("Tahoma", 0, 16));
         SearchButton.setText("Search");

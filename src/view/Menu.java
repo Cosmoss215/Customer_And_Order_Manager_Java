@@ -130,7 +130,12 @@ public class Menu extends JFrame {
         jMenuItemStatistics = new JMenuItem("Statistics");
         jMenuItemStatistics.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.ALT_DOWN_MASK));
         jMenuItemStatistics.addActionListener(evt -> {
-            Statistics statisticsView = new Statistics();
+            Statistics statisticsView = null;
+            try {
+                statisticsView = new Statistics();
+            } catch (ConnectionException | SelectQueryException exception) {
+                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
+            }
             statisticsView.setVisible(true);
         });
         jMenuItemSearch1 = new JMenuItem("Search 1 Order listing");

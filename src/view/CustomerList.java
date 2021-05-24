@@ -274,8 +274,8 @@ public class CustomerList extends JFrame {
         boolean isFind = false;
         while (iCustomer < customers.size() && !isFind){
             Customer currentCustomer = customers.get(iCustomer);
-            if (currentCustomer.getFirstName().startsWith(txt) ||currentCustomer.getLastName().startsWith(txt)) {
-                complete = customers.get(iCustomer).getLastName() + " " +customers.get(iCustomer).getFirstName();
+            if (currentCustomer.getLastName().toLowerCase().startsWith(txt) || currentCustomer.getFirstName().toLowerCase().startsWith(txt)) {
+                complete = currentCustomer.getLastName() + " " + currentCustomer.getFirstName();
                 last = complete.length();
                 isFind = true;
             }
