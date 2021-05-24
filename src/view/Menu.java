@@ -155,7 +155,7 @@ public class Menu extends JFrame {
                 JOptionPane.showMessageDialog(null,selectQueryException.getMessage(), "QueryException", JOptionPane.WARNING_MESSAGE);
             }
         });
-        jMenuItemSearch3 = new JMenuItem("Search 3 Product");
+        jMenuItemSearch3 = new JMenuItem("Search 3 By product");
         jMenuItemSearch3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.ALT_DOWN_MASK));
         jMenuItemSearch3.addActionListener(evt -> {
             try {
