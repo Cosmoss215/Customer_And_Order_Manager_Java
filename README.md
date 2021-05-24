@@ -81,5 +81,14 @@ Si l'on passe le curseur sur un champ à remplir, une petite indication montre l
 La fenêtre pou l'édition d'un client est sensiblement la même, les champs seront simplement près remplis des données du client et prête à être modifié. 
 Un message de confirmation demandera à l'utilisateur s'il veut effectuer l'opération. Ce contrôle évitera tout malentendu. 
 
+### Product list
+![image](https://user-images.githubusercontent.com/48365113/119389992-aacf6180-bccc-11eb-8b5f-069c47c9f443.png)
+
+Cette fenêtre est un simple affichage de tous les produits de l'entreprise. Elle sera utile pour obtenir toutes les informations que l'utilisateur jugera nécessaires pour les opérations sur le produit.
+
+### Statistics
+![image](https://user-images.githubusercontent.com/48365113/119390101-d5b9b580-bccc-11eb-850d-c4329e51dc7c.png)
+Cette fenêtre correspond à la tâche métier. Elle affichera des statistiques élémentaires sur l'entreprise avec par exemple "Company profit" qui correspond au chiffre d'affaires (et non au bénéfice" de l'entreprise.
+En sélectionnant un produit en en cliquant sur "Search" nous obtiendrons la représentativité de ce produit sur l'ensemble des achats ainsi que son prix total de ventes cumulé. 
 
 
