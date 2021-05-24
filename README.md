@@ -21,7 +21,11 @@ Ce projet comportera toutes les fonctionnalités citée et expliquée ci-dessous
   * La représentativité d'un produit par rapport aux autres (son nombre de commandes divisé par le total des commandes x 100).
   * Le montant total de ce produit commandé.
 
+## Le thread
+Un thread a été créé pour répondre aux contraintes du projet. Celui-ci est une image PNG se déplaçant de gauche à droite dans la fenêtre.
 
-
+## Amélioration 
+### Recherche numéro 1 : Order listing - Autocompletion
+Cette recherche doit être améliorée. En effet l'autocomplétion ne permet pas de sélectionner un client ayant le même prénom ou nom qu'un autre client. Le premier client sera toujours sélectionné au détriment du bon client. Par manque de temps nous n'avons pas pu corriger cette erreur.
 
 
