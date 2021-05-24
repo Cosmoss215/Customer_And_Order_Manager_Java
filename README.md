@@ -106,3 +106,5 @@ Un premier feedback à été données par notre professeur à été donnée le 1
   * Une confirmation lors de la suppression d'un client a été implémentée pour éviter les erreurs.
 * Autocomplete pour la recherche 3 :
   * Nous avons finalement opté pour proposé à l'utilisateur une JComboBox avec les produits disponibles pour leur sélection.
+* SQL n'accepte pas les '
+  * Nous n'avons malheureusement pas eu le temps de ce penché sur ce problème. En effet lorsque l'on introduit, par exemple, Rue de l'eau ne peut pas être ajouté, car une ' est dedans et que la nous utilisons un PreparedStatement qui empêche les injections et donc supprime-les '. 
