@@ -87,9 +87,6 @@ public class CustomerList extends JFrame {
 
         jTextFieldSearchBar.setFont(new Font("Tahoma", 0, 18));;
         jTextFieldSearchBar1.setFont(new Font("Tahoma", 0, 18));
-
-        KeyboardListner keyboardListner = new KeyboardListner();
-        jTextFieldSearchBar.addKeyListener(keyboardListner);
     }
 
     private void initTable() throws ConnectionException, SelectQueryException {
@@ -265,58 +262,4 @@ public class CustomerList extends JFrame {
         );
     }
 
-    private void autoComplete (String txt){
-        String complete = "";
-        int start = txt.length();
-        int last = txt.length();
-
-        int iCustomer = 0;
-        boolean isFind = false;
-        while (iCustomer < customers.size() && !isFind){
-            Customer currentCustomer = customers.get(iCustomer);
-            if (currentCustomer.getLastName().toLowerCase().startsWith(txt) || currentCustomer.getFirstName().toLowerCase().startsWith(txt)) {
-                complete = currentCustomer.getLastName() + " " + currentCustomer.getFirstName();
-                last = complete.length();
-                isFind = true;
-            }
-            iCustomer++;
-        }
-
-        if (last > start) {
-            jTextFieldSearchBar.setText(complete);
-            jTextFieldSearchBar.setCaretPosition(last);
-            jTextFieldSearchBar.moveCaretPosition(start);
-        }
-    }
-
-    private class KeyboardListner implements KeyListener {
-        @Override
-        public void keyTyped(KeyEvent e) {
-
-        }
-
-        @Override
-        public void keyPressed(KeyEvent evt) {
-            switch (evt.getKeyCode()) {
-                case KeyEvent.VK_BACK_SPACE:
-                    break;
-                case KeyEvent.VK_ENTER:
-                    jTextFieldSearchBar.setText(jTextFieldSearchBar.getText());
-                    break;
-                default:
-                    EventQueue.invokeLater(new Runnable(){
-                        @Override
-                        public void run(){
-                            String txt = jTextFieldSearchBar.getText();
-                            autoComplete(txt);
-                        }
-                    });
-            }
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-
-        }
-    }
 }

@@ -44,25 +44,27 @@ public class CreateCustomerForm extends CustomerForm {
 
         jButtonCreateCustomer = new JButton("Create");
         jButtonCreateCustomer.addActionListener(evt -> {
-            if (isValidForm())
-            {
-                customer = addCustomer();
-                ApplicationController applicationController = null;
-                try {
-                    applicationController = new ApplicationController();
-                } catch (ConnectionException connectionException) {
-                    JOptionPane.showMessageDialog(null,connectionException.getMessage(), connectionException.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                }
-                try {
-                    applicationController.addCustomer(customer);
 
-                } catch (CreateQueryException createQueryException) {
-                    JOptionPane.showMessageDialog(null,createQueryException.getMessage(), createQueryException.getTypeError(), JOptionPane.WARNING_MESSAGE);
-                } catch (NullException nullException) {
-                    JOptionPane.showMessageDialog(null,nullException.getMessage(), nullException.getTypeError(), JOptionPane.WARNING_MESSAGE);
+            int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to create this customer ?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                if (isValidForm()) {
+                    customer = addCustomer();
+                    ApplicationController applicationController = null;
+                    try {
+                        applicationController = new ApplicationController();
+                    } catch (ConnectionException connectionException) {
+                        JOptionPane.showMessageDialog(null, connectionException.getMessage(), connectionException.getTypeError(), JOptionPane.WARNING_MESSAGE);
+                    }
+                    try {
+                        applicationController.addCustomer(customer);
+
+                    } catch (CreateQueryException createQueryException) {
+                        JOptionPane.showMessageDialog(null, createQueryException.getMessage(), createQueryException.getTypeError(), JOptionPane.WARNING_MESSAGE);
+                    } catch (NullException nullException) {
+                        JOptionPane.showMessageDialog(null, nullException.getMessage(), nullException.getTypeError(), JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
-
         });
         jButtonCreateCustomer.setFont(new Font("Tahoma", 0, 20));
         panelButton.add(jButtonCreateCustomer);

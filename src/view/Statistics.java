@@ -18,6 +18,7 @@ public class Statistics extends JFrame {
     private  JTextField profitTextField,maxTextField,averageTextField,reprentativeness,referencedProductTotalPrice;
     private JComboBox<String> searchProductReference;
     private  JPanel mainPanel;
+    private StatisticsModel statisticsModel;
     private Container frameContainer;
 
     public Statistics() throws ConnectionException, SelectQueryException {
@@ -40,20 +41,18 @@ public class Statistics extends JFrame {
 
         WindowFormattingCode();
 
+        ArrayList<OrderBusinessTask> orderBusinessTasks = applicationController.getAllOrderBusinessTask();
+        statisticsModel = applicationController.getStatsFromAllSales(orderBusinessTasks,searchProductReference.getSelectedItem().toString());
+
+        maxTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getMax()) + " €");
+        profitTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getProfit()) + " €");
+        averageTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getAverageOrdersPrices()) + " €");
+
         SearchButton.addActionListener(evt -> {
-            try {
-                ArrayList<OrderBusinessTask> orderBusinessTasks = applicationController.getAllOrderBusinessTask();
-                StatisticsModel statisticsModel = applicationController.getStatsFromAllSales(orderBusinessTasks,searchProductReference.getSelectedItem().toString());
+            statisticsModel = applicationController.getStatsFromAllSales(orderBusinessTasks,searchProductReference.getSelectedItem().toString());
+            reprentativeness.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getPercentageRepresentativeness()) + " %");
+            referencedProductTotalPrice.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getReferencedProductTotalPrice()) + " €");
 
-                maxTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getMax()) + " €");
-                profitTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getProfit()) + " €");
-                averageTextField.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getAverageOrdersPrices()) + " €");
-                reprentativeness.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getPercentageRepresentativeness()) + " %");
-                referencedProductTotalPrice.setText(NumberFormater.primaryDecimalFormater(statisticsModel.getReferencedProductTotalPrice()) + " €");
-
-            } catch (SelectQueryException exception) {
-                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
-            }
         });
 
     }

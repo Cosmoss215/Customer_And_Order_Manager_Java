@@ -22,7 +22,7 @@ public class SearchByProduct extends JFrame {
 
 
     public SearchByProduct() throws SelectQueryException, ConnectionException, NullException {
-        super("Search product with reference");
+        super("Search by product");
         this.setResizable(false);
         panelSearchBar = new JPanel();
         jLabelProduct = new JLabel();
@@ -35,7 +35,6 @@ public class SearchByProduct extends JFrame {
 
         ApplicationController getProductByWording = new ApplicationController();
         products = getProductByWording.getAllProducts();
-
 
         int i = 0;
         String [] pattern = new String[products.size()];

@@ -7,6 +7,7 @@ import util.*;
 import view.tableModel.AllOrdersByCustomerModel;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -53,7 +54,6 @@ public class SearchOrderListing extends JFrame {
 
         jTextFieldSearchBar.setFont(new Font("Dialog", 0, 18));
         jTextFieldSearchBar.setText("");
-        jTextFieldSearchBar.setCursor(new Cursor(Cursor.TEXT_CURSOR));
 
         KeyboardListner keyboardListner = new KeyboardListner();
         jTextFieldSearchBar.addKeyListener(keyboardListner);
@@ -69,19 +69,25 @@ public class SearchOrderListing extends JFrame {
 
         searchButton = new JButton("Search");
         searchButton.addActionListener(evt -> {
-            try {
-                if(Verification.dateVerification(startDateSelector.getText()) && Verification.dateVerification(endDateSelector.getText())) {
-                    GregorianCalendar startDate = DateFormater.ourDate(startDateSelector.getText());
-                    GregorianCalendar endDate = DateFormater.ourDate(endDateSelector.getText());
+            if (!jTextFieldSearchBar.getText().isEmpty()) {
+                jTextFieldSearchBar.setBorder(new LineBorder(Color.BLACK,1));
+                try {
+                    if (Verification.dateVerification(startDateSelector.getText()) && Verification.dateVerification(endDateSelector.getText())) {
+                        GregorianCalendar startDate = DateFormater.ourDate(startDateSelector.getText());
+                        GregorianCalendar endDate = DateFormater.ourDate(endDateSelector.getText());
 
-                    initTable(customerId, startDate, endDate);
+                        initTable(customerId, startDate, endDate);
+                    } else {
+                        initTable(customerId);
+                    }
+                    jScrollTableOrderList.setViewportView(jTableOrderList);
+                } catch (ConnectionException | SelectQueryException | NullException exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
-                else {
-                    initTable(customerId);
-                }
-                jScrollTableOrderList.setViewportView(jTableOrderList);
-            } catch (ConnectionException | SelectQueryException | NullException exception) {
-                JOptionPane.showMessageDialog(null,exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"You must indicate the name of a customer. You can find the list via the menu bar, in the item \"Customer list\"", "Invalid field", JOptionPane.INFORMATION_MESSAGE);
+                jTextFieldSearchBar.setBorder(new LineBorder(Color.red,3));
             }
         });
 
