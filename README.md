@@ -30,6 +30,7 @@ Un thread a été créé pour répondre aux contraintes du projet. Celui-ci est 
 Cette recherche doit être améliorée. En effet l'autocomplétion ne permet pas de sélectionner un client ayant le même prénom ou nom qu'un autre client. Le premier client sera toujours sélectionné au détriment du bon client. Par manque de temps nous n'avons pas pu corriger cette erreur.
 
 ## Comment utiliser le programme
+### Le menu
 ![image](https://user-images.githubusercontent.com/48365113/119388930-37792000-bccb-11eb-9b60-bc4c4fd6e394.png)
 
 Le menu est composé de trois menus comportements chacun des items. Chaque item dirige vers une fenêtre qui sera expliquée plus loin.
@@ -44,4 +45,41 @@ Le menu est composé de trois menus comportements chacun des items. Chaque item 
   * Create Order -> CTRL O (cette fenêtre est là à titre d'exemple)
   * Product list -> CTRL P
   * Statistics -> ALT S
+
+### Search 1 Order listing
+![image](https://user-images.githubusercontent.com/48365113/119389393-dd2c8f00-bccb-11eb-8fa0-5a661270f0f9.png)
+
+Cette fenêtre, accessible via le menu (ALT O) permet d'afficher les commandes par client entre deux dates données ou simplement toutes les commandes de ce client si nous ne mentionnons pas de date. 
+Il faut donc fournir un nom de client et des dates, mais celles-ci sont optionnelles. 
+Vous pouvez utilise la fenêtre "Customer list (CTRL C dans le menu) pour voir tous les noms de client. 
+
+### Search 2 Customer by country
+![image](https://user-images.githubusercontent.com/48365113/119389526-0816e300-bccc-11eb-88eb-3eae03fa3670.png)
+
+Cette fenêtre permet d'afficher tous les clients pour un pays donné. Il y aura plusieurs pays disponibles dans le combo box. Lors de la sélection, la table est "refresh" pour afficher les clients pour le nouveau pays sélectionné.
+
+### Search 3 by product
+![image](https://user-images.githubusercontent.com/48365113/119389598-241a8480-bccc-11eb-85fc-7f855a6f8415.png)
+
+Cette fenêtre permet d'afficher les commandes ou ce produit se retrouve, le nom du client de la commande en question, la quantité commandée et le moyen de payement utiliser. 
+
+### Customer list
+![image](https://user-images.githubusercontent.com/48365113/119389682-401e2600-bccc-11eb-8cc6-61a796f52bba.png)
+
+Cette fenêtre est sans doute la plus importante. Elle permet d'effectuer toutes les opérations CRUD sur les clients.
+Le bouton refresh permettra de refresh la table après l'ajout d'un client.
+Pour supprimer un client, il suffit de le sélectionner dans la table et ensuite de cliquer sur "Delete customer"
+L'ajout et l'édition d'un client enverront vers une fenêtre de formulaire permettant d'effectuer la tâche demandée.
+Note : Le champ customer name et nickname n'ont pas été implémenter par manque de temps. Ils ne sont donc pas opérationnels. 
+
+### Le formulaire
+![image](https://user-images.githubusercontent.com/48365113/119389807-680d8980-bccc-11eb-9994-455c8034e03e.png)
+
+Chaque champ suivi d'une étoile est un champ obligatoire. Une fois ceux-ci remplis (et correctement remplis) le client pourra être créé. 
+Si un ou plusieurs champs ne répondent pas aux l'exigence. Alors les champs seront mis en rouge et expliqueront pourquoi la donnée entrée n'est pas bonne. 
+Si l'on passe le curseur sur un champ à remplir, une petite indication montre la bonne manière de remplir le champ.
+La fenêtre pou l'édition d'un client est sensiblement la même, les champs seront simplement près remplis des données du client et prête à être modifié. 
+Un message de confirmation demandera à l'utilisateur s'il veut effectuer l'opération. Ce contrôle évitera tout malentendu. 
+
+
 
