@@ -97,9 +97,9 @@ En sélectionnant un produit en en cliquant sur "Search" nous obtiendrons la rep
 Un premier feedback à été données par notre professeur à été donnée le 18/05/2021.  Les voici commentés.
 
 * Vérification sur l'iban dans le formulaire
- * Cette vérification oblige l'utilisateur à rentré un iban correcte composé de 3 ou 4 chiffres après le code du pays et la clef de contrpole (certains pays sont composé de 4 chiffres après la cléf, la belgique elle est composé de 3 chiffres).
+  * Cette vérification oblige l'utilisateur à rentré un iban correcte composé de 3 ou 4 chiffres après le code du pays et la clef de contrpole (certains pays sont composé de 4 chiffres après la cléf, la belgique elle est composé de 3 chiffres).
 * Registration date 
- * Lors de la création d'un client, il faut indiqué la date de création du client. Maintenant si la date est supérieure à celle du jour alors un message d'erreur apparait et empêche la continuité du formulaire.
+  * Lors de la création d'un client, il faut indiqué la date de création du client. Maintenant si la date est supérieure à celle du jour alors un message d'erreur apparait et empêche la continuité du formulaire.
 * Sélection de plusieurs lignes dans un jTable
- * Il n'est désormais plus possible de sélectionner plusieurs lignes dans la table customerList. Ainsi lors de la suppression d'un client, seul le client sélectionné sera supprimé après confirmation.
+  * Il n'est désormais plus possible de sélectionner plusieurs lignes dans la table customerList. Ainsi lors de la suppression d'un client, seul le client sélectionné sera supprimé après confirmation.
 
