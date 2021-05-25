@@ -35,6 +35,7 @@ public class Verification {
                 Pattern.matches( "^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){3}(?:[ ]?[0-9]{1,2})?$",iban); //Ici car en belgique c'est 3x 4 chiffre. Du coup au lieu de vérifié si il y a bien 4x4 chiffre on vérifie s'il n'y
         //en aura pas aussi que 3
     }
+
     /*
     public static boolean isToday(GregorianCalendar calendar) {
         LocalDate dateReceived = LocalDate.ofInstant(calendar.toInstant(),calendar.toZonedDateTime().getZone());
@@ -42,6 +43,7 @@ public class Verification {
         return today.isEqual(dateReceived) || today.isAfter(dateReceived);
     }
      */
+
     public static boolean nameVerification(String name){
         return Pattern.matches( "[a-zA-zéèàêÉÈ]+([ -][a-zéèàêA-Zéèàê]+)*",name);
     }
@@ -49,6 +51,7 @@ public class Verification {
     public static boolean isDateCorrect(GregorianCalendar date) {
         return !date.after(DateFormater.today());
     }
+
     public static void invalidField(JTextField jTextField,String message){
         JOptionPane.showMessageDialog(null,message, "FormException", JOptionPane.INFORMATION_MESSAGE);
         jTextField.setBorder(redBorder);
