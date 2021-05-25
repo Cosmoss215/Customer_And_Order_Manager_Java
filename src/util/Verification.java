@@ -1,12 +1,15 @@
 package util;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.regex.Pattern;
 
 public class Verification {
     private static Pattern pattern;
+    private static LineBorder redBorder = new LineBorder((Color.red), 3);
 
     public static boolean LengthStringVerification(String string,int min, int max) {
         return pattern.matches("^[A-Z]{"+ min +","+max+"}$", string);
@@ -46,15 +49,8 @@ public class Verification {
     public static boolean isDateCorrect(GregorianCalendar date) {
         return !date.after(DateFormater.today());
     }
-
-
-    public static String escapeString(String input){
-        String output = "";
-        for(int i = 0; i < input.length(); i++){
-            if(input.charAt(i) == '\'')
-                output += "\\'";
-            output += input.charAt(i);
-        }
-        return output;
+    public static void invalidField(JTextField jTextField,String message){
+        JOptionPane.showMessageDialog(null,message, "FormException", JOptionPane.INFORMATION_MESSAGE);
+        jTextField.setBorder(redBorder);
     }
 }
