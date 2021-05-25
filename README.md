@@ -41,6 +41,9 @@ Voici les changements qui seront auront lieu dans d'une future mise à jour :
 ### Clean code
 Le clean code est très important surtout dans un projet de cette ampleur. Nous pensons qu'il reste encore des factorisations de code à effectuer et probablement des éléments qui ont échappés à notre attention.
 
+### Les insert de single quote dans sql
+Nous sommes conscients de ne pas permettre l'utilsation de ' dans le formulaire car notre preparedStaement fait l'objet d'un contrôle pour éviter les injections et donc il retire les single quote '.
+
 ## Auto critique
 Nous sommes certains qu'il reste encore beaucoup de choses à améliorer dans l'aspect réutilisabilité, voire efficacité du code. Cependant avec davantage de temps et de recul nous aurions pu y consacrer plus d'attention et d'énergie.
 
@@ -95,6 +98,9 @@ Si un ou plusieurs champs ne répondent pas aux l'exigence. Alors les champs ser
 Si l'on passe le curseur sur un champ à remplir, une petite indication montre la bonne manière de remplir le champ.
 La fenêtre pou l'édition d'un client est sensiblement la même, les champs seront simplement près remplis des données du client et prête à être modifié. 
 Un message de confirmation demandera à l'utilisateur s'il veut effectuer l'opération. Ce contrôle évitera tout malentendu. 
+#### Le formulaire rempli
+![image](https://user-images.githubusercontent.com/48365113/119509008-89c04c80-bd70-11eb-8624-79a757d8cb83.png)
+![image](https://user-images.githubusercontent.com/48365113/119509160-ad839280-bd70-11eb-8da8-ebb84c7c2ce7.png)
 
 ### Product list
 ![image](https://user-images.githubusercontent.com/48365113/119389992-aacf6180-bccc-11eb-8b5f-069c47c9f443.png)
@@ -122,4 +128,4 @@ Un premier feedback à été données par notre professeur le 18/05/2021. Voici 
 * Autocomplete pour la recherche 3 :
   * Nous avons finalement opté pour proposé à l'utilisateur une JComboBox avec les produits disponibles pour leur sélection.
 * SQL n'accepte pas les '
-  * Nous n'avons malheureusement pas eu le temps de ce penché sur ce problème. En effet lorsque l'on introduit, par exemple, Rue de l'eau ne peut pas être ajouté, car une ' est dedans et que la nous utilisons un PreparedStatement qui empêche les injections et donc supprime-les '. 
+  * Nous n'avons malheureusement pas eu le temps de nous pencher sur ce problème. En effet lorsque l'on introduit, par exemple, Rue de l'eau ne peut pas être ajouté, car une ' est dedans et que la nous utilisons un PreparedStatement qui empêche les injections et donc supprime-les '. 
