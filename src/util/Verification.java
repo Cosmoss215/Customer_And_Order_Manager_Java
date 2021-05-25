@@ -39,6 +39,9 @@ public class Verification {
         return today.isEqual(dateReceived) || today.isAfter(dateReceived);
     }
      */
+    public static boolean nameVerification(String name){
+        return Pattern.matches( "^[a-zA-Z\\\\s]*$",name);
+    }
 
     public static boolean isDateCorrect(GregorianCalendar date) {
         return !date.after(DateFormater.today());

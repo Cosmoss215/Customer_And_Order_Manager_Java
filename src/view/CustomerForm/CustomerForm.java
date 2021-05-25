@@ -249,8 +249,8 @@ public class CustomerForm extends JFrame {
 
     protected boolean isValidForm(){
 
-        if (jTextFieldFirstName.getText().length() > 50 || jTextFieldFirstName.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null,"First name field is obligatory and the maximum length is (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
+        if (jTextFieldFirstName.getText().length() > 50 || jTextFieldFirstName.getText().isEmpty() || !Verification.nameVerification(jTextFieldFirstName.getText())) {
+            JOptionPane.showMessageDialog(null,"First name field is obligatory and must NOT contain NUMBERS (the maximum length is 50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldFirstName.setBorder(redBorder);
             return false;
         }
@@ -258,8 +258,8 @@ public class CustomerForm extends JFrame {
             jTextFieldFirstName.setBorder(blackBorder);
         }
 
-        if (jTextFieldLastName.getText().isEmpty() || jTextFieldLastName.getText().length() > 50) {
-            JOptionPane.showMessageDialog(null,"Last name field is obligatory and the maximum length is (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
+        if (jTextFieldLastName.getText().isEmpty() || jTextFieldLastName.getText().length() > 50 || !Verification.nameVerification(jTextFieldLastName.getText())) {
+            JOptionPane.showMessageDialog(null,"Last name field is obligatory and must NOT contain NUMBERS (the maximum length is 50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
             jTextFieldLastName.setBorder(redBorder);
             return false;
         }
