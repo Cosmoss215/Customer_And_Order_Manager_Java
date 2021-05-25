@@ -1,0 +1,115 @@
+-- =================== Scripts de DDL =================== --
+-- ==== MANDERLIER Alexandre et MANIL Pierre-Olivier ==== --
+-- ============= Order and Invoice Manager ============== --
+
+-- 0. database / schema
+
+create schema if not exists library
+charset 'utf8';
+set @@global.time_zone = '+00:00';
+set @@session.time_zone = '+00:00';
+
+create table payment_method (
+	wording	varchar(50) charset 'utf8',
+	constraint payment_method_pk primary key (wording)
+);
+
+create table vat (
+	category	char(1),
+	rate		decimal(2,2) not null,
+    constraint vat_pk 		primary key (category),
+	constraint vat_rate_chk check (rate >= 0)
+);
+
+
+create table country (
+		code char(3),
+		name varchar(50) charset 'utf8' not null,
+		constraint country_pk primary key (code)
+);
+
+
+create table locality (
+		name 		varchar(255)	charset 'utf8',
+		postal_code integer(10),
+		region		varchar(255)	charset 'utf8' not null,
+        country		char(3),
+        constraint locality_pk 				primary key (name, postal_code),
+        constraint locality_to_country_fk 	foreign key (country) references country (code),
+		constraint locality_postal_code_chk check (postal_code between 1000 and 9999999999)
+);
+
+
+create table address (
+	id	 		 	integer(10) 	auto_increment,
+	street_name	 	varchar(255)	charset 'utf8' not null,
+    street_number	integer(4) 		not null,
+    box			 	char(1),
+    locality	 	varchar(255) 	charset 'utf8',
+    postal_code	 	integer(10),
+    constraint address_pk 					primary key (id),
+    constraint address_to_locality_fk 		foreign key (locality, postal_code) references locality (name, postal_code),
+	constraint address_street_number_chk 	check (street_number > 0),
+	constraint address_box_chk 				check (box between 'A' and 'Z'),
+	constraint address_postal_code_chk 		check (postal_code between 1000 and 9999999999)
+);
+
+create table customer (
+	id 				  	integer(10) 	auto_increment,
+	first_name		  	varchar(50) 	charset 'utf8' not null,
+    last_name		  	varchar(50) 	charset 'utf8' not null,
+	registration_date 	datetime 		not null default current_timestamp,
+    is_vip				bit(1) 			not null,
+    nickname			varchar(10) 	charset 'utf8' unique,
+    phone_number		integer(15) 	unique,
+    email				varchar(100)	charset 'utf8' unique,
+    vat_number			integer(10) 	unique,
+    iban				varchar(35) 	charset 'utf8' unique not null,
+    bic					varchar(15) 	charset 'utf8' not null,
+    address				integer(10) 	unique,
+    constraint customer_pk 				primary key (id),
+    constraint customer_to_address_fk 	foreign key (address) references address (id),
+	constraint customer_email_chk 		check (email like '%@%.%'),
+	constraint customer_vat_number_chk 	check (vat_number > 0)
+);
+
+create table `order` (
+	number				integer(10)	auto_increment,
+	creation_date		datetime 	not null default current_timestamp,
+	payment_deadline	datetime 	not null,
+	state				varchar(15) charset 'utf8' not null,
+	payment_method		varchar(50) charset 'utf8',
+	customer			integer(10),
+	constraint order_pk 					primary key (number),
+	constraint order_to_payment_method_fk 	foreign key (payment_method) 	references payment_method (wording),
+	constraint order_to_customer_fk 		foreign key (customer)			references customer (id)
+);
+
+create table product (
+	reference		integer(5)		auto_increment,
+	wording			varchar(50) 	charset 'utf8' unique not null,
+    unit_price		decimal(9,2) 	not null,
+	stock_quantity	integer(10) 	not null,
+    description		varchar(255)	charset 'utf8',
+    vat_code		char(1),
+    constraint product_pk 					primary key (reference),
+    constraint product_to_vat_fk 			foreign key (vat_code) references vat (category),
+	constraint product_unit_price_chk		check (unit_price >= 0),
+	constraint product_stock_quantity_chk	check (stock_quantity >= 0)
+);
+
+
+create table order_line (
+	`order`						integer(10)		auto_increment,
+	product						integer(5),
+    quantity					integer(10)		not null,
+	all_taxes_included_price	decimal(9,2)	not null,
+    has_discount				bit(1) 			not null,
+    percentage_discount			decimal(3,2),
+    constraint order_line_pk 							primary key (`order`, product),
+    constraint order_line_to_order_fk 					foreign key (`order`) references `order` (number),
+	constraint order_line_to_product_fk 				foreign key (product) references product (reference),
+	constraint order_line_quantity_chk 					check (quantity > 0),
+	constraint order_line_all_taxes_included_price_chk 	check (all_taxes_included_price >= 0),
+	constraint order_line_percentage_discount_chk 		check (percentage_discount > 0)
+);
