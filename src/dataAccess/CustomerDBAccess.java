@@ -63,13 +63,20 @@ public class CustomerDBAccess implements CustomerDataAccess {
                         registrationDate,
                         data.getByte("is_vip") == 1,
                         data.getString("nickname"),
-                        data.getInt("phone_number"),
                         data.getString("email"),
-                        data.getInt("vat_number"),
                         data.getString("iban"),
                         data.getString("bic"),
                         address
                 );
+                Integer phoneNumber = data.getInt("phone_number");
+                if (!data.wasNull()){
+                    customer.setPhoneNumber(phoneNumber);
+                }
+                Integer vatNumber = data.getInt("vat_number");
+                if (!data.wasNull()){
+                    customer.setVatNumber(vatNumber);
+                }
+
                 customers.add(customer);
             }
         } catch (SQLException exception) {

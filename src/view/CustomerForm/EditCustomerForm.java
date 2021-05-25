@@ -63,16 +63,13 @@ public class EditCustomerForm extends CustomerForm {
 
         jTextFieldRegistrationDate.setText(DateFormater.toString(customerFromView.getRegistrationDate()));
 
-        if (customerFromView.getPhoneNumber() != 0){
+        if (customerFromView.getPhoneNumber() != null){
             jTextFieldPhoneNumber.setText(String.valueOf(customerFromView.getPhoneNumber()));
-        }else {
-            jTextFieldPhoneNumber.setText("");
         }
 
         if (customerFromView.getEmail() != null){
             jTextFieldEmail.setText(String.valueOf(customerFromView.getEmail()));
         }
-
 
         jTextFieldStreetWording.setText(customerFromView.getAddress().getStreetName());
         streetNumberSelector.setValue(customerFromView.getAddress().getStreetNumber());
@@ -85,13 +82,11 @@ public class EditCustomerForm extends CustomerForm {
         jTextFieldRegion.setText(customerFromView.getAddress().getLocality().getRegion());
         postalCodeSelector.setValue(customerFromView.getAddress().getLocality().getPostalCode());
         jTextFieldIBAN.setText(customerFromView.getIban());
-
         jTextFieldBIC.setText(customerFromView.getBic());
 
         if (customerFromView.getVatNumber() != null){
             jTextFieldVATNumber.setText(String.valueOf(customerFromView.getVatNumber()));
         }
-
 
         jCheckBoxIsVIP.setSelected(customerFromView.getVip());
     }

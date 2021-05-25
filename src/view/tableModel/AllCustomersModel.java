@@ -49,7 +49,7 @@ public class AllCustomersModel extends AbstractTableModel {
             case 3 : return DateFormater.toString(customers.getRegistrationDate());
             case 4 : return customers.getAddress();
             case 5 : return customers.getAddress().getLocality().getCountry();
-            case 6 : return customers.getPhoneNumber();
+            case 6 : return customers.getPhoneNumber() != null ? "0"+customers.getPhoneNumber():"";
             case 7 : return customers.getEmail();
             case 8 : return customers.getVatNumber();
             case 9 : return customers.getIban();
@@ -75,7 +75,7 @@ public class AllCustomersModel extends AbstractTableModel {
                 break;
             case 4:
             case 5: c = String.class;
-            case 6: c = Integer.class;
+            case 6: c = String.class;
             case 7: c = String.class;
                 break;
             case 8: c = Integer.class;

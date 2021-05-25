@@ -40,6 +40,9 @@ public class Customer {
     public Customer(String firstName, String lastName , GregorianCalendar registrationDate, Boolean isVip, String nickname, Integer phoneNumber, String email, Integer vatNumber, String iban, String bic, Address address){
         this(null, firstName, lastName, registrationDate, isVip, nickname, phoneNumber, email, vatNumber, iban, bic, address);
     }
+    public Customer( Integer id,String firstName, String lastName, GregorianCalendar registrationDate, Boolean isVip,String nickanme, String email,String iban, String bic, Address address) {
+        this(id, firstName, lastName, registrationDate, isVip,nickanme ,null, email, null, iban, bic, address);
+    }
 
     public Customer(Integer id, String firstName, String lastName, GregorianCalendar registrationDate, Boolean isVip, String iban, String bic, Address address) {
         this(id, firstName, lastName, registrationDate, isVip, null, null, null, null, iban, bic, address);
