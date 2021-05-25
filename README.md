@@ -95,6 +95,9 @@ Si un ou plusieurs champs ne répondent pas aux l'exigence. Alors les champs ser
 Si l'on passe le curseur sur un champ à remplir, une petite indication montre la bonne manière de remplir le champ.
 La fenêtre pou l'édition d'un client est sensiblement la même, les champs seront simplement près remplis des données du client et prête à être modifié. 
 Un message de confirmation demandera à l'utilisateur s'il veut effectuer l'opération. Ce contrôle évitera tout malentendu. 
+#### Le formulaire rempli
+![image](https://user-images.githubusercontent.com/48365113/119509008-89c04c80-bd70-11eb-8624-79a757d8cb83.png)
+![image](https://user-images.githubusercontent.com/48365113/119509160-ad839280-bd70-11eb-8da8-ebb84c7c2ce7.png)
 
 ### Product list
 ![image](https://user-images.githubusercontent.com/48365113/119389992-aacf6180-bccc-11eb-8b5f-069c47c9f443.png)
