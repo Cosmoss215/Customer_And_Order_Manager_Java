@@ -42,7 +42,7 @@ Voici les changements qui seront auront lieu dans d'une future mise à jour :
 Le clean code est très important surtout dans un projet de cette ampleur. Nous pensons qu'il reste encore des factorisations de code à effectuer et probablement des éléments qui ont échappés à notre attention.
 
 ## Auto critique
-Nous sommes certains qu'il reste encore beaucoup de choses à améliorer dans l'aspect réutilisabilité voire efficacité du code. Cependant avec davantage de temps et de recul nous aurions pu y consacrer plus d'attention et d'énergie.
+Nous sommes certains qu'il reste encore beaucoup de choses à améliorer dans l'aspect réutilisabilité, voire efficacité du code. Cependant avec davantage de temps et de recul nous aurions pu y consacrer plus d'attention et d'énergie.
 
 ## Comment utiliser le programme
 ### Le menu
