@@ -9,7 +9,7 @@ import java.util.*;
 
 public class CustomerDBAccess implements CustomerDataAccess {
 
-    private static final String WITHOUT_DELETED = " AND c.id != 0 ";
+    private static final String WITHOUT_DELETED = " AND c.id != 1 ";
     private final Connection connection;
 
     public CustomerDBAccess() throws ConnectionException {
@@ -87,7 +87,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
 
     @Override
     public ArrayList<Customer> getAllCustomers() throws SelectQueryException {
-        return getCustomers("WHERE c.id != 0");
+        return getCustomers("WHERE c.id != 1");
     }
 
     @Override
@@ -278,7 +278,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
     @Override
     public boolean delete(Customer customer) throws DeleteQueryException, UpdateQueryException {
         int affectedRowsNb;
-        String sqlUpdateInstruction = "UPDATE `order` SET `order`.customer = 0 WHERE `order`.customer = ? ;";
+        String sqlUpdateInstruction = "UPDATE `order` SET `order`.customer = 1 WHERE `order`.customer = ? ;";
         try {
             connection.setAutoCommit(false);
             connection.setSavepoint();

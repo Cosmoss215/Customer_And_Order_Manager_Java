@@ -40,7 +40,7 @@ public class Verification {
     }
      */
     public static boolean nameVerification(String name){
-        return Pattern.matches( "^[a-zA-Z\\\\s]*$",name);
+        return Pattern.matches( "[a-zA-z]+([ '-][a-zA-Z]+)*",name);
     }
 
     public static boolean isDateCorrect(GregorianCalendar date) {

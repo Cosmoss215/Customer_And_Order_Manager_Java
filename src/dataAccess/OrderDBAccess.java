@@ -28,7 +28,7 @@ public class OrderDBAccess implements OrderDataAccess {
                     "JOIN address a ON c.address = a.id " +
                     "JOIN locality l ON l.name = a.locality AND l.postal_code = a.postal_code " +
                     "JOIN country co ON l.country = co.code " +
-                    sqlWhereClause + " AND c.id != 0 " +
+                    sqlWhereClause + " AND c.id != 1 " +
                     "GROUP BY o.number ORDER BY c.id AND o.creation_date;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sqlSelectOrders);
