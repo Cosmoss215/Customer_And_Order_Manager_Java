@@ -30,7 +30,8 @@ public class SearchOrderListing extends JFrame {
     private ArrayList<OrderByCustomer> orders;
     private JButton searchButton;
     private ApplicationController applicationControllerCustomer;
-
+    private LineBorder redBorder;
+    private LineBorder blackBorder;
 
     int customerId;
 
@@ -44,6 +45,9 @@ public class SearchOrderListing extends JFrame {
         panelTableOrderList = new JPanel();
         jScrollTableOrderList = new JScrollPane();
         jTableOrderList = new JTable();
+
+        redBorder = new LineBorder((Color.red), 3);
+        blackBorder = new LineBorder((Color.black), 1);
 
         ApplicationController allCustomers = new ApplicationController();
         customers = allCustomers.getAllCustomers();
@@ -61,8 +65,8 @@ public class SearchOrderListing extends JFrame {
         startDateSelector = new JTextField();
         endDateSelector = new JTextField();
 
-        startDateSelector.setPreferredSize(new Dimension(100,30));
-        endDateSelector.setPreferredSize(new Dimension(100,30));
+        startDateSelector.setPreferredSize(new Dimension(100, 30));
+        endDateSelector.setPreferredSize(new Dimension(100, 30));
 
         startDateSelector.setFont(new Font("Tahoma", 0, 18));
         endDateSelector.setFont(new Font("Tahoma", 0, 18));
@@ -70,24 +74,33 @@ public class SearchOrderListing extends JFrame {
         searchButton = new JButton("Search");
         searchButton.addActionListener(evt -> {
             if (!jTextFieldSearchBar.getText().isEmpty()) {
-                jTextFieldSearchBar.setBorder(new LineBorder(Color.BLACK,1));
+                jTextFieldSearchBar.setBorder(new LineBorder(Color.BLACK, 1));
                 try {
-                    if (Verification.dateVerification(startDateSelector.getText()) && Verification.dateVerification(endDateSelector.getText())) {
-                        GregorianCalendar startDate = DateFormater.ourDate(startDateSelector.getText());
-                        GregorianCalendar endDate = DateFormater.ourDate(endDateSelector.getText());
-
-                        initTable(customerId, startDate, endDate);
-                    } else {
+                    if (startDateSelector.getText().isEmpty()) {
                         initTable(customerId);
+                    } else {
+                        if (Verification.dateVerification(startDateSelector.getText()) && Verification.dateVerification(endDateSelector.getText())) {
+                            GregorianCalendar startDate = DateFormater.ourDate(startDateSelector.getText());
+                            GregorianCalendar endDate = DateFormater.ourDate(endDateSelector.getText());
+
+                            startDateSelector.setBorder(new LineBorder(Color.BLACK, 1));
+                            endDateSelector.setBorder(new LineBorder(Color.BLACK, 1));
+
+                            initTable(customerId, startDate, endDate);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "The date isn't correct", "Invalid field", JOptionPane.INFORMATION_MESSAGE);
+                            startDateSelector.setBorder(redBorder);
+                            endDateSelector.setBorder(redBorder);
+                        }
                     }
+
                     jScrollTableOrderList.setViewportView(jTableOrderList);
                 } catch (ConnectionException | SelectQueryException | NullException exception) {
                     JOptionPane.showMessageDialog(null, exception.getMessage(), exception.getTypeError(), JOptionPane.WARNING_MESSAGE);
                 }
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"You must indicate the name of a customer. You can find the list via the menu bar, in the item \"Customer list\"", "Invalid field", JOptionPane.INFORMATION_MESSAGE);
-                jTextFieldSearchBar.setBorder(new LineBorder(Color.red,3));
+            } else {
+                JOptionPane.showMessageDialog(null, "You must indicate the name of a customer. You can find the list via the menu bar, in the item \"Customer list\"", "Invalid field", JOptionPane.INFORMATION_MESSAGE);
+                jTextFieldSearchBar.setBorder(redBorder);
             }
         });
 

@@ -2,15 +2,10 @@ package model;
 
 public class PaymentMethod {
     private String wording;
-    private String iban;
-    private String bic;
 
-    public PaymentMethod(String wording, String iban, String bic) {
+    public PaymentMethod(String wording) {
         this.wording = wording;
-        this.iban = iban;
-        this.bic = bic;
     }
-
     @Override
     public String toString() {
         return wording;

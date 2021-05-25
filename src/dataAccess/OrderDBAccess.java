@@ -83,9 +83,7 @@ public class OrderDBAccess implements OrderDataAccess {
                 );
 
                 PaymentMethod paymentMethod = new PaymentMethod(
-                        data.getString("wording"),
-                        data.getString("iban"),
-                        data.getString("bic")
+                        data.getString("wording")
                 );
 
                 orderByCustomer = new OrderByCustomer(

@@ -32,13 +32,17 @@ public class CustomerForm extends JFrame {
     protected JComboBox<String> jComboBoxCountry;
     protected Customer customer;
     private ArrayList<Locality> locality;
+    private LineBorder redBorder;
+    private LineBorder blackBorder;
 
     public CustomerForm(String title,Color color) throws ConnectionException, SelectQueryException {
         setTitle(title);
-
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(200, 70, 800, 850);
         setLayout(new FlowLayout());
+
+        redBorder = new LineBorder((Color.red), 3);
+        blackBorder = new LineBorder((Color.black), 1);
 
         mainContainer = getContentPane();
         mainContainer.setBackground(color);
@@ -247,122 +251,122 @@ public class CustomerForm extends JFrame {
 
         if (jTextFieldFirstName.getText().length() > 50 || jTextFieldFirstName.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null,"First name field is obligatory and the maximum length is (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldFirstName.setBorder(new LineBorder(Color.red,3));
+            jTextFieldFirstName.setBorder(redBorder);
             return false;
         }
         else {
-            jTextFieldFirstName.setBorder(new LineBorder(Color.BLACK,1));
+            jTextFieldFirstName.setBorder(blackBorder);
         }
 
         if (jTextFieldLastName.getText().isEmpty() || jTextFieldLastName.getText().length() > 50) {
             JOptionPane.showMessageDialog(null,"Last name field is obligatory and the maximum length is (50)", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldLastName.setBorder(new LineBorder(Color.red,3));
+            jTextFieldLastName.setBorder(redBorder);
             return false;
         }
         else {
-            jTextFieldLastName.setBorder(new LineBorder(Color.BLACK,1));
+            jTextFieldLastName.setBorder(blackBorder);
         }
 
         if (!jTextFieldNickame.getText().isEmpty() && jTextFieldNickame.getText().length() > 10) {
             JOptionPane.showMessageDialog(null,"The maximum length is reached (10)", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldNickame.setBorder(new LineBorder(Color.red,3));
+            jTextFieldNickame.setBorder(redBorder);
             return false;
         }
         else {
-            jTextFieldNickame.setBorder(new LineBorder(Color.BLACK,1));
+            jTextFieldNickame.setBorder(blackBorder);
         }
 
         if (!Verification.dateVerification(jTextFieldRegistrationDate.getText()) || jTextFieldRegistrationDate.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null,"This date is incorrect, should be yyyy/mm/dd (05/12/2020)", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldRegistrationDate.setBorder(new LineBorder(Color.red,3));
+            jTextFieldRegistrationDate.setBorder(redBorder);
             return false;
         }
         else {
-            jTextFieldRegistrationDate.setBorder(new LineBorder(Color.BLACK,1));
+            jTextFieldRegistrationDate.setBorder(blackBorder);
         }
         if (!Verification.isDateCorrect(DateFormater.ourDate(jTextFieldRegistrationDate.getText()))) {
             JOptionPane.showMessageDialog(null,"The recording date cannot be greater than the current date. Must be " + LocalDate.now() + " or earlier", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldRegistrationDate.setBorder(new LineBorder(Color.red,3));
+            jTextFieldRegistrationDate.setBorder(redBorder);
             return false;
         }
         else {
-            jTextFieldRegistrationDate.setBorder(new LineBorder(Color.BLACK,1));
+            jTextFieldRegistrationDate.setBorder(blackBorder);;
         }
         if (!jTextFieldPhoneNumber.getText().isEmpty() && !Verification.phoneNumberVerification(jTextFieldPhoneNumber.getText())) {
             JOptionPane.showMessageDialog(null,"The phone number is incorrect", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldPhoneNumber.setBorder(new LineBorder(Color.red,3));
+            jTextFieldPhoneNumber.setBorder(redBorder);
             return false;
         }
         else {
-            jTextFieldPhoneNumber.setBorder(new LineBorder(Color.BLACK,1));
+            jTextFieldPhoneNumber.setBorder(blackBorder);
         }
         if (!jTextFieldEmail.getText().isEmpty() && !Verification.emailVerification(jTextFieldEmail.getText())) {
             JOptionPane.showMessageDialog(null,"The email is incorrect (must be xxxx@xxxx.ccc", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldEmail.setBorder(new LineBorder(Color.red,3));
+            jTextFieldEmail.setBorder(redBorder);
             return false;
         }
         else {
-            jTextFieldEmail.setBorder(new LineBorder(Color.BLACK,1));
+            jTextFieldEmail.setBorder(blackBorder);
         }
 
         if (jTextFieldStreetWording.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Street name is obligatory", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldStreetWording.setBorder(new LineBorder(Color.red,3));
+            jTextFieldStreetWording.setBorder(redBorder);
             return false;
         }
         else {
-            jTextFieldStreetWording.setBorder(new LineBorder(Color.BLACK,1));
+            jTextFieldStreetWording.setBorder(blackBorder);
         }
 
         if (streetNumberSelector.getValue().equals(0)){
             JOptionPane.showMessageDialog(null,"The street number cannot be 0", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            streetNumberSelector.setBorder(new LineBorder(Color.red,2));
+            streetNumberSelector.setBorder(redBorder);
             return false;
         }
         else {
-            streetNumberSelector.setBorder(new LineBorder(Color.BLACK,1));
+            streetNumberSelector.setBorder(blackBorder);
         }
         if (!jTextFieldBox.getText().isEmpty() && !Verification.isAlphabeticCharacters(jTextFieldBox.getText())){
             JOptionPane.showMessageDialog(null,"The box must be a character or short string (A,AB,..)", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldBox.setBorder(new LineBorder(Color.red,3));
+            jTextFieldBox.setBorder(redBorder);
             return false;
         }
         else {
-            jTextFieldBox.setBorder(new LineBorder(Color.BLACK,1));
+            jTextFieldBox.setBorder(blackBorder);
         }
         if (!jTextFieldVATNumber.getText().isEmpty() && Integer.parseInt(jTextFieldVATNumber.getText()) < 0) {
             JOptionPane.showMessageDialog(null,"VAT isn't good", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldVATNumber.setBorder(new LineBorder(Color.red,3));
+            jTextFieldVATNumber.setBorder(redBorder);
             return false;
         }
         else {
-            jTextFieldVATNumber.setBorder(new LineBorder(Color.BLACK,1));
+            jTextFieldVATNumber.setBorder(blackBorder);
         }
 
         if (jTextFieldIBAN.getText().length() > 35 || jTextFieldIBAN.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null,"Iban field is obligatory and the maximum length is (35)", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldIBAN.setBorder(new LineBorder(Color.red,3));
+            jTextFieldIBAN.setBorder(redBorder);
             return false;
         }
         else {
-            jTextFieldIBAN.setBorder(new LineBorder(Color.BLACK,1));
+            jTextFieldIBAN.setBorder(blackBorder);
         }
         if (!Verification.ibanVerification(jTextFieldIBAN.getText())) {
             JOptionPane.showMessageDialog(null,"The iban number you mentioned is not accepted by this program. Please enter it correctly or contact customer services.", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldIBAN.setBorder(new LineBorder(Color.red,3));
+            jTextFieldIBAN.setBorder(redBorder);
             return false;
         }
         else {
-            jTextFieldIBAN.setBorder(new LineBorder(Color.BLACK,1));
+            jTextFieldIBAN.setBorder(blackBorder);
         }
 
         if (jTextFieldBIC.getText().length() > 15 || jTextFieldBIC.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null,"BIC field is obligatory and the maximum length is reached (15)", "FormException", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldBIC.setBorder(new LineBorder(Color.red,3));
+            jTextFieldBIC.setBorder(redBorder);
             return false;
         }
         else {
-            jTextFieldBIC.setBorder(new LineBorder(Color.BLACK,1));
+            jTextFieldBIC.setBorder(blackBorder);
         }
         return true;
     }

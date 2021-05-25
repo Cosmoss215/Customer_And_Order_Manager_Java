@@ -216,7 +216,6 @@ public class CustomerDBAccess implements CustomerDataAccess {
             setPreparedWritingStatementForCustomer(preparedStatement, customer);
             preparedStatement.setInt(11, customer.getId());
             affectedRowsNb = preparedStatement.executeUpdate();
-
             } catch (SQLException sqlException) {
                 throw new UpdateQueryException(sqlException.getMessage());
             }
@@ -308,6 +307,7 @@ public class CustomerDBAccess implements CustomerDataAccess {
                         }
                     }
                     connection.commit();
+                    connection.setAutoCommit(true);
                 } catch (SQLException exception) {
                     throw new DeleteQueryException(exception.getMessage());
                 }
