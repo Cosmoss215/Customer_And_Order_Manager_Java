@@ -29,6 +29,21 @@ Un thread a été créé pour répondre aux contraintes du projet. Celui-ci est 
 ### Recherche numéro 1 : Order listing - Autocompletion
 Cette recherche doit être améliorée. En effet l'autocomplétion ne permet pas de sélectionner un client ayant le même prénom ou nom qu'un autre client. Le premier client sera toujours sélectionné au détriment du bon client. Par manque de temps nous n'avons pas pu corriger cette erreur.
 
+### Nouvelles normes SQL
+Certaines normes MySQL que nous avons employées seront bientôt dépréciés. Cependant, dans le cadre de notre projet nous avons jugé bon de les laisser telles quelles.
+
+Voici les changements qui seront auront lieu dans d'une future mise à jour :
+
+* Le fait d'indiquer une taille à un entier sera supprimé dans une future mise à jour mais ne devrait pas impacter le script de notre projet. Plus tard il ne sera donc plus nécessaire d'indiquer cette taille d'entier.
+
+* UTF8 est un alias pour UTF8MB3 mais une future mise à jour mettre UTF8 comme alias pour UTF8 MB4 ce qui n'aura aucun impact sur notre projet.
+
+### Clean code
+Le clean code est très important surtout dans un projet de cette ampleur. Nous pensons qu'il reste encore des factorisations de code à effectuer et probablement des éléments qui ont échappés à notre attention.
+
+## Auto critique
+Nous sommes certains qu'il reste encore beaucoup de choses à améliorer dans l'aspect réutilisabilité, voire efficacité du code. Cependant avec davantage de temps et de recul nous aurions pu y consacrer plus d'attention et d'énergie.
+
 ## Comment utiliser le programme
 ### Le menu
 ![image](https://user-images.githubusercontent.com/48365113/119388930-37792000-bccb-11eb-9b60-bc4c4fd6e394.png)
