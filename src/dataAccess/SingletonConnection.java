@@ -9,7 +9,7 @@ public class SingletonConnection {
     private static Connection connection = null;
     private static String url = "jdbc:mysql://localhost:3306/library";
     private static String id = "root";
-    private static String password = "Manil93Manderlier97";
+    private static String password = "****";
 
     private SingletonConnection() throws ConnectionException {
         try{
